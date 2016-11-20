@@ -76,6 +76,11 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add a tap gesture recognizer to the view controller's main view
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
+        // The login button should be disabled initially
         loginButton.set(enabled: false)
         
         // Add the error message view to the login view controller as a subview and
@@ -114,6 +119,13 @@ class LoginViewController: UIViewController {
         webViewController.url = url
         present(webViewController, animated: true, completion: nil)
     }
+    
+    // When the main view is tapped every text field should resign its
+    // first responder status so that the keyboard hides if it's currently
+    // displayed
+    func viewWasTapped() {
+        view.endEditing(true)
+    }
 
 }
 
@@ -129,7 +141,10 @@ extension LoginViewController {
         
         if let userInfo = notification.userInfo,
             let keyboardFrameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-            view.frame.origin.y -= keyboardFrameEnd.height
+            // When the keyboard will be shown the main view should be pushed up slightly
+            // so the most important elements are visible when typing (other text field,
+            // login button, forgot password/sign-up page buttons)
+            view.frame.origin.y -= keyboardFrameEnd.height / 1.25
             isKeyboardActive = true
         }
     }

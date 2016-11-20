@@ -1,26 +1,288 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KLd-lg-sp5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="CarterOne.ttf">
+            <string>CarterOne</string>
+        </array>
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
+        <array key="Lato-Light.ttf">
+            <string>Lato-Light</string>
+        </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Login View Controller-->
+        <scene sceneID="qw2-Yg-tVw">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KLd-lg-sp5" customClass="LoginViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="uUS-rq-xd7"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kt5-Sa-nfQ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="R8f-G0-nGS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
+                                <rect key="frame" x="0.0" y="50" width="375" height="103"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
+                                        <rect key="frame" x="45" y="0.0" width="285" height="74"/>
+                                        <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with your AniList account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="YZW-La-QsL">
+                                        <rect key="frame" x="24" y="74" width="327" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YZW-La-QsL" secondAttribute="trailing" constant="23.5" id="1Jt-Jq-ae6"/>
+                                    <constraint firstItem="YZW-La-QsL" firstAttribute="leading" secondItem="jMd-Na-OAI" secondAttribute="leading" constant="23.5" id="wZT-RD-yRM"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrX-Eq-hIl">
+                                <rect key="frame" x="152" y="565" width="71" height="32"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Skip Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipLogin" destination="KLd-lg-sp5" eventType="touchUpInside" id="VNL-Gj-97b"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-CF-u71">
+                                <rect key="frame" x="0.0" y="245" width="375" height="257"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-OE-4Kw">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-BW-xbg">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yJr-DE-zkJ" customClass="AniManagerTextField" customModule="AniManager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="5uK-Hm-xBN"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Z4n-lK-FxC" customClass="AniManagerTextField" customModule="AniManager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="70" width="375" height="50"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="qGC-B3-Stq"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="140" width="375" height="50"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="fn4-V6-Ayc"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="24"/>
+                                                        <color key="tintColor" red="0.013609491288661957" green="0.71974295377731323" blue="0.9999886155128479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <state key="normal" title="Login">
+                                                            <color key="titleColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="login" destination="KLd-lg-sp5" eventType="touchUpInside" id="f6d-nB-RIK"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Hrc-BW-xbg" firstAttribute="leading" secondItem="EXj-OE-4Kw" secondAttribute="leading" id="WOc-7p-krO"/>
+                                            <constraint firstAttribute="trailing" secondItem="Hrc-BW-xbg" secondAttribute="trailing" id="hcT-kZ-Lkp"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-YE-2H5">
+                                        <rect key="frame" x="79" y="210" width="218" height="47"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="c8D-1M-7L7">
+                                                <rect key="frame" x="0.0" y="0.0" width="218" height="47"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="D6v-L8-6yc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="218" height="20"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sh-La-2Fi">
+                                                                <rect key="frame" x="0.0" y="0.0" width="161" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDn-2Y-t9F">
+                                                                <rect key="frame" x="166" y="0.0" width="52" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <state key="normal" title="Sign up">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="openSignUpPage" destination="KLd-lg-sp5" eventType="touchUpInside" id="A9Q-ai-2nc"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="ErG-Zq-gHJ"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDh-w0-ZyY">
+                                                        <rect key="frame" x="45" y="15" width="127" height="32"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="Forgot password?">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="openForgotPasswordPage" destination="KLd-lg-sp5" eventType="touchUpInside" id="ybe-xk-fmT"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EXj-OE-4Kw" firstAttribute="leading" secondItem="FYe-CF-u71" secondAttribute="leading" id="4uy-UN-SWB"/>
+                                    <constraint firstAttribute="trailing" secondItem="EXj-OE-4Kw" secondAttribute="trailing" id="oha-zW-fcr"/>
+                                </constraints>
+                            </stackView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOQ-27-j3J">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something wrong happened and this is a very long error message right here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="330-X4-ZdY">
+                                        <rect key="frame" x="42" y="13" width="290" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="290" id="UUo-f3-glH"/>
+                                            <constraint firstAttribute="height" constant="34" id="ppD-aw-Hqi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpQ-Mc-qae">
+                                        <rect key="frame" x="350" y="10" width="15" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="CancelCross"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="KFE-jy-GCr"/>
+                                    <constraint firstItem="330-X4-ZdY" firstAttribute="centerY" secondItem="rOQ-27-j3J" secondAttribute="centerY" id="kZm-jz-F7z"/>
+                                    <constraint firstItem="330-X4-ZdY" firstAttribute="centerX" secondItem="rOQ-27-j3J" secondAttribute="centerX" id="sL8-XZ-hGA"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="jMd-Na-OAI" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="EJM-a7-s2Y"/>
+                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="rOQ-27-j3J" secondAttribute="bottom" id="EVJ-QP-dZN"/>
+                            <constraint firstAttribute="trailing" secondItem="rOQ-27-j3J" secondAttribute="trailing" id="ZTd-IG-6Ag"/>
+                            <constraint firstItem="FYe-CF-u71" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="a1b-k5-aF4"/>
+                            <constraint firstItem="FYe-CF-u71" firstAttribute="centerY" secondItem="R8f-G0-nGS" secondAttribute="centerY" constant="40" id="cmj-75-6AP"/>
+                            <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="fMn-Ft-0wG"/>
+                            <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="k8v-aj-OOM"/>
+                            <constraint firstItem="rOQ-27-j3J" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="mOF-OK-NZ0"/>
+                            <constraint firstItem="jMd-Na-OAI" firstAttribute="top" secondItem="uUS-rq-xd7" secondAttribute="bottom" constant="50" id="ogy-Cp-Lof"/>
+                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="DrX-Eq-hIl" secondAttribute="bottom" constant="70" id="tUc-p0-waD"/>
+                            <constraint firstAttribute="trailing" secondItem="FYe-CF-u71" secondAttribute="trailing" id="xxx-rY-OPg"/>
+                        </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="yJr-DE-zkJ" id="cgU-lY-HUb"/>
+                        <outlet property="forgotPasswordButton" destination="BDh-w0-ZyY" id="KfN-0b-Byb"/>
+                        <outlet property="loginButton" destination="jRj-XV-Tl4" id="Kyu-Ss-VwI"/>
+                        <outlet property="passwordTextField" destination="Z4n-lK-FxC" id="qzV-ue-fxL"/>
+                        <outlet property="signUpButton" destination="CDn-2Y-t9F" id="YDJ-i6-vba"/>
+                        <outlet property="skipLoginButton" destination="DrX-Eq-hIl" id="y77-Ww-ZHM"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avX-nu-2zR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="472.80000000000001" y="82.3088455772114"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="B5Z-Qp-w0d">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="dcw-WQ-teh" customClass="WebViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GMy-hA-n3t"/>
+                        <viewControllerLayoutGuide type="bottom" id="4BX-zX-gkR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lzA-qA-2TP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sov-da-tac">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dcw-WQ-teh" id="hl1-rQ-9cL"/>
+                                </connections>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MxW-GF-tPN">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Ddh-1c-IuO"/>
+                                    <barButtonItem image="CancelCross" id="qK9-lw-lgE">
+                                        <color key="tintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="cancel" destination="dcw-WQ-teh" id="tXg-yH-fM4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MxW-GF-tPN" firstAttribute="top" secondItem="lzA-qA-2TP" secondAttribute="top" id="3Rg-mK-uot"/>
+                            <constraint firstItem="sov-da-tac" firstAttribute="leading" secondItem="lzA-qA-2TP" secondAttribute="leading" id="70w-0F-hZO"/>
+                            <constraint firstItem="4BX-zX-gkR" firstAttribute="top" secondItem="sov-da-tac" secondAttribute="bottom" id="EYJ-Hv-ZTP"/>
+                            <constraint firstAttribute="trailing" secondItem="sov-da-tac" secondAttribute="trailing" id="JAN-F8-zdl"/>
+                            <constraint firstItem="MxW-GF-tPN" firstAttribute="leading" secondItem="lzA-qA-2TP" secondAttribute="leading" id="UWB-0D-mN3"/>
+                            <constraint firstItem="sov-da-tac" firstAttribute="top" secondItem="MxW-GF-tPN" secondAttribute="bottom" id="ep1-rq-N1f"/>
+                            <constraint firstAttribute="trailing" secondItem="MxW-GF-tPN" secondAttribute="trailing" id="oHR-c2-a8c"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="sov-da-tac" id="vOh-bC-i5I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pMd-Yb-sHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="472.80000000000001" y="773.16341829085468"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CancelCross" width="25" height="25"/>
+    </resources>
 </document>

@@ -7,17 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
+		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
+		D25EDEA91DDF979600267243 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA51DDF979600267243 /* Lato-Light.ttf */; };
+		D25EDEAA1DDF979600267243 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA61DDF979600267243 /* Lato-Regular.ttf */; };
+		D25EDEAC1DDF981300267243 /* CarterOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEAB1DDF981300267243 /* CarterOne.ttf */; };
+		D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */; };
+		D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */; };
+		D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */; };
+		D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB31DE08B9700267243 /* WebViewController.swift */; };
+		D25EDEB61DE0909300267243 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB51DE0909300267243 /* Constant.swift */; };
+		D25EDEBA1DE10AF200267243 /* AniManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
-		D27A77B71DDF861700228EF2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B61DDF861700228EF2 /* ViewController.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BC1DDF861700228EF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BB1DDF861700228EF2 /* Assets.xcassets */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		D25EDEA51DDF979600267243 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		D25EDEA61DDF979600267243 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		D25EDEAB1DDF981300267243 /* CarterOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarterOne.ttf; sourceTree = "<group>"; };
+		D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerButton.swift; sourceTree = "<group>"; };
+		D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerTextField.swift; sourceTree = "<group>"; };
+		D25EDEB31DE08B9700267243 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		D25EDEB51DE0909300267243 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerViewController.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D27A77B61DDF861700228EF2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D27A77BB1DDF861700228EF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D27A77BE1DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +55,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D25EDE9B1DDF8FE500267243 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		D25EDE9C1DDF8FEF00267243 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */,
+				D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */,
+				D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */,
+				D25EDEB31DE08B9700267243 /* WebViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D25EDE9E1DDF901C00267243 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D27A77C01DDF861700228EF2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D25EDE9F1DDF909300267243 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D27A77B81DDF861700228EF2 /* Main.storyboard */,
+				D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		D25EDEA11DDF956000267243 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEA21DDF973200267243 /* Fonts */,
+				D27A77BB1DDF861700228EF2 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D25EDEA21DDF973200267243 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEA31DDF979600267243 /* Lato-Black.ttf */,
+				D25EDEA41DDF979600267243 /* Lato-Bold.ttf */,
+				D25EDEA51DDF979600267243 /* Lato-Light.ttf */,
+				D25EDEA61DDF979600267243 /* Lato-Regular.ttf */,
+				D25EDEAB1DDF981300267243 /* CarterOne.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		D27A77A81DDF861700228EF2 = {
 			isa = PBXGroup;
 			children = (
@@ -55,11 +139,13 @@
 			isa = PBXGroup;
 			children = (
 				D27A77B41DDF861700228EF2 /* AppDelegate.swift */,
-				D27A77B61DDF861700228EF2 /* ViewController.swift */,
-				D27A77B81DDF861700228EF2 /* Main.storyboard */,
-				D27A77BB1DDF861700228EF2 /* Assets.xcassets */,
-				D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */,
-				D27A77C01DDF861700228EF2 /* Info.plist */,
+				D25EDEB51DE0909300267243 /* Constant.swift */,
+				D25EDE9B1DDF8FE500267243 /* Models */,
+				D25EDE9C1DDF8FEF00267243 /* Views */,
+				D25EDE9D1DDF8FFA00267243 /* Controllers */,
+				D25EDE9F1DDF909300267243 /* Storyboards */,
+				D25EDEA11DDF956000267243 /* Resources */,
+				D25EDE9E1DDF901C00267243 /* Supporting Files */,
 			);
 			path = AniManager;
 			sourceTree = "<group>";
@@ -124,7 +210,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */,
+				D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */,
 				D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */,
+				D25EDEA91DDF979600267243 /* Lato-Light.ttf in Resources */,
+				D25EDEAC1DDF981300267243 /* CarterOne.ttf in Resources */,
+				D25EDEAA1DDF979600267243 /* Lato-Regular.ttf in Resources */,
 				D27A77BC1DDF861700228EF2 /* Assets.xcassets in Resources */,
 				D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */,
 			);
@@ -137,8 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D27A77B71DDF861700228EF2 /* ViewController.swift in Sources */,
+				D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */,
+				D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */,
+				D25EDEBA1DE10AF200267243 /* AniManagerViewController.swift in Sources */,
+				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
+				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
+				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +398,7 @@
 				D27A77C51DDF861700228EF2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

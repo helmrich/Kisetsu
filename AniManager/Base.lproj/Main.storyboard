@@ -15,9 +15,6 @@
         <array key="Lato-Bold.ttf">
             <string>Lato-Bold</string>
         </array>
-        <array key="Lato-Light.ttf">
-            <string>Lato-Light</string>
-        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
@@ -35,8 +32,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
-                                <rect key="frame" x="0.0" y="50" width="375" height="103"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
+                                <rect key="frame" x="0.0" y="50" width="375" height="113"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
                                         <rect key="frame" x="45" y="0.0" width="285" height="74"/>
@@ -45,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with your AniList account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="YZW-La-QsL">
-                                        <rect key="frame" x="24" y="74" width="327" height="29"/>
+                                        <rect key="frame" x="24" y="84" width="327" height="29"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -179,43 +176,14 @@
                                     <constraint firstAttribute="trailing" secondItem="EXj-OE-4Kw" secondAttribute="trailing" id="oha-zW-fcr"/>
                                 </constraints>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOQ-27-j3J">
-                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something wrong happened and this is a very long error message right here." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="330-X4-ZdY">
-                                        <rect key="frame" x="42" y="13" width="290" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="290" id="UUo-f3-glH"/>
-                                            <constraint firstAttribute="height" constant="34" id="ppD-aw-Hqi"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpQ-Mc-qae">
-                                        <rect key="frame" x="350" y="10" width="15" height="15"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="CancelCross"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="KFE-jy-GCr"/>
-                                    <constraint firstItem="330-X4-ZdY" firstAttribute="centerY" secondItem="rOQ-27-j3J" secondAttribute="centerY" id="kZm-jz-F7z"/>
-                                    <constraint firstItem="330-X4-ZdY" firstAttribute="centerX" secondItem="rOQ-27-j3J" secondAttribute="centerX" id="sL8-XZ-hGA"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="jMd-Na-OAI" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="EJM-a7-s2Y"/>
-                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="rOQ-27-j3J" secondAttribute="bottom" id="EVJ-QP-dZN"/>
-                            <constraint firstAttribute="trailing" secondItem="rOQ-27-j3J" secondAttribute="trailing" id="ZTd-IG-6Ag"/>
                             <constraint firstItem="FYe-CF-u71" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="a1b-k5-aF4"/>
                             <constraint firstItem="FYe-CF-u71" firstAttribute="centerY" secondItem="R8f-G0-nGS" secondAttribute="centerY" constant="40" id="cmj-75-6AP"/>
                             <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="fMn-Ft-0wG"/>
                             <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="k8v-aj-OOM"/>
-                            <constraint firstItem="rOQ-27-j3J" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="mOF-OK-NZ0"/>
                             <constraint firstItem="jMd-Na-OAI" firstAttribute="top" secondItem="uUS-rq-xd7" secondAttribute="bottom" constant="50" id="ogy-Cp-Lof"/>
                             <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="DrX-Eq-hIl" secondAttribute="bottom" constant="70" id="tUc-p0-waD"/>
                             <constraint firstAttribute="trailing" secondItem="FYe-CF-u71" secondAttribute="trailing" id="xxx-rY-OPg"/>
@@ -268,6 +236,9 @@
                                 </items>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FSC-Ke-kOf">
+                                <rect key="frame" x="177" y="324" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -275,13 +246,16 @@
                             <constraint firstItem="sov-da-tac" firstAttribute="leading" secondItem="lzA-qA-2TP" secondAttribute="leading" id="70w-0F-hZO"/>
                             <constraint firstItem="4BX-zX-gkR" firstAttribute="top" secondItem="sov-da-tac" secondAttribute="bottom" id="EYJ-Hv-ZTP"/>
                             <constraint firstAttribute="trailing" secondItem="sov-da-tac" secondAttribute="trailing" id="JAN-F8-zdl"/>
+                            <constraint firstItem="FSC-Ke-kOf" firstAttribute="centerY" secondItem="lzA-qA-2TP" secondAttribute="centerY" id="JCb-xo-jn5"/>
                             <constraint firstItem="MxW-GF-tPN" firstAttribute="leading" secondItem="lzA-qA-2TP" secondAttribute="leading" id="UWB-0D-mN3"/>
                             <constraint firstItem="sov-da-tac" firstAttribute="top" secondItem="MxW-GF-tPN" secondAttribute="bottom" id="ep1-rq-N1f"/>
                             <constraint firstAttribute="trailing" secondItem="MxW-GF-tPN" secondAttribute="trailing" id="oHR-c2-a8c"/>
+                            <constraint firstItem="FSC-Ke-kOf" firstAttribute="centerX" secondItem="lzA-qA-2TP" secondAttribute="centerX" id="ojA-eI-se9"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="FSC-Ke-kOf" id="HNa-f9-yxH"/>
                         <outlet property="webView" destination="sov-da-tac" id="vOh-bC-i5I"/>
                     </connections>
                 </viewController>

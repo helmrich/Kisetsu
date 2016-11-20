@@ -134,7 +134,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func keyboardWillShow(notification: Notification) {
-        print("Keyboard will show...")
         guard !isKeyboardActive else {
             return
         }
@@ -144,13 +143,12 @@ extension LoginViewController {
             // When the keyboard will be shown the main view should be pushed up slightly
             // so the most important elements are visible when typing (other text field,
             // login button, forgot password/sign-up page buttons)
-            view.frame.origin.y -= keyboardFrameEnd.height / 1.25
+            view.frame.origin.y -= keyboardFrameEnd.height / 1.75
             isKeyboardActive = true
         }
     }
     
     func keyboardWillHide(notification: Notification) {
-        print("Keyboard will hide...")
         view.frame.origin.y = 0
         isKeyboardActive = false
     }

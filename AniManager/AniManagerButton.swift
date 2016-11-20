@@ -30,6 +30,7 @@ class AniManagerButton: UIButton {
                 NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
             ])
+        activityIndicator.alpha = 0
         
         // Add actions that handle the button's appearance when it's tapped
         addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
@@ -44,12 +45,14 @@ class AniManagerButton: UIButton {
             set(enabled: false)
             UIView.animate(withDuration: 0.25, animations: { 
                 self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.0), for: .normal)
+                self.activityIndicator.alpha = 1
             })
-            activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         } else {
             set(enabled: true)
-            activityIndicator.isHidden = true
+            UIView.animate(withDuration: 0.25, animations: { 
+                self.activityIndicator.alpha = 0
+            })
             activityIndicator.stopAnimating()
         }
     }

@@ -11,34 +11,62 @@ import UIKit
 
 class AniManagerButton: UIButton {
 
+    // MARK: - Properties
+    
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+
+    
+    // MARK: - Initializers
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
+        // Add the activity indicator to the button as a subview 
+        // and set its constraints
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
                 NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
             ])
+        
+        // Add actions that handle the button's appearance when it's tapped
+        addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
+        addTarget(self, action: #selector(setTouchUpOutsideAppearance), for: .touchUpOutside)
     }
+    
+    
+    // MARK: - Methods
     
     func setActivityIndicator(active: Bool) {
         if active {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.0), for: .normal)
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.8)
+            })
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0), for: .normal)
-            backgroundColor = backgroundColor?.withAlphaComponent(0.8)
             isEnabled = false
         } else {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.setTitleColor(self.titleColor(for: .normal)!.withAlphaComponent(1.0), for: .normal)
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(1.0)
+            })
             activityIndicator.isHidden = true
             activityIndicator.stopAnimating()
-            setTitleColor(titleColor(for: .normal)!.withAlphaComponent(1), for: .normal)
-            backgroundColor = backgroundColor?.withAlphaComponent(1)
             isEnabled = true
         }
+    }
+    
+    func setTouchDownAppearance() {
+        setTitleColor(titleColor(for: .normal)?.withAlphaComponent(0.8), for: .normal)
+        backgroundColor = backgroundColor?.withAlphaComponent(0.8)
+    }
+    
+    func setTouchUpOutsideAppearance() {
+        setTitleColor(titleColor(for: .normal)?.withAlphaComponent(1.0), for: .normal)
+        backgroundColor = backgroundColor?.withAlphaComponent(1.0)
     }
     
 }

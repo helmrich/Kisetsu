@@ -12,6 +12,8 @@ class LoginViewController: AniManagerViewController {
 
     // MARK: - Properties
     
+    var isKeyboardActive = false
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -20,7 +22,6 @@ class LoginViewController: AniManagerViewController {
     // MARK: - Outlets and Actions
     
     // MARK: - Outlets
-    
     @IBOutlet weak var emailTextField: AniManagerTextField!
     @IBOutlet weak var passwordTextField: AniManagerTextField!
     @IBOutlet weak var loginButton: AniManagerButton!
@@ -29,7 +30,6 @@ class LoginViewController: AniManagerViewController {
     @IBOutlet weak var skipLoginButton: UIButton!
     
     // MARK: - Actions
-    
     @IBAction func openSignUpPage() {
         if let url = URL(string: Constant.aniListSignUpString) {
             presentWebViewController(with: url)
@@ -52,6 +52,26 @@ class LoginViewController: AniManagerViewController {
     
     @IBAction func login() {
         loginButton.setActivityIndicator(active: true)
+        view.endEditing(true)
+    }
+    
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add observers for keyboard changes
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil, using: keyboardWillShow)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil, using: keyboardWillHide)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Remove observers for keyboard changes
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     
@@ -63,4 +83,42 @@ class LoginViewController: AniManagerViewController {
         present(webViewController, animated: true, completion: nil)
     }
 
+}
+
+
+// MARK: - Keyboard Functions
+
+extension LoginViewController {
+    func keyboardWillShow(notification: Notification) {
+        print("Keyboard will show...")
+        guard !isKeyboardActive else {
+            return
+        }
+        
+        if let userInfo = notification.userInfo,
+            let keyboardFrameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            view.frame.origin.y -= keyboardFrameEnd.height
+            isKeyboardActive = true
+        }
+    }
+    
+    func keyboardWillHide(notification: Notification) {
+        print("Keyboard will hide...")
+        view.frame.origin.y = 0
+        isKeyboardActive = false
+    }
+}
+
+
+// MARK: - Text Field Delegate
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        view.resignFirstResponder()
+    }
 }

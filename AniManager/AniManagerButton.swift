@@ -41,32 +41,42 @@ class AniManagerButton: UIButton {
     
     func setActivityIndicator(active: Bool) {
         if active {
-            UIView.animate(withDuration: 0.25, animations: {
+            set(enabled: false)
+            UIView.animate(withDuration: 0.25, animations: { 
                 self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.0), for: .normal)
-                self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.8)
             })
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            isEnabled = false
         } else {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.setTitleColor(self.titleColor(for: .normal)!.withAlphaComponent(1.0), for: .normal)
-                self.backgroundColor = self.backgroundColor?.withAlphaComponent(1.0)
-            })
+            set(enabled: true)
             activityIndicator.isHidden = true
             activityIndicator.stopAnimating()
-            isEnabled = true
         }
     }
     
     func setTouchDownAppearance() {
-        setTitleColor(titleColor(for: .normal)?.withAlphaComponent(0.8), for: .normal)
+        setTitleColor(titleColor(for: .normal)?.withAlphaComponent(0.6), for: .normal)
         backgroundColor = backgroundColor?.withAlphaComponent(0.8)
     }
     
     func setTouchUpOutsideAppearance() {
         setTitleColor(titleColor(for: .normal)?.withAlphaComponent(1.0), for: .normal)
         backgroundColor = backgroundColor?.withAlphaComponent(1.0)
+    }
+    
+    func set(enabled: Bool) {
+        if enabled {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.setTitleColor(self.titleColor(for: .normal)!.withAlphaComponent(1.0), for: .normal)
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(1.0)
+            })
+            isEnabled = true
+        } else {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.backgroundColor = self.backgroundColor?.withAlphaComponent(0.6)
+            })
+            isEnabled = false
+        }
     }
     
 }

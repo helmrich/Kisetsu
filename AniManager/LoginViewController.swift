@@ -8,11 +8,12 @@
 
 import UIKit
 
-class LoginViewController: AniManagerViewController {
+class LoginViewController: UIViewController {
 
     // MARK: - Properties
     
     var isKeyboardActive = false
+    var errorMessageView = ErrorMessageView()
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -34,7 +35,7 @@ class LoginViewController: AniManagerViewController {
         if let url = URL(string: Constant.aniListSignUpString) {
             presentWebViewController(with: url)
         } else {
-            showError(withMessage: "Couldn't open Sign-Up page. Try again.")
+            errorMessageView.showError(withMessage: "Couldn't open Sign-Up page. Try again.")
         }
     }
     
@@ -42,7 +43,7 @@ class LoginViewController: AniManagerViewController {
         if let url = URL(string: Constant.aniListForgotPasswordUrlString) {
             presentWebViewController(with: url)
         } else {
-            showError(withMessage: "Couldn't open Forgot Password page. Try again.")
+            errorMessageView.showError(withMessage: "Couldn't open Forgot Password page. Try again.")
         }
     }
     
@@ -57,6 +58,21 @@ class LoginViewController: AniManagerViewController {
     
     
     // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Add the error message view to the login view controller as a subview and
+        // set its constraints
+        view.addSubview(errorMessageView)
+        errorMessageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: errorMessageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60),
+                NSLayoutConstraint(item: errorMessageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            ])
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -17,7 +17,7 @@
 		D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */; };
 		D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB31DE08B9700267243 /* WebViewController.swift */; };
 		D25EDEB61DE0909300267243 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB51DE0909300267243 /* Constant.swift */; };
-		D25EDEBA1DE10AF200267243 /* AniManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */; };
+		D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BC1DDF861700228EF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BB1DDF861700228EF2 /* Assets.xcassets */; };
@@ -35,7 +35,7 @@
 		D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerTextField.swift; sourceTree = "<group>"; };
 		D25EDEB31DE08B9700267243 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		D25EDEB51DE0909300267243 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerViewController.swift; sourceTree = "<group>"; };
+		D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,6 +67,7 @@
 			children = (
 				D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */,
 				D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */,
+				D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -74,7 +75,6 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D25EDEB91DE10AF200267243 /* AniManagerViewController.swift */,
 				D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */,
 				D25EDEB31DE08B9700267243 /* WebViewController.swift */,
 			);
@@ -230,7 +230,7 @@
 			files = (
 				D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */,
 				D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */,
-				D25EDEBA1DE10AF200267243 /* AniManagerViewController.swift in Sources */,
+				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,

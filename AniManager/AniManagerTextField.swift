@@ -10,7 +10,6 @@ import UIKit
 
 class AniManagerTextField: UITextField {
 
-    
     // Add a left padding to text inside of text fields
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x: bounds.minX + 20, y: bounds.origin.y, width: bounds.width, height: bounds.height)

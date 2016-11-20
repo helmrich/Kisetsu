@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebViewController: UIViewController, UIWebViewDelegate {
+class WebViewController: UIViewController {
 
     // MARK: - Properties
     
@@ -18,6 +18,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     // MARK: - Outlets and Actions
     
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
@@ -40,4 +41,24 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         return true
     }
 
+}
+
+extension WebViewController: UIWebViewDelegate {
+    // Show the activity indicator view and animate it
+    // when the web view starts loading...
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.activityIndicatorView.alpha = 1
+        })
+        self.activityIndicatorView.startAnimating()
+    }
+    
+    // and stop animating it and hide it, when the web
+    // view did finish loading
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.activityIndicatorView.alpha = 0
+        })
+        self.activityIndicatorView.stopAnimating()
+    }
 }

@@ -56,11 +56,27 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func checkTextFieldContent() {
+        guard let emailText = emailTextField.text,
+            let passwordText = passwordTextField.text else {
+            return
+        }
+        
+        if emailText.isEmpty || passwordText.isEmpty {
+            loginButton.set(enabled: false)
+        } else {
+            loginButton.set(enabled: true)
+        }
+    }
+    
+    
     
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginButton.set(enabled: false)
         
         // Add the error message view to the login view controller as a subview and
         // set its constraints
@@ -132,9 +148,5 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        view.resignFirstResponder()
     }
 }

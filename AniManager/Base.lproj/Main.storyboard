@@ -86,6 +86,7 @@
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                                         <connections>
+                                                            <action selector="checkTextFieldContent" destination="KLd-lg-sp5" eventType="editingChanged" id="UDB-Sv-vw9"/>
                                                             <outlet property="delegate" destination="KLd-lg-sp5" id="wvW-hg-nds"/>
                                                         </connections>
                                                     </textField>
@@ -99,6 +100,7 @@
                                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                         <connections>
+                                                            <action selector="checkTextFieldContent" destination="KLd-lg-sp5" eventType="editingChanged" id="Cja-0z-AfB"/>
                                                             <outlet property="delegate" destination="KLd-lg-sp5" id="DHt-rz-yF9"/>
                                                         </connections>
                                                     </textField>
@@ -231,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avX-nu-2zR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="472.80000000000001" y="82.3088455772114"/>
+            <point key="canvasLocation" x="473" y="83"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="B5Z-Qp-w0d">

@@ -30,6 +30,8 @@ class WebViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setActivityIndicator(enabled: true)
+        
         let request = URLRequest(url: url)
         webView.loadRequest(request)
     }
@@ -40,25 +42,27 @@ class WebViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    func setActivityIndicator(enabled: Bool) {
+        if enabled {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.activityIndicatorView.alpha = 1
+            })
+            self.activityIndicatorView.startAnimating()
+        } else {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.activityIndicatorView.alpha = 0
+            })
+            self.activityIndicatorView.stopAnimating()
+        }
+    }
 
 }
 
 extension WebViewController: UIWebViewDelegate {
-    // Show the activity indicator view and animate it
-    // when the web view starts loading...
-    func webViewDidStartLoad(_ webView: UIWebView) {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.activityIndicatorView.alpha = 1
-        })
-        self.activityIndicatorView.startAnimating()
-    }
-    
     // and stop animating it and hide it, when the web
     // view did finish loading
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.activityIndicatorView.alpha = 0
-        })
-        self.activityIndicatorView.stopAnimating()
+        setActivityIndicator(enabled: false)
     }
 }

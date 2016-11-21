@@ -12,7 +12,6 @@ class LoginViewController: UIViewController {
 
     // MARK: - Properties
     
-    var isKeyboardActive = false
     var errorMessageView = ErrorMessageView()
     
     override var prefersStatusBarHidden: Bool {
@@ -23,8 +22,6 @@ class LoginViewController: UIViewController {
     // MARK: - Outlets and Actions
     
     // MARK: - Outlets
-    @IBOutlet weak var emailTextField: AniManagerTextField!
-    @IBOutlet weak var passwordTextField: AniManagerTextField!
     @IBOutlet weak var loginButton: AniManagerButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
@@ -52,37 +49,24 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login() {
-        loginButton.setActivityIndicator(active: true)
-        view.endEditing(true)
-    }
-    
-    @IBAction func checkTextFieldContent() {
-        guard let emailText = emailTextField.text,
-            let passwordText = passwordTextField.text else {
-            return
-        }
-        
-        if emailText.isEmpty || passwordText.isEmpty {
-            loginButton.set(enabled: false)
-        } else {
-            loginButton.set(enabled: true)
+        // Create an AniList URL for requesting an authorization code and
+        // present the web view controller with this URL
+        let parameters = [
+            AniListConstant.ParameterKey.Authentication.grantType: AniListConstant.ParameterValue.Authentication.grantType,
+            AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
+            AniListConstant.ParameterKey.Authentication.redirectUri: AniListConstant.ParameterValue.Authentication.redirectUri,
+            AniListConstant.ParameterKey.Authentication.responseType: AniListConstant.ParameterValue.Authentication.responseType
+        ]
+        if let url = AniListClient.createAniListUrl(withPath: AniListConstant.Path.Authentication.authorize, andParameters: parameters) {
+            presentWebViewController(with: url)
         }
     }
-    
     
     
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Add a tap gesture recognizer to the view controller's main view
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped))
-        view.addGestureRecognizer(tapGestureRecognizer)
-        
-        // The login button should be disabled initially
-        loginButton.set(enabled: false)
-        
         // Add the error message view to the login view controller as a subview and
         // set its constraints
         view.addSubview(errorMessageView)
@@ -95,22 +79,6 @@ class LoginViewController: UIViewController {
             ])
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Add observers for keyboard changes
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: nil, using: keyboardWillShow)
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: nil, using: keyboardWillHide)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Remove observers for keyboard changes
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
     
     // MARK: - Functions
     
@@ -119,47 +87,5 @@ class LoginViewController: UIViewController {
         webViewController.url = url
         present(webViewController, animated: true, completion: nil)
     }
-    
-    // When the main view is tapped every text field should resign its
-    // first responder status so that the keyboard hides if it's currently
-    // displayed
-    func viewWasTapped() {
-        view.endEditing(true)
-    }
 
-}
-
-
-// MARK: - Keyboard Functions
-
-extension LoginViewController {
-    func keyboardWillShow(notification: Notification) {
-        guard !isKeyboardActive else {
-            return
-        }
-        
-        if let userInfo = notification.userInfo,
-            let keyboardFrameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-            // When the keyboard will be shown the main view should be pushed up slightly
-            // so the most important elements are visible when typing (other text field,
-            // login button, forgot password/sign-up page buttons)
-            view.frame.origin.y -= keyboardFrameEnd.height / 1.75
-            isKeyboardActive = true
-        }
-    }
-    
-    func keyboardWillHide(notification: Notification) {
-        view.frame.origin.y = 0
-        isKeyboardActive = false
-    }
-}
-
-
-// MARK: - Text Field Delegate
-
-extension LoginViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
 }

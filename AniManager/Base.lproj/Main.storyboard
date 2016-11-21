@@ -32,27 +32,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
-                                <rect key="frame" x="0.0" y="50" width="375" height="113"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
-                                        <rect key="frame" x="45" y="0.0" width="285" height="74"/>
-                                        <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with your AniList account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="YZW-La-QsL">
-                                        <rect key="frame" x="24" y="84" width="327" height="29"/>
-                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="YZW-La-QsL" secondAttribute="trailing" constant="23.5" id="1Jt-Jq-ae6"/>
-                                    <constraint firstItem="YZW-La-QsL" firstAttribute="leading" secondItem="jMd-Na-OAI" secondAttribute="leading" constant="23.5" id="wZT-RD-yRM"/>
-                                </constraints>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrX-Eq-hIl">
                                 <rect key="frame" x="152" y="565" width="71" height="32"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
@@ -65,67 +44,25 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-CF-u71">
-                                <rect key="frame" x="0.0" y="245" width="375" height="257"/>
+                                <rect key="frame" x="0.0" y="300" width="375" height="127"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="EXj-OE-4Kw">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-BW-xbg">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
-                                                <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yJr-DE-zkJ" customClass="AniManagerTextField" customModule="AniManager" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="5uK-Hm-xBN"/>
-                                                        </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
-                                                        <connections>
-                                                            <action selector="checkTextFieldContent" destination="KLd-lg-sp5" eventType="editingChanged" id="UDB-Sv-vw9"/>
-                                                            <outlet property="delegate" destination="KLd-lg-sp5" id="wvW-hg-nds"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Z4n-lK-FxC" customClass="AniManagerTextField" customModule="AniManager" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="70" width="375" height="50"/>
-                                                        <color key="backgroundColor" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="qGC-B3-Stq"/>
-                                                        </constraints>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                                        <connections>
-                                                            <action selector="checkTextFieldContent" destination="KLd-lg-sp5" eventType="editingChanged" id="Cja-0z-AfB"/>
-                                                            <outlet property="delegate" destination="KLd-lg-sp5" id="DHt-rz-yF9"/>
-                                                        </connections>
-                                                    </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="140" width="375" height="50"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="fn4-V6-Ayc"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="24"/>
-                                                        <color key="tintColor" red="0.013609491288661957" green="0.71974295377731323" blue="0.9999886155128479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <state key="normal" title="Login">
-                                                            <color key="titleColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="login" destination="KLd-lg-sp5" eventType="touchUpInside" id="f6d-nB-RIK"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="Hrc-BW-xbg" firstAttribute="leading" secondItem="EXj-OE-4Kw" secondAttribute="leading" id="WOc-7p-krO"/>
-                                            <constraint firstAttribute="trailing" secondItem="Hrc-BW-xbg" secondAttribute="trailing" id="hcT-kZ-Lkp"/>
+                                            <constraint firstAttribute="height" constant="60" id="cZN-J6-GTk"/>
                                         </constraints>
-                                    </stackView>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="24"/>
+                                        <color key="tintColor" red="0.013609491288661957" green="0.71974295377731323" blue="0.9999886155128479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Login with AniList">
+                                            <color key="titleColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="login" destination="KLd-lg-sp5" eventType="touchUpInside" id="f6d-nB-RIK"/>
+                                        </connections>
+                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-YE-2H5">
-                                        <rect key="frame" x="79" y="210" width="217.5" height="47"/>
+                                        <rect key="frame" x="79" y="80" width="217.5" height="47"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="c8D-1M-7L7">
                                                 <rect key="frame" x="0.0" y="0.0" width="217.5" height="47"/>
@@ -172,29 +109,48 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="EXj-OE-4Kw" firstAttribute="leading" secondItem="FYe-CF-u71" secondAttribute="leading" id="4uy-UN-SWB"/>
-                                    <constraint firstAttribute="trailing" secondItem="EXj-OE-4Kw" secondAttribute="trailing" id="oha-zW-fcr"/>
+                                    <constraint firstItem="jRj-XV-Tl4" firstAttribute="leading" secondItem="FYe-CF-u71" secondAttribute="leading" id="eNk-0q-YGg"/>
+                                    <constraint firstAttribute="trailing" secondItem="jRj-XV-Tl4" secondAttribute="trailing" id="tq4-Op-8So"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
+                                <rect key="frame" x="0.0" y="80" width="375" height="103"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
+                                        <rect key="frame" x="45" y="0.0" width="285" height="74"/>
+                                        <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login with your AniList account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="YZW-La-QsL">
+                                        <rect key="frame" x="24" y="74" width="327" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YZW-La-QsL" secondAttribute="trailing" constant="23.5" id="1Jt-Jq-ae6"/>
+                                    <constraint firstItem="YZW-La-QsL" firstAttribute="leading" secondItem="jMd-Na-OAI" secondAttribute="leading" constant="23.5" id="wZT-RD-yRM"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="jMd-Na-OAI" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="EJM-a7-s2Y"/>
-                            <constraint firstItem="FYe-CF-u71" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="a1b-k5-aF4"/>
-                            <constraint firstItem="FYe-CF-u71" firstAttribute="centerY" secondItem="R8f-G0-nGS" secondAttribute="centerY" constant="40" id="cmj-75-6AP"/>
-                            <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="fMn-Ft-0wG"/>
-                            <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="k8v-aj-OOM"/>
-                            <constraint firstItem="jMd-Na-OAI" firstAttribute="top" secondItem="uUS-rq-xd7" secondAttribute="bottom" constant="50" id="ogy-Cp-Lof"/>
-                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="DrX-Eq-hIl" secondAttribute="bottom" constant="70" id="tUc-p0-waD"/>
-                            <constraint firstAttribute="trailing" secondItem="FYe-CF-u71" secondAttribute="trailing" id="xxx-rY-OPg"/>
+                            <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="50s-Ee-AfO"/>
+                            <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="9FO-1h-6GF"/>
+                            <constraint firstItem="FYe-CF-u71" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="Hwn-Yl-FYb"/>
+                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="DrX-Eq-hIl" secondAttribute="bottom" constant="70" id="NK2-Ac-IEf"/>
+                            <constraint firstItem="jMd-Na-OAI" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="fUE-1E-GlV"/>
+                            <constraint firstItem="jMd-Na-OAI" firstAttribute="top" secondItem="uUS-rq-xd7" secondAttribute="bottom" constant="80" id="t8k-aE-Oz5"/>
+                            <constraint firstItem="FYe-CF-u71" firstAttribute="centerY" secondItem="R8f-G0-nGS" secondAttribute="centerY" constant="30" id="u2W-Y4-EWC"/>
+                            <constraint firstAttribute="trailing" secondItem="FYe-CF-u71" secondAttribute="trailing" id="wV3-FD-NPN"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="emailTextField" destination="yJr-DE-zkJ" id="cgU-lY-HUb"/>
                         <outlet property="forgotPasswordButton" destination="BDh-w0-ZyY" id="KfN-0b-Byb"/>
                         <outlet property="loginButton" destination="jRj-XV-Tl4" id="Kyu-Ss-VwI"/>
-                        <outlet property="passwordTextField" destination="Z4n-lK-FxC" id="qzV-ue-fxL"/>
                         <outlet property="signUpButton" destination="CDn-2Y-t9F" id="YDJ-i6-vba"/>
                         <outlet property="skipLoginButton" destination="DrX-Eq-hIl" id="y77-Ww-ZHM"/>
                     </connections>

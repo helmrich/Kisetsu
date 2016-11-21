@@ -34,7 +34,7 @@ class AniManagerButton: UIButton {
         
         // Add actions that handle the button's appearance when it's tapped
         addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
-        addTarget(self, action: #selector(setTouchUpOutsideAppearance), for: .touchUpOutside)
+        addTarget(self, action: #selector(setTouchUpAppearance), for: [.touchUpInside, .touchUpOutside])
     }
     
     
@@ -43,14 +43,14 @@ class AniManagerButton: UIButton {
     func setActivityIndicator(active: Bool) {
         if active {
             set(enabled: false)
-            UIView.animate(withDuration: 0.25, animations: { 
+            UIView.animate(withDuration: 0.25, animations: {
                 self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.0), for: .normal)
                 self.activityIndicator.alpha = 1
             })
             activityIndicator.startAnimating()
         } else {
             set(enabled: true)
-            UIView.animate(withDuration: 0.25, animations: { 
+            UIView.animate(withDuration: 0.25, animations: {
                 self.activityIndicator.alpha = 0
             })
             activityIndicator.stopAnimating()
@@ -62,7 +62,7 @@ class AniManagerButton: UIButton {
         backgroundColor = backgroundColor?.withAlphaComponent(0.8)
     }
     
-    func setTouchUpOutsideAppearance() {
+    func setTouchUpAppearance() {
         setTitleColor(titleColor(for: .normal)?.withAlphaComponent(1.0), for: .normal)
         backgroundColor = backgroundColor?.withAlphaComponent(1.0)
     }

@@ -14,10 +14,11 @@
 		D25EDEAC1DDF981300267243 /* CarterOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEAB1DDF981300267243 /* CarterOne.ttf */; };
 		D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */; };
 		D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */; };
-		D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */; };
 		D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB31DE08B9700267243 /* WebViewController.swift */; };
 		D25EDEB61DE0909300267243 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB51DE0909300267243 /* Constant.swift */; };
 		D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */; };
+		D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEBE1DE2515C00267243 /* AniListConstant.swift */; };
+		D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEC11DE2777A00267243 /* AniListClient.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BC1DDF861700228EF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BB1DDF861700228EF2 /* Assets.xcassets */; };
@@ -32,10 +33,11 @@
 		D25EDEAB1DDF981300267243 /* CarterOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarterOne.ttf; sourceTree = "<group>"; };
 		D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerButton.swift; sourceTree = "<group>"; };
 		D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerTextField.swift; sourceTree = "<group>"; };
 		D25EDEB31DE08B9700267243 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		D25EDEB51DE0909300267243 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
+		D25EDEBE1DE2515C00267243 /* AniListConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListConstant.swift; sourceTree = "<group>"; };
+		D25EDEC11DE2777A00267243 /* AniListClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClient.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		D25EDE9B1DDF8FE500267243 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D25EDEC01DE2552700267243 /* Clients */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -66,7 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */,
-				D25EDEB11DDFB7ED00267243 /* AniManagerTextField.swift */,
 				D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */,
 			);
 			name = Views;
@@ -117,6 +119,23 @@
 				D25EDEAB1DDF981300267243 /* CarterOne.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		D25EDEBD1DE2513400267243 /* AniList */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEBE1DE2515C00267243 /* AniListConstant.swift */,
+				D25EDEC11DE2777A00267243 /* AniListClient.swift */,
+			);
+			name = AniList;
+			sourceTree = "<group>";
+		};
+		D25EDEC01DE2552700267243 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDEBD1DE2513400267243 /* AniList */,
+			);
+			name = Clients;
 			sourceTree = "<group>";
 		};
 		D27A77A81DDF861700228EF2 = {
@@ -228,12 +247,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25EDEB21DDFB7ED00267243 /* AniManagerTextField.swift in Sources */,
 				D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */,
+				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
+				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,9 +11,11 @@ import Foundation
 class AniListClient {
     
     static let shared = AniListClient()
+    var authorizationCode: String? = nil
     
     fileprivate init() {}
-
+    
+    
     // MARK: - Helper methods
     static func createAniListUrl(withPath path: String, andParameters parameters: [String:Any]) -> URL? {
         var urlComponents = URLComponents()

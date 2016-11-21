@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     @IBAction func login() {
         // Create an AniList URL for requesting an authorization code and
         // present the web view controller with this URL
-        let parameters = [
+        let parameters: [String:Any] = [
             AniListConstant.ParameterKey.Authentication.grantType: AniListConstant.ParameterValue.Authentication.grantType,
             AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
             AniListConstant.ParameterKey.Authentication.redirectUri: AniListConstant.ParameterValue.Authentication.redirectUri,
@@ -77,6 +77,11 @@ class LoginViewController: UIViewController {
                 NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
             ])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     

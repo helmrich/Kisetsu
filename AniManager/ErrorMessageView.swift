@@ -41,7 +41,7 @@ class ErrorMessageView: UIView {
         
         // Add an error label that displays the error message's text
         errorLabel.numberOfLines = 2
-        errorLabel.font = UIFont(name: "Lato-Light", size: 14)
+        errorLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14)
         errorLabel.textColor = .white
         errorLabel.textAlignment = .center
         self.addSubview(errorLabel)

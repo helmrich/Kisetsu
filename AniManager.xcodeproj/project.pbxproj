@@ -23,6 +23,14 @@
 		D25EDEC61DE452BF00267243 /* TabBarIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */; };
 		D25EDEC81DE452D300267243 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC71DE452D300267243 /* Icons.xcassets */; };
 		D25EDECA1DE452E100267243 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC91DE452E100267243 /* AppIcon.xcassets */; };
+		D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDECB1DE4D71900267243 /* HomeViewController.swift */; };
+		D25EDECE1DE4DCD900267243 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDECD1DE4DCD900267243 /* ListViewController.swift */; };
+		D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */; };
+		D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED31DE4DE3300267243 /* BrowseViewController.swift */; };
+		D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED71DE4E64600267243 /* ColorExtension.swift */; };
+		D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDB1DE4F49300267243 /* NavigationController.swift */; };
+		D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */; };
+		D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -45,6 +53,14 @@
 		D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBarIcons.xcassets; sourceTree = "<group>"; };
 		D25EDEC71DE452D300267243 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		D25EDEC91DE452E100267243 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		D25EDECB1DE4D71900267243 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D25EDECD1DE4DCD900267243 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D25EDED31DE4DE3300267243 /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		D25EDED71DE4E64600267243 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		D25EDEDB1DE4F49300267243 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeListViewController.swift; sourceTree = "<group>"; };
+		D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListViewController.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,6 +92,7 @@
 			children = (
 				D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */,
 				D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */,
+				D25EDED71DE4E64600267243 /* ColorExtension.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -85,6 +102,13 @@
 			children = (
 				D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */,
 				D25EDEB31DE08B9700267243 /* WebViewController.swift */,
+				D25EDEDB1DE4F49300267243 /* NavigationController.swift */,
+				D25EDECB1DE4D71900267243 /* HomeViewController.swift */,
+				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
+				D25EDECD1DE4DCD900267243 /* ListViewController.swift */,
+				D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */,
+				D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */,
+				D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,10 +287,18 @@
 				D25EDEC41DE3AF9900267243 /* AccessToken.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
+				D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */,
+				D25EDECE1DE4DCD900267243 /* ListViewController.swift in Sources */,
+				D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */,
+				D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
+				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
+				D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */,
+				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
+				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

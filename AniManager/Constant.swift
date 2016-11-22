@@ -9,6 +9,17 @@
 import Foundation
 
 struct Constant {
-    static let aniListSignUpString = "https://anilist.co/register"
-    static let aniListForgotPasswordUrlString = "https://anilist.co/forgot"
+    struct URL {
+        static let aniListSignUpString = "https://anilist.co/register"
+        static let aniListForgotPasswordUrlString = "https://anilist.co/forgot"
+    }
+    
+    struct FontName {
+        static let mainLight = "Lato-Light"
+        static let mainRegular = "Lato-Regular"
+        static let mainBold = "Lato-Bold"
+        static let mainBlack = "Lato-Black"
+        
+        static let logo = "CarterOne"
+    }
 }

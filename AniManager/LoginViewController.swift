@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func openSignUpPage() {
-        if let url = URL(string: Constant.aniListSignUpString) {
+        if let url = URL(string: Constant.URL.aniListSignUpString) {
             presentWebViewController(with: url)
         } else {
             errorMessageView.showError(withMessage: "Couldn't open Sign-Up page. Try again.")
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func openForgotPasswordPage() {
-        if let url = URL(string: Constant.aniListForgotPasswordUrlString) {
+        if let url = URL(string: Constant.URL.aniListForgotPasswordUrlString) {
             presentWebViewController(with: url)
         } else {
             errorMessageView.showError(withMessage: "Couldn't open Forgot Password page. Try again.")

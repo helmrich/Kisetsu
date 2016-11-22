@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KLd-lg-sp5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7uD-ZS-SyR">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -70,13 +70,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="D6v-L8-6yc">
                                                         <rect key="frame" x="0.0" y="0.0" width="217.5" height="20"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sh-La-2Fi">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sh-La-2Fi">
                                                                 <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDn-2Y-t9F">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDn-2Y-t9F">
                                                                 <rect key="frame" x="165.5" y="0.0" width="52" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -159,14 +159,38 @@
             </objects>
             <point key="canvasLocation" x="473" y="83"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="rG3-ru-PUR">
+            <objects>
+                <navigationController id="7uD-ZS-SyR" customClass="NavigationController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HWd-mG-9Hx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gKc-6b-GHk" kind="relationship" relationship="rootViewController" id="rEK-Yv-Zjf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ufn-xR-dDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1756" y="81"/>
+        </scene>
+        <!--AniManager-->
         <scene sceneID="6H7-WG-Q6N">
             <objects>
-                <tabBarController id="gKc-6b-GHk" sceneMemberID="viewController">
+                <tabBarController title="AniManager" id="gKc-6b-GHk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="AniManager" id="mm2-3R-zeO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Dr0-YQ-PMm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.12156862745098039" green="0.14901960784313725" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.12156862745098039" green="0.14901960784313725" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="mXY-UU-HB9" kind="relationship" relationship="viewControllers" id="GnZ-ti-Job"/>
@@ -178,12 +202,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B04-ae-bPM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1510" y="74"/>
+            <point key="canvasLocation" x="2716" y="82"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="EQB-MF-Ii9">
             <objects>
-                <viewController id="MEK-xW-Ysf" sceneMemberID="viewController">
+                <viewController id="MEK-xW-Ysf" customClass="SettingsViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HXt-72-m56"/>
                         <viewControllerLayoutGuide type="bottom" id="2dL-8Z-Nc1"/>
@@ -199,12 +223,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQp-NN-Rzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="-1607"/>
+            <point key="canvasLocation" x="3910" y="-1621"/>
         </scene>
-        <!--View Controller-->
+        <!--Browse View Controller-->
         <scene sceneID="Ytf-x0-QEc">
             <objects>
-                <viewController id="645-XW-Nu9" sceneMemberID="viewController">
+                <viewController id="645-XW-Nu9" customClass="BrowseViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SzN-rn-rkK"/>
                         <viewControllerLayoutGuide type="bottom" id="H0f-3Z-8cC"/>
@@ -220,12 +244,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gvw-Mq-tI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="-814"/>
+            <point key="canvasLocation" x="3910" y="-802"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="Hrz-Fu-2gF">
             <objects>
-                <viewController id="mXY-UU-HB9" sceneMemberID="viewController">
+                <viewController id="mXY-UU-HB9" customClass="HomeViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZGL-sN-IRE"/>
                         <viewControllerLayoutGuide type="bottom" id="73c-a8-crc"/>
@@ -235,18 +259,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="HomeIconActive" id="ZFA-UR-xcW">
+                    <tabBarItem key="tabBarItem" title="" image="HomeIcon" selectedImage="HomeIconActive" id="ZFA-UR-xcW">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4T-6Q-lJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="73"/>
+            <point key="canvasLocation" x="3910" y="82"/>
         </scene>
-        <!--View Controller-->
+        <!--Anime List View Controller-->
         <scene sceneID="54M-V3-vQZ">
             <objects>
-                <viewController id="6g2-7A-bjD" sceneMemberID="viewController">
+                <viewController id="6g2-7A-bjD" customClass="AnimeListViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0lV-9V-i5v"/>
                         <viewControllerLayoutGuide type="bottom" id="gAT-P7-XTB"/>
@@ -262,12 +286,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7N-qG-Jcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="824"/>
+            <point key="canvasLocation" x="3910" y="846"/>
         </scene>
-        <!--View Controller-->
+        <!--Manga List View Controller-->
         <scene sceneID="DPD-1J-x1k">
             <objects>
-                <viewController id="Dia-Jv-QgS" sceneMemberID="viewController">
+                <viewController id="Dia-Jv-QgS" customClass="MangaListViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CA4-lU-YAm"/>
                         <viewControllerLayoutGuide type="bottom" id="zAs-1i-B3g"/>
@@ -283,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4aY-jN-xrw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2462" y="1558"/>
+            <point key="canvasLocation" x="3910" y="1890"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="B5Z-Qp-w0d">
@@ -347,15 +371,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AnimeIcon" width="32" height="32"/>
-        <image name="AnimeIconActive" width="32" height="32"/>
+        <image name="AnimeIcon" width="25" height="25"/>
+        <image name="AnimeIconActive" width="25" height="25"/>
         <image name="CancelCross" width="25" height="25"/>
-        <image name="HomeIconActive" width="32" height="32"/>
-        <image name="MangaIcon" width="32" height="32"/>
-        <image name="MangaIconActiveAlternative" width="32" height="32"/>
-        <image name="SearchIcon" width="32" height="32"/>
-        <image name="SearchIconActive" width="32" height="32"/>
-        <image name="SettingsGearIcon" width="32" height="32"/>
-        <image name="SettingsGearIconActive" width="32" height="32"/>
+        <image name="HomeIcon" width="25" height="25"/>
+        <image name="HomeIconActive" width="25" height="25"/>
+        <image name="MangaIcon" width="25" height="25"/>
+        <image name="MangaIconActiveAlternative" width="25" height="25"/>
+        <image name="SearchIcon" width="25" height="25"/>
+        <image name="SearchIconActive" width="25" height="25"/>
+        <image name="SettingsGearIcon" width="25" height="25"/>
+        <image name="SettingsGearIconActive" width="25" height="25"/>
     </resources>
 </document>

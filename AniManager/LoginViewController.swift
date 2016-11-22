@@ -52,10 +52,10 @@ class LoginViewController: UIViewController {
         // Create an AniList URL for requesting an authorization code and
         // present the web view controller with this URL
         let parameters: [String:Any] = [
-            AniListConstant.ParameterKey.Authentication.grantType: AniListConstant.ParameterValue.Authentication.grantType,
+            AniListConstant.ParameterKey.Authentication.grantType: AniListConstant.ParameterValue.Authentication.grantTypeAuthorizationCode,
             AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
             AniListConstant.ParameterKey.Authentication.redirectUri: AniListConstant.ParameterValue.Authentication.redirectUri,
-            AniListConstant.ParameterKey.Authentication.responseType: AniListConstant.ParameterValue.Authentication.responseType
+            AniListConstant.ParameterKey.Authentication.responseType: AniListConstant.ParameterValue.Authentication.responseTypeCode
         ]
         if let url = AniListClient.createAniListUrl(withPath: AniListConstant.Path.Authentication.authorize, andParameters: parameters) {
             presentWebViewController(with: url)
@@ -82,6 +82,40 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if let _ = AniListClient.shared.authorizationCode {
+            
+            AniListClient.shared.getAccessToken(withAuthorizationCode: true, completionHandlerForTokens: { (accessToken, refreshToken, errorMessage) in
+                
+                guard errorMessage == nil else {
+                    DispatchQueue.main.async {
+                        self.errorMessageView.showError(withMessage: errorMessage!)
+                    }
+                    return
+                }
+                
+                guard let accessToken = accessToken else {
+                    DispatchQueue.main.async {
+                        self.errorMessageView.showError(withMessage: "Couldn't get access token")
+                    }
+                    return
+                }
+                
+                guard let refreshToken = refreshToken else {
+                    DispatchQueue.main.async {
+                        self.errorMessageView.showError(withMessage: "Couldn't get refresh token")
+                    }
+                    return
+                }
+                
+                UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
+                UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
+                UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
+                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                
+            })
+        } else {
+            print("No authorization code available")
+        }
     }
     
     

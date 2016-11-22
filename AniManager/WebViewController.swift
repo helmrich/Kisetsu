@@ -99,8 +99,9 @@ extension WebViewController: UIWebViewDelegate {
             dismiss(animated: true, completion: nil)
         } else if url.absoluteString.contains("?error=access_denied") {
             // If the URL string contains "?error=access_denied" an error should be
-            // presenting LoginViewController's
-            (presentingViewController as! LoginViewController).errorMessageView.showError(withMessage: "The authorization request was denied")
+            // displayed on the presenting AuthenticationViewController and the
+            // WebViewController should be dismissed
+            (presentingViewController as! AuthenticationViewController).errorMessageView.showError(withMessage: "The authorization request was denied")
             dismiss(animated: true, completion: nil)
         }
     }

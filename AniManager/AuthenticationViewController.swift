@@ -1,15 +1,15 @@
 //
-//  LoginViewController.swift
+//  AuthenticationViewController.swift
 //  AniManager
 //
-//  Created by Tobias Helmrich on 18.11.16.
+//  Created by Tobias Helmrich on 22.11.16.
 //  Copyright © 2016 Tobias Helmrich. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
+class AuthenticationViewController: UIViewController {
+    
     // MARK: - Properties
     
     var errorMessageView = ErrorMessageView()
@@ -72,10 +72,10 @@ class LoginViewController: UIViewController {
         view.addSubview(errorMessageView)
         errorMessageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                NSLayoutConstraint(item: errorMessageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60),
-                NSLayoutConstraint(item: errorMessageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: errorMessageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60),
+            NSLayoutConstraint(item: errorMessageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
             ])
     }
     
@@ -126,5 +126,5 @@ class LoginViewController: UIViewController {
         webViewController.url = url
         present(webViewController, animated: true, completion: nil)
     }
-
+    
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7uD-ZS-SyR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,10 +20,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Login View Controller-->
+        <!--Authentication View Controller-->
         <scene sceneID="qw2-Yg-tVw">
             <objects>
-                <viewController id="KLd-lg-sp5" customClass="LoginViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KLd-lg-sp5" customClass="AuthenticationViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uUS-rq-xd7"/>
                         <viewControllerLayoutGuide type="bottom" id="Kt5-Sa-nfQ"/>

@@ -13,7 +13,6 @@
 		D25EDEAA1DDF979600267243 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA61DDF979600267243 /* Lato-Regular.ttf */; };
 		D25EDEAC1DDF981300267243 /* CarterOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEAB1DDF981300267243 /* CarterOne.ttf */; };
 		D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */; };
-		D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */; };
 		D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB31DE08B9700267243 /* WebViewController.swift */; };
 		D25EDEB61DE0909300267243 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEB51DE0909300267243 /* Constant.swift */; };
 		D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */; };
@@ -31,6 +30,7 @@
 		D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDB1DE4F49300267243 /* NavigationController.swift */; };
 		D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */; };
 		D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */; };
+		D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -43,7 +43,6 @@
 		D25EDEA61DDF979600267243 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		D25EDEAB1DDF981300267243 /* CarterOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CarterOne.ttf; sourceTree = "<group>"; };
 		D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniManagerButton.swift; sourceTree = "<group>"; };
-		D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D25EDEB31DE08B9700267243 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		D25EDEB51DE0909300267243 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
@@ -61,6 +60,7 @@
 		D25EDEDB1DE4F49300267243 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeListViewController.swift; sourceTree = "<group>"; };
 		D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListViewController.swift; sourceTree = "<group>"; };
+		D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D25EDEAF1DDFB33E00267243 /* LoginViewController.swift */,
+				D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */,
 				D25EDEB31DE08B9700267243 /* WebViewController.swift */,
 				D25EDEDB1DE4F49300267243 /* NavigationController.swift */,
 				D25EDECB1DE4D71900267243 /* HomeViewController.swift */,
@@ -282,10 +282,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25EDEB01DDFB33E00267243 /* LoginViewController.swift in Sources */,
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D25EDEC41DE3AF9900267243 /* AccessToken.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
+				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
 				D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */,
 				D25EDECE1DE4DCD900267243 /* ListViewController.swift in Sources */,

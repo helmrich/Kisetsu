@@ -70,13 +70,13 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="D6v-L8-6yc">
                                                         <rect key="frame" x="0.0" y="0.0" width="217.5" height="20"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sh-La-2Fi">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sh-La-2Fi">
                                                                 <rect key="frame" x="0.0" y="0.0" width="160.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDn-2Y-t9F">
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDn-2Y-t9F">
                                                                 <rect key="frame" x="165.5" y="0.0" width="52" height="20"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="16"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -159,6 +159,132 @@
             </objects>
             <point key="canvasLocation" x="473" y="83"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="6H7-WG-Q6N">
+            <objects>
+                <tabBarController id="gKc-6b-GHk" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Dr0-YQ-PMm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="mXY-UU-HB9" kind="relationship" relationship="viewControllers" id="GnZ-ti-Job"/>
+                        <segue destination="6g2-7A-bjD" kind="relationship" relationship="viewControllers" id="oXQ-1l-AbN"/>
+                        <segue destination="Dia-Jv-QgS" kind="relationship" relationship="viewControllers" id="ksD-qM-QPJ"/>
+                        <segue destination="645-XW-Nu9" kind="relationship" relationship="viewControllers" id="MXa-da-6wJ"/>
+                        <segue destination="MEK-xW-Ysf" kind="relationship" relationship="viewControllers" id="6hq-hO-s4r"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B04-ae-bPM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1510" y="74"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="EQB-MF-Ii9">
+            <objects>
+                <viewController id="MEK-xW-Ysf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HXt-72-m56"/>
+                        <viewControllerLayoutGuide type="bottom" id="2dL-8Z-Nc1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t6v-5F-Dmy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="SettingsGearIcon" selectedImage="SettingsGearIconActive" id="QFO-Ze-hhj">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQp-NN-Rzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2462" y="-1607"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ytf-x0-QEc">
+            <objects>
+                <viewController id="645-XW-Nu9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SzN-rn-rkK"/>
+                        <viewControllerLayoutGuide type="bottom" id="H0f-3Z-8cC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cfK-zV-nGh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="SearchIcon" selectedImage="SearchIconActive" id="CGj-iH-QGV">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gvw-Mq-tI5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2462" y="-814"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Hrz-Fu-2gF">
+            <objects>
+                <viewController id="mXY-UU-HB9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZGL-sN-IRE"/>
+                        <viewControllerLayoutGuide type="bottom" id="73c-a8-crc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nh3-wO-Sl2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="HomeIconActive" id="ZFA-UR-xcW">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A4T-6Q-lJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2462" y="73"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="54M-V3-vQZ">
+            <objects>
+                <viewController id="6g2-7A-bjD" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0lV-9V-i5v"/>
+                        <viewControllerLayoutGuide type="bottom" id="gAT-P7-XTB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lmQ-kD-vmZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="AnimeIcon" selectedImage="AnimeIconActive" id="SMF-c0-Ef4">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g7N-qG-Jcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2462" y="824"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DPD-1J-x1k">
+            <objects>
+                <viewController id="Dia-Jv-QgS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CA4-lU-YAm"/>
+                        <viewControllerLayoutGuide type="bottom" id="zAs-1i-B3g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wG0-bH-TzP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="MangaIcon" selectedImage="MangaIconActiveAlternative" id="AuE-YN-7Ue">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4aY-jN-xrw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2462" y="1558"/>
+        </scene>
         <!--Web View Controller-->
         <scene sceneID="B5Z-Qp-w0d">
             <objects>
@@ -221,6 +347,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AnimeIcon" width="32" height="32"/>
+        <image name="AnimeIconActive" width="32" height="32"/>
         <image name="CancelCross" width="25" height="25"/>
+        <image name="HomeIconActive" width="32" height="32"/>
+        <image name="MangaIcon" width="32" height="32"/>
+        <image name="MangaIconActiveAlternative" width="32" height="32"/>
+        <image name="SearchIcon" width="32" height="32"/>
+        <image name="SearchIconActive" width="32" height="32"/>
+        <image name="SettingsGearIcon" width="32" height="32"/>
+        <image name="SettingsGearIconActive" width="32" height="32"/>
     </resources>
 </document>

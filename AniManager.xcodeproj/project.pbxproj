@@ -31,6 +31,7 @@
 		D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */; };
 		D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */; };
 		D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */; };
+		D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE41DE5161900267243 /* LoadingViewController.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -61,6 +62,7 @@
 		D25EDEDD1DE4FC2300267243 /* AnimeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeListViewController.swift; sourceTree = "<group>"; };
 		D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListViewController.swift; sourceTree = "<group>"; };
 		D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		D25EDEE41DE5161900267243 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D25EDEE41DE5161900267243 /* LoadingViewController.swift */,
 				D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */,
 				D25EDEB31DE08B9700267243 /* WebViewController.swift */,
 				D25EDEDB1DE4F49300267243 /* NavigationController.swift */,
@@ -287,6 +290,7 @@
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
+				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */,
 				D25EDECE1DE4DCD900267243 /* ListViewController.swift in Sources */,
 				D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */,

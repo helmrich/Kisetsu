@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,15 +16,58 @@
         <array key="Lato-Bold.ttf">
             <string>Lato-Bold</string>
         </array>
+        <array key="Lato-Light.ttf">
+            <string>Lato-Light</string>
+        </array>
         <array key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
         </array>
     </customFonts>
     <scenes>
+        <!--Loading View Controller-->
+        <scene sceneID="XjM-Hy-YWY">
+            <objects>
+                <viewController storyboardIdentifier="loadingViewController" id="maD-s2-dON" customClass="LoadingViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UQx-Ih-rQ1"/>
+                        <viewControllerLayoutGuide type="bottom" id="gxO-wE-gmL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gFW-nz-iOk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-tQ-JtG">
+                                <rect key="frame" x="16" y="290" width="343" height="86"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-0S-ovY">
+                                        <rect key="frame" x="153" y="0.0" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authenticating ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRh-g6-3Aw">
+                                        <rect key="frame" x="86.5" y="57" width="170.5" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerY" secondItem="gFW-nz-iOk" secondAttribute="centerY" id="elI-Ka-stD"/>
+                            <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerX" secondItem="gFW-nz-iOk" secondAttribute="centerX" id="gjG-9P-CSG"/>
+                            <constraint firstItem="ndV-tQ-JtG" firstAttribute="leading" secondItem="gFW-nz-iOk" secondAttribute="leadingMargin" id="h3L-sk-kko"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ndV-tQ-JtG" secondAttribute="trailing" id="wBL-5D-Jqq"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v2Y-Fi-5QV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-564" y="81"/>
+        </scene>
         <!--Authentication View Controller-->
         <scene sceneID="qw2-Yg-tVw">
             <objects>
-                <viewController id="KLd-lg-sp5" customClass="AuthenticationViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="authenticationViewController" id="KLd-lg-sp5" customClass="AuthenticationViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uUS-rq-xd7"/>
                         <viewControllerLayoutGuide type="bottom" id="Kt5-Sa-nfQ"/>
@@ -162,11 +206,11 @@
         <!--Navigation Controller-->
         <scene sceneID="rG3-ru-PUR">
             <objects>
-                <navigationController id="7uD-ZS-SyR" customClass="NavigationController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="HWd-mG-9Hx">
+                <navigationController storyboardIdentifier="navigationController" id="7uD-ZS-SyR" customClass="NavigationController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="HWd-mG-9Hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.0" green="0.59607843137254901" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -213,7 +257,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2dL-8Z-Nc1"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t6v-5F-Dmy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -234,7 +278,7 @@
                         <viewControllerLayoutGuide type="bottom" id="H0f-3Z-8cC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cfK-zV-nGh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -255,7 +299,7 @@
                         <viewControllerLayoutGuide type="bottom" id="73c-a8-crc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nh3-wO-Sl2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -276,7 +320,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gAT-P7-XTB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lmQ-kD-vmZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -297,7 +341,7 @@
                         <viewControllerLayoutGuide type="bottom" id="zAs-1i-B3g"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wG0-bH-TzP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

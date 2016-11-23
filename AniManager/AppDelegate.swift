@@ -11,33 +11,52 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        // If no access token is available in the user defaults, the
+        // authentication view controller should be used as the root
+        // view controller as the user didn't authenticate the app
+        // before
+        guard let _ = UserDefaults.standard.string(forKey: "accessToken") else {
+            let authenticationViewController = storyboard.instantiateViewController(withIdentifier: "authenticationViewController") as! AuthenticationViewController
+            window?.rootViewController = authenticationViewController
+            window?.makeKeyAndVisible()
+            return true
+        }
+        
+        
+        // If an access token is available, its expiration timestamp should be checked.
+        // If it expired, the loading view controller should be used as the root view
+        // controller where a new access token should be requested with a refresh token
+        let expirationTimestamp = UserDefaults.standard.integer(forKey: "expirationTimestamp")
+        
+        guard expirationTimestamp > Int(Date().timeIntervalSince1970) else {
+            let loadingViewController = storyboard.instantiateViewController(withIdentifier: "loadingViewController") as! LoadingViewController
+            window?.rootViewController = loadingViewController
+            window?.makeKeyAndVisible()
+            return true
+        }
+
+        // If the access token didn't expire yet, the navigation controller that has
+        // the tab bar controller with the "main" content of the application as a root
+        // view controller, should be used as the root view controller
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "navigationController") as! NavigationController
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
     }
 
 

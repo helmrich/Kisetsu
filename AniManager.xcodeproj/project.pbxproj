@@ -32,6 +32,14 @@
 		D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */; };
 		D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */; };
 		D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE41DE5161900267243 /* LoadingViewController.swift */; };
+		D25EDEE91DE64D2B00267243 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEE81DE64D2B00267243 /* Series.swift */; };
+		D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEEA1DE64D6F00267243 /* SeriesType.swift */; };
+		D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEEE1DE6502600267243 /* MediaType.swift */; };
+		D25EDEF11DE658C400267243 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF01DE658C400267243 /* Genre.swift */; };
+		D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF21DE65C4500267243 /* AnimeSeries.swift */; };
+		D25EDEF51DE65C5D00267243 /* MangaSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF41DE65C5D00267243 /* MangaSeries.swift */; };
+		D25EDEF91DE7059600267243 /* AiringStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF81DE7059600267243 /* AiringStatus.swift */; };
+		D25EDEFB1DE7080400267243 /* AnimeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFA1DE7080400267243 /* AnimeSource.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -63,6 +71,14 @@
 		D25EDEDF1DE4FC3100267243 /* MangaListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListViewController.swift; sourceTree = "<group>"; };
 		D25EDEE21DE5019800267243 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		D25EDEE41DE5161900267243 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		D25EDEE81DE64D2B00267243 /* Series.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
+		D25EDEEA1DE64D6F00267243 /* SeriesType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesType.swift; sourceTree = "<group>"; };
+		D25EDEEE1DE6502600267243 /* MediaType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		D25EDEF01DE658C400267243 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		D25EDEF21DE65C4500267243 /* AnimeSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSeries.swift; sourceTree = "<group>"; };
+		D25EDEF41DE65C5D00267243 /* MangaSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSeries.swift; sourceTree = "<group>"; };
+		D25EDEF81DE7059600267243 /* AiringStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiringStatus.swift; sourceTree = "<group>"; };
+		D25EDEFA1DE7080400267243 /* AnimeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSource.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,6 +101,14 @@
 			isa = PBXGroup;
 			children = (
 				D25EDEC01DE2552700267243 /* Clients */,
+				D25EDEE81DE64D2B00267243 /* Series.swift */,
+				D25EDEF21DE65C4500267243 /* AnimeSeries.swift */,
+				D25EDEF41DE65C5D00267243 /* MangaSeries.swift */,
+				D25EDEEA1DE64D6F00267243 /* SeriesType.swift */,
+				D25EDEEE1DE6502600267243 /* MediaType.swift */,
+				D25EDEF01DE658C400267243 /* Genre.swift */,
+				D25EDEF81DE7059600267243 /* AiringStatus.swift */,
+				D25EDEFA1DE7080400267243 /* AnimeSource.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -288,11 +312,17 @@
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D25EDEC41DE3AF9900267243 /* AccessToken.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
+				D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */,
+				D25EDEF11DE658C400267243 /* Genre.swift in Sources */,
+				D25EDEE91DE64D2B00267243 /* Series.swift in Sources */,
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
+				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */,
+				D25EDEF51DE65C5D00267243 /* MangaSeries.swift in Sources */,
 				D25EDECE1DE4DCD900267243 /* ListViewController.swift in Sources */,
+				D25EDEFB1DE7080400267243 /* AnimeSource.swift in Sources */,
 				D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */,
 				D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
@@ -300,7 +330,9 @@
 				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
+				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,
 				D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */,
+				D25EDEF91DE7059600267243 /* AiringStatus.swift in Sources */,
 				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 			);

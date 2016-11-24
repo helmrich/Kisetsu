@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(true)
         
         tabBarController?.navigationItem.title = "AniManager"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
     }
     
     

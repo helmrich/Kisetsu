@@ -26,6 +26,8 @@ class BrowseViewController: UIViewController {
         super.viewWillAppear(animated)
 
         tabBarController?.navigationItem.title = "Browse"
+        // TODO: Add target-action
+        tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SettingBarsIcon"), style: .plain, target: nil, action: nil)
     }
     
     

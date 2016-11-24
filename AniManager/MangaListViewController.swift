@@ -26,6 +26,7 @@ class MangaListViewController: ListViewController {
         super.viewWillAppear(animated)
         
         tabBarController?.navigationItem.title = "Manga Lists"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
     }
     
     

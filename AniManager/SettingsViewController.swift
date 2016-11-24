@@ -26,6 +26,7 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tabBarController?.navigationItem.title = "Settings"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
     }
     
     

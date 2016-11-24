@@ -26,6 +26,7 @@ class AnimeListViewController: ListViewController {
         super.viewWillAppear(animated)
         
         tabBarController?.navigationItem.title = "Anime Lists"
+        tabBarController?.navigationItem.leftBarButtonItem = nil
     }
     
     

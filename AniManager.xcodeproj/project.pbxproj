@@ -38,8 +38,8 @@
 		D25EDEF11DE658C400267243 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF01DE658C400267243 /* Genre.swift */; };
 		D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF21DE65C4500267243 /* AnimeSeries.swift */; };
 		D25EDEF51DE65C5D00267243 /* MangaSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF41DE65C5D00267243 /* MangaSeries.swift */; };
-		D25EDEF91DE7059600267243 /* AiringStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF81DE7059600267243 /* AiringStatus.swift */; };
 		D25EDEFB1DE7080400267243 /* AnimeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFA1DE7080400267243 /* AnimeSource.swift */; };
+		D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -77,8 +77,8 @@
 		D25EDEF01DE658C400267243 /* Genre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		D25EDEF21DE65C4500267243 /* AnimeSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSeries.swift; sourceTree = "<group>"; };
 		D25EDEF41DE65C5D00267243 /* MangaSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSeries.swift; sourceTree = "<group>"; };
-		D25EDEF81DE7059600267243 /* AiringStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AiringStatus.swift; sourceTree = "<group>"; };
 		D25EDEFA1DE7080400267243 /* AnimeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSource.swift; sourceTree = "<group>"; };
+		D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStatus.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 				D25EDEEA1DE64D6F00267243 /* SeriesType.swift */,
 				D25EDEEE1DE6502600267243 /* MediaType.swift */,
 				D25EDEF01DE658C400267243 /* Genre.swift */,
-				D25EDEF81DE7059600267243 /* AiringStatus.swift */,
 				D25EDEFA1DE7080400267243 /* AnimeSource.swift */,
+				D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -332,8 +332,8 @@
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,
 				D25EDEDE1DE4FC2300267243 /* AnimeListViewController.swift in Sources */,
-				D25EDEF91DE7059600267243 /* AiringStatus.swift in Sources */,
 				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
+				D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */,
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

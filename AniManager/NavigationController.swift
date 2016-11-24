@@ -14,7 +14,7 @@ class NavigationController: UINavigationController {
         super.viewDidLoad()
 
         navigationBar.titleTextAttributes = [
-            NSFontAttributeName: UIFont(name: Constant.FontName.logo, size: 24),
+            NSFontAttributeName: UIFont(name: Constant.FontName.logo, size: 24)!,
             NSForegroundColorAttributeName: UIColor.white
         ]
     }

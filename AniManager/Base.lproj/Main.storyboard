@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-tQ-JtG">
-                                <rect key="frame" x="16" y="290" width="343" height="86"/>
+                                <rect key="frame" x="16" y="259.5" width="343" height="147"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-0S-ovY">
                                         <rect key="frame" x="153" y="0.0" width="37" height="37"/>
@@ -48,17 +48,41 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2py-oN-oeq">
+                                        <rect key="frame" x="124" y="106" width="95" height="41"/>
+                                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
+                                        <state key="normal" title="Try again">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retry" destination="maD-s2-dON" eventType="touchUpInside" id="bbH-7a-g8T"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owH-5o-pjI">
+                                <rect key="frame" x="45" y="80" width="285" height="74"/>
+                                <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="owH-5o-pjI" firstAttribute="centerX" secondItem="gFW-nz-iOk" secondAttribute="centerX" id="2Tm-Eu-Niz"/>
+                            <constraint firstItem="owH-5o-pjI" firstAttribute="top" secondItem="UQx-Ih-rQ1" secondAttribute="bottom" constant="80" id="54g-mi-Vc9"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerY" secondItem="gFW-nz-iOk" secondAttribute="centerY" id="elI-Ka-stD"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerX" secondItem="gFW-nz-iOk" secondAttribute="centerX" id="gjG-9P-CSG"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="leading" secondItem="gFW-nz-iOk" secondAttribute="leadingMargin" id="h3L-sk-kko"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ndV-tQ-JtG" secondAttribute="trailing" id="wBL-5D-Jqq"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="Wd0-0S-ovY" id="kiY-MH-ja0"/>
+                        <outlet property="statusLabel" destination="iRh-g6-3Aw" id="tWj-GA-bM8"/>
+                        <outlet property="tryAgainButton" destination="2py-oN-oeq" id="xfa-jw-Os4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2Y-Fi-5QV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -210,6 +234,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="HWd-mG-9Hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.59607843137254901" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -227,7 +252,9 @@
         <scene sceneID="6H7-WG-Q6N">
             <objects>
                 <tabBarController title="AniManager" id="gKc-6b-GHk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="AniManager" id="mm2-3R-zeO"/>
+                    <navigationItem key="navigationItem" title="AniManager" id="mm2-3R-zeO">
+                        <barButtonItem key="rightBarButtonItem" image="SearchIconNavBar" id="sT3-fV-MI1"/>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Dr0-YQ-PMm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -424,6 +451,7 @@
         <image name="MangaIconActiveAlternative" width="25" height="25"/>
         <image name="SearchIcon" width="25" height="25"/>
         <image name="SearchIconActive" width="25" height="25"/>
+        <image name="SearchIconNavBar" width="35" height="35"/>
         <image name="SettingsGearIcon" width="25" height="25"/>
         <image name="SettingsGearIconActive" width="25" height="25"/>
     </resources>

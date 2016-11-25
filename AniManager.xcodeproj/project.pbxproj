@@ -40,6 +40,7 @@
 		D25EDEF51DE65C5D00267243 /* MangaSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEF41DE65C5D00267243 /* MangaSeries.swift */; };
 		D25EDEFB1DE7080400267243 /* AnimeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFA1DE7080400267243 /* AnimeSource.swift */; };
 		D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */; };
+		D25EDEFF1DE78B7900267243 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEFE1DE78B7900267243 /* Season.swift */; };
 		D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A77B41DDF861700228EF2 /* AppDelegate.swift */; };
 		D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77B81DDF861700228EF2 /* Main.storyboard */; };
 		D27A77BF1DDF861700228EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D27A77BD1DDF861700228EF2 /* LaunchScreen.storyboard */; };
@@ -79,6 +80,7 @@
 		D25EDEF41DE65C5D00267243 /* MangaSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaSeries.swift; sourceTree = "<group>"; };
 		D25EDEFA1DE7080400267243 /* AnimeSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeSource.swift; sourceTree = "<group>"; };
 		D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaStatus.swift; sourceTree = "<group>"; };
+		D25EDEFE1DE78B7900267243 /* Season.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				D25EDEF01DE658C400267243 /* Genre.swift */,
 				D25EDEFA1DE7080400267243 /* AnimeSource.swift */,
 				D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */,
+				D25EDEFE1DE78B7900267243 /* Season.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
 				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
+				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,

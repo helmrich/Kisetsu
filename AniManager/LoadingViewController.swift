@@ -14,8 +14,8 @@ class LoadingViewController: UIViewController {
     
     let errorMessageView = ErrorMessageView()
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 

@@ -57,7 +57,7 @@ class AuthenticationViewController: UIViewController {
             AniListConstant.ParameterKey.Authentication.redirectUri: AniListConstant.ParameterValue.Authentication.redirectUri,
             AniListConstant.ParameterKey.Authentication.responseType: AniListConstant.ParameterValue.Authentication.responseTypeCode
         ]
-        if let url = AniListClient.createAniListUrl(withPath: AniListConstant.Path.Authentication.authorize, andParameters: parameters) {
+        if let url = AniListClient.shared.createAniListUrl(withPath: AniListConstant.Path.Authentication.authorize, andParameters: parameters) {
             presentWebViewController(with: url)
         }
     }

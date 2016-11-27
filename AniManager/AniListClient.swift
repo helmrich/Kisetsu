@@ -17,6 +17,11 @@ class AniListClient {
     
     // MARK: - Methods
     
+    /*
+        This method gets an access token (and also a refresh token if the authorization
+        happens with an authorization code) by using either an authorization code (for the first
+        authorization) or a refresh token
+     */
     func getAccessToken(withAuthorizationCode: Bool = false, withRefreshToken: Bool = false, completionHandlerForTokens: @escaping (_ accessToken: AccessToken?, _ refreshToken: String?, _ errorMessage: String?) -> Void) {
         var parameters = [
             AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
@@ -99,16 +104,12 @@ class AniListClient {
             completionHandlerForSeriesList(nil, "Couldn't create AniList URL")
             return
         }
-        
-        print(url)
 
         let request = NSMutableURLRequest(url: url)
         request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
         request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-            
-            print((response as? HTTPURLResponse)?.statusCode)
             
             if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                 completionHandlerForSeriesList(nil, errorMessage)
@@ -157,7 +158,8 @@ class AniListClient {
         task.resume()
         
     }
-    
+
+    // This method is used to get data for a single image from a specified URL string
     func getImageData(fromUrlString urlString: String, completionHandlerForImageData: @escaping (_ imageData: Data?, _ errorMessage: String?) -> Void) {
         guard let url = URL(string: urlString) else {
             completionHandlerForImageData(nil, "Couldn't create a URL from the provided URL string")
@@ -183,6 +185,12 @@ class AniListClient {
     
     
     // MARK: - Helper methods
+    
+    /* 
+        This method takes the three arguments of data task's completion handler
+        as parameters and checks if:
+        There was no error
+     */
     func checkDataTaskResponseForError(data: Data?, response: URLResponse?, error: Error?) -> String? {
         guard error == nil else {
             return error!.localizedDescription
@@ -201,6 +209,13 @@ class AniListClient {
         
     }
     
+    /*
+        This method takes in a path (like "browse/{seriesType}") and a dictionary of
+        parameters (parameterKey:parameterValue) and creates an AniList URL from it
+        by using an URLComponents object where the path will be appended to the base
+        URL of the AniList API, a query string will be created from the parameters
+        and assigned to the URLComponents' object's queryItems property (if there were parameters)
+    */
     func createAniListUrl(withPath path: String, andParameters parameters: [String:Any]) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = AniListConstant.URL.scheme
@@ -221,9 +236,11 @@ class AniListClient {
         
     }
     
-    // This function takes in a path string and replacing pairs as parameters.
-    // The pairs dictionary should contain placeholder strings as a key and
-    // the string they should be replaced by as a correspondent value
+    /*  
+        This function takes in a path string and replacing pairs as parameters.
+        The pairs dictionary should contain placeholder strings as a key and
+        the string they should be replaced by as a correspondent value
+     */
     fileprivate func replacePlaceholders(inPath path: String, withReplacingPairs pairs: [String:String]) -> String {
         var newPath = path
         for (placeholder, replacement) in pairs {

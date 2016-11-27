@@ -29,17 +29,19 @@ class Series {
     let favourite: Bool?
     let imageBannerUrlString: String?
     
-    // This initializer initializes an instance from a given
-    // dictionary. Firstly, all values that are also included
-    // in a series' small model are extracted from the dictionary
-    // and casted to the appropriate type. If all values can be
-    // extracted, the instance's properties are set, if not,
-    // the initializer fails and returns nil. 
-    
-    // After that, the dictionary should be searched for keys that
-    // are only available in the extended model and if they exist,
-    // the appropriate properties should also be set. If not, the
-    // properties should be set to nil.
+    /*
+         This initializer initializes an instance from a given
+         dictionary. Firstly, all values that are also included
+         in a series' small model are extracted from the dictionary
+         and casted to the appropriate type. If all values can be
+         extracted, the instance's properties are set, if not,
+         the initializer fails and returns nil.
+        
+         After that, the dictionary should be searched for keys that
+         are only available in the extended model and if they exist,
+         the appropriate properties should also be set. If not, the
+         properties should be set to nil.
+    */
     init?(fromDictionary dictionary: [String:Any]) {
         
         typealias seriesKey = AniListConstant.ResponseKey.Series
@@ -78,8 +80,10 @@ class Series {
         self.imageMediumUrlString = imageMediumUrlString
         self.imageLargeUrlString = imageLargeUrlString
         
-        // Extract and set all values (if there are ones) that are
-        // included in the extended model
+        /* 
+            Extract and set all values (if there are ones) that are
+            included in the extended model
+         */
         if let seasonId = dictionary["id"] as? Int {
             self.seasonId = seasonId
         } else {

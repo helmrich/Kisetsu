@@ -35,8 +35,10 @@ class ErrorMessageView: UIView {
             NSLayoutConstraint(item: cancelButton, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10)
         ])
         
-        // Add a target-action to the button that calls the hideError method when
-        // the cancel button is touched
+        /*
+             Add a target-action to the button that calls the hideError method when
+             the cancel button is touched
+         */
         cancelButton.addTarget(self, action: #selector(hideError), for: .touchUpInside)
         
         // Add an error label that displays the error message's text

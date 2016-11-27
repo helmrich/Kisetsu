@@ -18,10 +18,12 @@ class AnimeSeries: Series {
     typealias seriesKey = AniListConstant.ResponseKey.Series
     typealias animeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
     
-    // Override the superclass' initializer, initialize an
-    // instance from a dictionary, try to get all values that are
-    // specific to anime from the dictionary and set the anime's
-    // properties to them. After that call the superclass' initializer
+    /*
+        Override the superclass' initializer, initialize an
+        instance from a dictionary, try to get all values that are
+        specific to anime from the dictionary and set the anime's
+        properties to them. After that call the superclass' initializer
+     */
     override init?(fromDictionary dictionary: [String:Any]) {
         guard let numberOfTotalEpisodes = dictionary["total_episodes"] as? Int else {
             return nil

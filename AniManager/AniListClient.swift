@@ -45,21 +45,13 @@ class AniListClient {
         request.httpMethod = "POST"
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
-            guard error == nil else {
-                completionHandlerForTokens(nil, nil, error!.localizedDescription)
+            
+            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                completionHandlerForTokens(nil, nil, errorMessage)
                 return
             }
             
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-            statusCode >= 200 && statusCode <= 299 else {
-                completionHandlerForTokens(nil, nil, "Unsuccessful response status code")
-                return
-            }
-            
-            guard let data = data else {
-                completionHandlerForTokens(nil, nil, "Couldn't get data for access token")
-                return
-            }
+            let data = data!
             
             guard let jsonObject = self.deserializeJson(fromData: data) else {
                 completionHandlerForTokens(nil, nil, "Error when trying to deserialize JSON")
@@ -95,14 +87,10 @@ class AniListClient {
         
     }
     
-    func getSeriesList(completionHandlerForSeriesList: @escaping (_ jsonObject: Any?, _ errorMessage: String?) -> Void) {
-        let parameters: [String:Any] = [
-            AniListConstant.ParameterKey.Browse.year: "2016"
-//            AniListConstant.ParameterKey.Browse.season: "164"
-        ]
+    func getSeriesList(ofType type: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         let replacingPairs = [
-            "seriesType": "anime"
+            "seriesType": type.rawValue
         ]
         
         let path = replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
@@ -122,36 +110,47 @@ class AniListClient {
             
             print((response as? HTTPURLResponse)?.statusCode)
             
-            guard error == nil else {
-                completionHandlerForSeriesList(nil, "Error: \(error!.localizedDescription)")
+            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                completionHandlerForSeriesList(nil, errorMessage)
                 return
             }
             
-            print("No error was received...")
-            
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-                statusCode >= 200 && statusCode <= 299 else {
-                    completionHandlerForSeriesList(nil, "Unsuccessful response status code")
-                    return
-            }
-            
-            print("Status code implies successful response...")
-            
-            guard let data = data else {
-                completionHandlerForSeriesList(nil, "Couldn't get data for series list")
-                return
-            }
-            
-            print("Received data...")
+            let data = data!
             
             guard let jsonObject = self.deserializeJson(fromData: data) else {
                 completionHandlerForSeriesList(nil, "Error when trying to deserialize JSON")
                 return
             }
             
-            print("Could deserialize data into a JSON object...")
+            guard let rawSeriesList = jsonObject as? [[String:Any]] else {
+                completionHandlerForSeriesList(nil, "Error when trying to cast JSON to array of dictionaries")
+                return
+            }
             
-            completionHandlerForSeriesList(jsonObject, nil)
+            typealias seriesKey = AniListConstant.ResponseKey.Series
+            
+            var seriesList = [Series]()
+            if type.rawValue == SeriesType.anime.rawValue {
+                seriesList = seriesList as! [AnimeSeries]
+                for series in rawSeriesList {
+                    if let animeSeries = AnimeSeries(fromDictionary: series) {
+                        seriesList.append(animeSeries)
+                    } else {
+                        print("Couldn't create anime series")
+                    }
+                }
+            } else {
+                seriesList = seriesList as! [MangaSeries]
+                for series in rawSeriesList {
+                    if let mangaSeries = MangaSeries(fromDictionary: series) {
+                        seriesList.append(mangaSeries)
+                    } else {
+                        print("Couldn't create manga series")
+                    }
+                }
+            }
+            
+            completionHandlerForSeriesList(seriesList, nil)
             
         }
         
@@ -159,8 +158,49 @@ class AniListClient {
         
     }
     
+    func getImageData(fromUrlString urlString: String, completionHandlerForImageData: @escaping (_ imageData: Data?, _ errorMessage: String?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completionHandlerForImageData(nil, "Couldn't create a URL from the provided URL string")
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                completionHandlerForImageData(nil, errorMessage)
+                return
+            }
+            
+            let data = data!
+            
+            completionHandlerForImageData(data, nil)
+            
+        }
+        
+        task.resume()
+    }
+    
     
     // MARK: - Helper methods
+    func checkDataTaskResponseForError(data: Data?, response: URLResponse?, error: Error?) -> String? {
+        guard error == nil else {
+            return error!.localizedDescription
+        }
+        
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
+            statusCode >= 200 && statusCode <= 299 else {
+                return "Unsuccessful response status code"
+        }
+        
+        guard let _ = data else {
+            return "Couldn't retrieve data"
+        }
+        
+        return nil
+        
+    }
+    
     func createAniListUrl(withPath path: String, andParameters parameters: [String:Any]) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = AniListConstant.URL.scheme
@@ -195,7 +235,6 @@ class AniListClient {
     fileprivate func deserializeJson(fromData data: Data) -> Any? {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            print(jsonObject)
             return jsonObject
         } catch {
             print("Error when trying to deserialize JSON: \(error.localizedDescription)")

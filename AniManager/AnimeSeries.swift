@@ -10,10 +10,13 @@ import Foundation
 
 class AnimeSeries: Series {
     let numberOfTotalEpisodes: Int
-    let duration: Int?
+    let durationPerEpisode: Int?
     let airingStatus: AnimeAiringStatus?
     let youtubeVideoId: String?
     let source: AnimeSource?
+    
+    typealias seriesKey = AniListConstant.ResponseKey.Series
+    typealias animeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
     
     // Override the superclass' initializer, initialize an
     // instance from a dictionary, try to get all values that are
@@ -26,10 +29,10 @@ class AnimeSeries: Series {
         
         self.numberOfTotalEpisodes = numberOfTotalEpisodes
         
-        if let duration = dictionary["duration"] as? Int {
-            self.duration = duration
+        if let durationPerEpisode = dictionary["duration"] as? Int {
+            self.durationPerEpisode = durationPerEpisode
         } else {
-            self.duration = nil
+            self.durationPerEpisode = nil
         }
         
         if let airingStatusString = dictionary["airing_status"] as? String,

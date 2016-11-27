@@ -14,19 +14,6 @@ class BrowseViewController: UIViewController {
     
     let errorMessageView = ErrorMessageView()
     
-    // TEMPORARY
-    
-    var seriesList: [Series]? = nil {
-        didSet {
-            DispatchQueue.main.async {
-                self.seriesCollectionView.reloadData()
-            }
-        }
-    }
-    
-    var images = [IndexPath:UIImage]()
-    
-    // TEMPORARY
     
     // MARK: - Outlets and Actions
     
@@ -48,29 +35,21 @@ class BrowseViewController: UIViewController {
         seriesCollectionViewFlowLayout.minimumLineSpacing = 1
         
         let parameters: [String:Any] = [
-            AniListConstant.ParameterKey.Browse.year: "2016",
-//            AniListConstant.ParameterKey.Browse.genres: "Comedy",
+            AniListConstant.ParameterKey.Browse.year: "2015",
+            AniListConstant.ParameterKey.Browse.genres: "Comedy,Romance",
             AniListConstant.ParameterKey.Browse.sort: "score-desc",
             AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
         ]
         
-        AniListClient.shared.getSeriesList(ofType: .anime, andParameters: parameters) { (seriesList, errorMessage) in
-            
+        DataSource.shared.getBrowseSeriesList(ofType: .anime, withParameters: parameters) { errorMessage in
             guard errorMessage == nil else {
-                DispatchQueue.main.async {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
-                }
+                self.errorMessageView.showError(withMessage: errorMessage!)
                 return
             }
             
-            guard let seriesList = seriesList else {
-                DispatchQueue.main.async {
-                    self.errorMessageView.showError(withMessage: "Couldn't get series list")
-                }
-                return
+            DispatchQueue.main.async {
+                self.seriesCollectionView.reloadData()
             }
-            
-            self.seriesList = seriesList
             
         }
     }
@@ -86,44 +65,17 @@ class BrowseViewController: UIViewController {
     
     // MARK: - Functions
     
-    func getImageData(forCellAtIndexPath indexPath: IndexPath) {
-        
-        print("Inserting image at index path \(indexPath)...")
-        
-        guard let seriesList = seriesList else {
-            return
-        }
-        let series = seriesList[indexPath.row]
-        AniListClient.shared.getImageData(fromUrlString: series.imageMediumUrlString) { (imageData, errorMessage) in
-            guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
-                return
-            }
-            
-            guard let imageData = imageData else {
-                self.errorMessageView.showError(withMessage: "Couldn't get image data")
-                return
-            }
-            
-            if let image = UIImage(data: imageData) {
-                self.images[indexPath] = image
-                DispatchQueue.main.async {
-                    self.seriesCollectionView.reloadItems(at: [indexPath])
-                }
-            }
-            
-        }
-    }
+    
     
 }
 
 extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let seriesList = seriesList else {
+        guard let browseSeriesList = DataSource.shared.browseSeriesList else {
             return 0
         }
         
-        return seriesList.count
+        return browseSeriesList.count
         
     }
     
@@ -131,21 +83,36 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
-        guard let seriesList = seriesList else {
+        guard let browseSeriesList = DataSource.shared.browseSeriesList else {
             return cell
         }
         
-        let currentSeries = seriesList[indexPath.row]
+        let currentSeries = browseSeriesList[indexPath.row]
 
-        if let currentSeriesImage = images[indexPath] {
-            cell.imageOverlay.isHidden = false
-            cell.titleLabel.text = currentSeries.titleEnglish
-            cell.titleLabel.isHidden = false
-            cell.imageView.image = currentSeriesImage
+        if cell.seriesId == nil {
+            cell.seriesId = currentSeries.id
         }
         
         if cell.imageView.image == nil {
-            getImageData(forCellAtIndexPath: indexPath)
+            DataSource.shared.getImageData(forCellAtIndexPath: indexPath) { (image, errorMessage) in
+                guard errorMessage == nil else {
+                    self.errorMessageView.showError(withMessage: errorMessage!)
+                    return
+                }
+                
+                guard let image = image else {
+                    self.errorMessageView.showError(withMessage: "Couldn't get image")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    cell.imageOverlay.isHidden = false
+                    cell.titleLabel.text = currentSeries.titleEnglish
+                    cell.titleLabel.isHidden = false
+                    cell.imageView.image = image
+                }
+                
+            }
         }
         
         return cell
@@ -155,6 +122,8 @@ extension BrowseViewController: UICollectionViewDataSource {
 
 extension BrowseViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Implement
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! SeriesCollectionViewCell
+        print(selectedCell.seriesId)
+        print(selectedCell.titleLabel.text)
     }
 }

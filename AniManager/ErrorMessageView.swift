@@ -66,16 +66,20 @@ class ErrorMessageView: UIView {
     // MARK: - Methods
     
     func showError(withMessage message: String) {
-        errorLabel.text = "Error: \(message)"
-        UIView.animate(withDuration: 0.2, animations: {
-            self.alpha = 1
-        })
+        DispatchQueue.main.async {
+            self.errorLabel.text = "Error: \(message)"
+            UIView.animate(withDuration: 0.2, animations: {
+                self.alpha = 1
+            })
+        }
     }
     
     func hideError() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.alpha = 0
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.alpha = 0
+            })
+        }
     }
 
 }

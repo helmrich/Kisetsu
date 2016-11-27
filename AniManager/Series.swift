@@ -42,22 +42,25 @@ class Series {
     // properties should be set to nil.
     init?(fromDictionary dictionary: [String:Any]) {
         
+        typealias seriesKey = AniListConstant.ResponseKey.Series
+        
         // Extract and set all values that are included in the small model
-        guard let id = dictionary["id"] as? Int,
-                let seriesTypeString = dictionary["series_type"] as? String,
+        guard let id = dictionary[seriesKey.id] as? Int,
+                let seriesTypeString = dictionary[seriesKey.seriesType] as? String,
                 let seriesType = SeriesType(rawValue: seriesTypeString),
-                let titleRomaji = dictionary["title_romaji"] as? String,
-                let titleEnglish = dictionary["title_english"] as? String,
-                let titleJapanese = dictionary["title_japanese"] as? String,
-                let typeId = dictionary["type"] as? Int,
-                let type = MediaType(withId: typeId),
-                let synonyms = dictionary["synonyms"] as? [String],
-                let genres = dictionary["genres"] as? [String],
-                let isAdult = dictionary["adult"] as? Bool,
-                let averageScore = dictionary["average_score"] as? Double,
-                let popularity = dictionary["popularity"] as? Int,
-                let imageMediumUrlString = dictionary["image_url_med"] as? String,
-                let imageLargeUrlString = dictionary["image_url_lge"] as? String else {
+                let titleRomaji = dictionary[seriesKey.titleRomaji] as? String,
+                let titleEnglish = dictionary[seriesKey.titleEnglish] as? String,
+                let titleJapanese = dictionary[seriesKey.titleJapanese] as? String,
+                let mediaTypeString = dictionary[seriesKey.mediaType] as? String,
+                let type = MediaType(rawValue: mediaTypeString),
+                let synonyms = dictionary[seriesKey.synonyms] as? [String],
+                let genres = dictionary[seriesKey.genres] as? [String],
+                let isAdult = dictionary[seriesKey.adult] as? Bool,
+                let averageScore = dictionary[seriesKey.averageScore] as? Double,
+                let popularity = dictionary[seriesKey.popularity] as? Int,
+                let imageMediumUrlString = dictionary[seriesKey.imageMediumUrl] as? String,
+                let imageLargeUrlString = dictionary[seriesKey.imageLargeUrl] as? String else {
+                    print("Couldn't extract values from dictionary needed to create series...")
                     return nil
         }
         

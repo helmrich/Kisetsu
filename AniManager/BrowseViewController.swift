@@ -94,7 +94,7 @@ extension BrowseViewController: UICollectionViewDataSource {
         }
         
         if cell.imageView.image == nil {
-            DataSource.shared.getImageData(forCellAtIndexPath: indexPath) { (image, errorMessage) in
+            DataSource.shared.getImage(forCellAtIndexPath: indexPath) { (image, errorMessage) in
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
                     return

@@ -35,10 +35,10 @@ class BrowseViewController: UIViewController {
         seriesCollectionViewFlowLayout.minimumLineSpacing = 1
         
         let parameters: [String:Any] = [
-            AniListConstant.ParameterKey.Browse.year: "2015",
-            AniListConstant.ParameterKey.Browse.genres: "Comedy,Romance",
+            AniListConstant.ParameterKey.Browse.year: "2016",
+//            AniListConstant.ParameterKey.Browse.genres: "Comedy,Romance",
             AniListConstant.ParameterKey.Browse.sort: "score-desc",
-            AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
+//            AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
         ]
         
         DataSource.shared.getBrowseSeriesList(ofType: .anime, withParameters: parameters) { errorMessage in
@@ -58,14 +58,21 @@ class BrowseViewController: UIViewController {
         super.viewWillAppear(animated)
 
         tabBarController?.navigationItem.title = "Browse"
-        // TODO: Add target-action
-        tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SettingBarsIcon"), style: .plain, target: nil, action: nil)
+        tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SettingBarsIcon"), style: .plain, target: self, action: #selector(openFilterModal))
     }
     
     
     // MARK: - Functions
     
-    
+    func openFilterModal() {
+        let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
+        filterViewController.modalPresentationStyle = .custom
+        filterViewController.transitioningDelegate = self
+        UIView.animate(withDuration: 0.5) {
+            self.seriesCollectionView.alpha = 0.5
+        }
+        self.present(filterViewController, animated: true, completion: nil)
+    }
     
 }
 
@@ -85,6 +92,10 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         guard let browseSeriesList = DataSource.shared.browseSeriesList else {
             return cell
+        }
+        
+        if indexPath.row + 1 == browseSeriesList.count {
+            print("Collection view reached the end...")
         }
         
         let currentSeries = browseSeriesList[indexPath.row]
@@ -125,5 +136,11 @@ extension BrowseViewController: UICollectionViewDelegate {
         let selectedCell = collectionView.cellForItem(at: indexPath) as! SeriesCollectionViewCell
         print(selectedCell.seriesId)
         print(selectedCell.titleLabel.text)
+    }
+}
+
+extension BrowseViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return FilterModalPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

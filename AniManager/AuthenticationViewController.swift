@@ -112,6 +112,12 @@ class AuthenticationViewController: UIViewController {
                 UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
                 UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
+                let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as! NavigationController
+                
+                DispatchQueue.main.async {
+                    self.present(navigationController, animated: true, completion: nil)
+                }
+                
             })
         } else {
             print("No authorization code available")

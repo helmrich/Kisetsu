@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="descriptionCell" rowHeight="256" id="uXk-tK-9wx" customClass="DescriptionTableViewCell" customModule="AniManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uXk-tK-9wx" id="Oha-3F-wln">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="255"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQi-aw-mKR">
+                        <rect key="frame" x="15" y="15" width="128" height="29"/>
+                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ED5-eO-3XR">
+                        <rect key="frame" x="15" y="52" width="345" height="195"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">The anime begins when Kumiko Oumae, a girl who was in the brass band club in junior high school, visits her high school’s brass band club as a first year. Kumiko’s classmates Hazuki and Sapphire decide to join the club, but Kumiko sees her old classmate Reina there and hesitates. She remembers an incident she had with Reina at a brass band club contest in junior high school…</string>
+                        <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ED5-eO-3XR" firstAttribute="bottom" secondItem="Oha-3F-wln" secondAttribute="bottomMargin" id="5JD-bB-RRa"/>
+                    <constraint firstItem="KQi-aw-mKR" firstAttribute="top" secondItem="Oha-3F-wln" secondAttribute="top" constant="15" id="7kp-Jm-1PF"/>
+                    <constraint firstItem="ED5-eO-3XR" firstAttribute="leading" secondItem="Oha-3F-wln" secondAttribute="leadingMargin" constant="7" id="C4X-BE-Ny9"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ED5-eO-3XR" secondAttribute="trailing" constant="7" id="bzQ-mF-n9f"/>
+                    <constraint firstItem="ED5-eO-3XR" firstAttribute="top" secondItem="KQi-aw-mKR" secondAttribute="bottom" constant="8" id="hdP-Db-Qcn"/>
+                    <constraint firstItem="KQi-aw-mKR" firstAttribute="leading" secondItem="Oha-3F-wln" secondAttribute="leading" constant="15" id="kBj-6u-dwY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descriptionTextView" destination="ED5-eO-3XR" id="Ohj-33-MIy"/>
+            </connections>
+            <point key="canvasLocation" x="-49.5" y="158"/>
+        </tableViewCell>
+    </objects>
+</document>

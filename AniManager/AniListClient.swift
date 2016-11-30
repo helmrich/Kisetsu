@@ -92,7 +92,7 @@ class AniListClient {
         
     }
     
-    func getSeriesList(ofType type: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getSeriesList(fromPage page: Int = 1, ofType type: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         let replacingPairs = [
             "seriesType": type.rawValue
@@ -100,7 +100,10 @@ class AniListClient {
         
         let path = replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
         
-        guard let url = createAniListUrl(withPath: path, andParameters: parameters) else {
+        var allParameters = parameters
+        allParameters[AniListConstant.ParameterKey.Browse.page] = page
+        
+        guard let url = createAniListUrl(withPath: path, andParameters: allParameters) else {
             completionHandlerForSeriesList(nil, "Couldn't create AniList URL")
             return
         }

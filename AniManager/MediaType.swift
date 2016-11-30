@@ -22,6 +22,41 @@ enum MediaType: String {
     case doujin = "Doujin"
     case manhua = "Manhua"
     case manhwa = "Manhwa"
+    
+    static let allMediaTypeStrings = [
+        tv.rawValue,
+        tvShort.rawValue,
+        movie.rawValue,
+        special.rawValue,
+        ova.rawValue,
+        ona.rawValue,
+        music.rawValue,
+        manga.rawValue,
+        novel.rawValue,
+        oneShot.rawValue,
+        doujin.rawValue,
+        manhua.rawValue,
+        manhwa.rawValue
+    ]
+    
+    static let allAnimeMediaTypeStrings = [
+        tv.rawValue,
+        tvShort.rawValue,
+        movie.rawValue,
+        special.rawValue,
+        ova.rawValue,
+        ona.rawValue,
+        music.rawValue
+    ]
+    
+    static let allMangaMediaTypeStrings = [
+        manga.rawValue,
+        novel.rawValue,
+        oneShot.rawValue,
+        doujin.rawValue,
+        manhua.rawValue,
+        manhwa.rawValue
+    ]
 
     init?(withId id: Int) {
         switch id {

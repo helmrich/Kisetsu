@@ -10,4 +10,11 @@ import Foundation
 
 enum Season: String {
     case winter, spring, summer, fall
+    
+    static let allSeasonStrings = [
+        winter.rawValue,
+        spring.rawValue,
+        summer.rawValue,
+        fall.rawValue
+    ]
 }

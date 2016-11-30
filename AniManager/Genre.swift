@@ -27,4 +27,26 @@ enum Genre: String {
     case sports = "Sports"
     case supernatural = "Supernatural"
     case thriller = "Thriller"
+    
+    static let allGenreStrings = [
+        action.rawValue,
+        adventure.rawValue,
+        comedy.rawValue,
+        drama.rawValue,
+        ecchi.rawValue,
+        fantasy.rawValue,
+        horror.rawValue,
+        mahouShoujo.rawValue,
+        mecha.rawValue,
+        music.rawValue,
+        mystery.rawValue,
+        psychological.rawValue,
+        romance.rawValue,
+        sciFi.rawValue,
+        sliceOfLife.rawValue,
+        sports.rawValue,
+        supernatural.rawValue,
+        thriller.rawValue
+    ]
+    
 }

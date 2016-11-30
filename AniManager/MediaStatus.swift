@@ -13,6 +13,13 @@ enum AnimeAiringStatus: String {
     case currentlyAiring = "currently airing"
     case notYetAired = "not yet aired"
     case cancelled = "cancelled"
+    
+    static let allStatusStrings = [
+        finishedAiring.rawValue,
+        currentlyAiring.rawValue,
+        notYetAired.rawValue,
+        cancelled.rawValue
+    ]
 }
 
 enum MangaPublishingStatus: String {
@@ -20,4 +27,11 @@ enum MangaPublishingStatus: String {
     case publishing = "publishing"
     case notYetPublished = "not yet published"
     case cancelled = "cancelled"
+    
+    static let allStatusStrings = [
+        finishedPublishing.rawValue,
+        publishing.rawValue,
+        notYetPublished.rawValue,
+        cancelled.rawValue
+    ]
 }

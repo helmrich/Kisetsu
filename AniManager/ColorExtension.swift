@@ -14,4 +14,5 @@ extension UIColor {
     static let aniManagerBlack = UIColor(red: 31 / 255, green: 38 / 255, blue: 49 / 255, alpha: 1)
     static let aniManagerGreen = UIColor(red: 0, green: 230 / 255, blue: 118 / 255, alpha: 1)
     static let aniManagerYellow = UIColor(red: 1, green: 234 / 255, blue: 0, alpha: 1)
+    static let aniManagerGray = UIColor(red: 242 / 255, green: 242 / 255, blue: 242 / 255, alpha: 1)
 }

@@ -92,10 +92,10 @@ class AniListClient {
         
     }
     
-    func getSeriesList(fromPage page: Int = 1, ofType type: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         let replacingPairs = [
-            "seriesType": type.rawValue
+            AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue
         ]
         
         let path = replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
@@ -122,19 +122,19 @@ class AniListClient {
             let data = data!
             
             guard let jsonObject = self.deserializeJson(fromData: data) else {
-                completionHandlerForSeriesList(nil, "Error when trying to deserialize JSON")
+                completionHandlerForSeriesList(nil, "Couldn't deserialize data into a JSON object")
                 return
             }
             
             guard let rawSeriesList = jsonObject as? [[String:Any]] else {
-                completionHandlerForSeriesList(nil, "Error when trying to cast JSON to array of dictionaries")
+                completionHandlerForSeriesList(nil, "Couldn't cast JSON to array of dictionaries")
                 return
             }
             
             typealias seriesKey = AniListConstant.ResponseKey.Series
             
             var seriesList = [Series]()
-            if type.rawValue == SeriesType.anime.rawValue {
+            if seriesType.rawValue == SeriesType.anime.rawValue {
                 seriesList = seriesList as! [AnimeSeries]
                 for series in rawSeriesList {
                     if let animeSeries = AnimeSeries(fromDictionary: series) {
@@ -155,6 +155,71 @@ class AniListClient {
             }
             
             completionHandlerForSeriesList(seriesList, nil)
+            
+        }
+        
+        task.resume()
+        
+    }
+    
+    func getSingleSeries(ofType seriesType: SeriesType, withId id: Int, completionHandlerForSeries: @escaping (_ series: Series?, _ errorMessage: String?) -> Void) {
+        let replacingPairs = [
+            AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue,
+            AniListConstant.Path.Placeholder.id: "\(id)"
+        ]
+        
+        let path = replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.pageSeriesModel, withReplacingPairs: replacingPairs)
+        
+        guard let url = createAniListUrl(withPath: path, andParameters: [:]) else {
+            completionHandlerForSeries(nil, "Couldn't create AniList URL")
+            return
+        }
+        
+        print(url)
+        
+        let request = NSMutableURLRequest(url: url)
+        request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+        request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                completionHandlerForSeries(nil, errorMessage)
+                return
+            }
+            
+            let data = data!
+            
+            guard let jsonObject = self.deserializeJson(fromData: data) else {
+                completionHandlerForSeries(nil, "Couldn't deserialize data into a JSON object")
+                return
+            }
+            
+            guard let rawSeriesDictionary = jsonObject as? [String:Any] else {
+                completionHandlerForSeries(nil, "Couldn't cast JSON to dictionary")
+                return
+            }
+            
+            typealias seriesKey = AniListConstant.ResponseKey.Series
+            
+            if seriesType.rawValue == SeriesType.anime.rawValue {
+                if let animeSeries = AnimeSeries(fromDictionary: rawSeriesDictionary) {
+                    DataSource.shared.selectedSeries = animeSeries
+                    completionHandlerForSeries(animeSeries, nil)
+                    return
+                } else {
+                    completionHandlerForSeries(nil, "Couldn't get Anime series")
+                    return
+                }
+            } else {
+                if let mangaSeries = MangaSeries(fromDictionary: rawSeriesDictionary) {
+                    DataSource.shared.selectedSeries = mangaSeries
+                    completionHandlerForSeries(mangaSeries, nil)
+                    return
+                } else {
+                    completionHandlerForSeries(nil, "Couldn't get Manga series")
+                    return
+                }
+            }
             
         }
         

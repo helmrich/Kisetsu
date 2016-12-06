@@ -36,6 +36,8 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+        
         getAccessToken()
     }
     

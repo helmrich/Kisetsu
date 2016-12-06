@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     
+    let errorMessageView = ErrorMessageView()
+    
     
     // MARK: - Outlets and Actions
     
@@ -21,6 +23,12 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

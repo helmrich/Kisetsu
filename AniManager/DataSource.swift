@@ -15,7 +15,7 @@ class DataSource {
     static let shared = DataSource()
     
     var browseSeriesList: [Series]? = nil
-//    var browseSeriesImages = [IndexPath:UIImage]()
+    var selectedSeries: Series? = nil
     
     
     // MARK: Initializers
@@ -48,13 +48,13 @@ class DataSource {
         
         print("Inserting image at index path \(indexPath)...")
         
-        guard let seriesList = DataSource.shared.browseSeriesList else {
+        guard let seriesList = browseSeriesList else {
             return
         }
         
-        let series = seriesList[indexPath.row]
+        let seriesImageMediumUrlString = seriesList[indexPath.row].imageMediumUrlString
         
-        AniListClient.shared.getImageData(fromUrlString: series.imageMediumUrlString) { (imageData, errorMessage) in
+        AniListClient.shared.getImageData(fromUrlString: seriesImageMediumUrlString) { (imageData, errorMessage) in
             guard errorMessage == nil else {
                 completionHandlerForCellImage(nil, errorMessage!)
                 return

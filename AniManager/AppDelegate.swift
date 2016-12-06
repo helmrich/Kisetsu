@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        print(UserDefaults.standard.string(forKey: "authorizationKey"))
+        print(UserDefaults.standard.string(forKey: "accessToken"))
+        print(UserDefaults.standard.string(forKey: "refreshToken"))
+        print("Access token will expire in \(UserDefaults.standard.integer(forKey: "expirationTimestamp") - Int(Date().timeIntervalSince1970)) seconds")
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         // If no access token is available in the user defaults, the

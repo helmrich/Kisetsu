@@ -13,15 +13,24 @@ class BrowseViewController: UIViewController {
     // MARK: - Properties
     
     let errorMessageView = ErrorMessageView()
+    var statusBarShouldBeHidden = false
+    
+    override var prefersStatusBarHidden: Bool {
+        return statusBarShouldBeHidden
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
     
     
     // MARK: - Outlets and Actions
     
     // MARK: - Outlets
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var seriesCollectionView: UICollectionView!
     @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    
     
     // MARK: - Actions
     
@@ -30,12 +39,19 @@ class BrowseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicatorView.startAnimating()
+        UIView.animate(withDuration: 0.25) {
+            self.activityIndicatorView.alpha = 1
+        }
+        
+        addErrorMessageView(toBottomOf: view, withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
+        
         seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
         seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
         seriesCollectionViewFlowLayout.minimumLineSpacing = 1
         
         let parameters: [String:Any] = [
-            AniListConstant.ParameterKey.Browse.year: "2016",
+            AniListConstant.ParameterKey.Browse.year: "2015",
 //            AniListConstant.ParameterKey.Browse.genres: "Comedy,Romance",
             AniListConstant.ParameterKey.Browse.sort: "score-desc",
 //            AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
@@ -48,6 +64,10 @@ class BrowseViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                UIView.animate(withDuration: 0.25) {
+                    self.activityIndicatorView.alpha = 0
+                }
                 self.seriesCollectionView.reloadData()
             }
             
@@ -59,6 +79,11 @@ class BrowseViewController: UIViewController {
 
         tabBarController?.navigationItem.title = "Browse"
         tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SettingBarsIcon"), style: .plain, target: self, action: #selector(openFilterModal))
+        
+        statusBarShouldBeHidden = false
+        UIView.animate(withDuration: 0.25) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
     
     
@@ -134,8 +159,15 @@ extension BrowseViewController: UICollectionViewDataSource {
 extension BrowseViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCell = collectionView.cellForItem(at: indexPath) as! SeriesCollectionViewCell
-        print(selectedCell.seriesId)
-        print(selectedCell.titleLabel.text)
+        let seriesDetailViewController = storyboard!.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
+        seriesDetailViewController.seriesId = selectedCell.seriesId
+        seriesDetailViewController.seriesTitle = selectedCell.titleLabel.text
+        seriesDetailViewController.seriesType = .anime
+        statusBarShouldBeHidden = true
+        UIView.animate(withDuration: 0.5) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+        present(seriesDetailViewController, animated: true, completion: nil)
     }
 }
 

@@ -67,16 +67,7 @@ class AuthenticationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Add the error message view to the login view controller as a subview and
-        // set its constraints
-        view.addSubview(errorMessageView)
-        errorMessageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: errorMessageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60),
-            NSLayoutConstraint(item: errorMessageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-            ])
+        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -13,18 +13,22 @@ class MangaSeries: Series {
     let numberOfTotalVolumes: Int
     let publishingStatus: MangaPublishingStatus?
     
-    // Override the superclass' initializer, initialize an
-    // instance from a dictionary, try to get all values that are
-    // specific to manga from the dictionary and set the manga's
-    // properties to them. After that call the superclass' initializer
+    /*
+        Override the superclass' initializer, initialize an
+        instance from a dictionary, try to get all values that are
+        specific to manga from the dictionary and set the manga's
+        properties to them. After that call the superclass' initializer
+     */
     override init?(fromDictionary dictionary: [String:Any]) {
         guard let numberOfTotalChapters = dictionary["total_chapters"] as? Int else {
+            print("Couldn't get number of total chapters")
             return nil
         }
         
         self.numberOfTotalChapters = numberOfTotalChapters
         
         guard let numberOfTotalVolumes = dictionary["total_volumes"] as? Int else {
+            print("Couldn't get number of total volumes")
             return nil
         }
         

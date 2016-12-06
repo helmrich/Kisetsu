@@ -29,6 +29,14 @@ class Series {
     let favourite: Bool?
     let imageBannerUrlString: String?
     
+    // Additional informations
+    let characters: [Character]?
+//    let staff: [Staff]?
+    // TODO: Relations
+    
+    
+    typealias SeriesKey = AniListConstant.ResponseKey.Series
+    
     /*
          This initializer initializes an instance from a given
          dictionary. Firstly, all values that are also included
@@ -44,24 +52,22 @@ class Series {
     */
     init?(fromDictionary dictionary: [String:Any]) {
         
-        typealias seriesKey = AniListConstant.ResponseKey.Series
-        
         // Extract and set all values that are included in the small model
-        guard let id = dictionary[seriesKey.id] as? Int,
-                let seriesTypeString = dictionary[seriesKey.seriesType] as? String,
+        guard let id = dictionary[SeriesKey.id] as? Int,
+                let seriesTypeString = dictionary[SeriesKey.seriesType] as? String,
                 let seriesType = SeriesType(rawValue: seriesTypeString),
-                let titleRomaji = dictionary[seriesKey.titleRomaji] as? String,
-                let titleEnglish = dictionary[seriesKey.titleEnglish] as? String,
-                let titleJapanese = dictionary[seriesKey.titleJapanese] as? String,
-                let mediaTypeString = dictionary[seriesKey.mediaType] as? String,
+                let titleRomaji = dictionary[SeriesKey.titleRomaji] as? String,
+                let titleEnglish = dictionary[SeriesKey.titleEnglish] as? String,
+                let titleJapanese = dictionary[SeriesKey.titleJapanese] as? String,
+                let mediaTypeString = dictionary[SeriesKey.mediaType] as? String,
                 let type = MediaType(rawValue: mediaTypeString),
-                let synonyms = dictionary[seriesKey.synonyms] as? [String],
-                let genres = dictionary[seriesKey.genres] as? [String],
-                let isAdult = dictionary[seriesKey.adult] as? Bool,
-                let averageScore = dictionary[seriesKey.averageScore] as? Double,
-                let popularity = dictionary[seriesKey.popularity] as? Int,
-                let imageMediumUrlString = dictionary[seriesKey.imageMediumUrl] as? String,
-                let imageLargeUrlString = dictionary[seriesKey.imageLargeUrl] as? String else {
+                let synonyms = dictionary[SeriesKey.synonyms] as? [String],
+                let genres = dictionary[SeriesKey.genres] as? [String],
+                let isAdult = dictionary[SeriesKey.adult] as? Bool,
+                let averageScore = dictionary[SeriesKey.averageScore] as? Double,
+                let popularity = dictionary[SeriesKey.popularity] as? Int,
+                let imageMediumUrlString = dictionary[SeriesKey.imageMediumUrl] as? String,
+                let imageLargeUrlString = dictionary[SeriesKey.imageLargeUrl] as? String else {
                     print("Couldn't extract values from dictionary needed to create series...")
                     return nil
         }
@@ -84,28 +90,41 @@ class Series {
             Extract and set all values (if there are ones) that are
             included in the extended model
          */
-        if let seasonId = dictionary["id"] as? Int {
+        
+        if let seasonId = dictionary[SeriesKey.season] as? Int {
             self.seasonId = seasonId
         } else {
             self.seasonId = nil
         }
         
-        if let description = dictionary["description"] as? String {
+        if let description = dictionary[SeriesKey.description] as? String {
             self.description = description
         } else {
             self.description = nil
         }
         
-        if let favourite = dictionary["favourite"] as? Bool {
+        if let favourite = dictionary[SeriesKey.favourite] as? Bool {
             self.favourite = favourite
         } else {
             self.favourite = nil
         }
         
-        if let imageBannerUrlString = dictionary["image_url_banner"] as? String {
+        if let imageBannerUrlString = dictionary[SeriesKey.imageBannerUrl] as? String {
             self.imageBannerUrlString = imageBannerUrlString
         } else {
             self.imageBannerUrlString = nil
+        }
+        
+        if let charactersArrayOfDictionaries = dictionary[SeriesKey.characters] as? [[String:Any]] {
+            var characters = [Character]()
+            for characterDictionary in charactersArrayOfDictionaries {
+                if let character = Character(fromDictionary: characterDictionary) {
+                    characters.append(character)
+                }
+            }
+            self.characters = characters
+        } else {
+            self.characters = nil
         }
     }
 }

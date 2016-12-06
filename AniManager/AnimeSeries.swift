@@ -14,9 +14,10 @@ class AnimeSeries: Series {
     let airingStatus: AnimeAiringStatus?
     let youtubeVideoId: String?
     let source: AnimeSource?
+    let studios: [Studio]?
+    let externalLinks: [ExternalLink]?
     
-    typealias seriesKey = AniListConstant.ResponseKey.Series
-    typealias animeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
+    typealias AnimeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
     
     /*
         Override the superclass' initializer, initialize an
@@ -25,36 +26,63 @@ class AnimeSeries: Series {
         properties to them. After that call the superclass' initializer
      */
     override init?(fromDictionary dictionary: [String:Any]) {
-        guard let numberOfTotalEpisodes = dictionary["total_episodes"] as? Int else {
+        guard let numberOfTotalEpisodes = dictionary[AnimeSeriesKey.numberOfTotalEpisodes] as? Int else {
             return nil
         }
         
         self.numberOfTotalEpisodes = numberOfTotalEpisodes
         
-        if let durationPerEpisode = dictionary["duration"] as? Int {
+        if let durationPerEpisode = dictionary[AnimeSeriesKey.durationPerEpisode] as? Int {
             self.durationPerEpisode = durationPerEpisode
         } else {
             self.durationPerEpisode = nil
         }
         
-        if let airingStatusString = dictionary["airing_status"] as? String,
+        if let airingStatusString = dictionary[AnimeSeriesKey.airingStatus] as? String,
             let airingStatus = AnimeAiringStatus(rawValue: airingStatusString) {
                 self.airingStatus = airingStatus
         } else {
             self.airingStatus = nil
         }
         
-        if let youtubeVideoId = dictionary["youtube_id"] as? String {
+        if let youtubeVideoId = dictionary[AnimeSeriesKey.youtubeVideoId] as? String {
             self.youtubeVideoId = youtubeVideoId
         } else {
             self.youtubeVideoId = nil
         }
         
-        if let sourceString = dictionary["source"] as? String,
+        if let sourceString = dictionary[AnimeSeriesKey.source] as? String,
             let source = AnimeSource(rawValue: sourceString) {
                 self.source = source
         } else {
             self.source = nil
+        }
+        
+        
+        
+        if let externalLinkDictionaries = dictionary[AnimeSeriesKey.externalLinksStrings] as? [[String:Any]] {
+            var externalLinks = [ExternalLink]()
+            for externalLinkDictionary in externalLinkDictionaries {
+                if let externalLink = ExternalLink(fromDictionary: externalLinkDictionary) {
+                    externalLinks.append(externalLink)
+                }
+            }
+            self.externalLinks = externalLinks
+        } else {
+            self.externalLinks = nil
+        }
+        
+        if let studioDictionaries = dictionary[AnimeSeriesKey.studios] as? [[String:Any]] {
+            var studios = [Studio]()
+            for studioDictionary in studioDictionaries {
+                if let studioName = studioDictionary[AniListConstant.ResponseKey.Studio.name] as? String {
+                    let studio = Studio(name: studioName)
+                    studios.append(studio)
+                }
+            }
+            self.studios = studios
+        } else {
+            self.studios = nil
         }
         
         super.init(fromDictionary: dictionary)

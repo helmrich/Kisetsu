@@ -12,6 +12,8 @@ struct Character {
     let id: Int
     let firstName: String?
     let lastName: String?
+    let japaneseName: String?
+    let info: String?
     let role: String?
     let imageMediumUrlString: String?
     let imageLargeUrlString: String?
@@ -35,6 +37,18 @@ struct Character {
             self.lastName = lastName
         } else {
             self.lastName = nil
+        }
+        
+        if let japaneseName = dictionary[characterKey.japaneseName] as? String {
+            self.japaneseName = japaneseName
+        } else {
+            self.japaneseName = nil
+        }
+        
+        if let info = dictionary[characterKey.info] as? String {
+            self.info = info
+        } else {
+            self.info = nil
         }
         
         if let role = dictionary[characterKey.role] as? String {

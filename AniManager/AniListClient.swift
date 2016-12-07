@@ -175,8 +175,6 @@ class AniListClient {
             return
         }
         
-        print(url)
-        
         let request = NSMutableURLRequest(url: url)
         request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
         request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
@@ -224,6 +222,48 @@ class AniListClient {
         }
         
         task.resume()
+        
+    }
+    
+    func getPageModelCharacter(forCharacterId id: Int, completionHandlerForCharacterPageModel: @escaping (_ character: Character?, _ errorMessage: String?) -> Void) {
+        let replacingPairs = [
+            AniListConstant.Path.Placeholder.id: "\(id)"
+        ]
+        let path = replacePlaceholders(inPath: AniListConstant.Path.CharacterGet.pageCharacterModel, withReplacingPairs: replacingPairs)
+        guard let url = createAniListUrl(withPath: path, andParameters: [:]) else {
+            completionHandlerForCharacterPageModel(nil, "Couldn't create AniList URL")
+            return
+        }
+        
+        let request = NSMutableURLRequest(url: url)
+        request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+        request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                completionHandlerForCharacterPageModel(nil, errorMessage)
+                return
+            }
+            
+            let data = data!
+            
+            guard let jsonObject = self.deserializeJson(fromData: data) else {
+                completionHandlerForCharacterPageModel(nil, "Couldn't deserialize data into a JSON object")
+                return
+            }
+            
+            guard let characterDictionary = jsonObject as? [String:Any],
+                let character = Character(fromDictionary: characterDictionary) else {
+                    completionHandlerForCharacterPageModel(nil, "Couldn't create character object from dictionary")
+                    return
+            }
+            
+            completionHandlerForCharacterPageModel(character, nil)
+            
+        }
+        
+        task.resume()
+        
         
     }
 

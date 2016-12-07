@@ -40,19 +40,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-tQ-JtG">
-                                <rect key="frame" x="16" y="259.5" width="343" height="147"/>
+                                <rect key="frame" x="16" y="260.5" width="343" height="145"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-0S-ovY">
                                         <rect key="frame" x="153" y="0.0" width="37" height="37"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authenticating ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRh-g6-3Aw">
-                                        <rect key="frame" x="86.5" y="57" width="170.5" height="29"/>
+                                        <rect key="frame" x="81" y="57" width="181.5" height="28"/>
                                         <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2py-oN-oeq">
-                                        <rect key="frame" x="124" y="106" width="95" height="41"/>
+                                        <rect key="frame" x="123" y="105" width="97" height="40"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                         <state key="normal" title="Try again">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,7 +64,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owH-5o-pjI">
-                                <rect key="frame" x="45" y="80" width="285" height="74"/>
+                                <rect key="frame" x="58.5" y="80" width="258" height="56"/>
                                 <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -234,7 +234,7 @@
         <scene sceneID="rG3-ru-PUR">
             <objects>
                 <navigationController storyboardIdentifier="navigationController" id="7uD-ZS-SyR" customClass="NavigationController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="HWd-mG-9Hx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="HWd-mG-9Hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -429,7 +429,7 @@
                                 <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-1c-8lw">
-                                <rect key="frame" x="161.5" y="0.0" width="54" height="44"/>
+                                <rect key="frame" x="160.5" y="0.0" width="54.5" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hmY-q6-Jzc"/>
                                 </constraints>
@@ -481,7 +481,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5l0-Mv-cKh" id="IdK-g4-Ojf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49i-4M-fb4">
@@ -502,7 +502,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="maf-nh-l61" id="X7g-cF-cCd">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-WB-SzO" userLabel="Filter Value Label">
@@ -659,16 +659,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="D2d-g6-wh8">
                                         <rect key="frame" x="16" y="283" width="343" height="63"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arata Kaizaki" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-P5-UcJ">
-                                                <rect key="frame" x="97" y="0.0" width="149.5" height="29"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n/a" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-P5-UcJ">
+                                                <rect key="frame" x="154" y="0.0" width="35" height="29"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KF9-TD-kva">
-                                                <rect key="frame" x="121" y="34" width="101" height="29"/>
-                                                <string key="text">海崎 新太
-</string>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="n/a" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KF9-TD-kva">
+                                                <rect key="frame" x="154" y="34" width="35" height="29"/>
                                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -719,8 +717,8 @@
                                     <constraint firstItem="GLi-EF-Do4" firstAttribute="top" secondItem="HfW-iV-ICi" secondAttribute="top" constant="15" id="qG0-wc-ywX"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-hw-rum">
-                                <rect key="frame" x="16" y="375" width="343" height="282"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-hw-rum">
+                                <rect key="frame" x="16" y="365" width="343" height="302"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.12156862745098039" green="0.14901960784313725" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
@@ -731,12 +729,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iZn-hw-rum" firstAttribute="leading" secondItem="Dqv-Fh-RY9" secondAttribute="leadingMargin" id="4CV-mU-fnB"/>
-                            <constraint firstItem="Mx9-qU-bjr" firstAttribute="top" secondItem="iZn-hw-rum" secondAttribute="bottom" constant="10" id="7fd-N9-uBA"/>
+                            <constraint firstItem="Mx9-qU-bjr" firstAttribute="top" secondItem="iZn-hw-rum" secondAttribute="bottom" id="7fd-N9-uBA"/>
                             <constraint firstItem="HfW-iV-ICi" firstAttribute="top" secondItem="8Fb-d0-pEh" secondAttribute="bottom" id="NQn-ou-wKA"/>
                             <constraint firstItem="HfW-iV-ICi" firstAttribute="leading" secondItem="Dqv-Fh-RY9" secondAttribute="leading" id="QgP-Cb-3Wb"/>
                             <constraint firstAttribute="trailing" secondItem="HfW-iV-ICi" secondAttribute="trailing" id="ZQp-ge-BE3"/>
                             <constraint firstItem="iZn-hw-rum" firstAttribute="trailing" secondItem="Dqv-Fh-RY9" secondAttribute="trailingMargin" id="vnQ-cG-INv"/>
-                            <constraint firstItem="iZn-hw-rum" firstAttribute="top" secondItem="HfW-iV-ICi" secondAttribute="bottom" constant="10" id="zAj-67-rsp"/>
+                            <constraint firstItem="iZn-hw-rum" firstAttribute="top" secondItem="HfW-iV-ICi" secondAttribute="bottom" id="zAj-67-rsp"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>

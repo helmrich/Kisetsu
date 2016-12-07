@@ -61,12 +61,29 @@ class CharacterDetailViewController: UIViewController {
             characterNameLabel.text = "\(character.firstName!) \(character.lastName!)"
         }
         
-        if let japaneseName = character.japaneseName {
-            characterJapaneseNameLabel.text = japaneseName
-        }
-        
-        if let info = character.info {
-            infoTextView.text = info
+        AniListClient.shared.getPageModelCharacter(forCharacterId: character.id) { (pageModelCharacter, errorMessage) in
+            guard errorMessage == nil else {
+                print("ERROR: \(errorMessage)")
+                return
+            }
+            
+            guard let pageModelCharacter = pageModelCharacter else {
+                print("ERROR: Couldn't get character page model")
+                return
+            }
+            
+            if let japaneseName = pageModelCharacter.japaneseName {
+                DispatchQueue.main.async {
+                    self.characterJapaneseNameLabel.text = japaneseName
+                }
+            }
+            
+            if let info = pageModelCharacter.info {
+                DispatchQueue.main.async {
+                    self.infoTextView.text = info
+                }
+            }
+            
         }
         
         if let imageLargeUrlString = character.imageLargeUrlString {

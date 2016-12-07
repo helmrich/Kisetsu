@@ -10,6 +10,7 @@ import UIKit
 
 extension SeriesDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let selectedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
         
         guard let cellType = selectedCell.type else {
@@ -18,9 +19,13 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
         
         switch cellType {
         case .characters:
-            guard let selectedCharacterId = DataSource.shared.selectedSeries?.characters?[indexPath.row].id else {
+            guard let selectedCharacter = DataSource.shared.selectedSeries?.characters?[indexPath.row] else {
                 return
             }
+            
+            let characterDetailViewController = storyboard?.instantiateViewController(withIdentifier: "characterDetailViewController") as! CharacterDetailViewController
+            characterDetailViewController.character = selectedCharacter
+            present(characterDetailViewController, animated: true, completion: nil)
             
             // TODO: Present character detail view controller
         case .relations:

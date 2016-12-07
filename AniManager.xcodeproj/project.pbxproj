@@ -14,6 +14,7 @@
 		D2341CD61DF7493D004773B3 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */; };
 		D2341CD81DF74C87004773B3 /* ImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */; };
 		D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */; };
+		D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */; };
 		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
 		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
 		D25EDEA91DDF979600267243 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA51DDF979600267243 /* Lato-Light.ttf */; };
@@ -89,6 +90,7 @@
 		D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCellType.swift; sourceTree = "<group>"; };
+		D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
 		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		D25EDEA51DDF979600267243 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				D28A5E8E1DEDE05B00D62BDC /* SeriesDetailViewController.swift */,
 				D2786FAC1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift */,
 				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
+				D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
 				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D2786F8C1DF39C9200F4368F /* Studio.swift in Sources */,
+				D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */,
 				D2341CD21DF74793004773B3 /* ImagesTableViewCell.swift in Sources */,
 				D25EDEE01DE4FC3100267243 /* MangaListViewController.swift in Sources */,
 				D25EDEF51DE65C5D00267243 /* MangaSeries.swift in Sources */,

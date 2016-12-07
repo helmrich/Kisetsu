@@ -9,9 +9,10 @@
 import UIKit
 
 class ImagesCollectionViewCell: UICollectionViewCell {
-    var seriesId: Int?
+    var id: Int?
     var type: ImagesTableViewCellType?
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageOverlayView: UIView!
+    
 }

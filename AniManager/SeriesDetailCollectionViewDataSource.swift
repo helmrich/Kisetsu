@@ -12,6 +12,7 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
+        
         guard let series = DataSource.shared.selectedSeries else {
             return cell
         }
@@ -20,11 +21,9 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
         // collection view's table view cell's type property.
         // Note: The first superview property is the table view cell's
         // content view, the second one is the actual table view cell.
-        if let imagesTableViewCell = collectionView.superview?.superview as? ImagesTableViewCell {
-            cell.type = imagesTableViewCell.type
+        if let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type {
+            cell.type = imagesTableViewCellType
         }
-        
-        cell.seriesId = series.id
         
         guard let characters = series.characters else {
             return cell
@@ -55,6 +54,8 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             }
             
         }
+        
+        collectionView.reloadItems(at: [indexPath])
         
         return cell
         

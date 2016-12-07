@@ -51,8 +51,6 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
-            dump(series)
-            
             DispatchQueue.main.async {
                 self.seriesDataTableView.reloadData()
             }
@@ -253,14 +251,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
         } else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
             
-            cell.imagesCollectionView.dataSource = self
-            cell.imagesCollectionView.delegate = self
-            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
-            cell.imagesCollectionView.showsHorizontalScrollIndicator = false
-            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3.5, height: view.bounds.width / 3.5)
-            cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
-            cell.type = ImagesTableViewCellType.characters
-            
             guard let series = DataSource.shared.selectedSeries else {
                 return UITableViewCell(frame: CGRect.zero)
             }
@@ -269,6 +259,17 @@ extension SeriesDetailViewController: UITableViewDataSource {
             characters.count > 0 else {
                 return UITableViewCell(frame: CGRect.zero)
             }
+            
+            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
+            
+            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
+            cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
+            cell.type = ImagesTableViewCellType.characters
+            
+            cell.imagesCollectionView.dataSource = self
+            cell.imagesCollectionView.delegate = self
+            
+            
             
             return cell
         } else {

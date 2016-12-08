@@ -27,7 +27,6 @@ class BasicInformationsTableViewCell: UITableViewCell {
     let durationPerEpisodeValueLabel = BasicInformationsValueLabel()
     
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -49,6 +48,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
         numberOfEpisodesLabel.text = "Episodes"
         durationPerEpisodeLabel.text = "Duration"
         
+        averageRatingValueLabel.font = UIFont(name: "Lato-Black", size: 18.0)
         
         let typeStackView = UIStackView.createStackView(fromArrangedSubviews: [typeLabel, typeValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         typeStackView.translatesAutoresizingMaskIntoConstraints = false

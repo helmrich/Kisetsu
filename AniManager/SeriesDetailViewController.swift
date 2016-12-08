@@ -55,6 +55,13 @@ class SeriesDetailViewController: UIViewController {
                 self.seriesDataTableView.reloadData()
             }
             
+            if let seasonId = series.seasonId,
+                let releaseYear = self.getReleaseYear(fromSeasonId: seasonId) {
+                DispatchQueue.main.async {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).seriesReleaseYearLabel.text = "\(releaseYear)"
+                }
+            }
+            
             guard let imageBannerUrlString = series.imageBannerUrlString else {
                 return
             }
@@ -100,6 +107,67 @@ class SeriesDetailViewController: UIViewController {
         print("Favoriting...")
     }
     
+    
+    // MARK: - Helper Methods
+    
+    func createSeasonString(fromSeasonId seasonId: Int?) -> String? {
+        
+        guard let seasonId = seasonId else {
+            return nil
+        }
+        
+        /*
+            The season ID is a 3-digit number where the first two
+            numbers are the last two numbers of the season's year
+            and the last number is the season (3 = summer, 4 = fall,
+            1 = winter, 2 = spring)
+         */
+        let seasonIdString = "\(seasonId)"
+        let yearPart = seasonIdString.substring(to: seasonIdString.index(before: seasonIdString.endIndex))
+        let seasonNumber = seasonId % 10
+        
+        /*
+            Because the API just returns two digits for the year and
+            the database currently has series since 1951 it has to be
+            assumed for now that if the season ID is larger than 504
+            the series was released in the 20th century whereas if it's
+            smaller the series was released in the 21th century
+         */
+        let year = seasonId > 504 ? "19\(yearPart)" : "20\(yearPart)"
+        guard let season = Season(withSeasonNumber: seasonNumber) else {
+            return nil
+        }
+        
+        return "\(season.rawValue.capitalized) \(year)"
+    }
+    
+    func getReleaseYear(fromSeasonId seasonId: Int?) -> Int? {
+        
+        guard let seasonId = seasonId else {
+            return nil
+        }
+        
+        /*
+         The season ID is a 3-digit number where the first two
+         numbers are the last two numbers of the season's year
+         and the last number is the season (3 = summer, 4 = fall,
+         1 = winter, 2 = spring)
+         */
+        let seasonIdString = "\(seasonId)"
+        let yearPart = seasonIdString.substring(to: seasonIdString.index(before: seasonIdString.endIndex))
+        
+        /*
+         Because the API just returns two digits for the year and
+         the database currently has series since 1951 it has to be
+         assumed for now that if the season ID is larger than 504
+         the series was released in the 20th century whereas if it's
+         smaller the series was released in the 21th century
+         */
+        let yearString = seasonId > 504 ? "19\(yearPart)" : "20\(yearPart)"
+        
+        return Int(yearString)
+    }
+    
 }
 
 
@@ -137,9 +205,24 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             // Set cell property values that both series types have
-            cell.averageRatingValueLabel.text = "\(series.averageScore)"
-            cell.typeValueLabel.text = "TV"
+            cell.averageRatingValueLabel.text = "\(Int(round(series.averageScore)))"
             
+            // Set the cell's average rating value label's color depending on
+            // the score
+            switch series.averageScore {
+            case _ where series.averageScore > 75:
+                cell.averageRatingValueLabel.textColor = .aniManagerGreen
+            case _ where series.averageScore > 59:
+                cell.averageRatingValueLabel.textColor = .aniManagerLightGreen
+            case _ where series.averageScore > 39:
+                cell.averageRatingValueLabel.textColor = .aniManagerYellow
+            case _ where series.averageScore >= 0:
+                cell.averageRatingValueLabel.textColor = .aniManagerRed
+            default:
+                cell.averageRatingValueLabel.textColor = .aniManagerBlack
+            }
+            
+            cell.typeValueLabel.text = series.mediaType.rawValue
             // Set specific property values depending on the series type
             
             switch series.seriesType {
@@ -148,7 +231,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 cell.statusValueLabel.text = animeSeries.airingStatus != nil ? animeSeries.airingStatus!.rawValue : "n/a"
                 cell.durationPerEpisodeValueLabel.text = animeSeries.durationPerEpisode != nil ? "\(animeSeries.durationPerEpisode!)min" : "n/a"
                 cell.numberOfEpisodesValueLabel.text = "\(animeSeries.numberOfTotalEpisodes)"
-                cell.seasonValueLabel.text = animeSeries.seasonId != nil ? "\(animeSeries.seasonId!)" : "n/a"
+                let seasonString = createSeasonString(fromSeasonId: animeSeries.seasonId)
+                cell.seasonValueLabel.text = seasonString != nil ? seasonString : "n/a"
                 // layoutSubviews has to be called so that the the cell's labels
                 // with dynamic content will update their width based on the values
                 cell.layoutSubviews()

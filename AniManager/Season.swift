@@ -17,4 +17,19 @@ enum Season: String {
         summer.rawValue,
         fall.rawValue
     ]
+    
+    init?(withSeasonNumber number: Int) {
+        switch number {
+        case 1:
+            self = .winter
+        case 2:
+            self = .spring
+        case 3:
+            self = .summer
+        case 4:
+            self = .fall
+        default:
+            return nil
+        }
+    }
 }

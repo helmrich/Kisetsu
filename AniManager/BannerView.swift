@@ -80,11 +80,9 @@ class BannerView: UIView {
         
         seriesTitleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 24.0)
         seriesTitleLabel.textColor = .white
-        seriesTitleLabel.text = "Series Title"
         seriesTitleLabel.numberOfLines = 3
         seriesReleaseYearLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14.0)
         seriesReleaseYearLabel.textColor = .white
-        seriesReleaseYearLabel.text = "2016"
         let stackView = UIStackView(arrangedSubviews: [
             seriesTitleLabel,
             seriesReleaseYearLabel

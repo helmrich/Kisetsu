@@ -17,6 +17,8 @@ class AniListClient {
     
     // MARK: - Methods
     
+    // MARK: - GET
+    
     /*
         This method gets an access token (and also a refresh token if the authorization
         happens with an authorization code) by using either an authorization code (for the first
@@ -290,7 +292,6 @@ class AniListClient {
             
             task.resume()
 
-            
         }
         
         
@@ -322,6 +323,67 @@ class AniListClient {
         task.resume()
     }
     
+    
+    // MARK: - POST
+    
+    func favorite(seriesOfType type: SeriesType, withId id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
+        let replacingPairs = [
+            AniListConstant.Path.Placeholder.seriesType: type.rawValue
+        ]
+        
+        let path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesPost.favourite, withReplacingPairs: replacingPairs)
+        
+        favorite(id: id, path: path, completionHandlerForFavoriting: completionHandlerForFavoriting)
+    }
+
+    func favorite(characterWithId id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
+        let path = AniListConstant.Path.CharacterPost.favourite
+        
+        favorite(id: id, path: path, completionHandlerForFavoriting: completionHandlerForFavoriting)
+    }
+    
+    fileprivate func favorite(id: Int, path: String, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
+        validateAccessToken { (errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForFavoriting(errorMessage!)
+                return
+            }
+            
+            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+                completionHandlerForFavoriting("Couldn't create AniList URL")
+                return
+            }
+            
+            let request = NSMutableURLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = "{\"id\":\"\(id)\"}".data(using: .utf8)
+            request.addValue(AniListConstant.HeaderFieldValue.contentTypeJson, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                    completionHandlerForFavoriting(errorMessage)
+                    return
+                }
+                
+                let data = data!
+                
+                guard let jsonObject = self.deserializeJson(fromData: data) else {
+                    completionHandlerForFavoriting("Couldn't deserialize data into a JSON object")
+                    return
+                }
+                
+                print("RECEIVED THE FOLLOWING JSON OBJECT AFTER FAVORITING: \(jsonObject)")
+                completionHandlerForFavoriting(nil)
+                
+            }
+            
+            task.resume()
+            
+        }
+    }
+
     
     // MARK: - Helper methods
     

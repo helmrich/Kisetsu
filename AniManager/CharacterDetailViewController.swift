@@ -28,6 +28,8 @@ class CharacterDetailViewController: UIViewController {
     @IBOutlet weak fileprivate var characterNameLabel: UILabel!
     @IBOutlet weak fileprivate var characterJapaneseNameLabel: UILabel!
     @IBOutlet weak fileprivate var infoTextView: UITextView!
+    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     
     
@@ -38,12 +40,28 @@ class CharacterDetailViewController: UIViewController {
     }
     
     @IBAction func favorite(_ sender: Any) {
+        AniListClient.shared.favorite(characterWithId: character.id) { (errorMessage) in
+            guard errorMessage == nil else {
+                self.errorMessageView.showError(withMessage: errorMessage!)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                if self.favoriteButton.image(for: .normal) == #imageLiteral(resourceName: "HeartIconActive") {
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "HeartIcon"), for: .normal)
+                } else {
+                    self.favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
+                }
+            }
+        }
     }
     
     
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
+        
+        favoriteButton.alpha = 0
         
         /*
             Switch over the character's first and last name
@@ -81,6 +99,22 @@ class CharacterDetailViewController: UIViewController {
             if let info = pageModelCharacter.info {
                 DispatchQueue.main.async {
                     self.infoTextView.text = info
+                }
+            }
+            
+            if let isFavorite = pageModelCharacter.isFavorite {
+                DispatchQueue.main.async {
+                    if isFavorite {
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
+                    } else {
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "HeartIcon"), for: .normal)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.25) {
+                    self.favoriteButton.alpha = 1.0
                 }
             }
             

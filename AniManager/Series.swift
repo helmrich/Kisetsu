@@ -26,7 +26,7 @@ class Series {
     // Not in small model
     let seasonId: Int?
     let description: String?
-    let favourite: Bool?
+    let favorite: Bool?
     let imageBannerUrlString: String?
     
     // Additional informations
@@ -103,10 +103,10 @@ class Series {
             self.description = nil
         }
         
-        if let favourite = dictionary[SeriesKey.favourite] as? Bool {
-            self.favourite = favourite
+        if let favorite = dictionary[SeriesKey.favourite] as? Bool {
+            self.favorite = favorite
         } else {
-            self.favourite = nil
+            self.favorite = nil
         }
         
         if let imageBannerUrlString = dictionary[SeriesKey.imageBannerUrl] as? String {

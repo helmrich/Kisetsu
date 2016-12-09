@@ -40,6 +40,11 @@ class SeriesDetailViewController: UIViewController {
         
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
         
+        /*
+            Get a single series object for the specified series ID and series type
+            when the view controller is loaded
+        */
+ 
         AniListClient.shared.getSingleSeries(ofType: .anime, withId: seriesId) { (series, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
@@ -55,10 +60,21 @@ class SeriesDetailViewController: UIViewController {
                 self.seriesDataTableView.reloadData()
             }
             
+            // MARK: - Banner View Setup
+            
+            // Set the release year label
             if let seasonId = series.seasonId,
                 let releaseYear = self.getReleaseYear(fromSeasonId: seasonId) {
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).seriesReleaseYearLabel.text = "\(releaseYear)"
+                }
+            }
+            
+            // Set the favourite button
+            if let isFavorite = series.favorite,
+                isFavorite {
+                DispatchQueue.main.async {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
                 }
             }
             
@@ -75,6 +91,7 @@ class SeriesDetailViewController: UIViewController {
                     return
                 }
                 
+                // Set the banner view image
                 let bannerImage = UIImage(data: data)
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.image = bannerImage
@@ -104,7 +121,27 @@ class SeriesDetailViewController: UIViewController {
     }
     
     func favorite() {
-        print("Favoriting...")
+        AniListClient.shared.favorite(seriesOfType: .anime, withId: seriesId) { (errorMessage) in
+            guard errorMessage == nil else {
+                self.errorMessageView.showError(withMessage: errorMessage!)
+                return
+            }
+            
+            /*
+                Check whether the series was favorited or not based on the banner view
+                based on the current image and toggle the image (if the image indicates
+                that the series is a favorite (filled heart icon) it means that it was
+                unfavorited, thus the heart icon should be empty and the other way around)
+            */
+            DispatchQueue.main.async {
+                if (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.image(for: .normal) == #imageLiteral(resourceName: "HeartIconActive") {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIcon"), for: .normal)
+                } else {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
+                }
+            }
+            
+        }
     }
     
     

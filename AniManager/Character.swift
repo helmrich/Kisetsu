@@ -18,6 +18,7 @@ struct Character {
     let imageMediumUrlString: String?
     let imageLargeUrlString: String?
     let actor: Actor?
+    let isFavorite: Bool?
     
     typealias characterKey = AniListConstant.ResponseKey.Character
     
@@ -67,6 +68,12 @@ struct Character {
             self.imageLargeUrlString = imageLargeUrlString
         } else {
             self.imageLargeUrlString = nil
+        }
+        
+        if let favourite = dictionary[characterKey.favourite] as? Bool {
+            self.isFavorite = favourite
+        } else {
+            self.isFavorite = nil
         }
         
         if let actorDictionary = dictionary[characterKey.actor] as? [String:Any],

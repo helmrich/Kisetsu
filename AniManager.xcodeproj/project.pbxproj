@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D224A2621DEF9A710085C532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D224A2611DEF9A710085C532 /* Images.xcassets */; };
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
+		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
+		D227408A1DFA35E700C3E776 /* ExternalLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */; };
 		D2341CCF1DF744AF004773B3 /* ImagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2341CCE1DF744AF004773B3 /* ImagesTableViewCell.xib */; };
 		D2341CD21DF74793004773B3 /* ImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD11DF74793004773B3 /* ImagesTableViewCell.swift */; };
 		D2341CD61DF7493D004773B3 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */; };
@@ -60,7 +62,6 @@
 		D2786F871DF3997400F4368F /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F861DF3997400F4368F /* Character.swift */; };
 		D2786F8A1DF39A4000F4368F /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F891DF39A4000F4368F /* Actor.swift */; };
 		D2786F8C1DF39C9200F4368F /* Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F8B1DF39C9200F4368F /* Studio.swift */; };
-		D2786F8F1DF39E2600F4368F /* AdditionalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F8E1DF39E2600F4368F /* AdditionalInformation.swift */; };
 		D2786F911DF452C800F4368F /* ExternalLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F901DF452C800F4368F /* ExternalLink.swift */; };
 		D2786F941DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F931DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift */; };
 		D2786F961DF5C09100F4368F /* StackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2786F951DF5C09100F4368F /* StackViewExtension.swift */; };
@@ -85,6 +86,8 @@
 /* Begin PBXFileReference section */
 		D224A2611DEF9A710085C532 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
+		D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinkButton.swift; sourceTree = "<group>"; };
 		D2341CCE1DF744AF004773B3 /* ImagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagesTableViewCell.xib; sourceTree = "<group>"; };
 		D2341CD11DF74793004773B3 /* ImagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCell.swift; sourceTree = "<group>"; };
 		D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -136,7 +139,6 @@
 		D2786F861DF3997400F4368F /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D2786F891DF39A4000F4368F /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		D2786F8B1DF39C9200F4368F /* Studio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Studio.swift; sourceTree = "<group>"; };
-		D2786F8E1DF39E2600F4368F /* AdditionalInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalInformation.swift; sourceTree = "<group>"; };
 		D2786F901DF452C800F4368F /* ExternalLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLink.swift; sourceTree = "<group>"; };
 		D2786F931DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalInformationsTableViewCell.swift; sourceTree = "<group>"; };
 		D2786F951DF5C09100F4368F /* StackViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewExtension.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				D2C6358E1DECFE7C00959D75 /* Browse Filter Table View */,
 				D25EDF031DE8EC4F00267243 /* Series Collection View */,
 				D25EDEAD1DDFAE5200267243 /* AniManagerButton.swift */,
+				D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */,
 				D25EDF121DECD21F00267243 /* OnOffButton.swift */,
 				D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */,
 				D25EDED71DE4E64600267243 /* ColorExtension.swift */,
@@ -296,7 +299,6 @@
 				D25EDEFA1DE7080400267243 /* AnimeSource.swift */,
 				D25EDEFC1DE76DCE00267243 /* MediaStatus.swift */,
 				D25EDEFE1DE78B7900267243 /* Season.swift */,
-				D2786F8E1DF39E2600F4368F /* AdditionalInformation.swift */,
 			);
 			name = Series;
 			sourceTree = "<group>";
@@ -354,6 +356,7 @@
 				D2786F801DF2F65000F4368F /* GenreTableViewCell.swift */,
 				D2786F931DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift */,
 				D2786FA41DF5FD1D00F4368F /* VideoTableViewCell.swift */,
+				D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				D25EDF131DECD21F00267243 /* OnOffButton.swift in Sources */,
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D224A2681DF061F00085C532 /* BannerView.swift in Sources */,
+				D227408A1DFA35E700C3E776 /* ExternalLinkButton.swift in Sources */,
 				D25EDEC41DE3AF9900267243 /* AccessToken.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */,
@@ -546,8 +550,8 @@
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D2786F961DF5C09100F4368F /* StackViewExtension.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
-				D2786F8F1DF39E2600F4368F /* AdditionalInformation.swift in Sources */,
 				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
+				D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */,
 				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,

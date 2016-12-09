@@ -212,7 +212,7 @@ class SeriesDetailViewController: UIViewController {
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -323,7 +323,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
-                return cell
+                return UITableViewCell(frame: CGRect.zero)
             }
             
             if series.seriesType == .anime,
@@ -346,6 +346,30 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
+            
+            guard let series = DataSource.shared.selectedSeries else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            guard let animeSeries = series as? AnimeSeries else {
+                print("Anime Series error")
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            guard let externalLinks = animeSeries.externalLinks else {
+                print("No external links available")
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            print(externalLinks)
+            
+            cell.externalLinks = externalLinks
+            
+            cell.setupCell()
+            
+            return cell
+        } else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -369,7 +393,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.videoWebView.load(request)
             
             return cell
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {

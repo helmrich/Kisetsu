@@ -18,23 +18,27 @@ class AniManagerButton: UIButton {
     
     // MARK: - Initializers
     
-    required init?(coder aDecoder: NSCoder) {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        super.init(coder: aDecoder)
-        
-        // Add the activity indicator to the button as a subview 
+        // Add the activity indicator to the button as a subview
         // and set its constraints
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-                NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
             ])
         activityIndicator.alpha = 0
         
         // Add actions that handle the button's appearance when it's tapped
         addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
         addTarget(self, action: #selector(setTouchUpAppearance), for: [.touchUpInside, .touchUpOutside])
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
     }
     
     

@@ -130,24 +130,23 @@ extension BrowseViewController: UICollectionViewDataSource {
         }
         
         if cell.imageView.image == nil {
-            DataSource.shared.getImage(forCellAtIndexPath: indexPath) { (image, errorMessage) in
+            AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
                     return
                 }
                 
-                guard let image = image else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get image")
+                guard let imageData = imageData else {
                     return
                 }
                 
-                DispatchQueue.main.async {
-                    cell.imageOverlay.isHidden = false
-                    cell.titleLabel.text = currentSeries.titleEnglish
-                    cell.titleLabel.isHidden = false
-                    cell.imageView.image = image
+                if let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        cell.imageOverlay.isHidden = false
+                        cell.titleLabel.text = currentSeries.titleEnglish
+                        cell.titleLabel.isHidden = false
+                        cell.imageView.image = image
+                    }
                 }
-                
             }
         }
         

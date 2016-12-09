@@ -43,35 +43,4 @@ class DataSource {
             
         }
     }
-    
-    func getImage(forCellAtIndexPath indexPath: IndexPath, completionHandlerForCellImage: @escaping (_ image: UIImage?, _ errorMessage: String?) -> Void) {
-        
-        print("Inserting image at index path \(indexPath)...")
-        
-        guard let seriesList = browseSeriesList else {
-            return
-        }
-        
-        let seriesImageMediumUrlString = seriesList[indexPath.row].imageMediumUrlString
-        
-        AniListClient.shared.getImageData(fromUrlString: seriesImageMediumUrlString) { (imageData, errorMessage) in
-            guard errorMessage == nil else {
-                completionHandlerForCellImage(nil, errorMessage!)
-                return
-            }
-            
-            guard let imageData = imageData else {
-                completionHandlerForCellImage(nil, "Couldn't get image data")
-                return
-            }
-            
-            if let image = UIImage(data: imageData) {
-                completionHandlerForCellImage(image, nil)
-            } else {
-                completionHandlerForCellImage(nil, "Couldn't create image from received data")
-            }
-            
-        }
-    }
-    
 }

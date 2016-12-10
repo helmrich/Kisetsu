@@ -21,6 +21,10 @@ class AniManagerButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        layer.cornerRadius = 2.0
+        backgroundColor = .aniManagerBlue
+        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
+        
         // Add the activity indicator to the button as a subview
         // and set its constraints
         addSubview(activityIndicator)
@@ -38,7 +42,23 @@ class AniManagerButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        layer.cornerRadius = 2.0
+        backgroundColor = .aniManagerBlue
+        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
         
+        // Add the activity indicator to the button as a subview
+        // and set its constraints
+        addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
+            ])
+        activityIndicator.alpha = 0
+        
+        // Add actions that handle the button's appearance when it's tapped
+        addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
+        addTarget(self, action: #selector(setTouchUpAppearance), for: [.touchUpInside, .touchUpOutside])
     }
     
     

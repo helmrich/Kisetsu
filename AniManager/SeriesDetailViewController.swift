@@ -95,12 +95,16 @@ class SeriesDetailViewController: UIViewController {
                 let bannerImage = UIImage(data: data)
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.image = bannerImage
+                    UIView.animate(withDuration: 0.25) {
+                        (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.alpha = 1.0
+                    }
                 }
                 
             }
             
         }
         
+        seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
         seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "imagesCell")
         
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
@@ -212,7 +216,7 @@ class SeriesDetailViewController: UIViewController {
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -237,6 +241,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 let image = UIImage(data: imageData)
                 DispatchQueue.main.async {
                     cell.seriesCoverImageView.image = image
+                    UIView.animate(withDuration: 0.25) {
+                        cell.seriesCoverImageView.alpha = 1.0
+                    }
                 }
                 
             }
@@ -285,6 +292,17 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 return cell
             }
         } else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
+            
+            guard let series = DataSource.shared.selectedSeries else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            cell.setupCell(forSeriesType: .manga)
+            
+            return cell
+            
+        } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell") as! GenreTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -303,7 +321,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell") as! DescriptionTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -319,7 +337,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.descriptionTextView.text = cleanDescription
             
             return cell
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -345,7 +363,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.japaneseTitleValueLabel.text = series.titleJapanese
             
             return cell
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -369,7 +387,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell()
             
             return cell
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -393,7 +411,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.videoWebView.load(request)
             
             return cell
-        } else if indexPath.row == 6 {
+        } else if indexPath.row == 7 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {

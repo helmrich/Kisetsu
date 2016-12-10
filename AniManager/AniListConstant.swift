@@ -50,6 +50,21 @@ extension PathConstant {
         struct SeriesPost {
             static let favourite = "{seriesType}/favourite"
         }
+        
+        struct CharacterGet {
+            static let basicCharacterModel = "character/{id}"
+            static let pageCharacterModel = "character/{id}/page"
+        }
+        
+        struct CharacterPost {
+            static let favourite = "character/favourite"
+        }
+        
+        struct Placeholder {
+            static let seriesType = "seriesType"
+            static let id = "id"
+            static let query = "query"
+        }
     }
 }
 
@@ -102,6 +117,7 @@ extension HeaderFieldConstant {
     struct HeaderFieldValue {
         static let authorizationAccessToken = "Bearer access_token"
         static let contentType = "application/x-www-form-urlencoded"
+        static let contentTypeJson = "application/json"
     }
 }
 
@@ -115,6 +131,70 @@ extension ResponseConstant {
             static let expires = "expires"
             static let expiresInSeconds = "expires_in"
             static let refreshToken = "refresh_token"
+        }
+        
+        struct Series {
+            static let id = "id"
+            static let seriesType = "series_type"
+            static let titleRomaji = "title_romaji"
+            static let titleEnglish = "title_english"
+            static let titleJapanese = "title_japanese"
+            static let mediaType = "type"
+            static let synonyms = "synonyms"
+            static let genres = "genres"
+            static let adult = "adult"
+            static let averageScore = "average_score"
+            static let popularity = "popularity"
+            static let imageSmallUrl = "image_url_sml"
+            static let imageMediumUrl = "image_url_med"
+            static let imageLargeUrl = "image_url_lge"
+            static let imageBannerUrl = "image_url_banner"
+            static let season = "season"
+            static let description = "description"
+            static let favourite = "favourite"
+            static let characters = "characters"
+            static let tags = "tags"
+        }
+        
+        struct AnimeSeries {
+            static let numberOfTotalEpisodes = "total_episodes"
+            static let durationPerEpisode = "duration"
+            static let airingStatus = "airing_status"
+            static let youtubeVideoId = "youtube_id"
+            static let source = "source"
+            static let externalLinksStrings = "external_links"
+            static let studios = "studio"
+        }
+        
+        struct Character {
+            static let id = "id"
+            static let firstName = "name_first"
+            static let lastName = "name_last"
+            static let japaneseName = "name_japanese"
+            static let imageMediumUrl = "image_url_med"
+            static let imageLargeUrl = "image_url_lge"
+            static let info = "info"
+            static let role = "role"
+            static let favourite = "favourite"
+            static let actor = "actor"
+        }
+        
+        struct ExternalLink {
+            static let site = "site"
+            static let url = "url"
+        }
+        
+        struct Studio {
+            static let name = "studio_name"
+        }
+        
+        struct Actor {
+            static let id = "id"
+            static let firstName  = "name_first"
+            static let lastName = "name_last"
+            static let language = "language"
+            static let imageMediumUrl = "image_url_med"
+            static let imageLargeUrl = "image_url_lge"
         }
     }
 }

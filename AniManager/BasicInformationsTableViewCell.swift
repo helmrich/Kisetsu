@@ -32,6 +32,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
         
         seriesCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         seriesCoverImageView.contentMode = .scaleAspectFill
+        seriesCoverImageView.alpha = 0.0
         addSubview(seriesCoverImageView)
         addConstraints([
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 177),

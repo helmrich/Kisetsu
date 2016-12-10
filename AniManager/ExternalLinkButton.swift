@@ -15,10 +15,6 @@ class ExternalLinkButton: AniManagerButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layer.cornerRadius = 2.0
-        backgroundColor = .aniManagerBlue
-        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-        
         addTarget(self, action: #selector(openWebsite), for: [.touchUpInside])
     }
     

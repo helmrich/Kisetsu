@@ -68,6 +68,7 @@ class AuthenticationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+        loginButton.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {

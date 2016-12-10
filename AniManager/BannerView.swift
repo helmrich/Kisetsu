@@ -40,6 +40,7 @@ class BannerView: UIView {
         imageView.backgroundColor = UIColor.aniManagerGray
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.alpha = 0.0
         containerView.addSubview(imageView)
         containerView.addConstraints([
             NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 0.0),
@@ -71,7 +72,7 @@ class BannerView: UIView {
         containerView.addSubview(favoriteButton)
         containerView.addConstraints([
             NSLayoutConstraint(item: favoriteButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 25.0),
-            NSLayoutConstraint(item: favoriteButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 22.0),
+            NSLayoutConstraint(item: favoriteButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 25.0),
             NSLayoutConstraint(item: favoriteButton, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 20.0),
             NSLayoutConstraint(item: favoriteButton, attribute: .top, relatedBy: .equal, toItem: containerView, attribute: .top, multiplier: 1.0, constant: 15.0)
             ])

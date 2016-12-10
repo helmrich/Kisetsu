@@ -11,6 +11,8 @@
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
 		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
 		D227408A1DFA35E700C3E776 /* ExternalLinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */; };
+		D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D227408B1DFAE31A00C3E776 /* ActionsTableViewCell.swift */; };
+		D22740901DFB318700C3E776 /* ActionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D227408F1DFB318700C3E776 /* ActionsTableViewCell.xib */; };
 		D2341CCF1DF744AF004773B3 /* ImagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2341CCE1DF744AF004773B3 /* ImagesTableViewCell.xib */; };
 		D2341CD21DF74793004773B3 /* ImagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD11DF74793004773B3 /* ImagesTableViewCell.swift */; };
 		D2341CD61DF7493D004773B3 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */; };
@@ -88,6 +90,8 @@
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
 		D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinkButton.swift; sourceTree = "<group>"; };
+		D227408B1DFAE31A00C3E776 /* ActionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionsTableViewCell.swift; sourceTree = "<group>"; };
+		D227408F1DFB318700C3E776 /* ActionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionsTableViewCell.xib; sourceTree = "<group>"; };
 		D2341CCE1DF744AF004773B3 /* ImagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagesTableViewCell.xib; sourceTree = "<group>"; };
 		D2341CD11DF74793004773B3 /* ImagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCell.swift; sourceTree = "<group>"; };
 		D2341CD51DF7493D004773B3 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -357,6 +361,8 @@
 				D2786F931DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift */,
 				D2786FA41DF5FD1D00F4368F /* VideoTableViewCell.swift */,
 				D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */,
+				D227408F1DFB318700C3E776 /* ActionsTableViewCell.xib */,
+				D227408B1DFAE31A00C3E776 /* ActionsTableViewCell.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -494,6 +500,7 @@
 				D25EDEAC1DDF981300267243 /* CarterOne.ttf in Resources */,
 				D25EDEAA1DDF979600267243 /* Lato-Regular.ttf in Resources */,
 				D2341CD81DF74C87004773B3 /* ImagesCollectionViewCell.xib in Resources */,
+				D22740901DFB318700C3E776 /* ActionsTableViewCell.xib in Resources */,
 				D27A77BA1DDF861700228EF2 /* Main.storyboard in Resources */,
 				D25EDECA1DE452E100267243 /* AppIcon.xcassets in Resources */,
 			);
@@ -561,6 +568,7 @@
 				D2786FA31DF5F88600F4368F /* BasicInformationsValueLabel.swift in Sources */,
 				D2786F7F1DF2F36300F4368F /* GenreLabel.swift in Sources */,
 				D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */,
+				D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */,
 				D2786F911DF452C800F4368F /* ExternalLink.swift in Sources */,
 				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
 				D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */,

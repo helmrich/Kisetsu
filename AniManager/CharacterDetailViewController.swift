@@ -133,6 +133,9 @@ class CharacterDetailViewController: UIViewController {
                 if let image = UIImage(data: imageData) {
                     DispatchQueue.main.async {
                         self.characterImageView.image = image
+                        UIView.animate(withDuration: 0.25) {
+                            self.characterImageView.alpha = 1.0
+                        }
                     }
                 }
             }

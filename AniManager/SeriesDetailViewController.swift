@@ -216,7 +216,7 @@ class SeriesDetailViewController: UIViewController {
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 9
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -338,6 +338,30 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
+            
+            guard let series = DataSource.shared.selectedSeries else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            guard let characters = series.characters,
+                characters.count > 0 else {
+                    return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
+            
+            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
+            cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
+            cell.type = ImagesTableViewCellType.characters
+            
+            cell.imagesCollectionView.dataSource = self
+            cell.imagesCollectionView.delegate = self
+            
+            
+            
+            return cell
+        } else if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -363,7 +387,32 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.japaneseTitleValueLabel.text = series.titleJapanese
             
             return cell
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell") as! GenreTableViewCell
+            
+            guard let series = DataSource.shared.selectedSeries else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            guard let tags = series.tags else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            cell.titleLabel.text = "Tags"
+            
+            guard cell.genreLabelStackView.arrangedSubviews.count != tags.count else {
+                return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            for tag in tags {
+                let genreLabel = GenreLabel()
+                genreLabel.text = tag.name
+                cell.genreLabelStackView.addArrangedSubview(genreLabel)
+            }
+            
+            return cell
+            
+        } else if indexPath.row == 7 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -387,7 +436,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell()
             
             return cell
-        } else if indexPath.row == 6 {
+        } else if indexPath.row == 8 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -409,30 +458,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             let request = URLRequest(url: url)
             
             cell.videoWebView.load(request)
-            
-            return cell
-        } else if indexPath.row == 7 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
-            
-            guard let series = DataSource.shared.selectedSeries else {
-                return UITableViewCell(frame: CGRect.zero)
-            }
-            
-            guard let characters = series.characters,
-            characters.count > 0 else {
-                return UITableViewCell(frame: CGRect.zero)
-            }
-            
-            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
-            
-            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
-            cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
-            cell.type = ImagesTableViewCellType.characters
-            
-            cell.imagesCollectionView.dataSource = self
-            cell.imagesCollectionView.delegate = self
-            
-            
             
             return cell
         } else {

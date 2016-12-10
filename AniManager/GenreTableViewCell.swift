@@ -10,7 +10,7 @@ import UIKit
 
 class GenreTableViewCell: UITableViewCell {
 
-    fileprivate let titleLabel = TableViewCellTitleLabel(withTitle: "Genres")
+    let titleLabel = TableViewCellTitleLabel(withTitle: "Genres")
     let genreLabelStackView = UIStackView()
     
     required init?(coder aDecoder: NSCoder) {

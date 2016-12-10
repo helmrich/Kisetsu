@@ -28,6 +28,7 @@ class Series {
     let description: String?
     let favorite: Bool?
     let imageBannerUrlString: String?
+    let tags: [Tag]?
     
     // Additional informations
     let characters: [Character]?
@@ -113,6 +114,13 @@ class Series {
             self.imageBannerUrlString = imageBannerUrlString
         } else {
             self.imageBannerUrlString = nil
+        }
+        
+        if let tagDictionaries = dictionary[SeriesKey.tags] as? [[String:Any]],
+            let tags = Tag.createTagArray(fromDictionaries: tagDictionaries) {
+            self.tags = tags
+        } else {
+            self.tags = nil
         }
         
         if let charactersArrayOfDictionaries = dictionary[SeriesKey.characters] as? [[String:Any]] {

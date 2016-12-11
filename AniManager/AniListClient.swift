@@ -162,7 +162,6 @@ class AniListClient {
                     }
                 }
                 
-                DataSource.shared.browseSeriesList = seriesList
                 completionHandlerForSeriesList(seriesList, nil)
                 
             }

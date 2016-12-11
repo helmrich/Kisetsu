@@ -17,6 +17,7 @@ class SeriesCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var imageOverlay: UIView!
     @IBOutlet weak var imageView: UIImageView!
     

@@ -162,6 +162,7 @@ class AniListClient {
                     }
                 }
                 
+                DataSource.shared.browseSeriesList = seriesList
                 completionHandlerForSeriesList(seriesList, nil)
                 
             }
@@ -214,7 +215,7 @@ class AniListClient {
                     completionHandlerForSeries(nil, "Couldn't cast JSON to dictionary")
                     return
                 }
-                
+                print(jsonObject)
                 typealias seriesKey = AniListConstant.ResponseKey.Series
                 
                 if seriesType.rawValue == SeriesType.anime.rawValue {

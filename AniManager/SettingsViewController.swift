@@ -22,6 +22,12 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Lifecycle Methods
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

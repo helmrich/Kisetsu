@@ -309,8 +309,12 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 return UITableViewCell(frame: CGRect.zero)
             }
             
-            guard cell.genreLabelStackView.arrangedSubviews.count != series.genres.count else {
+            guard series.genres.count > 0 else {
                 return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            guard cell.genreLabelStackView.arrangedSubviews.count != series.genres.count else {
+                return cell
             }
             
             for genre in series.genres {
@@ -401,7 +405,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.titleLabel.text = "Tags"
             
             guard cell.genreLabelStackView.arrangedSubviews.count != tags.count else {
-                return UITableViewCell(frame: CGRect.zero)
+                return cell
             }
             
             for tag in tags {

@@ -17,6 +17,9 @@ class DataSource {
     var browseSeriesList: [Series]? = nil
     var selectedSeries: Series? = nil
     
+    var selectedAnimeList: [AnimeSeries]? = nil
+    var selectedMangaList: [MangaSeries]? = nil
+    
     
     
     // MARK: Initializers

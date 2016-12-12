@@ -14,7 +14,18 @@ class ListSelectionViewController: UIViewController {
     
     var seriesType: SeriesType?
 
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+    }
 }
+
+
+// MARK: - Table View Data Source
 
 extension ListSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,6 +63,9 @@ extension ListSelectionViewController: UITableViewDataSource {
     }
 }
 
+
+// MARK: - Table View Delegate
+
 extension ListSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! ListNameTableViewCell
@@ -61,16 +75,18 @@ extension ListSelectionViewController: UITableViewDelegate {
         }
         
         guard seriesType == .anime else {
-            if let mangaListDetailViewController = storyboard?.instantiateViewController(withIdentifier: "mangaListDetailViewController") as? MangaListDetailViewController {
-                mangaListDetailViewController.title = selectedCell.listNameLabel.text
-                tabBarController?.navigationController?.pushViewController(mangaListDetailViewController, animated: true)
+            if let listDetailViewController = storyboard?.instantiateViewController(withIdentifier: "listDetailViewController") as? ListDetailViewController {
+                listDetailViewController.title = selectedCell.listNameLabel.text
+                listDetailViewController.seriesType = .manga
+                navigationController?.pushViewController(listDetailViewController, animated: true)
             }
             return
         }
         
-        if let animeListDetailViewController = storyboard?.instantiateViewController(withIdentifier: "animeListDetailViewController") as? AnimeListDetailViewController {
-            animeListDetailViewController.title = selectedCell.listNameLabel.text
-            tabBarController?.navigationController?.pushViewController(animeListDetailViewController, animated: true)
+        if let listDetailViewController = storyboard?.instantiateViewController(withIdentifier: "listDetailViewController") as? ListDetailViewController {
+            listDetailViewController.title = selectedCell.listNameLabel.text
+            listDetailViewController.seriesType = .anime
+            navigationController?.pushViewController(listDetailViewController, animated: true)
         }
     }
 }

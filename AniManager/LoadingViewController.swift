@@ -65,8 +65,8 @@ class LoadingViewController: UIViewController {
             UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
             
             DispatchQueue.main.async {
-                let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as! NavigationController
-                self.present(navigationController, animated: true, completion: nil)
+                let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+                self.present(tabBarController, animated: true, completion: nil)
             }
             
         }

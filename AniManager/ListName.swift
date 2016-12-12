@@ -8,38 +8,68 @@
 
 import Foundation
 
-enum ListName: String {
-    case completed = "Completed"
-    case onHold = "On Hold"
-    case dropped = "Dropped"
-}
-
 enum AnimeListName: String {
     case watching = "Watching"
     case planToWatch = "Plan to Watch"
+    case completed = "Completed"
+    case onHold = "On Hold"
+    case dropped = "Dropped"
     
     static func allNames() -> [String] {
         return [
             self.watching.rawValue,
             self.planToWatch.rawValue,
-            ListName.completed.rawValue,
-            ListName.onHold.rawValue,
-            ListName.dropped.rawValue
+            self.completed.rawValue,
+            self.onHold.rawValue,
+            self.dropped.rawValue
         ]
+    }
+    
+    func asKey() -> String {
+        switch self {
+        case .watching:
+            return "watching"
+        case .planToWatch:
+            return "plan_to_watch"
+        case .completed:
+            return "completed"
+        case .onHold:
+            return "on_hold"
+        case .dropped:
+            return "dropped"
+        }
     }
 }
 
 enum MangaListName: String {
     case reading = "Reading"
     case planToRead = "Plan to Read"
+    case completed = "Completed"
+    case onHold = "On Hold"
+    case dropped = "Dropped"
     
     static func allNames() -> [String] {
         return [
             self.reading.rawValue,
             self.planToRead.rawValue,
-            ListName.completed.rawValue,
-            ListName.onHold.rawValue,
-            ListName.dropped.rawValue
+            self.completed.rawValue,
+            self.onHold.rawValue,
+            self.dropped.rawValue
         ]
+    }
+    
+    func asKey() -> String {
+        switch self {
+        case .reading:
+            return "reading"
+        case .planToRead:
+            return "plan_to_read"
+        case .completed:
+            return "completed"
+        case .onHold:
+            return "on_hold"
+        case .dropped:
+            return "dropped"
+        }
     }
 }

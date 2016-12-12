@@ -27,14 +27,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        tabBarController?.navigationItem.title = "AniManager"
-        tabBarController?.navigationItem.leftBarButtonItem = nil
     }
     
     

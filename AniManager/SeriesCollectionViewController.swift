@@ -15,6 +15,10 @@ class SeriesCollectionViewController: UIViewController {
     let errorMessageView = ErrorMessageView()
     var statusBarShouldBeHidden = false
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return statusBarShouldBeHidden
     }
@@ -22,7 +26,25 @@ class SeriesCollectionViewController: UIViewController {
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
+    
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        statusBarShouldBeHidden = false
+        UIView.animate(withDuration: 0.25) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
 }
 
 

@@ -49,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If the access token didn't expire yet, the navigation controller that has
         // the tab bar controller with the "main" content of the application as a root
         // view controller, should be used as the root view controller
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "navigationController") as! NavigationController
-        window?.rootViewController = navigationController
+        let tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
         return true

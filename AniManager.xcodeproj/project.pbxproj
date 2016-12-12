@@ -84,11 +84,11 @@
 		D2F32C561DFCAA360044D195 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C551DFCAA360044D195 /* Tag.swift */; };
 		D2F32C5A1DFCCFFB0044D195 /* AnimeListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C591DFCCFFB0044D195 /* AnimeListSelectionViewController.swift */; };
 		D2F32C5C1DFCD0070044D195 /* MangaListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C5B1DFCD0070044D195 /* MangaListSelectionViewController.swift */; };
-		D2F32C5E1DFCD0BC0044D195 /* AnimeListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C5D1DFCD0BC0044D195 /* AnimeListDetailViewController.swift */; };
-		D2F32C601DFCD0CC0044D195 /* MangaListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C5F1DFCD0CC0044D195 /* MangaListDetailViewController.swift */; };
 		D2F32C631DFCD5AF0044D195 /* ListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C621DFCD5AF0044D195 /* ListSelectionViewController.swift */; };
 		D2F32C6B1DFCE3640044D195 /* ListName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C6A1DFCE3640044D195 /* ListName.swift */; };
 		D2F32C6D1DFCE4570044D195 /* ListNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C6C1DFCE4570044D195 /* ListNameTableViewCell.swift */; };
+		D2F32C6F1DFDE2B70044D195 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C6E1DFDE2B70044D195 /* User.swift */; };
+		D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F32C701DFEDDBA0044D195 /* ListDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,11 +171,11 @@
 		D2F32C551DFCAA360044D195 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		D2F32C591DFCCFFB0044D195 /* AnimeListSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeListSelectionViewController.swift; sourceTree = "<group>"; };
 		D2F32C5B1DFCD0070044D195 /* MangaListSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListSelectionViewController.swift; sourceTree = "<group>"; };
-		D2F32C5D1DFCD0BC0044D195 /* AnimeListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeListDetailViewController.swift; sourceTree = "<group>"; };
-		D2F32C5F1DFCD0CC0044D195 /* MangaListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MangaListDetailViewController.swift; sourceTree = "<group>"; };
 		D2F32C621DFCD5AF0044D195 /* ListSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListSelectionViewController.swift; sourceTree = "<group>"; };
 		D2F32C6A1DFCE3640044D195 /* ListName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListName.swift; sourceTree = "<group>"; };
 		D2F32C6C1DFCE4570044D195 /* ListNameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNameTableViewCell.swift; sourceTree = "<group>"; };
+		D2F32C6E1DFDE2B70044D195 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D2F32C701DFEDDBA0044D195 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +206,7 @@
 			children = (
 				D25EDF011DE8CBEB00267243 /* DataSource.swift */,
 				D25EDF001DE8CBC300267243 /* Series */,
+				D2F32C6E1DFDE2B70044D195 /* User.swift */,
 				D25EDEC01DE2552700267243 /* Clients */,
 			);
 			name = Models;
@@ -448,9 +449,8 @@
 			children = (
 				D2F32C591DFCCFFB0044D195 /* AnimeListSelectionViewController.swift */,
 				D2F32C5B1DFCD0070044D195 /* MangaListSelectionViewController.swift */,
-				D2F32C5D1DFCD0BC0044D195 /* AnimeListDetailViewController.swift */,
-				D2F32C5F1DFCD0CC0044D195 /* MangaListDetailViewController.swift */,
 				D2F32C621DFCD5AF0044D195 /* ListSelectionViewController.swift */,
+				D2F32C701DFEDDBA0044D195 /* ListDetailViewController.swift */,
 			);
 			name = "List Controllers";
 			sourceTree = "<group>";
@@ -576,6 +576,7 @@
 				D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */,
 				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
+				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
 				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D2786F8C1DF39C9200F4368F /* Studio.swift in Sources */,
 				D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */,
@@ -601,11 +602,9 @@
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,
 				D2786FAD1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift in Sources */,
-				D2F32C601DFCD0CC0044D195 /* MangaListDetailViewController.swift in Sources */,
 				D2786FA31DF5F88600F4368F /* BasicInformationsValueLabel.swift in Sources */,
 				D2786F7F1DF2F36300F4368F /* GenreLabel.swift in Sources */,
 				D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */,
-				D2F32C5E1DFCD0BC0044D195 /* AnimeListDetailViewController.swift in Sources */,
 				D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */,
 				D2786F911DF452C800F4368F /* ExternalLink.swift in Sources */,
 				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
@@ -615,6 +614,7 @@
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 				D2786FA51DF5FD1D00F4368F /* VideoTableViewCell.swift in Sources */,
 				D22740961DFC99EF00C3E776 /* SeriesCollectionViewController.swift in Sources */,
+				D2F32C6F1DFDE2B70044D195 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

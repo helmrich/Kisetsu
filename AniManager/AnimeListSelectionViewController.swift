@@ -10,6 +10,8 @@ import UIKit
 
 class AnimeListSelectionViewController: ListSelectionViewController {
 
+    // MARK: - Lifecycle Methods
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -104,10 +104,10 @@ class AuthenticationViewController: UIViewController {
                 UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
                 UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
-                let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "navigationController") as! NavigationController
+                let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
                 
                 DispatchQueue.main.async {
-                    self.present(navigationController, animated: true, completion: nil)
+                    self.present(tabBarController, animated: true, completion: nil)
                 }
                 
             })

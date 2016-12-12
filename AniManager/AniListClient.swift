@@ -323,6 +323,164 @@ class AniListClient {
         task.resume()
     }
     
+    func getAuthenticatedUser(completionHandlerForUser: @escaping (_ user: User?, _ errorMessage: String?) -> Void) {
+        validateAccessToken { (errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForUser(nil, errorMessage!)
+                return
+            }
+            
+            guard let url = self.createAniListUrl(withPath: AniListConstant.Path.UserGet.authenticatedUserModel, andParameters: [:]) else {
+                completionHandlerForUser(nil, "Couldn't create AniList URL")
+                return
+            }
+            
+            let request = NSMutableURLRequest(url: url)
+            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                    completionHandlerForUser(nil, errorMessage)
+                    return
+                }
+                
+                let data = data!
+                
+                guard let jsonObject = self.deserializeJson(fromData: data) else {
+                    completionHandlerForUser(nil, "Couldn't deserialize data into a JSON object")
+                    return
+                }
+                
+                guard let userDictionary = jsonObject as? [String:Any],
+                    let user = User(fromDictionary: userDictionary) else {
+                        completionHandlerForUser(nil, "Couldn't create user object")
+                        return
+                }
+                
+                completionHandlerForUser(user, nil)
+                
+            }
+            
+            task.resume()
+            
+        }
+    }
+    
+    func getList(ofType type: SeriesType, withStatus status: String, andUserId userId: Int?, andDisplayName displayName: String?, completionHandlerForList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+        
+        validateAccessToken { (errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForList(nil, errorMessage!)
+                return
+            }
+            
+            let path: String
+            if type == .anime {
+                if let userId = userId {
+                    let placeholderPath = AniListConstant.Path.UserList.AnimeListGet.animeListModel
+                    path = self.replacePlaceholders(inPath: placeholderPath, withReplacingPairs: [AniListConstant.Path.Placeholder.id: "\(userId)"])
+                } else if let displayName = displayName {
+                    let placeholderPath = AniListConstant.Path.UserList.AnimeListGet.animeListModelFromDisplayName
+                    path = self.replacePlaceholders(inPath: placeholderPath, withReplacingPairs: [AniListConstant.Path.Placeholder.displayName: displayName])
+                } else {
+                    completionHandlerForList(nil, "No username or user ID available")
+                    return
+                }
+            } else if type == .manga {
+                if let userId = userId {
+                    let placeholderPath = AniListConstant.Path.UserList.MangaListGet.mangaListModel
+                    path = self.replacePlaceholders(inPath: placeholderPath, withReplacingPairs: [AniListConstant.Path.Placeholder.id: "\(userId)"])
+                } else if let displayName = displayName {
+                    let placeholderPath = AniListConstant.Path.UserList.MangaListGet.mangaListModelFromDisplayName
+                    path = self.replacePlaceholders(inPath: placeholderPath, withReplacingPairs: [AniListConstant.Path.Placeholder.displayName: displayName])
+                } else {
+                    completionHandlerForList(nil, "No username or user ID available")
+                    return
+                }
+            } else {
+                completionHandlerForList(nil, "Invalid series type")
+                return
+            }
+            
+            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+                completionHandlerForList(nil, "Couldn't create AniList URL")
+                return
+            }
+            
+            let request = NSMutableURLRequest(url: url)
+            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                    completionHandlerForList(nil, errorMessage)
+                    return
+                }
+                
+                let data = data!
+
+                guard let jsonObject = self.deserializeJson(fromData: data) else {
+                    completionHandlerForList(nil, "Couldn't deserialize data into a JSON object")
+                    return
+                }
+                
+                guard let listsDictionary = jsonObject as? [String:Any] else {
+                    completionHandlerForList(nil, "Couldn't create lists dictionary from JSON object")
+                    return
+                }
+                
+                guard let allStatusLists = listsDictionary[AniListConstant.ResponseKey.List.lists] as? [String:Any],
+                let statusList = allStatusLists[status] as? [[String:Any]] else {
+                    completionHandlerForList(nil, "Couldn't get series list from dictionary")
+                    return
+                }
+
+                if type == .anime {
+                    var animeSeriesList = [AnimeSeries]()
+                    for list in statusList {
+                        guard let seriesDictionary = list[type.rawValue] as? [String:Any] else {
+                            completionHandlerForList(nil, "Couldn't get series from list")
+                            return
+                        }
+                        
+                        guard let animeSeries = AnimeSeries(fromDictionary: seriesDictionary) else {
+                            completionHandlerForList(nil, "Couldn't create Anime Series object from dictionary")
+                            return
+                        }
+                        animeSeriesList.append(animeSeries)
+                    }
+                    completionHandlerForList(animeSeriesList, nil)
+                    return
+                } else if type == .manga {
+                    var mangaSeriesList = [MangaSeries]()
+                    for list in statusList {
+                        guard let seriesDictionary = list[type.rawValue] as? [String:Any] else {
+                            completionHandlerForList(nil, "Couldn't get series from list")
+                            return
+                        }
+                        
+                        guard let mangaSeries = MangaSeries(fromDictionary: seriesDictionary) else {
+                            completionHandlerForList(nil, "Couldn't create Anime Series object from dictionary")
+                            return
+                        }
+                        
+                        mangaSeriesList.append(mangaSeries)
+                    }
+                    completionHandlerForList(mangaSeriesList, nil)
+                    return
+                } else {
+                    completionHandlerForList(nil, "Invalid series type")
+                    return
+                }
+                
+            }
+            
+            task.resume()
+            
+        }
+    }
+    
     
     // MARK: - POST
     

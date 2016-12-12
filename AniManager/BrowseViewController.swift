@@ -28,6 +28,8 @@ class BrowseViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         activityIndicatorView.startAnimating()
         UIView.animate(withDuration: 0.25) {
             self.activityIndicatorView.alpha = 1
@@ -72,9 +74,6 @@ class BrowseViewController: SeriesCollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        tabBarController?.navigationItem.title = "Browse"
-        tabBarController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "SettingBarsIcon"), style: .plain, target: self, action: #selector(openFilterModal))
         
         statusBarShouldBeHidden = false
         UIView.animate(withDuration: 0.25) {
@@ -85,7 +84,7 @@ class BrowseViewController: SeriesCollectionViewController {
     
     // MARK: - Functions
     
-    func openFilterModal() {
+    @IBAction func openFilterModal() {
         let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
         filterViewController.modalPresentationStyle = .custom
         filterViewController.transitioningDelegate = self

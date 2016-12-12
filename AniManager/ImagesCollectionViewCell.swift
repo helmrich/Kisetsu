@@ -15,4 +15,8 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageOverlayView: UIView!
     
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
+    
 }

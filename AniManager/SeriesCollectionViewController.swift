@@ -12,6 +12,8 @@ class SeriesCollectionViewController: UIViewController {
     
     // MARK: - Properties
     
+    var seriesType: SeriesType! = .anime
+    
     let errorMessageView = ErrorMessageView()
     var statusBarShouldBeHidden = false
     
@@ -113,7 +115,7 @@ extension SeriesCollectionViewController: UICollectionViewDelegate {
         let seriesDetailViewController = storyboard!.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
         seriesDetailViewController.seriesId = selectedCell.seriesId
         seriesDetailViewController.seriesTitle = selectedCell.titleLabel.text
-        seriesDetailViewController.seriesType = .anime
+        seriesDetailViewController.seriesType = seriesType
         statusBarShouldBeHidden = true
         UIView.animate(withDuration: 0.5) {
             self.setNeedsStatusBarAppearanceUpdate()

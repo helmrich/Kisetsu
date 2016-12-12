@@ -16,7 +16,7 @@ class SeriesDetailViewController: UIViewController {
     
     var seriesId: Int!
     var seriesTitle: String!
-    var seriesType: SeriesType!
+    var seriesType: SeriesType! = .manga
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -45,7 +45,7 @@ class SeriesDetailViewController: UIViewController {
             when the view controller is loaded
         */
  
-        AniListClient.shared.getSingleSeries(ofType: .anime, withId: seriesId) { (series, errorMessage) in
+        AniListClient.shared.getSingleSeries(ofType: seriesType, withId: seriesId) { (series, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 return
@@ -125,7 +125,7 @@ class SeriesDetailViewController: UIViewController {
     }
     
     func favorite() {
-        AniListClient.shared.favorite(seriesOfType: .anime, withId: seriesId) { (errorMessage) in
+        AniListClient.shared.favorite(seriesOfType: seriesType, withId: seriesId) { (errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 return
@@ -196,6 +196,9 @@ class SeriesDetailViewController: UIViewController {
          */
         let seasonIdString = "\(seasonId)"
         let yearPart = seasonIdString.substring(to: seasonIdString.index(before: seasonIdString.endIndex))
+        if yearPart == "" {
+            return nil
+        }
         
         /*
          Because the API just returns two digits for the year and
@@ -272,6 +275,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             switch series.seriesType {
             case .anime:
                 let animeSeries = series as! AnimeSeries
+                cell.toggleAnimeSpecificLabels(hidden: false)
                 cell.statusValueLabel.text = animeSeries.airingStatus != nil ? animeSeries.airingStatus!.rawValue : "n/a"
                 cell.durationPerEpisodeValueLabel.text = animeSeries.durationPerEpisode != nil ? "\(animeSeries.durationPerEpisode!)min" : "n/a"
                 cell.numberOfEpisodesValueLabel.text = "\(animeSeries.numberOfTotalEpisodes)"
@@ -285,7 +289,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 let mangaSeries = series as! MangaSeries
                 cell.statusValueLabel.text = mangaSeries.publishingStatus?.rawValue
                 // TODO: Add more manga-specific values
-                
+                cell.toggleAnimeSpecificLabels(hidden: true)
                 // layoutSubviews has to be called so that the the cell's labels
                 // with dynamic content will update their width based on the values
                 cell.layoutSubviews()

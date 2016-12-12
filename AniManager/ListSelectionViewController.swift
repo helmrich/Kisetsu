@@ -12,7 +12,7 @@ class ListSelectionViewController: UIViewController {
 
     // MARK: - Properties
     
-    var seriesType: SeriesType?
+    var seriesType: SeriesType? = .anime
 
     
     // MARK: - Lifecycle Methods

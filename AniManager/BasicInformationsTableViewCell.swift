@@ -76,6 +76,24 @@ class BasicInformationsTableViewCell: UITableViewCell {
         
     }
     
+    func toggleAnimeSpecificLabels(hidden: Bool) {
+        if hidden {
+            seasonLabel.isHidden = true
+            seasonValueLabel.isHidden = true
+            durationPerEpisodeLabel.isHidden = true
+            durationPerEpisodeValueLabel.isHidden = true
+            numberOfEpisodesLabel.isHidden = true
+            numberOfEpisodesValueLabel.isHidden = true
+        } else {
+            seasonLabel.isHidden = false
+            seasonValueLabel.isHidden = false
+            durationPerEpisodeLabel.isHidden = false
+            durationPerEpisodeValueLabel.isHidden = false
+            numberOfEpisodesLabel.isHidden = false
+            numberOfEpisodesValueLabel.isHidden = false
+        }
+    }
+    
     override func prepareForReuse() {
         seriesCoverImageView.image = nil
         typeValueLabel.text = ""

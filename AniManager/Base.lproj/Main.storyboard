@@ -975,18 +975,33 @@
                                     <outlet property="delegate" destination="2F8-yd-OEC" id="mag-Kd-Th0"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="idc-rb-S1Z">
+                                <rect key="frame" x="178" y="324" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAI-GY-nla">
+                                <rect key="frame" x="124" y="322" width="127" height="24"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                <color key="textColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="idc-rb-S1Z" firstAttribute="centerY" secondItem="DLR-AA-Sal" secondAttribute="centerY" id="0zn-c6-SO6"/>
+                            <constraint firstItem="qAI-GY-nla" firstAttribute="centerX" secondItem="DLR-AA-Sal" secondAttribute="centerX" id="7wN-Zi-blE"/>
                             <constraint firstItem="b0A-1c-1OS" firstAttribute="top" secondItem="ln8-NL-PK0" secondAttribute="bottom" id="D3J-b5-3sw"/>
                             <constraint firstAttribute="trailing" secondItem="ln8-NL-PK0" secondAttribute="trailing" id="E9X-mD-15c"/>
                             <constraint firstItem="ln8-NL-PK0" firstAttribute="leading" secondItem="DLR-AA-Sal" secondAttribute="leading" id="G6j-G1-Y4b"/>
+                            <constraint firstItem="idc-rb-S1Z" firstAttribute="centerX" secondItem="DLR-AA-Sal" secondAttribute="centerX" id="byr-Ig-qf4"/>
+                            <constraint firstItem="qAI-GY-nla" firstAttribute="centerY" secondItem="DLR-AA-Sal" secondAttribute="centerY" id="cN0-bw-PFb"/>
                             <constraint firstItem="ln8-NL-PK0" firstAttribute="top" secondItem="DLR-AA-Sal" secondAttribute="top" id="jGr-Yy-7bS"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="idc-rb-S1Z" id="D4v-zW-5Bo"/>
+                        <outlet property="nothingFoundLabel" destination="qAI-GY-nla" id="21B-1J-hS8"/>
                         <outlet property="seriesCollectionView" destination="ln8-NL-PK0" id="r8R-5A-f1e"/>
                     </connections>
                 </viewController>

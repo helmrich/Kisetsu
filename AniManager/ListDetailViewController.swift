@@ -12,14 +12,14 @@ class ListDetailViewController: SeriesCollectionViewController {
 
     // MARK: - Properties
     
-    var seriesType: SeriesType?
-    
     
     // MARK: - Outlets and Actions
     
     // MARK: - Outlets
     
     @IBOutlet weak var seriesCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var nothingFoundLabel: UILabel!
     
     
     // MARK: - Lifecycle Methods
@@ -46,32 +46,60 @@ class ListDetailViewController: SeriesCollectionViewController {
             }
             
             let status: String
+            let nothingFoundText: String
             if seriesType == .anime {
                 status = AnimeListName(rawValue: self.title!)!.asKey()
+                nothingFoundText = "No anime found"
             } else {
                 status = MangaListName(rawValue: self.title!)!.asKey()
+                nothingFoundText = "No manga found"
             }
             
             AniListClient.shared.getList(ofType: seriesType, withStatus: status, andUserId: user.id, andDisplayName: nil) { (seriesList, errorMessage) in
+                
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.startAnimating()
+                    UIView.animate(withDuration: 0.25) {
+                        self.activityIndicatorView.alpha = 1.0
+                    }
+                }
+                
                 guard errorMessage == nil else {
-                    print(errorMessage!)
+                    DispatchQueue.main.async {
+                        self.nothingFoundLabel.text = nothingFoundText
+                        self.activityIndicatorView.stopAnimating()
+                        UIView.animate(withDuration: 0.25) {
+                            self.nothingFoundLabel.alpha = 1.0
+                            self.activityIndicatorView.alpha = 0.0
+                        }
+                    }
                     return
                 }
                 
-                guard let seriesList = seriesList else {
+                guard let generalSeriesList = seriesList else {
                     print("Couldn't get series list")
                     return
                 }
                 
-                guard let animeSeriesList = seriesList as? [AnimeSeries] else {
-                    print("Couldn't cast series list to anime series list")
+                let seriesList: [Series]
+                if seriesType == .anime,
+                    let animeSeriesList = generalSeriesList as? [AnimeSeries] {
+                    seriesList = animeSeriesList
+                } else if seriesType == .manga,
+                    let mangaSeriesList = generalSeriesList as? [MangaSeries] {
+                    seriesList = mangaSeriesList
+                } else {
+                    print("Couldn't create manga/anime series list from general series list")
                     return
                 }
                 
-                DataSource.shared.browseSeriesList = animeSeriesList
+                DataSource.shared.browseSeriesList = seriesList
                 DispatchQueue.main.async {
                     self.seriesCollectionView.reloadData()
+                    self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
+                        self.activityIndicatorView.alpha = 0.0
+                        self.nothingFoundLabel.alpha = 0.0
                         self.seriesCollectionView.alpha = 1.0
                     }
                 }

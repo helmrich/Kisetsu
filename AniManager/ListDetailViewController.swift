@@ -81,19 +81,17 @@ class ListDetailViewController: SeriesCollectionViewController {
                     return
                 }
                 
-                let seriesList: [Series]
                 if seriesType == .anime,
                     let animeSeriesList = generalSeriesList as? [AnimeSeries] {
-                    seriesList = animeSeriesList
+                    DataSource.shared.selectedAnimeList = animeSeriesList
                 } else if seriesType == .manga,
                     let mangaSeriesList = generalSeriesList as? [MangaSeries] {
-                    seriesList = mangaSeriesList
+                    DataSource.shared.selectedMangaList = mangaSeriesList
                 } else {
                     print("Couldn't create manga/anime series list from general series list")
                     return
                 }
                 
-                DataSource.shared.browseSeriesList = seriesList
                 DispatchQueue.main.async {
                     self.seriesCollectionView.reloadData()
                     self.activityIndicatorView.stopAnimating()
@@ -110,4 +108,64 @@ class ListDetailViewController: SeriesCollectionViewController {
         
     }
 
+}
+
+extension ListDetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if seriesType == .anime,
+            let selectedAnimeList = DataSource.shared.selectedAnimeList {
+            return selectedAnimeList.count
+        } else if seriesType == .manga,
+            let selectedMangaList = DataSource.shared.selectedMangaList {
+            return selectedMangaList.count
+        } else {
+            return 0
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
+        
+        let currentSeries: Series
+        if seriesType == .anime,
+            let selectedAnimeList = DataSource.shared.selectedAnimeList {
+            currentSeries = selectedAnimeList[indexPath.row]
+        } else if seriesType == .manga,
+            let selectedMangaList = DataSource.shared.selectedMangaList {
+            currentSeries = selectedMangaList[indexPath.row]
+        } else {
+            return cell
+        }
+        
+        if cell.seriesId == nil {
+            cell.seriesId = currentSeries.id
+        }
+        
+        if cell.imageView.image == nil {
+            AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
+                guard errorMessage == nil else {
+                    return
+                }
+                
+                guard let imageData = imageData else {
+                    return
+                }
+                
+                if let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        cell.imageOverlay.isHidden = false
+                        cell.titleLabel.text = currentSeries.titleEnglish
+                        cell.titleLabel.isHidden = false
+                        cell.imageView.image = image
+                    }
+                }
+            }
+        }
+        
+        return cell
+        
+    }
 }

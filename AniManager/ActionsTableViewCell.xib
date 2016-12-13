@@ -122,10 +122,10 @@
                         </constraints>
                     </stackView>
                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="f6n-Dh-igt">
-                        <rect key="frame" x="54" y="140" width="268" height="50"/>
+                        <rect key="frame" x="49.5" y="140" width="276.5" height="50"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cap-DW-Xib">
-                                <rect key="frame" x="0.0" y="0.0" width="123.5" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="132" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8e-Ne-IIF">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
@@ -138,21 +138,33 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xTA-2H-h3c">
-                                        <rect key="frame" x="25" y="0.0" width="73.5" height="50"/>
+                                        <rect key="frame" x="25" y="0.0" width="82" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="k4m-hS-AqM">
-                                                <rect key="frame" x="14" y="0.0" width="46" height="35.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="82" height="35.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="122" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kj3-cK-Y8f">
-                                                        <rect key="frame" x="0.0" y="6.5" width="46" height="29"/>
+                                                        <rect key="frame" x="0.0" y="11.5" width="39" height="24"/>
                                                         <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQL-aE-Z2o">
+                                                        <rect key="frame" x="39" y="11.5" width="8" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-kI-3L0">
+                                                        <rect key="frame" x="47" y="11.5" width="35" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapters read" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euI-yP-q3Z">
-                                                <rect key="frame" x="0.0" y="35.5" width="73.5" height="14.5"/>
+                                                <rect key="frame" x="4.5" y="35.5" width="73.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                 <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -160,7 +172,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uv0-5g-kOe">
-                                        <rect key="frame" x="103.5" y="0.0" width="20" height="50"/>
+                                        <rect key="frame" x="112" y="0.0" width="20" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="dbY-Gm-Vbw"/>
                                         </constraints>
@@ -172,7 +184,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ks2-lW-IWa">
-                                <rect key="frame" x="148.5" y="0.0" width="119.5" height="50"/>
+                                <rect key="frame" x="157" y="0.0" width="119.5" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hu6-dO-vrm">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
@@ -188,14 +200,26 @@
                                         <rect key="frame" x="25" y="0.0" width="69.5" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="3iF-Et-eaj">
-                                                <rect key="frame" x="26" y="0.0" width="18" height="35.5"/>
+                                                <rect key="frame" x="11" y="0.0" width="47.5" height="35.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="7" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zfZ-yS-GiS">
-                                                        <rect key="frame" x="0.0" y="6.5" width="18" height="29"/>
+                                                        <rect key="frame" x="0.0" y="11.5" width="16" height="24"/>
                                                         <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TxE-m3-LLp">
+                                                        <rect key="frame" x="16" y="11.5" width="8" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki6-cx-0lu">
+                                                        <rect key="frame" x="24" y="11.5" width="23.5" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="20"/>
+                                                        <color key="textColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volumes read" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vf-8W-IyN">
@@ -240,7 +264,9 @@
                 <outlet property="animeProgressStackView" destination="ziN-r0-JP3" id="kXo-2b-TtV"/>
                 <outlet property="chaptersReadTextField" destination="kj3-cK-Y8f" id="az4-54-SxC"/>
                 <outlet property="mangaProgressStackView" destination="f6n-Dh-igt" id="RUX-fz-uZc"/>
+                <outlet property="maximumNumberOfChaptersLabel" destination="tOh-kI-3L0" id="r7z-Va-c0X"/>
                 <outlet property="maximumNumberOfEpisodesLabel" destination="o2a-F8-44w" id="wrT-Bd-x3g"/>
+                <outlet property="maximumNumberOfVolumesLabel" destination="Ki6-cx-0lu" id="3lp-De-Hur"/>
                 <outlet property="rateButton" destination="kxz-00-zyb" id="csD-YO-Tx6"/>
                 <outlet property="topButtonsStackView" destination="IqI-4e-MHt" id="Tez-2l-wQN"/>
                 <outlet property="userListStatusButton" destination="V69-RX-gK6" id="zNY-fH-gRB"/>

@@ -31,7 +31,9 @@ class ActionsTableViewCell: UITableViewCell {
     
     // Manga Progress Stack View
     @IBOutlet weak var mangaProgressStackView: UIStackView!
+    @IBOutlet weak var maximumNumberOfChaptersLabel: UILabel!
     @IBOutlet weak var chaptersReadTextField: UITextField!
+    @IBOutlet weak var maximumNumberOfVolumesLabel: UILabel!
     @IBOutlet weak var volumesReadTextField: UITextField!
     
     // MARK: - Actions

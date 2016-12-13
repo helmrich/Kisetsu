@@ -17,6 +17,9 @@ class AnimeSeries: Series {
     let studios: [Studio]?
     let externalLinks: [ExternalLink]?
     
+    // List-specific properties
+    var watchedEpisodes: Int?
+    
     typealias AnimeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
     
     /*
@@ -83,6 +86,12 @@ class AnimeSeries: Series {
             self.studios = studios
         } else {
             self.studios = nil
+        }
+        
+        if let watchedEpisodes = dictionary[AniListConstant.ResponseKey.List.AnimeList.watchedEpisodes] as? Int {
+            self.watchedEpisodes = watchedEpisodes
+        } else {
+            self.watchedEpisodes = nil
         }
         
         super.init(fromDictionary: dictionary)

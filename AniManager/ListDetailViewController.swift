@@ -18,6 +18,7 @@ class ListDetailViewController: SeriesCollectionViewController {
     // MARK: - Outlets
     
     @IBOutlet weak var seriesCollectionView: UICollectionView!
+    @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var nothingFoundLabel: UILabel!
     
@@ -28,6 +29,10 @@ class ListDetailViewController: SeriesCollectionViewController {
         super.viewDidLoad()
         
         seriesCollectionView.alpha = 0.0
+        
+        seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
+        seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
+        seriesCollectionViewFlowLayout.minimumLineSpacing = 1
         
         AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
             guard errorMessage == nil else {

@@ -25,6 +25,16 @@ enum AnimeListName: String {
         ]
     }
     
+    static func allKeys() -> [String] {
+        return [
+            self.watching.asKey(),
+            self.planToWatch.asKey(),
+            self.completed.asKey(),
+            self.onHold.asKey(),
+            self.dropped.asKey()
+        ]
+    }
+    
     func asKey() -> String {
         switch self {
         case .watching:
@@ -55,6 +65,16 @@ enum MangaListName: String {
             self.completed.rawValue,
             self.onHold.rawValue,
             self.dropped.rawValue
+        ]
+    }
+    
+    static func allKeys() -> [String] {
+        return [
+            self.reading.asKey(),
+            self.planToRead.asKey(),
+            self.completed.asKey(),
+            self.onHold.asKey(),
+            self.dropped.asKey()
         ]
     }
     

@@ -15,25 +15,21 @@ enum AnimeListName: String {
     case onHold = "On Hold"
     case dropped = "Dropped"
     
-    static func allNames() -> [String] {
-        return [
-            self.watching.rawValue,
-            self.planToWatch.rawValue,
-            self.completed.rawValue,
-            self.onHold.rawValue,
-            self.dropped.rawValue
-        ]
-    }
+    static let allNames = [
+            watching.rawValue,
+            planToWatch.rawValue,
+            completed.rawValue,
+            onHold.rawValue,
+            dropped.rawValue
+    ]
     
-    static func allKeys() -> [String] {
-        return [
-            self.watching.asKey(),
-            self.planToWatch.asKey(),
-            self.completed.asKey(),
-            self.onHold.asKey(),
-            self.dropped.asKey()
-        ]
-    }
+    static let allKeys = [
+            watching.asKey(),
+            planToWatch.asKey(),
+            completed.asKey(),
+            onHold.asKey(),
+            dropped.asKey()
+    ]
     
     func asKey() -> String {
         switch self {
@@ -58,25 +54,21 @@ enum MangaListName: String {
     case onHold = "On Hold"
     case dropped = "Dropped"
     
-    static func allNames() -> [String] {
-        return [
-            self.reading.rawValue,
-            self.planToRead.rawValue,
-            self.completed.rawValue,
-            self.onHold.rawValue,
-            self.dropped.rawValue
-        ]
-    }
+    static let allNames = [
+            reading.rawValue,
+            planToRead.rawValue,
+            completed.rawValue,
+            onHold.rawValue,
+            dropped.rawValue
+    ]
     
-    static func allKeys() -> [String] {
-        return [
-            self.reading.asKey(),
-            self.planToRead.asKey(),
-            self.completed.asKey(),
-            self.onHold.asKey(),
-            self.dropped.asKey()
-        ]
-    }
+    static let allKeys = [
+            reading.asKey(),
+            planToRead.asKey(),
+            completed.asKey(),
+            onHold.asKey(),
+            dropped.asKey()
+    ]
     
     func asKey() -> String {
         switch self {

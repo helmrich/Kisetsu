@@ -35,6 +35,10 @@ class Series {
 //    let staff: [Staff]?
     // TODO: Relations
     
+    // List-specific properties
+    var finishedOn: String?
+    var itemListStatus: String?
+    var userScore: Int?
     
     typealias SeriesKey = AniListConstant.ResponseKey.Series
     
@@ -133,6 +137,24 @@ class Series {
             self.characters = characters
         } else {
             self.characters = nil
+        }
+        
+        if let finishedOn = dictionary[AniListConstant.ResponseKey.List.finishedOn] as? String {
+            self.finishedOn = finishedOn
+        } else {
+            self.finishedOn = nil
+        }
+        
+        if let itemListStatus = dictionary[AniListConstant.ResponseKey.List.itemListStatus] as? String {
+            self.itemListStatus = itemListStatus
+        } else {
+            self.itemListStatus = nil
+        }
+        
+        if let userScore = dictionary[AniListConstant.ResponseKey.List.userScore] as? Int {
+            self.userScore = userScore
+        } else {
+            self.userScore = nil
         }
     }
 }

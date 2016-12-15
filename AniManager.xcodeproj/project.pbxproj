@@ -10,6 +10,10 @@
 		D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */; };
 		D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */; };
 		D21EC74F1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */; };
+		D21EC7511E0321B0008027E4 /* AniListClientAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7501E0321B0008027E4 /* AniListClientAuthentication.swift */; };
+		D21EC7531E0322FE008027E4 /* AniListClientUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7521E0322FE008027E4 /* AniListClientUserList.swift */; };
+		D21EC7551E032475008027E4 /* AniListClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7541E032475008027E4 /* AniListClientHelper.swift */; };
+		D21EC7571E0326F3008027E4 /* AniListClientSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */; };
 		D224A2621DEF9A710085C532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D224A2611DEF9A710085C532 /* Images.xcassets */; };
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
 		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
@@ -98,6 +102,10 @@
 		D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
 		D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerHelper.swift; sourceTree = "<group>"; };
+		D21EC7501E0321B0008027E4 /* AniListClientAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClientAuthentication.swift; sourceTree = "<group>"; };
+		D21EC7521E0322FE008027E4 /* AniListClientUserList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClientUserList.swift; sourceTree = "<group>"; };
+		D21EC7541E032475008027E4 /* AniListClientHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClientHelper.swift; sourceTree = "<group>"; };
+		D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClientSeries.swift; sourceTree = "<group>"; };
 		D224A2611DEF9A710085C532 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +309,10 @@
 			children = (
 				D25EDEBE1DE2515C00267243 /* AniListConstant.swift */,
 				D25EDEC11DE2777A00267243 /* AniListClient.swift */,
+				D21EC7501E0321B0008027E4 /* AniListClientAuthentication.swift */,
+				D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */,
+				D21EC7521E0322FE008027E4 /* AniListClientUserList.swift */,
+				D21EC7541E032475008027E4 /* AniListClientHelper.swift */,
 				D25EDEC31DE3AF9900267243 /* AccessToken.swift */,
 			);
 			name = AniList;
@@ -568,8 +580,10 @@
 				D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */,
 				D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */,
 				D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */,
+				D21EC7531E0322FE008027E4 /* AniListClientUserList.swift in Sources */,
 				D25EDEF11DE658C400267243 /* Genre.swift in Sources */,
 				D2786F811DF2F65000F4368F /* GenreTableViewCell.swift in Sources */,
+				D21EC7551E032475008027E4 /* AniListClientHelper.swift in Sources */,
 				D2F32C5A1DFCCFFB0044D195 /* AnimeListSelectionViewController.swift in Sources */,
 				D25EDF051DE8ECA600267243 /* SeriesCollectionViewCell.swift in Sources */,
 				D2786F871DF3997400F4368F /* Character.swift in Sources */,
@@ -577,6 +591,7 @@
 				D25EDEE91DE64D2B00267243 /* Series.swift in Sources */,
 				D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */,
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
+				D21EC7511E0321B0008027E4 /* AniListClientAuthentication.swift in Sources */,
 				D2F32C6D1DFCE4570044D195 /* ListNameTableViewCell.swift in Sources */,
 				D28A5E981DEF5F8400D62BDC /* BasicInformationsTableViewCell.swift in Sources */,
 				D2786F9A1DF5CA2300F4368F /* TableViewCellTitleLabel.swift in Sources */,
@@ -599,6 +614,7 @@
 				D25EDF021DE8CBEB00267243 /* DataSource.swift in Sources */,
 				D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */,
 				D2341CD61DF7493D004773B3 /* ImagesCollectionViewCell.swift in Sources */,
+				D21EC7571E0326F3008027E4 /* AniListClientSeries.swift in Sources */,
 				D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */,
 				D25EDF111DECBFB300267243 /* FilterModalPresentationController.swift in Sources */,
 				D2786F851DF3993C00F4368F /* Staff.swift in Sources */,

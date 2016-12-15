@@ -31,10 +31,17 @@ class ActionsTableViewCell: UITableViewCell {
     
     // Manga Progress Stack View
     @IBOutlet weak var mangaProgressStackView: UIStackView!
+    @IBOutlet weak var chaptersReadStackView: UIStackView!
+    @IBOutlet weak var volumesReadStackView: UIStackView!
     @IBOutlet weak var maximumNumberOfChaptersLabel: UILabel!
     @IBOutlet weak var chaptersReadTextField: UITextField!
     @IBOutlet weak var maximumNumberOfVolumesLabel: UILabel!
     @IBOutlet weak var volumesReadTextField: UITextField!
+    
+    
+    
+    
+    
     
     // MARK: - Actions
 
@@ -46,6 +53,7 @@ class ActionsTableViewCell: UITableViewCell {
                 watchedEpisodesTextField.text = "\(watchedEpisodes + 1)"
         }
     }
+    
     @IBAction func decreaseWatchedEpisodes(_ sender: Any) {
         if let watchedEpisodesText = watchedEpisodesTextField.text,
             let watchedEpisodes = Int(watchedEpisodesText),
@@ -61,6 +69,7 @@ class ActionsTableViewCell: UITableViewCell {
             chaptersReadTextField.text = "\(readChapters + 1)"
         }
     }
+    
     @IBAction func decreaseReadChapters(_ sender: Any) {
         if let readChaptersText = chaptersReadTextField.text,
             let readChapters = Int(readChaptersText),
@@ -68,12 +77,14 @@ class ActionsTableViewCell: UITableViewCell {
             chaptersReadTextField.text = "\(readChapters - 1)"
         }
     }
+    
     @IBAction func increaseReadVolumes(_ sender: Any) {
         if let readVolumesText = volumesReadTextField.text,
             let readVolumes = Int(readVolumesText) {
             volumesReadTextField.text = "\(readVolumes + 1)"
         }
     }
+    
     @IBAction func decreaseReadVolumes(_ sender: Any) {
         if let readVolumesText = volumesReadTextField.text,
             let readVolumes = Int(readVolumesText),
@@ -95,6 +106,47 @@ class ActionsTableViewCell: UITableViewCell {
             animeProgressStackView.isHidden = true
             mangaProgressStackView.isHidden = false
         }
+    }
+    
+    func setupCellForStatus(isSeriesInList: Bool) {
+        if isSeriesInList {
+            rateButton.isEnabled = true
+            animeProgressStackView.isUserInteractionEnabled = true
+            mangaProgressStackView.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.25) {
+                self.rateButton.alpha = 1.0
+                self.animeProgressStackView.alpha = 1.0
+                self.mangaProgressStackView.alpha = 1.0
+            }
+        } else {
+            watchedEpisodesTextField.text = "0"
+            chaptersReadTextField.text = "0"
+            volumesReadTextField.text = "0"
+            userListStatusButton.setTitle("Add to List", for: .normal)
+            rateButton.isEnabled = false
+            animeProgressStackView.isUserInteractionEnabled = false
+            mangaProgressStackView.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.25) {
+                self.rateButton.alpha = 0.4
+                self.animeProgressStackView.alpha = 0.4
+                self.mangaProgressStackView.alpha = 0.4
+            }
+        }
+    }
+    
+    func getUserScoreFromRateButton() -> Int? {
+        guard let rateButtonText = rateButton.title(for: .normal) else {
+            return nil
+        }
+        
+        let userScoreString = rateButtonText.replacingOccurrences(of: "Your Rating: ", with: "")
+        
+        guard let userScore = Int(userScoreString) else {
+            return nil
+        }
+        
+        return userScore
+        
     }
     
     

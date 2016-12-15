@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -66,7 +66,7 @@
                                 </constraints>
                                 <state key="normal" title="Button" image="MinusIcon"/>
                                 <connections>
-                                    <action selector="decreaseWatchedEpisodes:" destination="WYy-Rj-HQh" eventType="touchUpInside" id="ibB-1m-Abp"/>
+                                    <action selector="decreaseWatchedEpisodes:" destination="WYy-Rj-HQh" eventType="touchUpInside" id="uxu-XI-Cf3"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8g9-Ur-cbz">
@@ -262,6 +262,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="animeProgressStackView" destination="ziN-r0-JP3" id="kXo-2b-TtV"/>
+                <outlet property="chaptersReadStackView" destination="Cap-DW-Xib" id="s45-fn-yVI"/>
                 <outlet property="chaptersReadTextField" destination="kj3-cK-Y8f" id="az4-54-SxC"/>
                 <outlet property="mangaProgressStackView" destination="f6n-Dh-igt" id="RUX-fz-uZc"/>
                 <outlet property="maximumNumberOfChaptersLabel" destination="tOh-kI-3L0" id="r7z-Va-c0X"/>
@@ -270,6 +271,7 @@
                 <outlet property="rateButton" destination="kxz-00-zyb" id="csD-YO-Tx6"/>
                 <outlet property="topButtonsStackView" destination="IqI-4e-MHt" id="Tez-2l-wQN"/>
                 <outlet property="userListStatusButton" destination="V69-RX-gK6" id="zNY-fH-gRB"/>
+                <outlet property="volumesReadStackView" destination="ks2-lW-IWa" id="Fyq-Ly-DDv"/>
                 <outlet property="volumesReadTextField" destination="zfZ-yS-GiS" id="XfH-XR-RWO"/>
                 <outlet property="watchedEpisodesTextField" destination="nAv-fX-N2Y" id="Ugg-bi-X3a"/>
             </connections>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */; };
+		D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */; };
+		D21EC74F1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */; };
 		D224A2621DEF9A710085C532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D224A2611DEF9A710085C532 /* Images.xcassets */; };
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
 		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
@@ -92,6 +95,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
+		D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
+		D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerHelper.swift; sourceTree = "<group>"; };
 		D224A2611DEF9A710085C532 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
@@ -236,8 +242,12 @@
 				D25EDEDB1DE4F49300267243 /* NavigationController.swift */,
 				D25EDF061DE8ECC400267243 /* Authentication */,
 				D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */,
+				D22740951DFC99EF00C3E776 /* SeriesCollectionViewController.swift */,
 				D25EDF101DECBFB300267243 /* FilterModalPresentationController.swift */,
 				D28A5E8E1DEDE05B00D62BDC /* SeriesDetailViewController.swift */,
+				D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */,
+				D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */,
+				D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */,
 				D2786FAC1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift */,
 				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
 				D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */,
@@ -349,7 +359,6 @@
 				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
 				D25EDF0C1DEBAFF800267243 /* BrowseFilterViewController.swift */,
 				D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */,
-				D22740951DFC99EF00C3E776 /* SeriesCollectionViewController.swift */,
 			);
 			name = "Tab Bar Main View Controllers";
 			sourceTree = "<group>";
@@ -554,8 +563,10 @@
 				D224A2681DF061F00085C532 /* BannerView.swift in Sources */,
 				D227408A1DFA35E700C3E776 /* ExternalLinkButton.swift in Sources */,
 				D25EDEC41DE3AF9900267243 /* AccessToken.swift in Sources */,
+				D21EC74F1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift in Sources */,
 				D25EDEBC1DE1F3EE00267243 /* ErrorMessageView.swift in Sources */,
 				D25EDEF31DE65C4500267243 /* AnimeSeries.swift in Sources */,
+				D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */,
 				D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */,
 				D25EDEF11DE658C400267243 /* Genre.swift in Sources */,
 				D2786F811DF2F65000F4368F /* GenreTableViewCell.swift in Sources */,
@@ -564,6 +575,7 @@
 				D2786F871DF3997400F4368F /* Character.swift in Sources */,
 				D2F32C6B1DFCE3640044D195 /* ListName.swift in Sources */,
 				D25EDEE91DE64D2B00267243 /* Series.swift in Sources */,
+				D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */,
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
 				D2F32C6D1DFCE4570044D195 /* ListNameTableViewCell.swift in Sources */,
 				D28A5E981DEF5F8400D62BDC /* BasicInformationsTableViewCell.swift in Sources */,

@@ -106,13 +106,9 @@ class ListDetailViewController: SeriesCollectionViewController {
                         self.seriesCollectionView.alpha = 1.0
                     }
                 }
-                
             }
-            
         }
-        
     }
-
 }
 
 extension ListDetailViewController: UICollectionViewDataSource {
@@ -135,11 +131,29 @@ extension ListDetailViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
         let currentSeries: Series
+        /*
+            Check the view controller's series type and get the appropriate
+            list from the data source
+         */
         if seriesType == .anime,
             let selectedAnimeList = DataSource.shared.selectedAnimeList {
+            // If the
+            if let watchedEpisodes = selectedAnimeList[indexPath.row].watchedEpisodes {
+                cell.progressLabel.text = "\(watchedEpisodes)/\(selectedAnimeList[indexPath.row].numberOfTotalEpisodes)"
+                cell.progressLabel.isHidden = false
+            }
+            seriesType = .anime
             currentSeries = selectedAnimeList[indexPath.row]
         } else if seriesType == .manga,
             let selectedMangaList = DataSource.shared.selectedMangaList {
+            if let readChapters = selectedMangaList[indexPath.row].readChapters {
+                cell.progressLabel.text = "Ch. \(readChapters)/\(selectedMangaList[indexPath.row].numberOfTotalChapters)"
+                cell.progressLabel.isHidden = false
+            } else if let readVolumes = selectedMangaList[indexPath.row].readVolumes {
+                cell.progressLabel.text = "Vol. \(readVolumes)/\(selectedMangaList[indexPath.row].numberOfTotalVolumes)"
+                cell.progressLabel.isHidden = false
+            }
+            seriesType = .manga
             currentSeries = selectedMangaList[indexPath.row]
         } else {
             return cell

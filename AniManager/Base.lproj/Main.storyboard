@@ -115,14 +115,11 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-CF-u71">
-                                <rect key="frame" x="0.0" y="300" width="375" height="127"/>
+                                <rect key="frame" x="0.0" y="309.5" width="375" height="108"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="cZN-J6-GTk"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="24"/>
                                         <color key="tintColor" red="0.013609491288661957" green="0.71974295377731323" blue="0.9999886155128479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Login with AniList">
@@ -133,7 +130,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-YE-2H5">
-                                        <rect key="frame" x="79" y="80" width="217.5" height="47"/>
+                                        <rect key="frame" x="79" y="61" width="217.5" height="47"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="c8D-1M-7L7">
                                                 <rect key="frame" x="0.0" y="0.0" width="217.5" height="47"/>
@@ -293,7 +290,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rvd-Cs-y1a">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="JX1-AT-KA9">
                                     <size key="itemSize" width="124" height="124"/>
@@ -371,8 +368,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rvd-Cs-y1a" firstAttribute="top" secondItem="cfK-zV-nGh" secondAttribute="top" id="1PN-cn-WNH"/>
-                            <constraint firstItem="H0f-3Z-8cC" firstAttribute="top" secondItem="rvd-Cs-y1a" secondAttribute="bottom" id="2dR-VN-G41"/>
                             <constraint firstItem="rvd-Cs-y1a" firstAttribute="leading" secondItem="cfK-zV-nGh" secondAttribute="leading" id="5oH-wO-d66"/>
+                            <constraint firstAttribute="bottom" secondItem="rvd-Cs-y1a" secondAttribute="bottom" id="TKb-wF-AjV"/>
                             <constraint firstAttribute="trailing" secondItem="rvd-Cs-y1a" secondAttribute="trailing" id="awy-BF-mUp"/>
                             <constraint firstItem="Wld-f6-oBt" firstAttribute="centerX" secondItem="cfK-zV-nGh" secondAttribute="centerX" id="tO2-KV-lEt"/>
                             <constraint firstItem="Wld-f6-oBt" firstAttribute="centerY" secondItem="cfK-zV-nGh" secondAttribute="centerY" id="xsQ-ja-cFp"/>
@@ -904,7 +901,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ln8-NL-PK0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="VPp-vA-uaN">
                                     <size key="itemSize" width="124" height="124"/>
@@ -989,9 +986,9 @@
                         <constraints>
                             <constraint firstItem="idc-rb-S1Z" firstAttribute="centerY" secondItem="DLR-AA-Sal" secondAttribute="centerY" id="0zn-c6-SO6"/>
                             <constraint firstItem="qAI-GY-nla" firstAttribute="centerX" secondItem="DLR-AA-Sal" secondAttribute="centerX" id="7wN-Zi-blE"/>
-                            <constraint firstItem="b0A-1c-1OS" firstAttribute="top" secondItem="ln8-NL-PK0" secondAttribute="bottom" id="D3J-b5-3sw"/>
                             <constraint firstAttribute="trailing" secondItem="ln8-NL-PK0" secondAttribute="trailing" id="E9X-mD-15c"/>
                             <constraint firstItem="ln8-NL-PK0" firstAttribute="leading" secondItem="DLR-AA-Sal" secondAttribute="leading" id="G6j-G1-Y4b"/>
+                            <constraint firstAttribute="bottom" secondItem="ln8-NL-PK0" secondAttribute="bottom" id="S8g-RW-VKR"/>
                             <constraint firstItem="idc-rb-S1Z" firstAttribute="centerX" secondItem="DLR-AA-Sal" secondAttribute="centerX" id="byr-Ig-qf4"/>
                             <constraint firstItem="qAI-GY-nla" firstAttribute="centerY" secondItem="DLR-AA-Sal" secondAttribute="centerY" id="cN0-bw-PFb"/>
                             <constraint firstItem="ln8-NL-PK0" firstAttribute="top" secondItem="DLR-AA-Sal" secondAttribute="top" id="jGr-Yy-7bS"/>
@@ -1003,11 +1000,12 @@
                         <outlet property="activityIndicatorView" destination="idc-rb-S1Z" id="D4v-zW-5Bo"/>
                         <outlet property="nothingFoundLabel" destination="qAI-GY-nla" id="21B-1J-hS8"/>
                         <outlet property="seriesCollectionView" destination="ln8-NL-PK0" id="r8R-5A-f1e"/>
+                        <outlet property="seriesCollectionViewFlowLayout" destination="VPp-vA-uaN" id="MgC-Ka-tGe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6NC-yC-38p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5761" y="1382"/>
+            <point key="canvasLocation" x="5760.8000000000002" y="1381.2593703148427"/>
         </scene>
         <!--Manga Lists-->
         <scene sceneID="DPD-1J-x1k">

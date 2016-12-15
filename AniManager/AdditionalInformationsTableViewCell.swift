@@ -16,11 +16,13 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
     let englishTitleLabel = AniManagerLabel()
     let romajiTitleLabel = AniManagerLabel()
     let japaneseTitleLabel = AniManagerLabel()
+    let synonymsLabel = AniManagerLabel()
     
     let studioValueLabel = AdditionalInformationsValueLabel()
     let englishTitleValueLabel = AdditionalInformationsValueLabel()
     let romajiTitleValueLabel = AdditionalInformationsValueLabel()
     let japaneseTitleValueLabel = AdditionalInformationsValueLabel()
+    let synonymsValueLabel = AdditionalInformationsValueLabel()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -41,18 +43,22 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
         romajiTitleLabel.text = "Romaji"
         japaneseTitleLabel.hasBoldFont = true
         japaneseTitleLabel.text = "Japanese"
+        synonymsLabel.hasBoldFont = true
+        synonymsLabel.text = "Synonyms"
         
         
         let studioStackView = UIStackView.createStackView(fromArrangedSubviews: [studioLabel, studioValueLabel], withAxis: .vertical, andSpacing: 0.0)
         let englishTitleStackView = UIStackView.createStackView(fromArrangedSubviews: [englishTitleLabel, englishTitleValueLabel], withAxis: .vertical, andSpacing: 0.0)
         let romajiTitleStackView = UIStackView.createStackView(fromArrangedSubviews: [romajiTitleLabel, romajiTitleValueLabel], withAxis: .vertical, andSpacing: 0.0)
         let japaneseTitleStackView = UIStackView.createStackView(fromArrangedSubviews: [japaneseTitleLabel, japaneseTitleValueLabel], withAxis: .vertical, andSpacing: 0.0)
+        let synonymsStackView = UIStackView.createStackView(fromArrangedSubviews: [synonymsLabel, synonymsValueLabel], withAxis: .vertical, andSpacing: 0.0)
         
         let mainStackView = UIStackView.createStackView(fromArrangedSubviews: [
                 studioStackView,
                 englishTitleStackView,
                 romajiTitleStackView,
-                japaneseTitleStackView
+                japaneseTitleStackView,
+                synonymsStackView
             ], withAxis: .vertical, andSpacing: 5.0)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainStackView)

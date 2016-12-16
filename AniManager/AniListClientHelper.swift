@@ -12,6 +12,9 @@ extension AniListClient {
     
     // This method is used to get data for a single image from a specified URL string
     func getImageData(fromUrlString urlString: String, completionHandlerForImageData: @escaping (_ imageData: Data?, _ errorMessage: String?) -> Void) {
+        
+        // URL creation and request configuration
+        
         guard let url = URL(string: urlString) else {
             completionHandlerForImageData(nil, "Couldn't create a URL from the provided URL string")
             return
@@ -99,6 +102,21 @@ extension AniListClient {
         return newPath
     }
     
+    func createHttpBody(withKeyValuePairs keyValuePairs: [String:Any]) -> Data? {
+        var httpBodyString = "{"
+        for (key, value) in keyValuePairs {
+            if httpBodyString == "{" {
+                httpBodyString.append("\"\(key)\":\"\(value)\"")
+            } else {
+                httpBodyString.append(",\"\(key)\":\"\(value)\"")
+            }
+        }
+        httpBodyString.append("}")
+        
+        return httpBodyString.data(using: .utf8)
+    }
+    
+    // This method tries to deserialize given data into a JSON object
     func deserializeJson(fromData data: Data) -> Any? {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)

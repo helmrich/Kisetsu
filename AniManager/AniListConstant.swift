@@ -12,6 +12,7 @@ typealias ParameterConstant = AniListConstant
 typealias HeaderFieldConstant = AniListConstant
 typealias PathConstant = AniListConstant
 typealias ResponseConstant = AniListConstant
+typealias PayloadConstant = AniListConstant
 
 struct AniListConstant {
     
@@ -34,6 +35,16 @@ extension PathConstant {
         struct Authentication {
             static let authorize = "auth/authorize"
             static let accessToken = "auth/access_token"
+        }
+        
+        struct UserGet {
+            static let authenticatedUserModel = "user"
+            static let basicUserModel = "user/{id}"
+            static let basicUserModelFromDisplayName = "user/{displayname}"
+            static let userFavourites = "user/{id}/favourites"
+            static let userFavouritesFromDisplayName = "user/{displayname}/favourites"
+            static let userWatchingAndAiringAnimeList = "user/airing"
+            static let notifications = "user/notifications"
         }
         
         struct SeriesGet {
@@ -60,13 +71,90 @@ extension PathConstant {
             static let favourite = "character/favourite"
         }
         
+        struct UserList {
+            struct AnimeListGet {
+                static let animeListModel = "user/{id}/animelist"
+                static let animeListModelFromDisplayName = "user/{displayname}/animelist"
+                static let rawAnimeListModel = "user/{id}/animelist/raw"
+                static let rawAnimeListModelFromDisplayName = "user/{displayname}/animelist/raw"
+            }
+            
+            struct AnimeListPost {
+                static let postEntry = "animelist"
+            }
+            
+            struct AnimeListPut {
+                static let putEntry = "animelist"
+            }
+            
+            struct AnimeListDelete {
+                static let deleteEntry = "animelist/{id}"
+            }
+            
+            struct MangaListGet {
+                static let mangaListModel = "user/{id}/mangalist"
+                static let mangaListModelFromDisplayName = "user/{displayname}/mangalist"
+                static let rawMangaListModel = "user/{id}/mangalist/raw"
+                static let rawMangaListModelFromDisplayName = "user/{displayname}/mangalist/raw"
+            }
+            
+            struct MangaListPost {
+                static let postEntry = "mangalist"
+            }
+            
+            struct MangaListPut {
+                static let putEntry = "mangalist"
+            }
+            
+            struct MangaListDelete {
+                static let deleteEntry = "mangalist/{id}"
+            }
+        }
+        
         struct Placeholder {
             static let seriesType = "seriesType"
             static let id = "id"
             static let query = "query"
+            static let displayName = "displayname"
         }
     }
 }
+
+// MARK: Payload
+
+extension PayloadConstant {
+    struct Payload {
+        struct UserList {
+            struct AnimeList {
+                static let id = "id"
+                static let listStatus = "list_status"
+                static let score = "score"
+                static let scoreRaw = "score_raw"
+                static let episodesWatched = "episodes_watched"
+                static let rewatched = "rewatched"
+                static let notes = "notes"
+                static let advancedRatingScores = "advanced_rating_scores"
+                static let customLists = "custom_lists"
+                static let hiddenDefault = "hidden_default"
+            }
+            
+            struct MangaList {
+                static let id = "id"
+                static let listStatus = "list_status"
+                static let score = "score"
+                static let scoreRaw = "score_raw"
+                static let volumesRead = "volumes_read"
+                static let chaptersRead = "chapters_read"
+                static let reread = "reread"
+                static let notes = "notes"
+                static let advancedRatingScores = "advanced_rating_scores"
+                static let customLists = "custom_lists"
+                static let hiddenDefault = "hidden_default"
+            }
+        }
+    }
+}
+
 
 // MARK: Parameter
 
@@ -166,6 +254,12 @@ extension ResponseConstant {
             static let studios = "studio"
         }
         
+        struct MangaSeries {
+            static let totalVolumes = "total_volumes"
+            static let totalChapters = "total_chapters"
+            static let publishingStatus = "publishing_status"
+        }
+        
         struct Character {
             static let id = "id"
             static let firstName = "name_first"
@@ -195,6 +289,35 @@ extension ResponseConstant {
             static let language = "language"
             static let imageMediumUrl = "image_url_med"
             static let imageLargeUrl = "image_url_lge"
+        }
+        
+        struct User {
+            static let id = "id"
+            static let displayName = "display_name"
+            static let imageMediumUrl = "image_url_med"
+            static let imageLargeUrl = "image_url_lge"
+            static let animeTime = "anime_time"
+            static let readMangaChapters = "manga_chap"
+            static let about = "about"
+            static let adultContent = "adult_content"
+            static let imageBannerUrl = "image_url_banner"
+            static let advancedRating = "advanced_rating"
+            static let advancedRatingNames = "advanced_rating_names"
+            static let scoreType = "score_type"
+        }
+        
+        struct List {
+            static let allLists = "lists"
+            static let finishedOn = "finished_on"
+            static let itemListStatus = "list_status"
+            static let userScore = "score"
+            struct AnimeList {
+                static let watchedEpisodes = "episodes_watched"
+            }
+            struct MangaList {
+                static let readChapters = "chapters_read"
+                static let readVolumes = "volumes_read"
+            }
         }
     }
 }

@@ -33,13 +33,11 @@ extension ListSelectionViewController: UITableViewDataSource {
             return 0
         }
         
-        print(MangaListName.allNames().count)
-        
         guard seriesType == .anime else {
-            return MangaListName.allNames().count
+            return MangaListName.allNames.count
         }
         
-        return AnimeListName.allNames().count
+        return AnimeListName.allNames.count
         
     }
     
@@ -51,12 +49,12 @@ extension ListSelectionViewController: UITableViewDataSource {
         }
         
         guard seriesType == .anime else {
-            let currentMangaListName = MangaListName.allNames()[indexPath.row]
+            let currentMangaListName = MangaListName.allNames[indexPath.row]
             cell.listNameLabel.text = currentMangaListName
             return cell
         }
         
-        let currentAnimeListName = AnimeListName.allNames()[indexPath.row]
+        let currentAnimeListName = AnimeListName.allNames[indexPath.row]
         cell.listNameLabel.text = currentAnimeListName
         return cell
         

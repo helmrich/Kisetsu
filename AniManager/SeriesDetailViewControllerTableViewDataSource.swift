@@ -94,6 +94,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             cell.setupCell(forSeriesType: seriesType)
+            cell.rateButton.addTarget(self, action: #selector(toggleRatingPickerVisibility), for: [.touchUpInside])
             
             AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                 guard errorMessage == nil else {
@@ -124,8 +125,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
                             cell.userListStatusButton.setTitle(status.capitalized, for: .normal)
                         }
                         
-                        if let userScore = userScore {
+                        if let userScore = userScore,
+                            userScore > 0 {
                             cell.rateButton.setTitle("Your Rating: \(userScore)", for: .normal)
+                            self.ratingPicker?.pickerView.selectRow(userScore - 1, inComponent: 0, animated: false)
                         }
                         
                         if self.seriesType == .anime {

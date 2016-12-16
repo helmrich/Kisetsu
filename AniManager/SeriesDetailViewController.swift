@@ -13,6 +13,7 @@ class SeriesDetailViewController: UIViewController {
     // MARK: - Properties
     
     let errorMessageView = ErrorMessageView()
+    var ratingPicker: RatingPicker?
     
     var seriesId: Int!
     var seriesTitle: String!
@@ -40,10 +41,19 @@ class SeriesDetailViewController: UIViewController {
         
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
         
+        ratingPicker = RatingPicker(frame: CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: 300.0))
+        ratingPicker!.dismissToolbarButton.target = self
+        ratingPicker!.dismissToolbarButton.action = #selector(toggleRatingPickerVisibility)
+        ratingPicker!.submitToolbarButton.target = self
+        ratingPicker!.submitToolbarButton.action = #selector(changeUserScore)
+        ratingPicker!.pickerView.dataSource = self
+        ratingPicker!.pickerView.delegate = self
+        view.addSubview(ratingPicker!)
+        
         /*
             Get a single series object for the specified series ID and series type
             when the view controller is loaded
-        */
+         */
         AniListClient.shared.getSingleSeries(ofType: seriesType, withId: seriesId) { (series, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
@@ -98,9 +108,7 @@ class SeriesDetailViewController: UIViewController {
                         (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.alpha = 1.0
                     }
                 }
-                
             }
-            
         }
         
         seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
@@ -135,7 +143,7 @@ class SeriesDetailViewController: UIViewController {
                 based on the current image and toggle the image (if the image indicates
                 that the series is a favorite (filled heart icon) it means that it was
                 unfavorited, thus the heart icon should be empty and the other way around)
-            */
+             */
             DispatchQueue.main.async {
                 if (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.image(for: .normal) == #imageLiteral(resourceName: "HeartIconActive") {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIcon"), for: .normal)
@@ -150,7 +158,7 @@ class SeriesDetailViewController: UIViewController {
     func showLists(_ sender: AniManagerButton) {
         let listsAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         if seriesType == .anime {
-            for animeListName in AnimeListName.allNames() {
+            for animeListName in AnimeListName.allNames {
                 let listAction = UIAlertAction(title: animeListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
                     self.listValueChanged()
@@ -158,7 +166,7 @@ class SeriesDetailViewController: UIViewController {
                 listsAlertController.addAction(listAction)
             }
         } else if seriesType == .manga {
-            for mangaListName  in MangaListName.allNames() {
+            for mangaListName  in MangaListName.allNames {
                 let listAction = UIAlertAction(title: mangaListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
                 }
@@ -175,7 +183,7 @@ class SeriesDetailViewController: UIViewController {
                 /*
                     If the series can be removed from the list, the cell's appearance should
                     be changed accordingly
-                */
+                 */
                 if let actionsCell = self.seriesDataTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? ActionsTableViewCell {
                     DispatchQueue.main.async {
                         actionsCell.setupCellForStatus(isSeriesInList: false)
@@ -187,5 +195,63 @@ class SeriesDetailViewController: UIViewController {
         listsAlertController.addAction(removeFromListAction)
         listsAlertController.addAction(cancelAction)
         present(listsAlertController, animated: true, completion: nil)
+    }
+    
+    /*
+        This function hides or shows the rating picker view
+        depending on whether it's currently visible or not
+     */
+    func toggleRatingPickerVisibility() {
+        
+        guard ratingPicker != nil else {
+            return
+        }
+        
+        UIView.animate(withDuration: 0.25) {
+            if self.ratingPicker!.frame.origin.y == self.view.bounds.maxY {
+                self.ratingPicker!.frame.origin.y -= self.ratingPicker!.frame.height
+            } else {
+                self.ratingPicker!.frame.origin.y += self.ratingPicker!.frame.height
+            }
+        }
+    }
+    
+    /*
+        This function changes the user score by first setting the rate button's
+        value to the currently selected rating picker value and then calling
+        the listValueChanged function which submits the series' current values
+        to the server. It then toggles the rating picker's visibility
+     */
+    func changeUserScore() {
+        let actionsCell = seriesDataTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as! ActionsTableViewCell
+        let selectedPickerRow = ratingPicker!.pickerView.selectedRow(inComponent: 0)
+        actionsCell.rateButton.setTitle("Your Rating: \(selectedPickerRow + 1)", for: .normal)
+        listValueChanged()
+        toggleRatingPickerVisibility()
+    }
+}
+
+extension SeriesDetailViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+}
+
+extension SeriesDetailViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row + 1)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let ratingLabel = UILabel()
+        ratingLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 36.0)
+        ratingLabel.textColor = .aniManagerBlack
+        ratingLabel.text = "\(row + 1)"
+        ratingLabel.textAlignment = .center
+        return ratingLabel
     }
 }

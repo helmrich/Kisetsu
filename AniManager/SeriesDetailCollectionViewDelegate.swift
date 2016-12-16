@@ -26,8 +26,6 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             let characterDetailViewController = storyboard?.instantiateViewController(withIdentifier: "characterDetailViewController") as! CharacterDetailViewController
             characterDetailViewController.character = selectedCharacter
             present(characterDetailViewController, animated: true, completion: nil)
-            
-            // TODO: Present character detail view controller
         case .relations:
             break
         case .actors:

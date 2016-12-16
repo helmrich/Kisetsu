@@ -46,7 +46,6 @@ class SeriesCollectionViewController: UIViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
-    
 }
 
 

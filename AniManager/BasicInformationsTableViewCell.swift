@@ -76,6 +76,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
         
     }
     
+    // This method hides or shows labels specific to anime series
     func toggleAnimeSpecificLabels(hidden: Bool) {
         if hidden {
             seasonLabel.isHidden = true

@@ -19,6 +19,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             guard let url = self.createAniListUrl(withPath: AniListConstant.Path.UserGet.authenticatedUserModel, andParameters: [:]) else {
                 completionHandlerForUser(nil, "Couldn't create AniList URL")
                 return
@@ -67,8 +69,8 @@ extension AniListClient {
     func getAccessToken(withAuthorizationCode: Bool = false, withRefreshToken: Bool = false, completionHandlerForTokens: @escaping (_ accessToken: AccessToken?, _ refreshToken: String?, _ errorMessage: String?) -> Void) {
         
         /*
-         Create a parameters array with parameters that are necessary to get
-         an access token (client ID, client secret)
+            Create a parameters array with parameters that are necessary to get
+            an access token (client ID, client secret)
          */
         var parameters = [
             AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
@@ -76,9 +78,9 @@ extension AniListClient {
         ]
         
         /*
-         Check whether the access token should be requested by using an authorization
-         code or a refresh token and add the appropriate parameters to the parameters
-         array based on the this
+            Check whether the access token should be requested by using an authorization
+            code or a refresh token and add the appropriate parameters to the parameters
+            array based on the this
          */
         if withAuthorizationCode == true,
             let authorizationCode = authorizationCode {
@@ -92,6 +94,8 @@ extension AniListClient {
             parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeRefreshToken
             parameters[AniListConstant.ParameterKey.Authentication.refreshToken] = refreshToken
         }
+        
+        // URL creation and request configuration
         
         guard let url = createAniListUrl(withPath: AniListConstant.Path.Authentication.accessToken, andParameters: parameters) else {
             completionHandlerForTokens(nil, nil, "Couldn't create AniList URL")
@@ -120,6 +124,11 @@ extension AniListClient {
                 return
             }
             
+            /*
+                Try to extract all values needed to create an access token object
+                (access token value, type, expiration timestamp) and create an access
+                token object from them
+            */
             guard let accessTokenValue = jsonDictionary[AniListConstant.ResponseKey.Authentication.accessToken] as? String,
                 let tokenType = jsonDictionary[AniListConstant.ResponseKey.Authentication.tokenType] as? String,
                 let expirationTimestamp = jsonDictionary[AniListConstant.ResponseKey.Authentication.expires] as? Int else {
@@ -129,6 +138,13 @@ extension AniListClient {
             
             let accessToken = AccessToken(accessTokenValue: accessTokenValue, tokenType: tokenType, expirationTimestamp: expirationTimestamp)
             
+            /*
+                If the authentication is done via an authorization code, the refresh token
+                should also be extracted from the dictionary. The completion handler should
+                be called and get just the access token as a parameter if the request was
+                made with a refresh token OR the access token *and* the refresh token if the
+                access token was requested with an authorization code
+            */
             if withAuthorizationCode == true {
                 guard let refreshTokenValue = jsonDictionary[AniListConstant.ResponseKey.Authentication.refreshToken] as? String else {
                     completionHandlerForTokens(nil, nil, "Couldn't parse refresh token value from JSON object")
@@ -144,6 +160,11 @@ extension AniListClient {
         
     }
     
+    /*
+        This method checks if the current access token is still valid by checking
+        the expiration timestamp. If it's not, a new access token should be requested
+        and set in the user defaults.
+     */
     func validateAccessToken(completionHandlerForValidation: @escaping (_ errorMessage: String?) -> Void) {
         if isAccessTokenValid() {
             completionHandlerForValidation(nil)

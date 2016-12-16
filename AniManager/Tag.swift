@@ -26,6 +26,12 @@ struct Tag {
         
     }
     
+    /*
+        This function takes in an array of dictionaries and tries to
+        create an array of tag objects from it by looping through the
+        dictionaries and creating tag objects with its dictionary
+        initializer
+    */
     static func createTagArray(fromDictionaries dictionaries: [[String:Any]]) -> [Tag]? {
         var tags = [Tag]()
         for dictionary in dictionaries {

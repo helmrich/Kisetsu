@@ -12,18 +12,14 @@ class DataSource {
     
     // MARK: - Properties
     
+    // Singleton
     static let shared = DataSource()
+    fileprivate init() {}
     
     var browseSeriesList: [Series]? = nil
     var selectedSeries: Series? = nil
     
     var selectedAnimeList: [AnimeSeries]? = nil
     var selectedMangaList: [MangaSeries]? = nil
-    
-    
-    
-    // MARK: Initializers
-    
-    fileprivate init() {}
     
 }

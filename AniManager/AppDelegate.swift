@@ -22,10 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        // If no access token is available in the user defaults, the
-        // authentication view controller should be used as the root
-        // view controller as the user didn't authenticate the app
-        // before
+        /*
+            If no access token is available in the user defaults, the
+            authentication view controller should be used as the root
+            view controller as the user didn't authenticate the app
+            before
+        */
         guard let _ = UserDefaults.standard.string(forKey: "accessToken") else {
             let authenticationViewController = storyboard.instantiateViewController(withIdentifier: "authenticationViewController") as! AuthenticationViewController
             window?.rootViewController = authenticationViewController
@@ -33,10 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        
-        // If an access token is available, its expiration timestamp should be checked.
-        // If it expired, the loading view controller should be used as the root view
-        // controller where a new access token should be requested with a refresh token
+        /*
+            If an access token is available, its expiration timestamp should be checked.
+            If it expired, the loading view controller should be used as the root view
+            controller where a new access token will be requested using a refresh token
+         */
         let expirationTimestamp = UserDefaults.standard.integer(forKey: "expirationTimestamp")
         
         guard expirationTimestamp > Int(Date().timeIntervalSince1970) else {
@@ -46,9 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        // If the access token didn't expire yet, the navigation controller that has
-        // the tab bar controller with the "main" content of the application as a root
-        // view controller, should be used as the root view controller
+        /*
+            If the access token didn't expire yet, the tab bar controller with
+            the "main" content of the application should be used as the root
+            view controller
+         */
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

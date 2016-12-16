@@ -22,6 +22,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue
             ]
@@ -101,6 +103,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue,
                 AniListConstant.Path.Placeholder.id: "\(id)"
@@ -174,6 +178,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.id: "\(id)"
             ]
@@ -240,6 +246,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
                 completionHandlerForFavoriting("Couldn't create AniList URL")
                 return
@@ -260,12 +268,11 @@ extension AniListClient {
                 
                 let data = data!
                 
-                guard let jsonObject = self.deserializeJson(fromData: data) else {
+                guard let _ = self.deserializeJson(fromData: data) else {
                     completionHandlerForFavoriting("Couldn't deserialize data into a JSON object")
                     return
                 }
                 
-                print("RECEIVED THE FOLLOWING JSON OBJECT AFTER FAVORITING: \(jsonObject)")
                 completionHandlerForFavoriting(nil)
                 
             }

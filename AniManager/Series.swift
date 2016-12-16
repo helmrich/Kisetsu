@@ -32,8 +32,7 @@ class Series {
     
     // Additional informations
     let characters: [Character]?
-//    let staff: [Staff]?
-    // TODO: Relations
+    // TODO: Relations, Staff
     
     // List-specific properties
     var finishedOn: String?
@@ -51,7 +50,7 @@ class Series {
          the initializer fails and returns nil.
         
          After that, the dictionary should be searched for keys that
-         are only available in the extended model and if they exist,
+         are only available in the extended/list model and if they exist,
          the appropriate properties should also be set. If not, the
          properties should be set to nil.
     */

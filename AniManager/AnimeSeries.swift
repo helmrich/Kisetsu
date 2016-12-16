@@ -61,8 +61,6 @@ class AnimeSeries: Series {
             self.source = nil
         }
         
-        
-        
         if let externalLinkDictionaries = dictionary[AnimeSeriesKey.externalLinksStrings] as? [[String:Any]] {
             var externalLinks = [ExternalLink]()
             for externalLinkDictionary in externalLinkDictionaries {

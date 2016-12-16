@@ -91,6 +91,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let path: String
             if type == .anime {
                 if let userId = userId {
@@ -224,6 +226,8 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let path: String
             switch (type, httpMethod) {
             case (.anime, "POST"):
@@ -252,16 +256,38 @@ extension AniListClient {
                 listStatus = listStatusString
             }
             
-            let httpBodyString: String
+            /*
+                Set the payload key-value pairs based on the series type and try to create
+                a HTTP body from it
+            */
+            let payloadKeyValuePairs: [String:Any]
             if type == .anime,
                 let episodesWatched = episodesWatched {
-                httpBodyString = "{\"id\":\"\(seriesId)\",\"list_status\":\"\(listStatus)\",\"score\":\"\(userScore)\",\"episodes_watched\":\"\(episodesWatched)\"}"
+                typealias AnimePayloadConstant = AniListConstant.Payload.UserList.AnimeList
+                payloadKeyValuePairs = [
+                    AnimePayloadConstant.id: seriesId,
+                    AnimePayloadConstant.listStatus: listStatus,
+                    AnimePayloadConstant.score: userScore,
+                    AnimePayloadConstant.episodesWatched: episodesWatched
+                ]
             } else if type == .manga,
                 let readChapters = readChapters,
                 let readVolumes = readVolumes {
-                httpBodyString = "{\"id\":\"\(seriesId)\",\"list_status\":\"\(listStatus)\",\"score\":\"\(userScore)\",\"chapters_read\":\"\(readChapters)\",\"volumes_read\":\"\(readVolumes)\"}"
+                typealias MangaPayloadConstant = AniListConstant.Payload.UserList.MangaList
+                payloadKeyValuePairs = [
+                    MangaPayloadConstant.id: seriesId,
+                    MangaPayloadConstant.listStatus: listStatus,
+                    MangaPayloadConstant.score: userScore,
+                    MangaPayloadConstant.chaptersRead: readChapters,
+                    MangaPayloadConstant.volumesRead: readVolumes
+                ]
             } else {
-                completionHandlerForSubmission("Couldn't create HTTP body string")
+                completionHandlerForSubmission("Invalid series type")
+                return
+            }
+            
+            guard let httpBody = self.createHttpBody(withKeyValuePairs: payloadKeyValuePairs) else {
+                completionHandlerForSubmission("Couldn't create HTTP body")
                 return
             }
             
@@ -272,7 +298,7 @@ extension AniListClient {
             
             let request = NSMutableURLRequest(url: url)
             request.httpMethod = httpMethod
-            request.httpBody = httpBodyString.data(using: .utf8)
+            request.httpBody = httpBody
             request.addValue(AniListConstant.HeaderFieldValue.contentTypeJson, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
             request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
             
@@ -311,10 +337,13 @@ extension AniListClient {
                 return
             }
             
+            // URL creation and request configuration
+            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.id: "\(seriesId)"
             ]
             
+            // Check the series type and assign an appropriate path to the path property
             let path: String
             if type == .anime {
                 path = self.replacePlaceholders(inPath: AniListConstant.Path.UserList.AnimeListDelete.deleteEntry, withReplacingPairs: replacingPairs)

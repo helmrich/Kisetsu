@@ -16,10 +16,26 @@ class FilterModalPresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         /*
-            When the modal will be dismissed the presenting BrowseViewController's
-            series collection view's alpha value should be reset to 1
+            When the modal will be dismissed, loop over all of the tab bar controller's
+            child view controllers in order to define the presenting browse view controller.
+            If the child view controller can be casted to the browse view controller's type
+            the selected parameters should be passed to it, its collection view's alpha value
+            should be reset to 1.0 and functions to download a new list and reload the
+            collection view should be called.
          */
         for childViewController in (self.presentingViewController as! UITabBarController).childViewControllers {
+            if let presentedBrowseFilterController = presentedViewController as? BrowseFilterViewController,
+                presentedBrowseFilterController.wasSubmitted,
+                let presentingBrowseViewController = childViewController.childViewControllers[0] as? BrowseViewController {
+                if presentedBrowseFilterController.seriesTypeButtonManga.isOn {
+                    presentingBrowseViewController.seriesType = .manga
+                    presentingBrowseViewController.getSeriesList()
+                } else {
+                    presentingBrowseViewController.seriesType = .anime
+                    presentingBrowseViewController.getSeriesList()
+                }
+            }
+            
             if let presentingBrowseViewController = childViewController.childViewControllers[0] as? BrowseViewController {
                 UIView.animate(withDuration: 0.5) {
                     presentingBrowseViewController.seriesCollectionView.alpha = 1.0

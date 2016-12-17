@@ -12,12 +12,6 @@ class BrowseViewController: SeriesCollectionViewController {
 
     // MARK: - Properties
     
-    let parameters: [String:Any] = [
-        AniListConstant.ParameterKey.Browse.year: "2015",
-        AniListConstant.ParameterKey.Browse.genres: "Comedy",
-        AniListConstant.ParameterKey.Browse.sort: "score-desc",
-//        AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
-    ]
     var showsAllAvailableSeriesItems = false
     
     
@@ -51,9 +45,25 @@ class BrowseViewController: SeriesCollectionViewController {
         seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
         seriesCollectionViewFlowLayout.minimumLineSpacing = 1
         
+        getSeriesList()
         
         
-        AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: parameters) { (seriesList, errorMessage) in
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        statusBarShouldBeHidden = false
+        UIView.animate(withDuration: 0.25) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
+    
+    // MARK: - Functions
+    
+    func getSeriesList() {
+        AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 return
@@ -77,18 +87,6 @@ class BrowseViewController: SeriesCollectionViewController {
             
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        statusBarShouldBeHidden = false
-        UIView.animate(withDuration: 0.25) {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
-    }
-    
-    
-    // MARK: - Functions
     
     @IBAction func openFilterModal() {
         let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
@@ -122,7 +120,7 @@ class BrowseViewController: SeriesCollectionViewController {
             */
             let lastCellIndexPathItem = DataSource.shared.browseSeriesList!.count - 1
             
-            AniListClient.shared.getSeriesList(fromPage: Int(DataSource.shared.browseSeriesList!.count / 40) + 1, ofType: seriesType, andParameters: parameters) { (seriesList, errorMessage) in
+            AniListClient.shared.getSeriesList(fromPage: Int(DataSource.shared.browseSeriesList!.count / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
                     return
@@ -137,23 +135,35 @@ class BrowseViewController: SeriesCollectionViewController {
                     self.showsAllAvailableSeriesItems = true
                 }
 
-                guard self.seriesType == .anime else {
-                    if let mangaSeriesList = generalSeriesList as? [MangaSeries],
-                        let currentMangaBrowseSeriesList = DataSource.shared.browseSeriesList as? [MangaSeries] {
-                        DataSource.shared.browseSeriesList = currentMangaBrowseSeriesList + mangaSeriesList
+                var indexPathsForNewItems = [IndexPath]()
+                if self.seriesType == .anime {
+                    if let animeSeriesList = generalSeriesList as? [AnimeSeries],
+                        let _ = DataSource.shared.browseSeriesList as? [AnimeSeries] {
+                        for animeSeries in animeSeriesList {
+                            DataSource.shared.browseSeriesList!.append(animeSeries)
+                            let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
+                            indexPathsForNewItems.append(indexPath)
+                        }
+                        
                     }
+                } else if self.seriesType == .manga {
+                    if let mangaSeriesList = generalSeriesList as? [MangaSeries],
+                        let _ = DataSource.shared.browseSeriesList as? [MangaSeries] {
+                        for mangaSeries in mangaSeriesList {
+                            DataSource.shared.browseSeriesList!.append(mangaSeries)
+                            let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
+                            indexPathsForNewItems.append(indexPath)
+                        }
+                    }
+                } else {
                     return
                 }
                 
-                var indexPathsForNewItems = [IndexPath]()
-                if let animeSeriesList = generalSeriesList as? [AnimeSeries],
-                    let currentAnimeBrowseSeriesList = DataSource.shared.browseSeriesList as? [AnimeSeries] {
-                    for animeSeries in animeSeriesList {
-                        DataSource.shared.browseSeriesList!.append(animeSeries)
-                        let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
-                        indexPathsForNewItems.append(indexPath)
-                    }
-                }
+                
+                
+                
+                
+                
                 
                 DispatchQueue.main.async {
                     self.seriesCollectionView.performBatchUpdates({ 

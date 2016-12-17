@@ -16,6 +16,12 @@ class DataSource {
     static let shared = DataSource()
     fileprivate init() {}
     
+    var browseParameters: [String:Any] = [
+//        AniListConstant.ParameterKey.Browse.year: "2016",
+//        AniListConstant.ParameterKey.Browse.genres: "Comedy",
+        AniListConstant.ParameterKey.Browse.sort: "score-desc",
+        //        AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
+    ]
     var browseSeriesList: [Series]? = nil
     var selectedSeries: Series? = nil
     

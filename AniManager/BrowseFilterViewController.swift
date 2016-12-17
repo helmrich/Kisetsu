@@ -12,6 +12,8 @@ class BrowseFilterViewController: UIViewController {
 
     // MARK: - Properties
     
+    var wasSubmitted = false
+    
     var presentingBrowseViewController: BrowseViewController?
     
     override var prefersStatusBarHidden: Bool {
@@ -25,20 +27,20 @@ class BrowseFilterViewController: UIViewController {
     
     let filters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
-        ["Year": [2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005]],
         ["Season": Season.allSeasonStrings],
         ["Status": AnimeAiringStatus.allStatusStrings],
         ["Type": MediaType.allMediaTypeStrings],
-        ["Genre": Genre.allGenreStrings]
+        ["Genres": Genre.allGenreStrings],
+        ["Year": [Int](1951...2016).reversed()]
     ]
     
-    var filterData = [
-        "Sort By",
-        "Year",
-        "Season",
-        "Status",
-        "Type",
-        "Genre"
+    var selectedFilters: [String:[IndexPath:String]?] = [
+        "Sort By": [IndexPath:String](),
+        "Season": [IndexPath:String](),
+        "Status": [IndexPath:String](),
+        "Type": [IndexPath:String](),
+        "Genres": [IndexPath:String](),
+        "Year": [IndexPath:String]()
     ]
     
     
@@ -58,6 +60,7 @@ class BrowseFilterViewController: UIViewController {
     @IBAction func applyFilters() {
         // TODO: Save selected filters as parameters in BrowseViewController
         // and request a new list of series.
+        wasSubmitted = true
         dismiss(animated: true, completion: nil)
     }
     
@@ -84,28 +87,114 @@ class BrowseFilterViewController: UIViewController {
         seriesTypeButtonAnime.toggle()
         
         filterTableView.separatorColor = .aniManagerGray
+        filterTableView.showsVerticalScrollIndicator = false
+        filterTableView.allowsMultipleSelection = true
     }
     
 
 }
 
 extension BrowseFilterViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return filters.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var headerTitle = ""
+        for (filterKey, _) in filters[section] {
+            headerTitle = filterKey
+        }
+        return headerTitle
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var numberOfFilterValues = 0
+        for (_, filterValues) in filters[section] {
+            numberOfFilterValues = filterValues.count
+        }
+        return numberOfFilterValues
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
-        let currentFilter = filters[indexPath.row]
-        for (filterName, _) in currentFilter {
-            cell.filterNameLabel.text = filterName
+        var filterValueString = ""
+        for (_, filterValues) in filters[indexPath.section] {
+            filterValueString = "\(filterValues[indexPath.row])"
         }
+        cell.filterNameLabel.text = filterValueString
         return cell
     }
 }
 
 extension BrowseFilterViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeaderLabel = BrowseFilterHeaderLabel()
+        var headerTitle = ""
+        for (filterKey, _) in filters[section] {
+            headerTitle = filterKey
+        }
+        sectionHeaderLabel.text = headerTitle
+        sectionHeaderLabel.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
+        sectionHeaderLabel.textColor = .aniManagerBlack
+        sectionHeaderLabel.textColor = .white
+        sectionHeaderLabel.backgroundColor = .aniManagerBlue
+        sectionHeaderLabel.textAlignment = .left
+        return sectionHeaderLabel
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        /*
+            When a row will be selected, get the associated
+            filter key and value from the filters array's
+            dictionary at the position of the indexPath's
+            section property.
+         */
+        for (filterName, filterValues) in filters[indexPath.section] {
+            /*
+                Check if the current section's associated filter name
+                is "Genres" which is the only filter that can have
+                multiple selected values and if it is, add a dictionary
+                item with the current index path as a key and the selected
+                filter value as a value to the selectedFilters dictionary
+                with the current filter name as a key
+             */
+            if filterName == "Genres" {
+                selectedFilters[filterName]??[indexPath] = "\(filterValues[indexPath.row])"
+            } else {
+                /*
+                    If the current section's associated filter name is NOT
+                    "Genres" it should only be possible to select one value.
+                    Thus before selecting a new row the row that was eventually
+                    selected before should be deselected. To achieve this the
+                    index path should be extracted from the dictionary - that's
+                    the value of the selectedFilter dictionary - to deselect 
+                    the row at this index path.
+                 */
+                if let selectedFilter = selectedFilters[filterName] {
+                    for (indexPath, _) in selectedFilter! {
+                        tableView.deselectRow(at: indexPath, animated: false)
+                    }
+                }
+                
+                /*
+                    Afterwards the value at the selectedFilters' dictionary
+                    with the current filter name should be set to a new dictionary
+                    with the current index path as a key and the filter value
+                    at the index of the index path's row property
+                 */
+                selectedFilters[filterName] = [indexPath: "\(filterValues[indexPath.row])"]
+            }
+        }
+        dump(selectedFilters)
+        return indexPath
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: Implement
+        
     }
 }

@@ -87,4 +87,15 @@ extension ListSelectionViewController: UITableViewDelegate {
             navigationController?.pushViewController(listDetailViewController, animated: true)
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let fullHeight = view.frame.height
+        let heightForRow: CGFloat
+        if seriesType == .anime {
+            heightForRow = fullHeight / CGFloat(AnimeListName.allNames.count)
+        } else {
+            heightForRow = fullHeight / CGFloat(MangaListName.allNames.count)
+        }
+        return heightForRow
+    }
 }

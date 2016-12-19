@@ -74,6 +74,10 @@ class BrowseViewController: SeriesCollectionViewController {
                 return
             }
             
+            if seriesList.count < 40 {
+                self.showsAllAvailableSeriesItems = true
+            }
+            
             DataSource.shared.browseSeriesList = seriesList
             
             DispatchQueue.main.async {
@@ -158,12 +162,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 } else {
                     return
                 }
-                
-                
-                
-                
-                
-                
                 
                 DispatchQueue.main.async {
                     self.seriesCollectionView.performBatchUpdates({ 

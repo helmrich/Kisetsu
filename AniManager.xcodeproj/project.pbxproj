@@ -16,6 +16,7 @@
 		D21EC7571E0326F3008027E4 /* AniListClientSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */; };
 		D21EC7771E0368FC008027E4 /* RatingPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7761E0368FC008027E4 /* RatingPicker.swift */; };
 		D21EC7791E055961008027E4 /* BrowseFilterHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7781E055961008027E4 /* BrowseFilterHeaderLabel.swift */; };
+		D21EC77B1E07271C008027E4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC77A1E07271C008027E4 /* SearchViewController.swift */; };
 		D224A2621DEF9A710085C532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D224A2611DEF9A710085C532 /* Images.xcassets */; };
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
 		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
@@ -44,7 +45,6 @@
 		D25EDEC61DE452BF00267243 /* TabBarIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */; };
 		D25EDEC81DE452D300267243 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC71DE452D300267243 /* Icons.xcassets */; };
 		D25EDECA1DE452E100267243 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC91DE452E100267243 /* AppIcon.xcassets */; };
-		D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDECB1DE4D71900267243 /* HomeViewController.swift */; };
 		D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */; };
 		D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED31DE4DE3300267243 /* BrowseViewController.swift */; };
 		D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED71DE4E64600267243 /* ColorExtension.swift */; };
@@ -110,6 +110,7 @@
 		D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AniListClientSeries.swift; sourceTree = "<group>"; };
 		D21EC7761E0368FC008027E4 /* RatingPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingPicker.swift; sourceTree = "<group>"; };
 		D21EC7781E055961008027E4 /* BrowseFilterHeaderLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseFilterHeaderLabel.swift; sourceTree = "<group>"; };
+		D21EC77A1E07271C008027E4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D224A2611DEF9A710085C532 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBarIcons.xcassets; sourceTree = "<group>"; };
 		D25EDEC71DE452D300267243 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		D25EDEC91DE452E100267243 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		D25EDECB1DE4D71900267243 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D25EDED31DE4DE3300267243 /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		D25EDED71DE4E64600267243 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -372,10 +372,10 @@
 			isa = PBXGroup;
 			children = (
 				D2F32C611DFCD16E0044D195 /* List Controllers */,
-				D25EDECB1DE4D71900267243 /* HomeViewController.swift */,
 				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
 				D25EDF0C1DEBAFF800267243 /* BrowseFilterViewController.swift */,
 				D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */,
+				D21EC77A1E07271C008027E4 /* SearchViewController.swift */,
 			);
 			name = "Tab Bar Main View Controllers";
 			sourceTree = "<group>";
@@ -619,7 +619,6 @@
 				D2C6358D1DECFE7600959D75 /* FilterNameTableViewCell.swift in Sources */,
 				D25EDEFB1DE7080400267243 /* AnimeSource.swift in Sources */,
 				D25EDF021DE8CBEB00267243 /* DataSource.swift in Sources */,
-				D25EDECC1DE4D71900267243 /* HomeViewController.swift in Sources */,
 				D2341CD61DF7493D004773B3 /* ImagesCollectionViewCell.swift in Sources */,
 				D21EC7571E0326F3008027E4 /* AniListClientSeries.swift in Sources */,
 				D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */,
@@ -634,6 +633,7 @@
 				D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */,
 				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
+				D21EC77B1E07271C008027E4 /* SearchViewController.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,
 				D2786FAD1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift in Sources */,

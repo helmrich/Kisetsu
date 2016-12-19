@@ -247,31 +247,11 @@
                         <segue destination="UM1-Zn-zbc" kind="relationship" relationship="viewControllers" id="oXQ-1l-AbN"/>
                         <segue destination="ylq-nY-8Jc" kind="relationship" relationship="viewControllers" id="ksD-qM-QPJ"/>
                         <segue destination="mXY-UU-HB9" kind="relationship" relationship="viewControllers" id="n2L-la-bBM"/>
-                        <segue destination="Log-Aw-92r" kind="relationship" relationship="viewControllers" id="6hq-hO-s4r"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B04-ae-bPM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2716" y="82"/>
-        </scene>
-        <!--Settings-->
-        <scene sceneID="EQB-MF-Ii9">
-            <objects>
-                <viewController id="MEK-xW-Ysf" customClass="SettingsViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HXt-72-m56"/>
-                        <viewControllerLayoutGuide type="bottom" id="2dL-8Z-Nc1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t6v-5F-Dmy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Settings" id="XWG-DM-Pyi"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tQp-NN-Rzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4848.8000000000002" y="-1621.4392803598203"/>
         </scene>
         <!--Browse-->
         <scene sceneID="Ytf-x0-QEc">
@@ -421,7 +401,7 @@
                                 <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-1c-8lw">
-                                <rect key="frame" x="160" y="0.0" width="55" height="44"/>
+                                <rect key="frame" x="160.5" y="0.0" width="55" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hmY-q6-Jzc"/>
                                 </constraints>
@@ -927,7 +907,7 @@
         <!--Anime Lists-->
         <scene sceneID="54M-V3-vQZ">
             <objects>
-                <viewController id="6g2-7A-bjD" customClass="AnimeListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="6g2-7A-bjD" customClass="AnimeListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0lV-9V-i5v"/>
                         <viewControllerLayoutGuide type="bottom" id="gAT-P7-XTB"/>
@@ -937,7 +917,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Oy0-ze-4wV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="ouV-bM-2pS" customClass="ListNameTableViewCell" customModule="AniManager" customModuleProvider="target">
@@ -955,7 +935,7 @@
                                                     <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGx-Vm-JlT">
-                                                    <rect key="frame" x="30" y="28.5" width="159" height="43.5"/>
+                                                    <rect key="frame" x="30" y="29" width="159" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="36"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1001,8 +981,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Oy0-ze-4wV" secondAttribute="trailing" id="0hC-Es-ten"/>
                             <constraint firstItem="gAT-P7-XTB" firstAttribute="top" secondItem="Oy0-ze-4wV" secondAttribute="bottom" id="5B0-n9-WO6"/>
-                            <constraint firstItem="Oy0-ze-4wV" firstAttribute="top" secondItem="lmQ-kD-vmZ" secondAttribute="top" id="D45-jj-xnm"/>
                             <constraint firstItem="Oy0-ze-4wV" firstAttribute="leading" secondItem="lmQ-kD-vmZ" secondAttribute="leading" id="STg-Ed-pKf"/>
+                            <constraint firstItem="Oy0-ze-4wV" firstAttribute="top" secondItem="0lV-9V-i5v" secondAttribute="bottom" id="eLm-OF-ZtA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Anime Lists" id="AGh-Gg-sAA">
@@ -1135,7 +1115,7 @@
         <!--Manga Lists-->
         <scene sceneID="DPD-1J-x1k">
             <objects>
-                <viewController id="Dia-Jv-QgS" customClass="MangaListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Dia-Jv-QgS" customClass="MangaListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CA4-lU-YAm"/>
                         <viewControllerLayoutGuide type="bottom" id="zAs-1i-B3g"/>
@@ -1145,7 +1125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KFG-V4-L3a">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="5ia-8z-oCn" customClass="ListNameTableViewCell" customModule="AniManager" customModuleProvider="target">
@@ -1163,7 +1143,7 @@
                                                     <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1UU-SK-BR6">
-                                                    <rect key="frame" x="30" y="29" width="134" height="43.5"/>
+                                                    <rect key="frame" x="30" y="28.5" width="134" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="36"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1210,7 +1190,7 @@
                             <constraint firstItem="KFG-V4-L3a" firstAttribute="leading" secondItem="wG0-bH-TzP" secondAttribute="leading" id="Jm3-mu-W2f"/>
                             <constraint firstItem="zAs-1i-B3g" firstAttribute="top" secondItem="KFG-V4-L3a" secondAttribute="bottom" id="fMc-e1-UEY"/>
                             <constraint firstAttribute="trailing" secondItem="KFG-V4-L3a" secondAttribute="trailing" id="iFM-uG-RNr"/>
-                            <constraint firstItem="KFG-V4-L3a" firstAttribute="top" secondItem="wG0-bH-TzP" secondAttribute="top" id="zIB-3O-kSs"/>
+                            <constraint firstItem="KFG-V4-L3a" firstAttribute="top" secondItem="CA4-lU-YAm" secondAttribute="bottom" id="yXv-zR-FJQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Manga Lists" id="GWD-Qt-bEO"/>
@@ -1253,7 +1233,7 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
                             <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FSC-Ke-kOf">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <rect key="frame" x="178" y="324" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1278,33 +1258,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMd-Yb-sHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="472.80000000000001" y="773.16341829085468"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cd2-o8-8OR">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Log-Aw-92r" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="SettingsGearIcon" selectedImage="SettingsGearIconActive" id="QFO-Ze-hhj">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="H9Y-eM-N4n">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="24"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="MEK-xW-Ysf" kind="relationship" relationship="rootViewController" id="qHZ-9w-aP0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8IY-hR-R4H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3909.5999999999999" y="-1621.4392803598203"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ve7-yB-lTy">
@@ -1402,7 +1355,5 @@
         <image name="SearchIconActive" width="25" height="25"/>
         <image name="SearchIconNavBar" width="35" height="35"/>
         <image name="SettingBarsIcon" width="30" height="30"/>
-        <image name="SettingsGearIcon" width="25" height="25"/>
-        <image name="SettingsGearIconActive" width="25" height="25"/>
     </resources>
 </document>

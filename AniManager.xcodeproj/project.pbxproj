@@ -45,7 +45,6 @@
 		D25EDEC61DE452BF00267243 /* TabBarIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */; };
 		D25EDEC81DE452D300267243 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC71DE452D300267243 /* Icons.xcassets */; };
 		D25EDECA1DE452E100267243 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEC91DE452E100267243 /* AppIcon.xcassets */; };
-		D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */; };
 		D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED31DE4DE3300267243 /* BrowseViewController.swift */; };
 		D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDED71DE4E64600267243 /* ColorExtension.swift */; };
 		D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25EDEDB1DE4F49300267243 /* NavigationController.swift */; };
@@ -139,7 +138,6 @@
 		D25EDEC51DE452BF00267243 /* TabBarIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBarIcons.xcassets; sourceTree = "<group>"; };
 		D25EDEC71DE452D300267243 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		D25EDEC91DE452E100267243 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
-		D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D25EDED31DE4DE3300267243 /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		D25EDED71DE4E64600267243 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		D25EDEDB1DE4F49300267243 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -374,7 +372,6 @@
 				D2F32C611DFCD16E0044D195 /* List Controllers */,
 				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
 				D25EDF0C1DEBAFF800267243 /* BrowseFilterViewController.swift */,
-				D25EDED11DE4DD8A00267243 /* SettingsViewController.swift */,
 				D21EC77A1E07271C008027E4 /* SearchViewController.swift */,
 			);
 			name = "Tab Bar Main View Controllers";
@@ -643,7 +640,6 @@
 				D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */,
 				D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */,
 				D2786F911DF452C800F4368F /* ExternalLink.swift in Sources */,
-				D25EDED21DE4DD8A00267243 /* SettingsViewController.swift in Sources */,
 				D2F32C5C1DFCD0070044D195 /* MangaListSelectionViewController.swift in Sources */,
 				D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */,
 				D2786F9D1DF5F3EC00F4368F /* AdditionalInformationsValueLabel.swift in Sources */,

@@ -14,7 +14,7 @@ extension AniListClient {
      page with a defined type (e.g. anime or manga) and parameters (such as
      release year, genres, sorting, etc.)
      */
-    func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], matchingQuery query: String? = nil, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         validateAccessToken { (errorMessage) in
             guard errorMessage == nil else {
@@ -24,11 +24,17 @@ extension AniListClient {
             
             // URL creation and request configuration
             
-            let replacingPairs = [
+            var replacingPairs = [
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue
             ]
             
-            let path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
+            let path: String
+            if let query = query {
+                replacingPairs[AniListConstant.Path.Placeholder.query] = query
+                path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.search, withReplacingPairs: replacingPairs)
+            } else {
+                path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
+            }
             
             var allParameters = parameters
             allParameters[AniListConstant.ParameterKey.Browse.page] = page
@@ -37,6 +43,8 @@ extension AniListClient {
                 completionHandlerForSeriesList(nil, "Couldn't create AniList URL")
                 return
             }
+            
+            print("getSeriesList URL: \(url)")
             
             let request = NSMutableURLRequest(url: url)
             request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
@@ -91,8 +99,6 @@ extension AniListClient {
             task.resume()
             
         }
-        
-        
     }
     
     func getSingleSeries(ofType seriesType: SeriesType, withId id: Int, completionHandlerForSeries: @escaping (_ series: Series?, _ errorMessage: String?) -> Void) {

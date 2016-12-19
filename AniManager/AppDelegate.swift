@@ -15,6 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        /*
+            Configure the application-wide appearance of text fields that are
+            contained in a search bar
+         */
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = .aniManagerBlack
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
+        
         print(UserDefaults.standard.string(forKey: "authorizationKey"))
         print(UserDefaults.standard.string(forKey: "accessToken"))
         print(UserDefaults.standard.string(forKey: "refreshToken"))

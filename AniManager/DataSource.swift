@@ -16,16 +16,27 @@ class DataSource {
     static let shared = DataSource()
     fileprivate init() {}
     
+    var selectedBrowseFilters: [String:[IndexPath:String]?] = [
+        "Sort By": [IndexPath:String](),
+        "Season": [IndexPath:String](),
+        "Status": [IndexPath:String](),
+        "Type": [IndexPath:String](),
+        "Genres": [IndexPath:String](),
+        "Year": [IndexPath:String]()
+    ]
     var browseParameters: [String:Any] = [
-//        AniListConstant.ParameterKey.Browse.year: "2016",
-//        AniListConstant.ParameterKey.Browse.genres: "Comedy",
-        AniListConstant.ParameterKey.Browse.sort: "score-desc",
-        //        AniListConstant.ParameterKey.Browse.season: Season.fall.rawValue
+        AniListConstant.ParameterKey.Browse.sort: "score-desc"
     ]
     var browseSeriesList: [Series]? = nil
+    var searchResultsSeriesList: [Series]? = nil
     var selectedSeries: Series? = nil
     
     var selectedAnimeList: [AnimeSeries]? = nil
     var selectedMangaList: [MangaSeries]? = nil
+    
+    
+    func set(parameterValue: String, forBrowseParameterWithName parameterName: String) {
+        browseParameters["\(parameterName)"] = parameterValue
+    }
     
 }

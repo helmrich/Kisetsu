@@ -25,22 +25,13 @@ class BrowseFilterViewController: UIViewController {
     // TEMPORARY TABLE VIEW DATA SOURCE FOR TESTING
     
     
-    let filters: [[String:[Any]]] = [
+    let browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
         ["Season": Season.allSeasonStrings],
         ["Status": AnimeAiringStatus.allStatusStrings],
         ["Type": MediaType.allMediaTypeStrings],
         ["Genres": Genre.allGenreStrings],
         ["Year": [Int](1951...2016).reversed()]
-    ]
-    
-    var selectedFilters: [String:[IndexPath:String]?] = [
-        "Sort By": [IndexPath:String](),
-        "Season": [IndexPath:String](),
-        "Status": [IndexPath:String](),
-        "Type": [IndexPath:String](),
-        "Genres": [IndexPath:String](),
-        "Year": [IndexPath:String]()
     ]
     
     
@@ -89,6 +80,12 @@ class BrowseFilterViewController: UIViewController {
         filterTableView.separatorColor = .aniManagerGray
         filterTableView.showsVerticalScrollIndicator = false
         filterTableView.allowsMultipleSelection = true
+        
+        for (_, filterValues) in DataSource.shared.selectedBrowseFilters {
+            for (filterIndexPath, _) in filterValues! {
+                filterTableView.selectRow(at: filterIndexPath, animated: true, scrollPosition: .top)
+            }
+        }
     }
     
 
@@ -96,12 +93,12 @@ class BrowseFilterViewController: UIViewController {
 
 extension BrowseFilterViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return filters.count
+        return browseFilters.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var headerTitle = ""
-        for (filterKey, _) in filters[section] {
+        for (filterKey, _) in browseFilters[section] {
             headerTitle = filterKey
         }
         return headerTitle
@@ -109,7 +106,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfFilterValues = 0
-        for (_, filterValues) in filters[section] {
+        for (_, filterValues) in browseFilters[section] {
             numberOfFilterValues = filterValues.count
         }
         return numberOfFilterValues
@@ -118,7 +115,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
         var filterValueString = ""
-        for (_, filterValues) in filters[indexPath.section] {
+        for (_, filterValues) in browseFilters[indexPath.section] {
             filterValueString = "\(filterValues[indexPath.row])"
         }
         cell.filterNameLabel.text = filterValueString
@@ -130,7 +127,7 @@ extension BrowseFilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderLabel = BrowseFilterHeaderLabel()
         var headerTitle = ""
-        for (filterKey, _) in filters[section] {
+        for (filterKey, _) in browseFilters[section] {
             headerTitle = filterKey
         }
         sectionHeaderLabel.text = headerTitle
@@ -153,7 +150,7 @@ extension BrowseFilterViewController: UITableViewDelegate {
             dictionary at the position of the indexPath's
             section property.
          */
-        for (filterName, filterValues) in filters[indexPath.section] {
+        for (filterName, filterValues) in browseFilters[indexPath.section] {
             /*
                 Check if the current section's associated filter name
                 is "Genres" which is the only filter that can have
@@ -163,7 +160,7 @@ extension BrowseFilterViewController: UITableViewDelegate {
                 with the current filter name as a key
              */
             if filterName == "Genres" {
-                selectedFilters[filterName]??[indexPath] = "\(filterValues[indexPath.row])"
+                DataSource.shared.selectedBrowseFilters[filterName]??[indexPath] = "\(filterValues[indexPath.row])"
             } else {
                 /*
                     If the current section's associated filter name is NOT
@@ -174,7 +171,7 @@ extension BrowseFilterViewController: UITableViewDelegate {
                     the value of the selectedFilter dictionary - to deselect 
                     the row at this index path.
                  */
-                if let selectedFilter = selectedFilters[filterName] {
+                if let selectedFilter = DataSource.shared.selectedBrowseFilters[filterName] {
                     for (indexPath, _) in selectedFilter! {
                         tableView.deselectRow(at: indexPath, animated: false)
                     }
@@ -186,15 +183,20 @@ extension BrowseFilterViewController: UITableViewDelegate {
                     with the current index path as a key and the filter value
                     at the index of the index path's row property
                  */
-                selectedFilters[filterName] = [indexPath: "\(filterValues[indexPath.row])"]
+                DataSource.shared.selectedBrowseFilters[filterName] = [indexPath: "\(filterValues[indexPath.row])"]
             }
         }
-        dump(selectedFilters)
         return indexPath
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Implement
-        
+    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        for (filterName, _) in browseFilters[indexPath.section] {
+            if filterName == "Genres" {
+                let _ = DataSource.shared.selectedBrowseFilters[filterName]??.removeValue(forKey: indexPath)
+            } else {
+                DataSource.shared.selectedBrowseFilters[filterName] = [IndexPath:String]()
+            }
+        }
+        return indexPath
     }
 }

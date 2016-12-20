@@ -10,21 +10,24 @@ import UIKit
 
 class OnOffButton: UIButton {
 
-    var isOn: Bool = false
+    var isOn: Bool = false {
+        didSet {
+            if isOn {
+                backgroundColor = .aniManagerBlue
+                layer.borderWidth = 0
+                setTitleColor(.white, for: .normal)
+            } else {
+                backgroundColor = .white
+                layer.borderColor = UIColor.aniManagerBlue.cgColor
+                layer.borderWidth = 1
+                setTitleColor(.aniManagerBlue, for: .normal)
+            }
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        if isOn {
-            backgroundColor = .aniManagerBlue
-            layer.borderWidth = 0
-            setTitleColor(.white, for: .normal)
-        } else {
-            backgroundColor = .white
-            layer.borderColor = UIColor.aniManagerBlue.cgColor
-            layer.borderWidth = 1
-            setTitleColor(.aniManagerBlue, for: .normal)
-        }
     }
     
     func toggle() {

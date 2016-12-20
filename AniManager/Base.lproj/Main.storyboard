@@ -63,17 +63,9 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owH-5o-pjI">
-                                <rect key="frame" x="45" y="80" width="285" height="74"/>
-                                <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.14289334416389465" green="0.75232315063476562" blue="0.99320739507675171" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="owH-5o-pjI" firstAttribute="centerX" secondItem="gFW-nz-iOk" secondAttribute="centerX" id="2Tm-Eu-Niz"/>
-                            <constraint firstItem="owH-5o-pjI" firstAttribute="top" secondItem="UQx-Ih-rQ1" secondAttribute="bottom" constant="80" id="54g-mi-Vc9"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerY" secondItem="gFW-nz-iOk" secondAttribute="centerY" id="elI-Ka-stD"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="centerX" secondItem="gFW-nz-iOk" secondAttribute="centerX" id="gjG-9P-CSG"/>
                             <constraint firstItem="ndV-tQ-JtG" firstAttribute="leading" secondItem="gFW-nz-iOk" secondAttribute="leadingMargin" id="h3L-sk-kko"/>
@@ -203,7 +195,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.14289334416389465" green="0.75232315063476562" blue="0.99320739507675171" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="50s-Ee-AfO"/>
                             <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="9FO-1h-6GF"/>
@@ -401,7 +393,7 @@
                                 <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-1c-8lw">
-                                <rect key="frame" x="160.5" y="0.0" width="55" height="44"/>
+                                <rect key="frame" x="160" y="0.0" width="55" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hmY-q6-Jzc"/>
                                 </constraints>
@@ -759,7 +751,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hZa-sX-XPG">
-                                <rect key="frame" x="0.0" y="125" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="125" width="375" height="493"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="cxO-Dr-77U">
                                     <size key="itemSize" width="124" height="124"/>
@@ -883,9 +875,9 @@
                             <constraint firstItem="H0u-PM-f56" firstAttribute="leading" secondItem="nh3-wO-Sl2" secondAttribute="leading" id="HIY-tH-NkK"/>
                             <constraint firstItem="hZa-sX-XPG" firstAttribute="leading" secondItem="nh3-wO-Sl2" secondAttribute="leading" id="M29-vV-IWS"/>
                             <constraint firstAttribute="trailing" secondItem="hZa-sX-XPG" secondAttribute="trailing" id="ZhT-ay-Hy4"/>
-                            <constraint firstAttribute="bottom" secondItem="hZa-sX-XPG" secondAttribute="bottom" id="cnb-Hc-n3a"/>
                             <constraint firstItem="hZa-sX-XPG" firstAttribute="top" secondItem="H0u-PM-f56" secondAttribute="bottom" id="ejn-wD-ebw"/>
                             <constraint firstAttribute="trailing" secondItem="H0u-PM-f56" secondAttribute="trailing" id="g9A-Ol-Ujv"/>
+                            <constraint firstItem="73c-a8-crc" firstAttribute="top" secondItem="hZa-sX-XPG" secondAttribute="bottom" id="i0o-5H-JKY"/>
                             <constraint firstItem="H0u-PM-f56" firstAttribute="top" secondItem="nh3-wO-Sl2" secondAttribute="top" id="qut-eE-xPc"/>
                         </constraints>
                     </view>

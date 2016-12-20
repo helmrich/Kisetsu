@@ -12,6 +12,7 @@ class BrowseFilterViewController: UIViewController {
 
     // MARK: - Properties
     
+    var seriesType: SeriesType!
     var wasSubmitted = false
     
     var presentingBrowseViewController: BrowseViewController?
@@ -22,20 +23,14 @@ class BrowseFilterViewController: UIViewController {
         }
     }
     
-    // TEMPORARY TABLE VIEW DATA SOURCE FOR TESTING
-    
-    
     let browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
         ["Season": Season.allSeasonStrings],
         ["Status": AnimeAiringStatus.allStatusStrings],
         ["Type": MediaType.allMediaTypeStrings],
         ["Genres": Genre.allGenreStrings],
-        ["Year": [Int](1951...2016).reversed()]
+        ["Year": [Int](1951...2018).reversed()]
     ]
-    
-    
-    // TEMPORARY TABLE VIEW DATA SOURCE FOR TESTING
     
     
     // MARK: - Outlets and Actions
@@ -49,8 +44,6 @@ class BrowseFilterViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func applyFilters() {
-        // TODO: Save selected filters as parameters in BrowseViewController
-        // and request a new list of series.
         wasSubmitted = true
         dismiss(animated: true, completion: nil)
     }
@@ -68,18 +61,18 @@ class BrowseFilterViewController: UIViewController {
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
-        /*
-            This gesture recognizer is added in order to prevent the filter modal
-            from being dismissed because of the FilterModalPresentationController's
-            tap gesture recognizer. This way it's only dismissed when there is a tap
-            outside of the BrowseFilterViewController.
-         */
-        
         seriesTypeButtonAnime.toggle()
-        
         filterTableView.separatorColor = .aniManagerGray
         filterTableView.showsVerticalScrollIndicator = false
         filterTableView.allowsMultipleSelection = true
+        
+        if seriesType == .manga {
+            seriesTypeButtonManga.isOn = true
+            seriesTypeButtonAnime.isOn = false
+        } else {
+            seriesTypeButtonAnime.isOn = true
+            seriesTypeButtonManga.isOn = false
+        }
         
         for (_, filterValues) in DataSource.shared.selectedBrowseFilters {
             for (filterIndexPath, _) in filterValues! {

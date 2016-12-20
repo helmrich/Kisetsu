@@ -96,6 +96,7 @@ class BrowseViewController: SeriesCollectionViewController {
         let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
         filterViewController.modalPresentationStyle = .custom
         filterViewController.transitioningDelegate = self
+        filterViewController.seriesType = seriesType
         UIView.animate(withDuration: 0.5) {
             self.seriesCollectionView.alpha = 0.5
         }
@@ -168,9 +169,6 @@ class BrowseViewController: SeriesCollectionViewController {
                         collectionView.insertItems(at: indexPathsForNewItems)
                     }, completion: nil)
                 }
-                
-                print("Number of downloaded series: \(DataSource.shared.browseSeriesList?.count)")
-                
             }
         }
     }

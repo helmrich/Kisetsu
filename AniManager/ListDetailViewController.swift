@@ -28,11 +28,13 @@ class ListDetailViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        seriesCollectionView.alpha = 0.0
+        configure(seriesCollectionViewFlowLayout)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
-        seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
-        seriesCollectionViewFlowLayout.minimumLineSpacing = 1
+        seriesCollectionView.alpha = 0.0
         
         AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
             guard errorMessage == nil else {

@@ -45,9 +45,7 @@ class SearchViewController: SeriesCollectionViewController {
         
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
         
-        seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
-        seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
-        seriesCollectionViewFlowLayout.minimumLineSpacing = 1
+        configure(seriesCollectionViewFlowLayout)
         
         /*
             Set the search bar's background image property
@@ -158,3 +156,4 @@ extension SearchViewController: UICollectionViewDataSource {
         searchBar.resignFirstResponder()
     }
 }
+

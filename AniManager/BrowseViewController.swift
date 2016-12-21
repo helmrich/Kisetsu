@@ -41,22 +41,12 @@ class BrowseViewController: SeriesCollectionViewController {
         
         addErrorMessageView(toBottomOf: view, withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
         
-        seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
-        seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
-        seriesCollectionViewFlowLayout.minimumLineSpacing = 1
+        
+        configure(seriesCollectionViewFlowLayout)
         
         getSeriesList()
         
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        statusBarShouldBeHidden = false
-        UIView.animate(withDuration: 0.25) {
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
     }
     
     
@@ -165,7 +155,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    self.seriesCollectionView.performBatchUpdates({ 
+                    self.seriesCollectionView.performBatchUpdates({
                         collectionView.insertItems(at: indexPathsForNewItems)
                     }, completion: nil)
                 }

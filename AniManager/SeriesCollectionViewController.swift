@@ -46,6 +46,21 @@ class SeriesCollectionViewController: UIViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
+    
+    
+    // MARK: - Functions
+    
+    func configure(_ seriesCollectionViewFlowLayout: UICollectionViewFlowLayout) {
+        if view.bounds.width > 414.0 {
+            seriesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 6) - 0.84, height: (view.bounds.width / 6) - 0.84)
+            seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
+            seriesCollectionViewFlowLayout.minimumLineSpacing = 1
+        } else {
+            seriesCollectionViewFlowLayout.itemSize = CGSize(width: view.bounds.width / 3 - 0.67, height: view.bounds.width / 3 - 0.67)
+            seriesCollectionViewFlowLayout.minimumInteritemSpacing = 1
+            seriesCollectionViewFlowLayout.minimumLineSpacing = 1
+        }
+    }
 }
 
 

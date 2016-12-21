@@ -134,6 +134,19 @@ class ActionsTableViewCell: UITableViewCell {
         }
     }
     
+    func addProgressTextFieldToolbarInputAccessoryView(doneButtonTarget target: Any, doneButtonAction action: Selector) {
+        let progressTextFieldToolbar = UIToolbar()
+        progressTextFieldToolbar.barTintColor = .aniManagerBlue
+        progressTextFieldToolbar.sizeToFit()
+        let doneBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: target, action: action)
+        doneBarButtonItem.tintColor = .white
+        let flexibleSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        progressTextFieldToolbar.items = [flexibleSpaceBarButtonItem, doneBarButtonItem]
+        watchedEpisodesTextField.inputAccessoryView = progressTextFieldToolbar
+        chaptersReadTextField.inputAccessoryView = progressTextFieldToolbar
+        volumesReadTextField.inputAccessoryView = progressTextFieldToolbar
+    }
+    
     func getUserScoreFromRateButton() -> Int? {
         guard let rateButtonText = rateButton.title(for: .normal) else {
             return nil

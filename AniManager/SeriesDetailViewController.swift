@@ -39,6 +39,10 @@ class SeriesDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardWillHide, object: nil)
+        
+        
         addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
         
         ratingPicker = RatingPicker(frame: CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: 300.0))
@@ -129,6 +133,26 @@ class SeriesDetailViewController: UIViewController {
     
     func goBack() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func progressTextFieldWasEdited() {
+        listValueChanged()
+        view.endEditing(true)
+    }
+    
+    // Notification methods
+    func keyboardDidShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+        let keyboardFrameEnd = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        let keyboardFrameEndRect = keyboardFrameEnd as CGRect
+        view.frame.origin.y -= keyboardFrameEndRect.height
+    }
+    
+    func keyboardDidHide(_ notification: Notification) {
+        view.frame.origin.y = 0.0
     }
     
     func favorite() {

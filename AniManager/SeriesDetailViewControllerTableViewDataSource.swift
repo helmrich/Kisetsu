@@ -96,6 +96,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell(forSeriesType: seriesType)
             cell.rateButton.addTarget(self, action: #selector(toggleRatingPickerVisibility), for: [.touchUpInside])
             
+            cell.addProgressTextFieldToolbarInputAccessoryView(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
+            
+            
             AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
@@ -314,16 +317,12 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             guard let animeSeries = series as? AnimeSeries else {
-                print("Anime Series error")
                 return UITableViewCell(frame: CGRect.zero)
             }
             
             guard let externalLinks = animeSeries.externalLinks else {
-                print("No external links available")
                 return UITableViewCell(frame: CGRect.zero)
             }
-            
-            print(externalLinks)
             
             cell.externalLinks = externalLinks
             
@@ -415,5 +414,4 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
         }
     }
-    
 }

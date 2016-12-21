@@ -17,6 +17,11 @@
 		D21EC7771E0368FC008027E4 /* RatingPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7761E0368FC008027E4 /* RatingPicker.swift */; };
 		D21EC7791E055961008027E4 /* BrowseFilterHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC7781E055961008027E4 /* BrowseFilterHeaderLabel.swift */; };
 		D21EC77B1E07271C008027E4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC77A1E07271C008027E4 /* SearchViewController.swift */; };
+		D22197FE1E0ADBEA00B6F20A /* PathConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22197FD1E0ADBEA00B6F20A /* PathConstant.swift */; };
+		D22198001E0ADC1400B6F20A /* PayloadConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22197FF1E0ADC1400B6F20A /* PayloadConstant.swift */; };
+		D22198021E0ADCB500B6F20A /* ParameterConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22198011E0ADCB500B6F20A /* ParameterConstant.swift */; };
+		D22198041E0ADCE500B6F20A /* HeaderFieldConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22198031E0ADCE500B6F20A /* HeaderFieldConstant.swift */; };
+		D22198061E0ADD0500B6F20A /* ResponseConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22198051E0ADD0500B6F20A /* ResponseConstant.swift */; };
 		D224A2621DEF9A710085C532 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D224A2611DEF9A710085C532 /* Images.xcassets */; };
 		D224A2681DF061F00085C532 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D224A2671DF061F00085C532 /* BannerView.swift */; };
 		D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */; };
@@ -110,6 +115,11 @@
 		D21EC7761E0368FC008027E4 /* RatingPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingPicker.swift; sourceTree = "<group>"; };
 		D21EC7781E055961008027E4 /* BrowseFilterHeaderLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseFilterHeaderLabel.swift; sourceTree = "<group>"; };
 		D21EC77A1E07271C008027E4 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D22197FD1E0ADBEA00B6F20A /* PathConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathConstant.swift; sourceTree = "<group>"; };
+		D22197FF1E0ADC1400B6F20A /* PayloadConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadConstant.swift; sourceTree = "<group>"; };
+		D22198011E0ADCB500B6F20A /* ParameterConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterConstant.swift; sourceTree = "<group>"; };
+		D22198031E0ADCE500B6F20A /* HeaderFieldConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFieldConstant.swift; sourceTree = "<group>"; };
+		D22198051E0ADD0500B6F20A /* ResponseConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseConstant.swift; sourceTree = "<group>"; };
 		D224A2611DEF9A710085C532 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D224A2671DF061F00085C532 /* BannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		D22740871DFA34A900C3E776 /* ExternalLinksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExternalLinksTableViewCell.swift; sourceTree = "<group>"; };
@@ -311,6 +321,11 @@
 			isa = PBXGroup;
 			children = (
 				D25EDEBE1DE2515C00267243 /* AniListConstant.swift */,
+				D22197FD1E0ADBEA00B6F20A /* PathConstant.swift */,
+				D22198011E0ADCB500B6F20A /* ParameterConstant.swift */,
+				D22198051E0ADD0500B6F20A /* ResponseConstant.swift */,
+				D22197FF1E0ADC1400B6F20A /* PayloadConstant.swift */,
+				D22198031E0ADCE500B6F20A /* HeaderFieldConstant.swift */,
 				D25EDEC11DE2777A00267243 /* AniListClient.swift */,
 				D21EC7501E0321B0008027E4 /* AniListClientAuthentication.swift */,
 				D21EC7561E0326F3008027E4 /* AniListClientSeries.swift */,
@@ -621,8 +636,11 @@
 				D25EDEDC1DE4F49300267243 /* NavigationController.swift in Sources */,
 				D25EDF111DECBFB300267243 /* FilterModalPresentationController.swift in Sources */,
 				D2786F851DF3993C00F4368F /* Staff.swift in Sources */,
+				D22197FE1E0ADBEA00B6F20A /* PathConstant.swift in Sources */,
 				D2786F8A1DF39A4000F4368F /* Actor.swift in Sources */,
 				D2786FA11DF5F79C00F4368F /* BasicInformationsLabel.swift in Sources */,
+				D22198061E0ADD0500B6F20A /* ResponseConstant.swift in Sources */,
+				D22198021E0ADCB500B6F20A /* ParameterConstant.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D2786F961DF5C09100F4368F /* StackViewExtension.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
@@ -630,6 +648,7 @@
 				D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */,
 				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
+				D22198001E0ADC1400B6F20A /* PayloadConstant.swift in Sources */,
 				D21EC77B1E07271C008027E4 /* SearchViewController.swift in Sources */,
 				D25EDEB61DE0909300267243 /* Constant.swift in Sources */,
 				D25EDEEB1DE64D6F00267243 /* SeriesType.swift in Sources */,
@@ -643,6 +662,7 @@
 				D2F32C5C1DFCD0070044D195 /* MangaListSelectionViewController.swift in Sources */,
 				D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */,
 				D2786F9D1DF5F3EC00F4368F /* AdditionalInformationsValueLabel.swift in Sources */,
+				D22198041E0ADCE500B6F20A /* HeaderFieldConstant.swift in Sources */,
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 				D2786FA51DF5FD1D00F4368F /* VideoTableViewCell.swift in Sources */,
 				D22740961DFC99EF00C3E776 /* SeriesCollectionViewController.swift in Sources */,
@@ -775,6 +795,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.AniManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -788,6 +809,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.AniManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

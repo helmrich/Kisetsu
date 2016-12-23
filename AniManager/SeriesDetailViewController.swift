@@ -132,6 +132,7 @@ class SeriesDetailViewController: UIViewController {
     // MARK: - Functions
     
     func goBack() {
+        DataSource.shared.selectedSeries = nil
         dismiss(animated: true, completion: nil)
     }
     
@@ -180,8 +181,23 @@ class SeriesDetailViewController: UIViewController {
     }
     
     func showLists(_ sender: AniManagerButton) {
+        /*
+            Create an alert controller and configure its popover presentation
+            controller. The popover presentation controller has to be configured
+            for iPads or else the app would crash when the alert controller is
+            presented
+         */
         let listsAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        listsAlertController.popoverPresentationController?.permittedArrowDirections = [.up]
+        listsAlertController.popoverPresentationController?.sourceView = sender
+        listsAlertController.popoverPresentationController?.sourceRect = CGRect(x: 0, y: sender.bounds.size.height / 2.0, width: view.bounds.size.width, height: 0.0)
+        
+        /*
+            Check the series type and add actions for every available
+            list with the list names as titles depending on the type
+         */
         if seriesType == .anime {
+            
             for animeListName in AnimeListName.allNames {
                 let listAction = UIAlertAction(title: animeListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
@@ -193,10 +209,16 @@ class SeriesDetailViewController: UIViewController {
             for mangaListName  in MangaListName.allNames {
                 let listAction = UIAlertAction(title: mangaListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
+                    self.listValueChanged()
                 }
                 listsAlertController.addAction(listAction)
             }
         }
+        
+        /*
+            Add alert actions for removing a series from a list
+            and cancelling the alert controller
+         */
         let removeFromListAction = UIAlertAction(title: "Remove from List", style: .default) { (alertAction) in
             AniListClient.shared.deleteListEntry(ofType: self.seriesType, withSeriesId: self.seriesId) { (errorMessage) in
                 guard errorMessage == nil else {

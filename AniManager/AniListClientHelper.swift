@@ -23,6 +23,8 @@ extension AniListClient {
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            // Error Handling
             if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                 completionHandlerForImageData(nil, errorMessage)
                 return
@@ -60,6 +62,23 @@ extension AniListClient {
         
         return nil
         
+    }
+    
+    /*
+        This method creates a "default" request for AniList by adding
+        values (bearer access token, content type x-www-form-urlencoded) 
+        that are needed to access the resource server on the resource
+        owner's behalf to the belonging HTTP header fields
+     */
+    func createDefaultRequest(withUrl url: URL) -> NSMutableURLRequest {
+        // Create request from URL
+        let request = NSMutableURLRequest(url: url)
+        
+        // Add HTTP header field values
+        request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
+        request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+        
+        return request
     }
     
     /*
@@ -102,6 +121,13 @@ extension AniListClient {
         return newPath
     }
     
+    /*
+        This function creates a HTTP body from a dictionary with key-value pairs.
+        It first iterates over all items of the dictionary and appends them to a
+        HTTP body string. When it iterated over all key-value pairs it returns
+        an encoded data representation of the HTTP body string which can be used
+        as the HTTP body
+     */
     func createHttpBody(withKeyValuePairs keyValuePairs: [String:Any]) -> Data? {
         var httpBodyString = "{"
         for (key, value) in keyValuePairs {

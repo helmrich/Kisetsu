@@ -10,9 +10,9 @@ import Foundation
 
 extension AniListClient {
     /*
-     This method tries to get an array of series objects from a specific
-     page with a defined type (e.g. anime or manga) and parameters (such as
-     release year, genres, sorting, etc.)
+        This method tries to get an array of series objects from a specific
+        page with a defined type (e.g. anime or manga) and parameters (such as
+        release year, genres, sorting, etc.)
      */
     func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], matchingQuery query: String? = nil, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
@@ -23,7 +23,6 @@ extension AniListClient {
             }
             
             // URL creation and request configuration
-            
             var replacingPairs = [
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue
             ]
@@ -44,21 +43,19 @@ extension AniListClient {
                 return
             }
             
-            print("getSeriesList URL: \(url)")
-            
-            let request = NSMutableURLRequest(url: url)
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForSeriesList(nil, errorMessage)
                     return
                 }
                 
                 let data = data!
-                
+
+                // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
                     completionHandlerForSeriesList(nil, "Couldn't deserialize data into a JSON object")
                     return
@@ -69,16 +66,23 @@ extension AniListClient {
                     return
                 }
                 
+                
+                /*
+                    Create and fill a list of series by first checking which series
+                    type was requested and depending on that trying to create series
+                    by iterating over all dictionaries in the raw series list array
+                 */
                 typealias seriesKey = AniListConstant.ResponseKey.Series
                 
                 var seriesList = [Series]()
-                if seriesType.rawValue == SeriesType.anime.rawValue {
+                if seriesType == .anime {
                     seriesList = seriesList as! [AnimeSeries]
                     for series in rawSeriesList {
                         if let animeSeries = AnimeSeries(fromDictionary: series) {
                             seriesList.append(animeSeries)
                         } else {
-                            print("Couldn't create anime series")
+                            completionHandlerForSeriesList(nil, "Couldn't get anime series")
+                            return
                         }
                     }
                 } else {
@@ -87,7 +91,8 @@ extension AniListClient {
                         if let mangaSeries = MangaSeries(fromDictionary: series) {
                             seriesList.append(mangaSeries)
                         } else {
-                            print("Couldn't create manga series")
+                            completionHandlerForSeriesList(nil, "Couldn't get manga series")
+                            return
                         }
                     }
                 }
@@ -101,6 +106,9 @@ extension AniListClient {
         }
     }
     
+    /*
+        This method gets a single series with a specified ID and series type
+     */
     func getSingleSeries(ofType seriesType: SeriesType, withId id: Int, completionHandlerForSeries: @escaping (_ series: Series?, _ errorMessage: String?) -> Void) {
         
         validateAccessToken { (errorMessage) in
@@ -110,7 +118,6 @@ extension AniListClient {
             }
             
             // URL creation and request configuration
-            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue,
                 AniListConstant.Path.Placeholder.id: "\(id)"
@@ -123,11 +130,11 @@ extension AniListClient {
                 return
             }
             
-            let request = NSMutableURLRequest(url: url)
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForSeries(nil, errorMessage)
                     return
@@ -135,6 +142,7 @@ extension AniListClient {
                 
                 let data = data!
                 
+                // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
                     completionHandlerForSeries(nil, "Couldn't deserialize data into a JSON object")
                     return
@@ -145,6 +153,14 @@ extension AniListClient {
                     return
                 }
                 
+                
+                /*
+                    Check whether the requested series type is of anime or manga type
+                    and try to create an appropriate object depending on this from the
+                    raw series dictionary that was casted from the JSON object. Depending
+                    on whether creating the object the completion handler should either be
+                    called with the created object or an error message.
+                 */
                 typealias seriesKey = AniListConstant.ResponseKey.Series
                 
                 if seriesType == .anime {
@@ -166,15 +182,14 @@ extension AniListClient {
                         return
                     }
                 }
-                
             }
             
             task.resume()
             
         }
-        
     }
     
+    // This method gets the page model for a character with a specified character ID
     func getPageModelCharacter(forCharacterId id: Int, completionHandlerForCharacterPageModel: @escaping (_ character: Character?, _ errorMessage: String?) -> Void) {
         
         
@@ -185,7 +200,6 @@ extension AniListClient {
             }
             
             // URL creation and request configuration
-            
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.id: "\(id)"
             ]
@@ -195,11 +209,11 @@ extension AniListClient {
                 return
             }
             
-            let request = NSMutableURLRequest(url: url)
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForCharacterPageModel(nil, errorMessage)
                     return
@@ -207,6 +221,7 @@ extension AniListClient {
                 
                 let data = data!
                 
+                // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
                     completionHandlerForCharacterPageModel(nil, "Couldn't deserialize data into a JSON object")
                     return
@@ -229,6 +244,7 @@ extension AniListClient {
     
     // MARK: - POST/PUT
     
+    // This method is used to favorite a series with a specified type and ID
     func favorite(seriesOfType type: SeriesType, withId id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
         let replacingPairs = [
             AniListConstant.Path.Placeholder.seriesType: type.rawValue
@@ -239,12 +255,18 @@ extension AniListClient {
         favorite(id: id, path: path, completionHandlerForFavoriting: completionHandlerForFavoriting)
     }
     
+    // This method is used to favorite a character with a specified ID
     func favorite(characterWithId id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
         let path = AniListConstant.Path.CharacterPost.favourite
         
         favorite(id: id, path: path, completionHandlerForFavoriting: completionHandlerForFavoriting)
     }
     
+    /*
+        This method contains the general networking code for favoriting an object
+        with an ID (e.g. series, character) and should be called inside of a more
+        specific method that specifies a path based on the object type
+     */
     fileprivate func favorite(id: Int, path: String, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
         validateAccessToken { (errorMessage) in
             guard errorMessage == nil else {
@@ -253,7 +275,6 @@ extension AniListClient {
             }
             
             // URL creation and request configuration
-            
             guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
                 completionHandlerForFavoriting("Couldn't create AniList URL")
                 return
@@ -267,6 +288,7 @@ extension AniListClient {
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForFavoriting(errorMessage)
                     return
@@ -274,6 +296,7 @@ extension AniListClient {
                 
                 let data = data!
                 
+                // JSON Deserialization
                 guard let _ = self.deserializeJson(fromData: data) else {
                     completionHandlerForFavoriting("Couldn't deserialize data into a JSON object")
                     return

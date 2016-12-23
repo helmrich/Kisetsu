@@ -26,9 +26,7 @@ extension AniListClient {
                 return
             }
             
-            let request = NSMutableURLRequest(url: url)
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {

@@ -126,9 +126,7 @@ extension AniListClient {
                 return
             }
             
-            let request = NSMutableURLRequest(url: url)
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+            let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
@@ -228,6 +226,7 @@ extension AniListClient {
             
             // URL creation and request configuration
             
+            // Create the path based on the HTTP method and series type
             let path: String
             switch (type, httpMethod) {
             case (.anime, "POST"):
@@ -305,6 +304,7 @@ extension AniListClient {
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForSubmission(errorMessage)
                     return
@@ -343,7 +343,10 @@ extension AniListClient {
                 AniListConstant.Path.Placeholder.id: "\(seriesId)"
             ]
             
-            // Check the series type and assign an appropriate path to the path property
+            /*
+                Check the series type and assign an appropriate path to the path property
+                based on the series type
+             */
             let path: String
             if type == .anime {
                 path = self.replacePlaceholders(inPath: AniListConstant.Path.UserList.AnimeListDelete.deleteEntry, withReplacingPairs: replacingPairs)
@@ -359,10 +362,8 @@ extension AniListClient {
                 return
             }
             
-            let request = NSMutableURLRequest(url: url)
+            let request = self.createDefaultRequest(withUrl: url)
             request.httpMethod = "DELETE"
-            request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-            request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {

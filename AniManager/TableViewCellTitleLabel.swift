@@ -9,6 +9,9 @@
 import UIKit
 
 class TableViewCellTitleLabel: AniManagerLabel {
+    
+    // MARK: - Initializer
+    
     convenience init(withTitle title: String) {
         self.init()
         text = title

@@ -10,6 +10,10 @@ import UIKit
 
 class FilterNameTableViewCell: UITableViewCell {
 
+    // MARK: - Outlets and Actions
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var filterNameLabel: UILabel!
     
 }

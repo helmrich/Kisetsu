@@ -10,6 +10,8 @@ import UIKit
 
 class BrowseFilterHeaderLabel: AniManagerLabel {
     
+    // MARK: - Functions
+    
     override func drawText(in rect: CGRect) {
         let edgeInsets = UIEdgeInsets(top: 0.0, left: 15.0, bottom: 0.0, right: 0.0)
         super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))

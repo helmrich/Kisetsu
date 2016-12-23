@@ -16,6 +16,7 @@ class DescriptionTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Set the title label and description text views' properties
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +28,7 @@ class DescriptionTableViewCell: UITableViewCell {
         descriptionTextView.textAlignment = .justified
         descriptionTextView.textContainer.lineFragmentPadding = 0
         
-        
+        // Set the title label and description text views' constraints
         addSubview(titleLabel)
         addSubview(descriptionTextView)
         addConstraints([

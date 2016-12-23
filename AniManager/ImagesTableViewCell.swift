@@ -10,7 +10,14 @@ import UIKit
 
 class ImagesTableViewCell: UITableViewCell {
 
+    // MARK: - Properties
+    
     var type: ImagesTableViewCellType?
+    
+    
+    // MARK: - Outlets and Actions
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imagesCollectionView: UICollectionView!

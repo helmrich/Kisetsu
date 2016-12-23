@@ -10,6 +10,8 @@ import UIKit
 
 class AdditionalInformationsTableViewCell: UITableViewCell {
 
+    // MARK: - Properties
+    
     fileprivate let titleLabel = TableViewCellTitleLabel(withTitle: "Additional Informations")
     
     let studioLabel = AniManagerLabel()
@@ -24,9 +26,13 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
     let japaneseTitleValueLabel = AdditionalInformationsValueLabel()
     let synonymsValueLabel = AdditionalInformationsValueLabel()
     
+    
+    // MARK: - Initializer
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Configure the title label and set its constraints
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addConstraints([
@@ -34,7 +40,7 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
                 NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
             ])
         
-        
+        // Set the static labels' text and specify that the font should be bold
         studioLabel.hasBoldFont = true
         studioLabel.text = "Studios"
         englishTitleLabel.hasBoldFont = true
@@ -46,7 +52,7 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
         synonymsLabel.hasBoldFont = true
         synonymsLabel.text = "Synonyms"
         
-        
+        // Setup stack views
         let studioStackView = UIStackView.createStackView(fromArrangedSubviews: [studioLabel, studioValueLabel], withAxis: .vertical, andSpacing: 0.0)
         let englishTitleStackView = UIStackView.createStackView(fromArrangedSubviews: [englishTitleLabel, englishTitleValueLabel], withAxis: .vertical, andSpacing: 0.0)
         let romajiTitleStackView = UIStackView.createStackView(fromArrangedSubviews: [romajiTitleLabel, romajiTitleValueLabel], withAxis: .vertical, andSpacing: 0.0)

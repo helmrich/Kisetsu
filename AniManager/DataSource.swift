@@ -16,6 +16,10 @@ class DataSource {
     static let shared = DataSource()
     fileprivate init() {}
     
+    // General
+    var selectedSeries: Series? = nil
+    
+    // Browse
     var selectedBrowseFilters: [String:[IndexPath:String]?] = [
         "Sort By": [IndexPath:String](),
         "Season": [IndexPath:String](),
@@ -28,12 +32,16 @@ class DataSource {
         AniListConstant.ParameterKey.Browse.sort: "score-desc"
     ]
     var browseSeriesList: [Series]? = nil
-    var searchResultsSeriesList: [Series]? = nil
-    var selectedSeries: Series? = nil
     
+    // Search
+    var searchResultsSeriesList: [Series]? = nil
+    
+    // Lists
     var selectedAnimeList: [AnimeSeries]? = nil
     var selectedMangaList: [MangaSeries]? = nil
     
+    
+    // MARK: - Functions
     
     func set(parameterValue: String, forBrowseParameterWithName parameterName: String) {
         browseParameters["\(parameterName)"] = parameterValue

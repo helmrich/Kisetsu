@@ -9,11 +9,22 @@
 import UIKit
 
 class ImagesCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Properties
+    
     var id: Int?
     var type: ImagesTableViewCellType?
     
+    
+    // MARK: - Outlets and Actions
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageOverlayView: UIView!
+    
+    
+    // MARK: - Functions
     
     override func prepareForReuse() {
         imageView.image = nil

@@ -10,6 +10,8 @@ import UIKit
 
 class AniManagerLabel: UILabel {
     
+    // MARK: - Properties
+    
     var hasBoldFont = false {
         didSet {
             if hasBoldFont {
@@ -19,6 +21,9 @@ class AniManagerLabel: UILabel {
             }
         }
     }
+    
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)

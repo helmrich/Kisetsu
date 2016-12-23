@@ -10,6 +10,11 @@ import UIKit
 
 class OnOffButton: UIButton {
 
+    /*
+        Inside the didSet property observer the button's
+        appearance is changed depending on the isOn property's
+        value
+     */
     var isOn: Bool = false {
         didSet {
             if isOn {
@@ -30,17 +35,14 @@ class OnOffButton: UIButton {
         
     }
     
+    /*
+        This method toggles an on-off button's boolean isOn
+        property's value
+     */
     func toggle() {
         if isOn {
-            backgroundColor = .white
-            layer.borderColor = UIColor.aniManagerBlue.cgColor
-            layer.borderWidth = 1
-            setTitleColor(.aniManagerBlue, for: .normal)
             isOn = false
         } else {
-            backgroundColor = .aniManagerBlue
-            layer.borderWidth = 0
-            setTitleColor(.white, for: .normal)
             isOn = true
         }
     }

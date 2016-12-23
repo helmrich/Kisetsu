@@ -98,6 +98,12 @@ class ActionsTableViewCell: UITableViewCell {
     
     // MARK: - Functions
     
+    /*
+        This function toggles the visibility of the manga
+        and anime progress stack views depending on a given
+        series type (which is the series type whose stack view
+        should be visible)
+     */
     func setupCell(forSeriesType seriesType: SeriesType) {
         if seriesType == .anime {
             mangaProgressStackView.isHidden = true
@@ -108,6 +114,11 @@ class ActionsTableViewCell: UITableViewCell {
         }
     }
     
+    /*
+        This function sets the affected properties of UI elements
+        that should look different depending on whether they're
+        in a list or not to appropriate values
+     */
     func setupCellForStatus(isSeriesInList: Bool) {
         if isSeriesInList {
             rateButton.isEnabled = true
@@ -134,19 +145,48 @@ class ActionsTableViewCell: UITableViewCell {
         }
     }
     
-    func addProgressTextFieldToolbarInputAccessoryView(doneButtonTarget target: Any, doneButtonAction action: Selector) {
+    /*
+        This function is used to add a toolbar with a "done"-button to
+        a progress text field as an input accessory view which will
+        show on top of the keyboard when a progress text field becomes
+        the first responder. 
+     
+        It takes the done button's target and action as a parameter as
+        this should be specified when the actions table view cell is
+        implemented
+     */
+    func addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget target: Any, doneButtonAction action: Selector) {
+        // Create and configure the toolbar
         let progressTextFieldToolbar = UIToolbar()
         progressTextFieldToolbar.barTintColor = .aniManagerBlue
         progressTextFieldToolbar.sizeToFit()
+        
+        /*
+            Create and configure the done bar button and a flexible
+            space bar button item and add assign them to the toolbar's
+            items property
+         */
         let doneBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: target, action: action)
         doneBarButtonItem.tintColor = .white
         let flexibleSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         progressTextFieldToolbar.items = [flexibleSpaceBarButtonItem, doneBarButtonItem]
+        
+        /*
+            Assign the created toolbar to all of the progress-related
+            text fields' inputAccessoryView property
+         */
         watchedEpisodesTextField.inputAccessoryView = progressTextFieldToolbar
         chaptersReadTextField.inputAccessoryView = progressTextFieldToolbar
         volumesReadTextField.inputAccessoryView = progressTextFieldToolbar
     }
     
+    /*
+        This function is used in order to get an integer rating value from
+        the action cell's rate button. It therefore removes the "Your Rating "
+        string that's shown in the button when the user already rated the series.
+        Afterwards an integer object is initialized with the resulting string and
+        the value (or nil if it failed) is returned
+     */
     func getUserScoreFromRateButton() -> Int? {
         guard let rateButtonText = rateButton.title(for: .normal) else {
             return nil

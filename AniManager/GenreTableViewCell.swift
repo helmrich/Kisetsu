@@ -10,12 +10,18 @@ import UIKit
 
 class GenreTableViewCell: UITableViewCell {
 
+    // MARK: - Properties
+    
     let titleLabel = TableViewCellTitleLabel(withTitle: "Genres")
     let genreLabelStackView = UIStackView()
+    
+    
+    // MARK: - Initializer
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Set the title label's constraints
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addConstraints([
@@ -23,6 +29,7 @@ class GenreTableViewCell: UITableViewCell {
             NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
             ])
         
+        // Set the genre label stack view's properties and constraints
         genreLabelStackView.translatesAutoresizingMaskIntoConstraints = false
         genreLabelStackView.axis = .vertical
         genreLabelStackView.distribution = .fillProportionally
@@ -36,12 +43,17 @@ class GenreTableViewCell: UITableViewCell {
         
     }
     
+    
+    // MARK: - Functions
+    
     override func prepareForReuse() {
-        // All subviews of the genreLabelStackView should be removed completely
-        // in order to guarantee that the stack view only has the genres that belong
-        // to a certain series instead of just adding genres to the existing ones.
-        // This way every time a GenreTableViewCell is reused the genres will be
-        // added to an empty stack view.
+        /*
+            All subviews of the genreLabelStackView should be removed completely
+            in order to guarantee that the stack view only has the genres that belong
+            to a certain series instead of just adding genres to the existing ones.
+            This way every time a GenreTableViewCell is reused the genres will be
+            added to an empty stack view.
+         */
         for arrangedSubview in genreLabelStackView.arrangedSubviews {
             arrangedSubview.removeFromSuperview()
         }

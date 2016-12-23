@@ -9,7 +9,14 @@
 import UIKit
 
 class BannerView: UIView {
+    
+    /*
+        The parallax effect implemented in the banner view was inspired by
+        the ParallaxAutoLayoutDemo GitHub repo: https://github.com/runmad/ParallaxAutoLayoutDemo
+     */
 
+    // MARK: - Properties
+    
     var heightLayoutConstraint = NSLayoutConstraint()
     var bottomLayoutConstraint = NSLayoutConstraint()
     var overlayHeightLayoutConstraint = NSLayoutConstraint()
@@ -26,9 +33,13 @@ class BannerView: UIView {
     let seriesTitleLabel = UILabel()
     let seriesReleaseYearLabel = UILabel()
     
+    
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // Configure the container view and set its constraints
         containerView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(containerView)
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[containerView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["containerView":containerView]))
@@ -36,6 +47,7 @@ class BannerView: UIView {
         containerLayoutConstraint = NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1.0, constant: 0.0)
         addConstraint(containerLayoutConstraint)
         
+        // Configure the image view
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor.aniManagerGray
         imageView.clipsToBounds = true
@@ -47,6 +59,7 @@ class BannerView: UIView {
             NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
             ])
         
+        // Create and configure the image overlay view
         let imageOverlayView = UIView()
         imageOverlayView.translatesAutoresizingMaskIntoConstraints = false
         imageOverlayView.backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.7)
@@ -57,6 +70,8 @@ class BannerView: UIView {
                 NSLayoutConstraint(item: imageOverlayView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.0, constant: 0.0)
             ])
 
+        
+        // Add the dismiss and favorite button
         dismissButton.translatesAutoresizingMaskIntoConstraints = false
         dismissButton.setImage(#imageLiteral(resourceName: "CancelCross"), for: .normal)
         containerView.addSubview(dismissButton)
@@ -78,7 +93,10 @@ class BannerView: UIView {
             ])
 
         
-        
+        /*
+            Set the series title and release year labels' properties
+            and create a stack view with them
+         */
         seriesTitleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 24.0)
         seriesTitleLabel.textColor = .white
         seriesTitleLabel.numberOfLines = 3

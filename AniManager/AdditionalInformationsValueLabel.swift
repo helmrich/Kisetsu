@@ -9,6 +9,9 @@
 import UIKit
 
 class AdditionalInformationsValueLabel: AniManagerLabel {
+    
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

@@ -10,10 +10,15 @@ import UIKit
 
 class RatingPicker: UIView {
     
+    // MARK: - Properties
+    
     let pickerView = UIPickerView()
     let dismissToolbarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "CancelCross"), style: .plain, target: nil, action: nil)
     let submitToolbarButton = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
 
+    
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

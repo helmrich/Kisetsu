@@ -61,11 +61,11 @@ class ErrorMessageView: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     
-    // MARK: - Methods
+    // MARK: - Functions
     
     func showError(withMessage message: String) {
         DispatchQueue.main.async {
@@ -86,8 +86,15 @@ class ErrorMessageView: UIView {
 
 }
 
+
+// MARK: - UIViewController extension
+
 extension UIViewController {
-    func addErrorMessageView(toBottomOf view: UIView, withOffsetToBottom bottomOffset: CGFloat = 0, errorMessageView: ErrorMessageView) {
+    /*
+        This method adds an error message view at the bottom of a view
+        controller's main view
+     */
+    func addErrorMessageViewToBottomOfView(withOffsetToBottom bottomOffset: CGFloat = 0, errorMessageView: ErrorMessageView) {
         view.addSubview(errorMessageView)
         errorMessageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

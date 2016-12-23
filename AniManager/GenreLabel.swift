@@ -10,6 +10,8 @@ import UIKit
 
 class GenreLabel: UILabel {
     
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

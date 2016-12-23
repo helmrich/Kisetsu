@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIStackView {
+    /*
+        This type method takes in an array of arranged subviews, an axis
+        and a spacing parameter and creates a stack view from it
+     */
     static func createStackView(fromArrangedSubviews arrangedSubviews: [UIView], withAxis axis: UILayoutConstraintAxis, andSpacing spacing: CGFloat) -> UIStackView {
         let statusStackView = UIStackView(arrangedSubviews: arrangedSubviews)
         statusStackView.axis = axis

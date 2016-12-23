@@ -10,6 +10,16 @@ import UIKit
 
 class AuthenticationViewController: UIViewController {
     
+    /*
+        The authentication view controller will be used
+        when the user authenticates the application for
+        the first time.
+     
+        It provides buttons to go to the authentication
+        page, the "forgot password" page, or, if the user
+        doesn't have an account yet, to the register page.
+     */
+    
     // MARK: - Properties
     
     var errorMessageView = ErrorMessageView()
@@ -44,13 +54,11 @@ class AuthenticationViewController: UIViewController {
         }
     }
     
-    @IBAction func skipLogin() {
-        // TODO: Implement
-    }
-    
     @IBAction func login() {
-        // Create an AniList URL for requesting an authorization code and
-        // present the web view controller with this URL
+        /*
+            Create an AniList URL for requesting an authorization code and
+            present the web view controller with this URL
+         */
         let parameters: [String:Any] = [
             AniListConstant.ParameterKey.Authentication.grantType: AniListConstant.ParameterValue.Authentication.grantTypeAuthorizationCode,
             AniListConstant.ParameterKey.Authentication.clientId: AniListConstant.Account.clientId,
@@ -67,17 +75,31 @@ class AuthenticationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+        
+        /*
+            Add an error message view to the main view and change
+            the login button's background color to white
+         */
+        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
         loginButton.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let _ = AniListClient.shared.authorizationCode {
+        /*
+            When the main view will appear, check if the AniListClient's
+            authorizationCode property is not nil. If that's the case,
+            request an access token with the AniListClient's authorization
+            code and if an access token is successfully received, set values
+            in the user defaults and instantiate and show the "main" tab bar
+            controller
+         */
+        if AniListClient.shared.authorizationCode != nil {
             
-            AniListClient.shared.getAccessToken(withAuthorizationCode: true, completionHandlerForTokens: { (accessToken, refreshToken, errorMessage) in
+            AniListClient.shared.getAccessToken(withAuthorizationCode: true) { (accessToken, refreshToken, errorMessage) in
                 
+                // Error Handling
                 guard errorMessage == nil else {
                     DispatchQueue.main.async {
                         self.errorMessageView.showError(withMessage: errorMessage!)
@@ -99,18 +121,20 @@ class AuthenticationViewController: UIViewController {
                     return
                 }
                 
+                // Set user default values
                 UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
                 UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
                 UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
                 UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
+                // Instantiate and present tab bar controller
                 let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
                 
                 DispatchQueue.main.async {
                     self.present(tabBarController, animated: true, completion: nil)
                 }
                 
-            })
+            }
         } else {
             print("No authorization code available")
         }

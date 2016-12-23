@@ -8,6 +8,18 @@
 
 import UIKit
 
+/*
+    The loading view controller will be used when
+    the user authenticated the application before but
+    the access token is not valid anymore, thus a new
+    one has to be requested with a refresh token.
+ 
+    When this view controller is loaded, it immediately
+    tries to get a new access token. If it fails, it
+    communicates the error and gives the user the option
+    to retry requesting a new access token.
+ */
+
 class LoadingViewController: UIViewController {
     
     // MARK: - Properties
@@ -31,12 +43,13 @@ class LoadingViewController: UIViewController {
         getAccessToken()
     }
     
+    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
         
         getAccessToken()
     }

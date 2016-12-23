@@ -10,26 +10,32 @@ import UIKit
 
 class ExternalLinksTableViewCell: UITableViewCell {
 
+    // MARK: - Properties
+    
     var externalLinks = [ExternalLink]()
     var maximumNumberOfButtonsPerRow = 2
-    let titleLabel = TableViewCellTitleLabel()
+    let titleLabel = TableViewCellTitleLabel(withTitle: "External Links")
+    
+    
+    // MARK: - Initializer
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        titleLabel.text = "External Links"
+        // Configure the title label and set its constraints
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addConstraints([
             NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 15.0),
             NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
             ])
-        
-        
     }
     
+    
+    // MARK: - Functions
+    
     func setupCell() {
-        // Create a vertical main stack view that should contain all button stack views
+        // Create a vertical main stack view that will contain all button stack views
         let mainStackView = UIStackView()
         mainStackView.axis = .vertical
         mainStackView.spacing = 5.0
@@ -53,7 +59,6 @@ class ExternalLinksTableViewCell: UITableViewCell {
             button.setTitle(externalLink.siteName, for: .normal)
             button.siteUrlString = externalLink.siteUrlString
             button.translatesAutoresizingMaskIntoConstraints = false
-            print("BUTTON TITLE: \(button.title(for: .normal))")
             buttons.append(button)
             
             /*

@@ -8,8 +8,16 @@
 
 import UIKit
 
-class ListSelectionViewController: UIViewController {
+/*
+    The ListSelectionViewController is the AnimeList/MangaListSelectionViewController's
+    superclass. It contains most of the selection view controller's logic as it
+    implements the table view data source and delegate methods. The selection view
+    controllers display all available lists for a series type and when selected they
+    present a list detail view controller with the list's content
+ */
 
+class ListSelectionViewController: UIViewController {
+    
     // MARK: - Properties
     
     var seriesType: SeriesType? = .anime
@@ -29,10 +37,18 @@ class ListSelectionViewController: UIViewController {
 
 extension ListSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // Make sure the view controller's series type is not nil
         guard let seriesType = seriesType else {
             return 0
         }
         
+        /*
+            If the series type is anime the number of all
+            anime list names should be returned, otherwise
+            the number of all manga list names should be
+            returned
+         */
         guard seriesType == .anime else {
             return MangaListName.allNames.count
         }
@@ -44,10 +60,16 @@ extension ListSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "listNameTableViewCell") as! ListNameTableViewCell
         
+        // Make sure the view controller's series type is not nil
         guard let seriesType = seriesType else {
             return UITableViewCell(frame: CGRect.zero)
         }
         
+        /*
+            If the series type is anime get the list name at the index of the
+            current index path's row from all anime list names, otherwise get
+            the name from all manga list names
+         */
         guard seriesType == .anime else {
             let currentMangaListName = MangaListName.allNames[indexPath.row]
             cell.listNameLabel.text = currentMangaListName
@@ -68,26 +90,36 @@ extension ListSelectionViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCell = tableView.cellForRow(at: indexPath) as! ListNameTableViewCell
         
+        // Make sure the view controller's series type is not nil
         guard let seriesType = seriesType else {
             return
         }
         
-        guard seriesType == .anime else {
-            if let listDetailViewController = storyboard?.instantiateViewController(withIdentifier: "listDetailViewController") as? ListDetailViewController {
-                listDetailViewController.title = selectedCell.listNameLabel.text
-                listDetailViewController.seriesType = .manga
-                navigationController?.pushViewController(listDetailViewController, animated: true)
-            }
+        guard let listDetailViewController = storyboard?.instantiateViewController(withIdentifier: "listDetailViewController") as? ListDetailViewController else {
             return
         }
         
-        if let listDetailViewController = storyboard?.instantiateViewController(withIdentifier: "listDetailViewController") as? ListDetailViewController {
+        /*
+            Check the series type, set the list detail view controller's
+            properties depending on the series type and push the list
+            detail view controller onto the navigation stack
+         */
+        guard seriesType == .anime else {
             listDetailViewController.title = selectedCell.listNameLabel.text
-            listDetailViewController.seriesType = .anime
+            listDetailViewController.seriesType = .manga
             navigationController?.pushViewController(listDetailViewController, animated: true)
+            return
         }
+        
+        listDetailViewController.title = selectedCell.listNameLabel.text
+        listDetailViewController.seriesType = .anime
+        navigationController?.pushViewController(listDetailViewController, animated: true)
     }
     
+    /*
+        Set the rows' height value to a value that makes all rows combined fill
+        out all the available space between the tab bar and the navigation bar
+     */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let fullHeight = tableView.frame.height
         let heightForRow: CGFloat

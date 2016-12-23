@@ -11,17 +11,23 @@ import WebKit
 
 class VideoTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
+    
     let videoWebView = WKWebView()
+
+    
+    // MARK: - Initializer
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Configure the video web view
         videoWebView.backgroundColor = .aniManagerBlack
         videoWebView.scrollView.backgroundColor = .aniManagerBlack
         videoWebView.scrollView.isScrollEnabled = false
         
-        let titleLabel = TableViewCellTitleLabel()
-        titleLabel.text = "Video"
+        // Configure the title label and set its constraints
+        let titleLabel = TableViewCellTitleLabel(withTitle: "Video")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addConstraints([
@@ -29,6 +35,7 @@ class VideoTableViewCell: UITableViewCell {
             NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
             ])
         
+        // Set the video web view's constraints
         videoWebView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(videoWebView)
         addConstraints([
@@ -38,8 +45,6 @@ class VideoTableViewCell: UITableViewCell {
                 NSLayoutConstraint(item: videoWebView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0),
                 NSLayoutConstraint(item: videoWebView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
             ])
-        
-        
     }
 
 }

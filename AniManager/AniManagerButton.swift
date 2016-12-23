@@ -21,12 +21,18 @@ class AniManagerButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        /*
+            Set the button layer's corner radius and background color
+            and add a constraint for its height
+         */
         layer.cornerRadius = 2.0
         backgroundColor = .aniManagerBlue
         addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
         
-        // Add the activity indicator to the button as a subview
-        // and set its constraints
+        /*
+            Add the activity indicator to the button as a subview
+            and set its constraints
+         */
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -42,12 +48,16 @@ class AniManagerButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        // Configure button's properties and set its constraints
         layer.cornerRadius = 2.0
         backgroundColor = .aniManagerBlue
         addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-        
-        // Add the activity indicator to the button as a subview
-        // and set its constraints
+
+        /*
+            Add the activity indicator to the button as a subview
+            and set its constraints
+         */
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -64,6 +74,10 @@ class AniManagerButton: UIButton {
     
     // MARK: - Methods
     
+    /*
+        This method configures the button's activity indicator's appearance
+        based on whether the activity indicator should be active or not
+     */
     func setActivityIndicator(active: Bool) {
         if active {
             set(enabled: false)
@@ -81,6 +95,10 @@ class AniManagerButton: UIButton {
         }
     }
     
+    /*
+        These methods should be used to set the button's appearance
+        when it's tapped
+     */
     func setTouchDownAppearance() {
         setTitleColor(titleColor(for: .normal)?.withAlphaComponent(0.6), for: .normal)
         backgroundColor = backgroundColor?.withAlphaComponent(0.8)
@@ -91,6 +109,11 @@ class AniManagerButton: UIButton {
         backgroundColor = backgroundColor?.withAlphaComponent(1.0)
     }
     
+    /*
+        This method sets the button's appearance to an enabled or disabled
+        state by enabling/disabling it and changing the background and title
+        color to an appropriate color
+     */
     func set(enabled: Bool) {
         if enabled {
             UIView.animate(withDuration: 0.25, animations: {

@@ -10,6 +10,8 @@ import UIKit
 
 class BasicInformationsTableViewCell: UITableViewCell {
     
+    // MARK: - Properties
+    
     let seriesCoverImageView = UIImageView()
     
     let typeLabel = BasicInformationsLabel()
@@ -27,9 +29,12 @@ class BasicInformationsTableViewCell: UITableViewCell {
     let durationPerEpisodeValueLabel = BasicInformationsValueLabel()
     
     
+    // MARK: - Initializer
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        // Configure the series cover image view
         seriesCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         seriesCoverImageView.contentMode = .scaleAspectFill
         seriesCoverImageView.alpha = 0.0
@@ -42,6 +47,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0)
             ])
         
+        // Assign values to the static labels
         typeLabel.text = "Type"
         averageRatingLabel.text = "Avg. Rating"
         statusLabel.text = "Status"
@@ -49,8 +55,10 @@ class BasicInformationsTableViewCell: UITableViewCell {
         numberOfEpisodesLabel.text = "Episodes"
         durationPerEpisodeLabel.text = "Duration"
         
-        averageRatingValueLabel.font = UIFont(name: "Lato-Black", size: 18.0)
+        // Assign a different font to the average rating value label
+        averageRatingValueLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 18.0)
         
+        // Create all stack views
         let typeStackView = UIStackView.createStackView(fromArrangedSubviews: [typeLabel, typeValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         typeStackView.translatesAutoresizingMaskIntoConstraints = false
         let averageRatingStackView = UIStackView.createStackView(fromArrangedSubviews: [averageRatingLabel, averageRatingValueLabel], withAxis: .horizontal, andSpacing: 0.0)

@@ -58,6 +58,11 @@ enum MediaType: String {
         manhwa.rawValue
     ]
 
+    /*
+        The API returns the media type as an ID. This initializer
+        takes an integer ID as a parameter and creates a media
+        type object from it if possible
+     */
     init?(withId id: Int) {
         switch id {
         case 0:

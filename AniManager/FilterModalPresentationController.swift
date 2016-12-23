@@ -14,6 +14,8 @@ class FilterModalPresentationController: UIPresentationController {
         return CGRect(x: 0, y: containerView!.bounds.maxY - (containerView!.bounds.height / 1.25), width: containerView!.bounds.width, height: containerView!.bounds.height / 1.25)
     }
     
+    
+    
     override func dismissalTransitionWillBegin() {
         /*
             When the modal will be dismissed, loop over all of the tab bar controller's

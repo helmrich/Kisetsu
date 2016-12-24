@@ -43,7 +43,7 @@ class SeriesDetailViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardWillHide, object: nil)
         
         
-        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
+        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
         
         ratingPicker = RatingPicker(frame: CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: 300.0))
         ratingPicker!.dismissToolbarButton.target = self

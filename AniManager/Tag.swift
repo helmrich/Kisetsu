@@ -14,9 +14,12 @@ struct Tag {
     let isSpoiler: Bool
     
     init?(fromDictionary dictionary: [String:Any]) {
-        guard let name = dictionary["name"] as? String,
-        let description = dictionary["description"] as? String,
-            let isSpoiler = dictionary["spoiler"] as? Bool else {
+        
+        typealias TagResponseKey = AniListConstant.ResponseKey.Tag
+        
+        guard let name = dictionary[TagResponseKey.name] as? String,
+        let description = dictionary[TagResponseKey.description] as? String,
+            let isSpoiler = dictionary[TagResponseKey.isSpoiler] as? Bool else {
                 return nil
         }
         

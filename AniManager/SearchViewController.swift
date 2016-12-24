@@ -26,11 +26,19 @@ class SearchViewController: SeriesCollectionViewController {
     @IBOutlet weak var seriesCollectionView: UICollectionView!
     @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet weak var nothingFoundLabel: UILabel!
     
     // MARK: - Actions
     
     @IBAction func changeSeriesType(_ sender: Any) {
         setSeriesTypeFromSelectedSegment()
+        
+        /*
+            Check if the search bar's text is not nil and if the
+            number of characters is higher than 0, if it is,
+            a new series list should be requested with the search
+            bar's text
+         */
         guard let searchBarText = searchBar.text,
             searchBarText.characters.count > 0 else {
                 return
@@ -43,8 +51,10 @@ class SearchViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addErrorMessageView(toBottomOf: view, errorMessageView: errorMessageView)
-        
+        /*
+            Add an error message view and configure the collection
+            view's flow layout
+         */
         configure(seriesCollectionViewFlowLayout)
         
         /*
@@ -60,26 +70,53 @@ class SearchViewController: SeriesCollectionViewController {
     
     // MARK: - Functions
     
+    /*
+        This method takes a search text string as a parameter
+        which it passes to the getSeriesList method's matchingQuery
+        parameter
+     */
     func getSeriesList(withSearchText searchText: String) {
         AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
-                print(errorMessage!)
+                DispatchQueue.main.async {
+                    self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
+                    UIView.animate(withDuration: 0.25) {
+                        self.nothingFoundLabel.alpha = 1.0
+                    }
+                }
                 return
             }
             
             guard let seriesList = seriesList else {
-                print("Couldn't get series")
+                self.errorMessageView.showError(withMessage: "Couldn't get series")
                 return
             }
             
+            /*
+                Assign the received series list to the data source's
+                searchResultsSeriesList property, reload the series
+                collection view and make it visible
+             */
             DataSource.shared.searchResultsSeriesList = seriesList
             
             DispatchQueue.main.async {
                 self.seriesCollectionView.reloadData()
+                UIView.animate(withDuration: 0.25) {
+                    self.nothingFoundLabel.alpha = 0.0
+                    self.seriesCollectionView.alpha = 1.0
+                }
             }
         }
     }
     
+    /*
+        This function gets a series type from a selected segment
+        of the seriesTypeSegmentedControl by first getting the
+        title for the selected segment and then initializing
+        a SeriesType object with the segment's title as a raw value
+     */
     func setSeriesTypeFromSelectedSegment() {
         guard let selectedSegmentTitle = seriesTypeSegmentedControl.titleForSegment(at: seriesTypeSegmentedControl.selectedSegmentIndex) else {
             return
@@ -88,14 +125,15 @@ class SearchViewController: SeriesCollectionViewController {
         seriesType = selectedSeriesType
     }
     
-    func mainViewWasTapped() {
-        searchBar.resignFirstResponder()
-    }
+//    func mainViewWasTapped() {
+//        searchBar.resignFirstResponder()
+//    }
 
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        seriesCollectionView.alpha = 0.0
         getSeriesList(withSearchText: searchText)
     }
 }

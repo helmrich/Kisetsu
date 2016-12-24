@@ -70,6 +70,12 @@ extension ResponseConstant {
             static let actor = "actor"
         }
         
+        struct Tag {
+            static let name = "name"
+            static let description = "description"
+            static let isSpoiler = "spoiler"
+        }
+        
         struct ExternalLink {
             static let site = "site"
             static let url = "url"

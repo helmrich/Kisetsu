@@ -32,7 +32,6 @@ class Series {
     
     // Additional informations
     let characters: [Character]?
-    // TODO: Relations, Staff
     
     // List-specific properties
     var finishedOn: String?

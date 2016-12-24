@@ -20,6 +20,14 @@ class DataSource {
     var selectedSeries: Series? = nil
     
     // Browse
+    let browseFilters: [[String:[Any]]] = [
+        ["Sort By": ["Score", "Popularity"]],
+        ["Season": Season.allSeasonStrings],
+        ["Status": AnimeAiringStatus.allStatusStrings],
+        ["Type": MediaType.allMediaTypeStrings],
+        ["Genres": Genre.allGenreStrings],
+        ["Year": [Int](1951...2018).reversed()]
+    ]
     var selectedBrowseFilters: [String:[IndexPath:String]?] = [
         "Sort By": [IndexPath:String](),
         "Season": [IndexPath:String](),

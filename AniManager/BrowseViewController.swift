@@ -32,6 +32,14 @@ class BrowseViewController: SeriesCollectionViewController {
         
         navigationController?.navigationBar.barStyle = .blackTranslucent
         
+        /*
+            - Hide the series collection view initially
+            - Show and start animating the activity indicator view
+            - Add the error message view
+            - Configure the series collection view's flow layout
+            - Get a series list
+         */
+        
         seriesCollectionView.alpha = 0.0
         
         activityIndicatorView.startAnimating()
@@ -39,19 +47,29 @@ class BrowseViewController: SeriesCollectionViewController {
             self.activityIndicatorView.alpha = 1.0
         }
         
-        addErrorMessageView(toBottomOf: view, withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
-        
-        
+        addErrorMessageViewToBottomOfView(withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
         configure(seriesCollectionViewFlowLayout)
         
         getSeriesList()
-        
-        
     }
     
     
     // MARK: - Functions
     
+    /*
+        This function gets a new series list by calling the
+        shared AniListClient's getSeriesList method.
+     
+        It then checks if the received series list's count is
+        less than 40 which would mean that the series collection
+        view already shows all the series that were found because
+        there are 40 series per page and sets the boolean
+        showsAllAvailableSeriesItems variable's value accordingly.
+     
+        In the end the series collection view's data is reloaded
+        and made visible and the indicator view hides and stops
+        animating
+     */
     func getSeriesList() {
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
@@ -83,6 +101,13 @@ class BrowseViewController: SeriesCollectionViewController {
     }
     
     @IBAction func openFilterModal() {
+        /*
+            Instantiate the browse filter view controller from the storyboard
+            and set its properties. The modal presentation style should be custom
+            and the browse view controller should be its transitioning delegate
+            as it implements the necessary UIViewControllerTransitioningDelegate's
+            method
+         */
         let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
         filterViewController.modalPresentationStyle = .custom
         filterViewController.transitioningDelegate = self
@@ -92,6 +117,9 @@ class BrowseViewController: SeriesCollectionViewController {
         }
         self.present(filterViewController, animated: true, completion: nil)
     }
+    
+    
+    // MARK: - Collection View Delegate
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
@@ -116,6 +144,8 @@ class BrowseViewController: SeriesCollectionViewController {
             let lastCellIndexPathItem = DataSource.shared.browseSeriesList!.count - 1
             
             AniListClient.shared.getSeriesList(fromPage: Int(DataSource.shared.browseSeriesList!.count / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
+                
+                // Error Handling
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
                     return
@@ -126,10 +156,21 @@ class BrowseViewController: SeriesCollectionViewController {
                     return
                 }
                 
+                // Check if it's the last page with new series
                 if generalSeriesList.count < 40 {
                     self.showsAllAvailableSeriesItems = true
                 }
 
+                /*
+                    Create an empty array that should hold all the new items'
+                    index paths. 
+                 
+                    Then cast the received series list to the
+                    appropriate type and loop through the casted array and
+                    append each series to the data source's browseSeriesList
+                    array, create an index path for the series and append it
+                    to the indexPathsForNewItems array
+                 */
                 var indexPathsForNewItems = [IndexPath]()
                 if self.seriesType == .anime {
                     if let animeSeriesList = generalSeriesList as? [AnimeSeries],
@@ -154,6 +195,10 @@ class BrowseViewController: SeriesCollectionViewController {
                     return
                 }
                 
+                /*
+                    Insert new items in the series collection view at all the index
+                    paths in the indexPathsForNewItems array
+                 */
                 DispatchQueue.main.async {
                     self.seriesCollectionView.performBatchUpdates({
                         collectionView.insertItems(at: indexPathsForNewItems)
@@ -162,8 +207,10 @@ class BrowseViewController: SeriesCollectionViewController {
             }
         }
     }
-    
 }
+
+
+// MARK: - Collection View Data Source
 
 extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -179,6 +226,12 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
+        /*
+            Check if the browse series list in the data source is not nil
+            and if the number of items in the browse series list is higher
+            than the current index path's row (because the index path's row
+            starts at 0 but the count at 1)
+         */
         guard let browseSeriesList = DataSource.shared.browseSeriesList else {
             return cell
         }
@@ -187,10 +240,25 @@ extension BrowseViewController: UICollectionViewDataSource {
             return cell
         }
         
+        /*
+            Get the current series from the browse series list,
+            if the cell doesn't have a series ID, assign the current
+            series' ID to the cells seriesId property and set the
+            cell's title label to the current series' title and
+            show it
+         
+            Then download the cover image and set the cell's image
+            view's image property to the received image
+         */
         let currentSeries = browseSeriesList[indexPath.row]
         
         if cell.seriesId == nil {
             cell.seriesId = currentSeries.id
+        }
+        
+        DispatchQueue.main.async {
+            cell.titleLabel.text = currentSeries.titleEnglish
+            cell.titleLabel.isHidden = false
         }
         
         if cell.imageView.image == nil {
@@ -206,8 +274,6 @@ extension BrowseViewController: UICollectionViewDataSource {
                 if let image = UIImage(data: imageData) {
                     DispatchQueue.main.async {
                         cell.imageOverlay.isHidden = false
-                        cell.titleLabel.text = currentSeries.titleEnglish
-                        cell.titleLabel.isHidden = false
                         cell.imageView.image = image
                     }
                 }
@@ -219,10 +285,11 @@ extension BrowseViewController: UICollectionViewDataSource {
     }
 }
 
+
+// MARK: - View Controller Transitioning Delegate
+
 extension BrowseViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return FilterModalPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
-
-

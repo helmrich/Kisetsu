@@ -96,7 +96,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell(forSeriesType: seriesType)
             cell.rateButton.addTarget(self, action: #selector(toggleRatingPickerVisibility), for: [.touchUpInside])
             
-            cell.addProgressTextFieldToolbarInputAccessoryView(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
+            cell.userListStatusButton.addTarget(self, action: #selector(showLists), for: [.touchUpInside])
+            cell.addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
             
             
             AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
@@ -151,8 +152,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                     }
                 }
             }
-            
-            cell.userListStatusButton.addTarget(self, action: #selector(showLists), for: [.touchUpInside])
             
             if let animeSeries = series as? AnimeSeries {
                 print("Setting number of episodes...")

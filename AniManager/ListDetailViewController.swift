@@ -9,9 +9,6 @@
 import UIKit
 
 class ListDetailViewController: SeriesCollectionViewController {
-
-    // MARK: - Properties
-    
     
     // MARK: - Outlets and Actions
     
@@ -28,52 +25,63 @@ class ListDetailViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure the series collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Hide the series collection view initially
         seriesCollectionView.alpha = 0.0
         
         AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
-                print(errorMessage!)
+                self.errorMessageView.showError(withMessage: errorMessage!)
                 return
             }
             
             guard let user = user else {
-                print("Couldn't get user")
+                self.errorMessageView.showError(withMessage: "Couldn't get user")
                 return
             }
             
             guard let seriesType = self.seriesType else {
-                print("No valid series type given")
+                self.errorMessageView.showError(withMessage: "No valid series type given")
                 return
             }
             
+            /*
+                Get the appropriate status key for the request by getting
+                the current view controller's title and initializing an
+                Anime/MangaListName object with it as a raw value and calling
+                the asKey method on it
+             */
             let status: String
-            let nothingFoundText: String
             if seriesType == .anime {
                 status = AnimeListName(rawValue: self.title!)!.asKey()
-                nothingFoundText = "No anime found"
-            } else {
+            } else if seriesType == .manga {
                 status = MangaListName(rawValue: self.title!)!.asKey()
-                nothingFoundText = "No manga found"
+            } else {
+                self.errorMessageView.showError(withMessage: "Invalid series type")
+                return
             }
             
+            // Show the activity indicator
+            self.activityIndicatorView.startAnimating()
+            UIView.animate(withDuration: 0.25) {
+                self.activityIndicatorView.alpha = 1.0
+            }
+            
+            // Request a series list
             AniListClient.shared.getList(ofType: seriesType, withStatus: status, andUserId: user.id, andDisplayName: nil) { (seriesList, errorMessage) in
                 
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.startAnimating()
-                    UIView.animate(withDuration: 0.25) {
-                        self.activityIndicatorView.alpha = 1.0
-                    }
-                }
-                
+                // Error Handling
                 guard errorMessage == nil else {
                     DispatchQueue.main.async {
-                        self.nothingFoundLabel.text = nothingFoundText
+                        self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
                         self.activityIndicatorView.stopAnimating()
                         UIView.animate(withDuration: 0.25) {
                             self.nothingFoundLabel.alpha = 1.0
@@ -84,10 +92,15 @@ class ListDetailViewController: SeriesCollectionViewController {
                 }
                 
                 guard let generalSeriesList = seriesList else {
-                    print("Couldn't get series list")
+                    self.errorMessageView.showError(withMessage: "Couldn't get series list")
                     return
                 }
                 
+                /*
+                    Check the series type and cast the general series list to
+                    the appropriate type. Then assign the casted list to the
+                    appropriate property in the shared data source
+                 */
                 if seriesType == .anime,
                     let animeSeriesList = generalSeriesList as? [AnimeSeries] {
                     DataSource.shared.selectedAnimeList = animeSeriesList
@@ -95,10 +108,15 @@ class ListDetailViewController: SeriesCollectionViewController {
                     let mangaSeriesList = generalSeriesList as? [MangaSeries] {
                     DataSource.shared.selectedMangaList = mangaSeriesList
                 } else {
-                    print("Couldn't create manga/anime series list from general series list")
+                    self.errorMessageView.showError(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
                     return
                 }
                 
+                /*
+                    Reload and show the collection view, stop the activity
+                    indicator's animation and hide it and the "nothing found"-
+                    label
+                 */
                 DispatchQueue.main.async {
                     self.seriesCollectionView.reloadData()
                     self.activityIndicatorView.stopAnimating()
@@ -115,7 +133,11 @@ class ListDetailViewController: SeriesCollectionViewController {
 
 extension ListDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        /*
+            Check the series type and set the number of items in the section
+            to the number of items in the belonging selected list in the shared
+            data source
+         */
         if seriesType == .anime,
             let selectedAnimeList = DataSource.shared.selectedAnimeList {
             return selectedAnimeList.count
@@ -132,11 +154,14 @@ extension ListDetailViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
-        let currentSeries: Series
         /*
-            Check the view controller's series type and get the appropriate
-            list from the data source
+         Check the view controller's series type and get the appropriate
+         list from the data source. Then set the current cell's progress label,
+         title label and series ID to the values of the series at the index in
+         the selected series list that's equal to the current index path's row
+         value and download the series' image
          */
+        let currentSeries: Series
         if seriesType == .anime,
             let selectedAnimeList = DataSource.shared.selectedAnimeList {
             // If the

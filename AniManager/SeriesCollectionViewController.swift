@@ -35,6 +35,7 @@ class SeriesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addErrorMessageViewToBottomOfView(withOffsetToBottom: -49.0, errorMessageView: errorMessageView)
         navigationController?.navigationBar.barStyle = .blackTranslucent
     }
 

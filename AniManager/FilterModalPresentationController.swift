@@ -78,6 +78,7 @@ class FilterModalPresentationController: UIPresentationController {
                 }
                 let genreParameterValue = createGenreParameterString(fromGenres: genres)
                 DataSource.shared.set(parameterValue: genreParameterValue, forBrowseParameterWithName: BrowseParameterKey.genres)
+                continue
             }
             
             for (_, filterValue) in filterValues {
@@ -93,7 +94,7 @@ class FilterModalPresentationController: UIPresentationController {
                 case "Year":
                     DataSource.shared.set(parameterValue: filterValue, forBrowseParameterWithName: BrowseParameterKey.year)
                 default:
-                    print("Unknown filter name")
+                    print("Unknown filter name \(filterName)")
                     break
                 }
             }

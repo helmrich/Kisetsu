@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */; };
 		D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */; };
 		D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */; };
 		D21EC74F1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */; };
@@ -104,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
 		D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
 		D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerHelper.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				D25EDED71DE4E64600267243 /* ColorExtension.swift */,
 				D2786F951DF5C09100F4368F /* StackViewExtension.swift */,
 				D21EC7761E0368FC008027E4 /* RatingPicker.swift */,
+				D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				D21EC7551E032475008027E4 /* AniListClientHelper.swift in Sources */,
 				D2F32C5A1DFCCFFB0044D195 /* AnimeListSelectionViewController.swift in Sources */,
 				D25EDF051DE8ECA600267243 /* SeriesCollectionViewCell.swift in Sources */,
+				D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */,
 				D2786F871DF3997400F4368F /* Character.swift in Sources */,
 				D2F32C6B1DFCE3640044D195 /* ListName.swift in Sources */,
 				D25EDEE91DE64D2B00267243 /* Series.swift in Sources */,

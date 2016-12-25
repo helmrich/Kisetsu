@@ -33,19 +33,10 @@ class BrowseViewController: SeriesCollectionViewController {
         navigationController?.navigationBar.barStyle = .blackTranslucent
         
         /*
-            - Hide the series collection view initially
-            - Show and start animating the activity indicator view
             - Add the error message view
             - Configure the series collection view's flow layout
             - Get a series list
          */
-        
-        seriesCollectionView.alpha = 0.0
-        
-        activityIndicatorView.startAnimating()
-        UIView.animate(withDuration: 0.25) {
-            self.activityIndicatorView.alpha = 1.0
-        }
         
         addErrorMessageViewToBottomOfView(withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
         configure(seriesCollectionViewFlowLayout)
@@ -71,6 +62,13 @@ class BrowseViewController: SeriesCollectionViewController {
         animating
      */
     func getSeriesList() {
+        
+        seriesCollectionView.alpha = 0.0
+        activityIndicatorView.startAnimating()
+        UIView.animate(withDuration: 0.25) {
+            self.activityIndicatorView.alpha = 1.0
+        }
+        
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)

@@ -10,16 +10,24 @@ import UIKit
 
 class SeriesCollectionViewController: UIViewController {
     
+    /*
+        The SeriesCollectionViewController class will be used
+        as a superclass for most classes that will display
+        series items in a collection view.
+     
+        It provides common properties and functionality such as
+        an error message view, properties for the status bar's
+        display status, a basic implementation of the collection
+        view delegate and a configuration method for the series
+        collection view flow layout
+     */
+    
     // MARK: - Properties
     
     var seriesType: SeriesType! = .anime
     
     let errorMessageView = ErrorMessageView()
     var statusBarShouldBeHidden = false
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     override var prefersStatusBarHidden: Bool {
         return statusBarShouldBeHidden

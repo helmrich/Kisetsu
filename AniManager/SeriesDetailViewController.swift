@@ -31,34 +31,49 @@ class SeriesDetailViewController: UIViewController {
     @IBOutlet weak var seriesDataTableView: UITableView!
     
     
-    // MARK: - Actions
-    
-    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardWillHide, object: nil)
-        
-        
+        // Add error message view to main view
         addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
         
+        // Register the nibs for the actions and images table view cells
+        seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
+        seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "imagesCell")
+        
+        // Instantiate and configure rating picker:
         ratingPicker = RatingPicker(frame: CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: 300.0))
+        // - Toolbar buttons target-actions
         ratingPicker!.dismissToolbarButton.target = self
         ratingPicker!.dismissToolbarButton.action = #selector(toggleRatingPickerVisibility)
         ratingPicker!.submitToolbarButton.target = self
         ratingPicker!.submitToolbarButton.action = #selector(changeUserScore)
+        // - Picker view data source and delegate
         ratingPicker!.pickerView.dataSource = self
         ratingPicker!.pickerView.delegate = self
+        // - Add to main view
         view.addSubview(ratingPicker!)
+        
+        // Create and configure the banner view
+        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
+        bannerView.dismissButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        bannerView.favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
+        bannerView.seriesTitleLabel.text = seriesTitle
+        seriesDataTableView.tableHeaderView = bannerView
+        
+        // Set the table view's row height properties
+        seriesDataTableView.estimatedRowHeight = 300
+        seriesDataTableView.rowHeight = UITableViewAutomaticDimension
         
         /*
             Get a single series object for the specified series ID and series type
             when the view controller is loaded
          */
         AniListClient.shared.getSingleSeries(ofType: seriesType, withId: seriesId) { (series, errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 return
@@ -69,11 +84,12 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
+            // Reload the table view's data
             DispatchQueue.main.async {
                 self.seriesDataTableView.reloadData()
             }
             
-            // MARK: - Banner View Setup
+            // Banner View Setup
             
             // Set the release year label
             if let seasonId = series.seasonId,
@@ -91,11 +107,15 @@ class SeriesDetailViewController: UIViewController {
                 }
             }
             
+            // Check if the series has an URL string for a banner image
             guard let imageBannerUrlString = series.imageBannerUrlString else {
                 return
             }
             
+            // Get the banner image from the banner image URL string
             AniListClient.shared.getImageData(fromUrlString: imageBannerUrlString) { (data, errorMessage) in
+                
+                // Error Handling
                 guard errorMessage == nil else {
                     return
                 }
@@ -104,7 +124,7 @@ class SeriesDetailViewController: UIViewController {
                     return
                 }
                 
-                // Set the banner view image
+                // Create and set the banner view image
                 let bannerImage = UIImage(data: data)
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.image = bannerImage
@@ -114,20 +134,24 @@ class SeriesDetailViewController: UIViewController {
                 }
             }
         }
-        
-        seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
-        seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "imagesCell")
-        
-        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
-        bannerView.dismissButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        bannerView.favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
-        bannerView.seriesTitleLabel.text = seriesTitle
-        
-        seriesDataTableView.tableHeaderView = bannerView
-        
-        seriesDataTableView.estimatedRowHeight = 300
-        seriesDataTableView.rowHeight = UITableViewAutomaticDimension
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Remove keyboard notifications
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
     
     // MARK: - Functions
     
@@ -156,6 +180,7 @@ class SeriesDetailViewController: UIViewController {
         view.frame.origin.y = 0.0
     }
     
+    // This function favorites or unfavorites a series with a given type and ID
     func favorite() {
         AniListClient.shared.favorite(seriesOfType: seriesType, withId: seriesId) { (errorMessage) in
             guard errorMessage == nil else {
@@ -180,6 +205,12 @@ class SeriesDetailViewController: UIViewController {
         }
     }
     
+    /*
+        This function creates and presents an alert controller with
+        all available lists (e.g. watching, plan to watch, completed, etc.)
+        for a certain type. It should usually be called when the series
+        data table view's action cell's user list status button is tapped.
+     */
     func showLists(_ sender: AniManagerButton) {
         /*
             Create an alert controller and configure its popover presentation
@@ -238,8 +269,10 @@ class SeriesDetailViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
         listsAlertController.addAction(removeFromListAction)
         listsAlertController.addAction(cancelAction)
+        
         present(listsAlertController, animated: true, completion: nil)
     }
     
@@ -257,7 +290,7 @@ class SeriesDetailViewController: UIViewController {
             if self.ratingPicker!.frame.origin.y == self.view.bounds.maxY {
                 self.ratingPicker!.frame.origin.y -= self.ratingPicker!.frame.height
             } else {
-                self.ratingPicker!.frame.origin.y += self.ratingPicker!.frame.height
+                self.ratingPicker!.frame.origin.y = self.view.bounds.maxY
             }
         }
     }
@@ -282,16 +315,23 @@ extension SeriesDetailViewController: UIPickerViewDataSource {
         return 1
     }
     
+    /*
+        The number of rows in the component should be 10 as the
+        default rating values range from 1 to 10
+     */
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 10
     }
 }
 
 extension SeriesDetailViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row + 1)"
-    }
-    
+    /*
+        Create a custom label and configure its properties.
+     
+        The title should display the rating's value. It should start
+        at 1 and end at 10. Because the row starts at 0 the title
+        should display the row's value + 1
+     */
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let ratingLabel = UILabel()
         ratingLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 36.0)

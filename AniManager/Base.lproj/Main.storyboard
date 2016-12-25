@@ -95,17 +95,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrX-Eq-hIl">
-                                <rect key="frame" x="152" y="565" width="71" height="32"/>
-                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Skip Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="skipLogin" destination="KLd-lg-sp5" eventType="touchUpInside" id="VNL-Gj-97b"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-CF-u71">
                                 <rect key="frame" x="0.0" y="309.5" width="375" height="108"/>
                                 <subviews>
@@ -197,10 +186,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.14289334416389465" green="0.75232315063476562" blue="0.99320739507675171" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="DrX-Eq-hIl" firstAttribute="centerX" secondItem="R8f-G0-nGS" secondAttribute="centerX" id="50s-Ee-AfO"/>
                             <constraint firstAttribute="trailing" secondItem="jMd-Na-OAI" secondAttribute="trailing" id="9FO-1h-6GF"/>
                             <constraint firstItem="FYe-CF-u71" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="Hwn-Yl-FYb"/>
-                            <constraint firstItem="Kt5-Sa-nfQ" firstAttribute="top" secondItem="DrX-Eq-hIl" secondAttribute="bottom" constant="70" id="NK2-Ac-IEf"/>
                             <constraint firstItem="jMd-Na-OAI" firstAttribute="leading" secondItem="R8f-G0-nGS" secondAttribute="leading" id="fUE-1E-GlV"/>
                             <constraint firstItem="jMd-Na-OAI" firstAttribute="top" secondItem="uUS-rq-xd7" secondAttribute="bottom" constant="80" id="t8k-aE-Oz5"/>
                             <constraint firstItem="FYe-CF-u71" firstAttribute="centerY" secondItem="R8f-G0-nGS" secondAttribute="centerY" constant="30" id="u2W-Y4-EWC"/>
@@ -212,7 +199,6 @@
                         <outlet property="forgotPasswordButton" destination="BDh-w0-ZyY" id="KfN-0b-Byb"/>
                         <outlet property="loginButton" destination="jRj-XV-Tl4" id="Kyu-Ss-VwI"/>
                         <outlet property="signUpButton" destination="CDn-2Y-t9F" id="YDJ-i6-vba"/>
-                        <outlet property="skipLoginButton" destination="DrX-Eq-hIl" id="y77-Ww-ZHM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avX-nu-2zR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -436,7 +422,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8w7-Yw-UWn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8w7-Yw-UWn">
                                 <rect key="frame" x="0.0" y="154" width="375" height="513"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -822,13 +808,8 @@
                                     <outlet property="delegate" destination="mXY-UU-HB9" id="4gJ-jW-iga"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-5h-evD">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNk-og-rz6">
-                                <rect key="frame" x="124" y="321" width="127" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNk-og-rz6">
+                                <rect key="frame" x="124" y="360" width="127" height="24"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -872,6 +853,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nNk-og-rz6" firstAttribute="centerX" secondItem="hZa-sX-XPG" secondAttribute="centerX" id="6gN-hy-B9K"/>
+                            <constraint firstItem="nNk-og-rz6" firstAttribute="centerY" secondItem="hZa-sX-XPG" secondAttribute="centerY" id="DVL-63-9lx"/>
                             <constraint firstItem="H0u-PM-f56" firstAttribute="leading" secondItem="nh3-wO-Sl2" secondAttribute="leading" id="HIY-tH-NkK"/>
                             <constraint firstItem="hZa-sX-XPG" firstAttribute="leading" secondItem="nh3-wO-Sl2" secondAttribute="leading" id="M29-vV-IWS"/>
                             <constraint firstAttribute="trailing" secondItem="hZa-sX-XPG" secondAttribute="trailing" id="ZhT-ay-Hy4"/>
@@ -886,6 +869,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Search" id="vmY-jZ-7ff"/>
                     <connections>
+                        <outlet property="nothingFoundLabel" destination="nNk-og-rz6" id="r9B-mo-M8E"/>
                         <outlet property="searchBar" destination="Jc3-Db-79z" id="68W-4f-T4F"/>
                         <outlet property="seriesCollectionView" destination="hZa-sX-XPG" id="GEo-Nu-SIc"/>
                         <outlet property="seriesCollectionViewFlowLayout" destination="cxO-Dr-77U" id="IqV-aG-nNp"/>
@@ -1135,7 +1119,7 @@
                                                     <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1UU-SK-BR6">
-                                                    <rect key="frame" x="30" y="28.5" width="134" height="43.5"/>
+                                                    <rect key="frame" x="30" y="29" width="134" height="43.5"/>
                                                     <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="36"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>

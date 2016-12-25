@@ -124,15 +124,15 @@ class SearchViewController: SeriesCollectionViewController {
         let selectedSeriesType = SeriesType(rawValue: selectedSegmentTitle.lowercased())
         seriesType = selectedSeriesType
     }
-    
-//    func mainViewWasTapped() {
-//        searchBar.resignFirstResponder()
-//    }
-
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        /*
+            Every time the search bar's text changed, the series
+            collection view should be hidden and a new series list
+            should be requested with the current search text
+         */
         seriesCollectionView.alpha = 0.0
         getSeriesList(withSearchText: searchText)
     }
@@ -140,6 +140,11 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        /*
+            The number of items in the section should be equal
+            to the number of series in the data source's
+            searchResultsSeriesList property
+         */
         guard let searchResultsSeriesList = DataSource.shared.searchResultsSeriesList else {
             return 0
         }
@@ -151,20 +156,43 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
-        guard let searchResultsSeriesList = DataSource.shared.searchResultsSeriesList else {
+        /*
+            Check if there is a results series list and if the number
+            of series in the array is higher than the index path's
+            row property
+         */
+        guard let searchResultsSeriesList = DataSource.shared.searchResultsSeriesList,
+        searchResultsSeriesList.count > indexPath.row else {
             return cell
         }
         
-        guard searchResultsSeriesList.count > indexPath.row else {
-            return cell
-        }
-        
+        /*
+            Get the current series from the search results series list
+            by getting the item at the index that's equal to the current
+            index path's row property
+         */
         let currentSeries = searchResultsSeriesList[indexPath.row]
         
+        /*
+            If the dequeued cell's seriesId property is nil, the current
+            series' ID should be assigned to it
+         */
         if cell.seriesId == nil {
             cell.seriesId = currentSeries.id
         }
         
+        /*
+            Set the cell's title label to the current series' title
+            and show it
+         */
+        cell.titleLabel.text = currentSeries.titleEnglish
+        cell.titleLabel.isHidden = false
+        
+        /*
+            Check if the cell image view's image property is nil. If it is,
+            get image data for the current series' medium image URL string
+            and set the image when the data was successfully downloaded
+         */
         if cell.imageView.image == nil {
             AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
@@ -178,8 +206,6 @@ extension SearchViewController: UICollectionViewDataSource {
                 if let image = UIImage(data: imageData) {
                     DispatchQueue.main.async {
                         cell.imageOverlay.isHidden = false
-                        cell.titleLabel.text = currentSeries.titleEnglish
-                        cell.titleLabel.isHidden = false
                         cell.imageView.image = image
                     }
                 }
@@ -189,7 +215,11 @@ extension SearchViewController: UICollectionViewDataSource {
         return cell
         
     }
-    
+
+    /*
+        When the search bar's search button is tapped, the search bar
+        should resign its first responder status
+     */
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

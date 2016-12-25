@@ -15,6 +15,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
+            
+            // MARK: - Basic Informations Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInformationsCell") as! BasicInformationsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -72,21 +75,28 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 cell.numberOfEpisodesValueLabel.text = "\(animeSeries.numberOfTotalEpisodes)"
                 let seasonString = createSeasonString(fromSeasonId: animeSeries.seasonId)
                 cell.seasonValueLabel.text = seasonString != nil ? seasonString : "n/a"
-                // layoutSubviews has to be called so that the the cell's labels
-                // with dynamic content will update their width based on the values
+                
+                /*
+                    layoutSubviews has to be called so that the the cell's labels
+                    with dynamic content will update their width based on the values
+                 */
                 cell.layoutSubviews()
                 return cell
             case .manga:
                 let mangaSeries = series as! MangaSeries
                 cell.statusValueLabel.text = mangaSeries.publishingStatus?.rawValue
-                // TODO: Add more manga-specific values
                 cell.toggleAnimeSpecificLabels(hidden: true)
-                // layoutSubviews has to be called so that the the cell's labels
-                // with dynamic content will update their width based on the values
+                /*
+                     layoutSubviews has to be called so that the the cell's labels
+                     with dynamic content will update their width based on the values
+                 */
                 cell.layoutSubviews()
                 return cell
             }
         } else if indexPath.row == 1 {
+            
+            // MARK: - Actions Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -98,7 +108,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             cell.userListStatusButton.addTarget(self, action: #selector(showLists), for: [.touchUpInside])
             cell.addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
-            
             
             AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                 guard errorMessage == nil else {
@@ -185,6 +194,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             return cell
             
         } else if indexPath.row == 2 {
+            
+            // MARK: - Genre Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell") as! GenreTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -208,6 +220,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             return cell
             
         } else if indexPath.row == 3 {
+            
+            // MARK: - Description Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell") as! DescriptionTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -248,6 +263,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 5 {
+            
+            // MARK: - Additional Informations Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -284,6 +302,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 6 {
+            
+            // MARK: - Tags Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell") as! GenreTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -309,6 +330,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             return cell
             
         } else if indexPath.row == 7 {
+            
+            // MARK: - External Links Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -329,6 +353,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 8 {
+            
+            // MARK: - Videos Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
             
             guard let series = DataSource.shared.selectedSeries else {
@@ -360,7 +387,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
     func listValueChanged() {
         if let actionsCell = seriesDataTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? ActionsTableViewCell {
             
-            let httpMethod = "PUT"
             let listStatus = actionsCell.userListStatusButton.title(for: .normal)!.lowercased()
             
             let watchedEpisodes: Int
@@ -395,7 +421,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 userScore = 0
             }
             
-            AniListClient.shared.submitList(ofType: seriesType, withHttpMethod: httpMethod, seriesId: seriesId, listStatusString: listStatus, userScore: userScore, episodesWatched: watchedEpisodes, readChapters: readChapters, readVolumes: readVolumes) { (errorMessage) in
+            AniListClient.shared.submitList(ofType: seriesType, withHttpMethod: "PUT", seriesId: seriesId, listStatusString: listStatus, userScore: userScore, episodesWatched: watchedEpisodes, readChapters: readChapters, readVolumes: readVolumes) { (errorMessage) in
                 guard errorMessage == nil else {
                     print("ERROR: \(errorMessage!)")
                     return

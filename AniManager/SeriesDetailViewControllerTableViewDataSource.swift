@@ -24,6 +24,11 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 return UITableViewCell(frame: CGRect.zero)
             }
             
+            /*
+                Try to get the large image from the series' URL string and
+                set the cell's cover image when the image data could be
+                downloaded and turned into an image successfully
+             */
             AniListClient.shared.getImageData(fromUrlString: series.imageLargeUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
@@ -48,8 +53,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // Set cell property values that both series types have
             cell.averageRatingValueLabel.text = "\(Int(round(series.averageScore)))"
             
-            // Set the cell's average rating value label's color depending on
-            // the score
+            /*
+                Set the cell's average rating value label's color depending on
+                the score
+             */
             switch series.averageScore {
             case _ where series.averageScore > 75:
                 cell.averageRatingValueLabel.textColor = .aniManagerGreen
@@ -64,8 +71,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             cell.typeValueLabel.text = series.mediaType.rawValue
-            // Set specific property values depending on the series type
             
+            // Set specific property values depending on the series type
             switch series.seriesType {
             case .anime:
                 let animeSeries = series as! AnimeSeries

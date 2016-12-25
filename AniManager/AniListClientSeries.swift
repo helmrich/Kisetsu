@@ -27,16 +27,15 @@ extension AniListClient {
                 AniListConstant.Path.Placeholder.seriesType: seriesType.rawValue
             ]
             
+            var allParameters = parameters
             let path: String
             if let query = query {
                 replacingPairs[AniListConstant.Path.Placeholder.query] = query
                 path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.search, withReplacingPairs: replacingPairs)
             } else {
                 path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.browse, withReplacingPairs: replacingPairs)
+                allParameters[AniListConstant.ParameterKey.Browse.page] = page
             }
-            
-            var allParameters = parameters
-            allParameters[AniListConstant.ParameterKey.Browse.page] = page
             
             guard let url = self.createAniListUrl(withPath: path, andParameters: allParameters) else {
                 completionHandlerForSeriesList(nil, "Couldn't create AniList URL")

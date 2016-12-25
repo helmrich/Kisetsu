@@ -22,11 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = .aniManagerBlack
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
         
-        print(UserDefaults.standard.string(forKey: "authorizationKey"))
-        print(UserDefaults.standard.string(forKey: "accessToken"))
-        print(UserDefaults.standard.string(forKey: "refreshToken"))
-        print("Access token will expire in \(UserDefaults.standard.integer(forKey: "expirationTimestamp") - Int(Date().timeIntervalSince1970)) seconds")
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         /*
@@ -67,15 +62,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        
-    }
-
-
 }
 

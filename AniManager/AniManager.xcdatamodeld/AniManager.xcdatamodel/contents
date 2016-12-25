@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16C67" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BasicSeries" representedClassName="BasicSeries" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imageMediumUrlString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seriesType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleEnglish" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleRomaji" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="browseList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BrowseList" inverseName="basicSeries" inverseEntity="BrowseList" syncable="YES"/>
+    </entity>
+    <entity name="BrowseList" representedClassName="BrowseList" syncable="YES">
+        <relationship name="basicSeries" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BasicSeries" inverseName="browseList" inverseEntity="BasicSeries" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="BasicSeries" positionX="-45" positionY="0" width="128" height="135"/>
+        <element name="BrowseList" positionX="-18" positionY="81" width="128" height="60"/>
+    </elements>
+</model>

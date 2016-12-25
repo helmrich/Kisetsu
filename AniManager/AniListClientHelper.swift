@@ -14,7 +14,6 @@ extension AniListClient {
     func getImageData(fromUrlString urlString: String, completionHandlerForImageData: @escaping (_ imageData: Data?, _ errorMessage: String?) -> Void) {
         
         // URL creation and request configuration
-        
         guard let url = URL(string: urlString) else {
             completionHandlerForImageData(nil, "Couldn't create a URL from the provided URL string")
             return

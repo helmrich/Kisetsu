@@ -850,6 +850,9 @@
                                     <constraint firstItem="7AW-Sj-7pg" firstAttribute="centerX" secondItem="H0u-PM-f56" secondAttribute="centerX" id="rel-ye-GsT"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CiZ-QH-BRS">
+                                <rect key="frame" x="177" y="361" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -861,7 +864,9 @@
                             <constraint firstItem="hZa-sX-XPG" firstAttribute="top" secondItem="H0u-PM-f56" secondAttribute="bottom" id="ejn-wD-ebw"/>
                             <constraint firstAttribute="trailing" secondItem="H0u-PM-f56" secondAttribute="trailing" id="g9A-Ol-Ujv"/>
                             <constraint firstItem="73c-a8-crc" firstAttribute="top" secondItem="hZa-sX-XPG" secondAttribute="bottom" id="i0o-5H-JKY"/>
+                            <constraint firstItem="CiZ-QH-BRS" firstAttribute="centerY" secondItem="hZa-sX-XPG" secondAttribute="centerY" id="o4S-Z5-kvm"/>
                             <constraint firstItem="H0u-PM-f56" firstAttribute="top" secondItem="nh3-wO-Sl2" secondAttribute="top" id="qut-eE-xPc"/>
+                            <constraint firstItem="CiZ-QH-BRS" firstAttribute="centerX" secondItem="hZa-sX-XPG" secondAttribute="centerX" id="yTR-Xc-Wpf"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="SearchIcon" selectedImage="SearchIconActive" id="ft3-3L-c7Q">
@@ -869,6 +874,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Search" id="vmY-jZ-7ff"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="CiZ-QH-BRS" id="PIm-G3-PhJ"/>
                         <outlet property="nothingFoundLabel" destination="nNk-og-rz6" id="r9B-mo-M8E"/>
                         <outlet property="searchBar" destination="Jc3-Db-79z" id="68W-4f-T4F"/>
                         <outlet property="seriesCollectionView" destination="hZa-sX-XPG" id="GEo-Nu-SIc"/>

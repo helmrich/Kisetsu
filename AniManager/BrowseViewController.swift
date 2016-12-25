@@ -38,7 +38,6 @@ class BrowseViewController: SeriesCollectionViewController {
             - Get a series list
          */
         
-        addErrorMessageViewToBottomOfView(withOffsetToBottom: 49.0, errorMessageView: errorMessageView)
         configure(seriesCollectionViewFlowLayout)
         
         getSeriesList()
@@ -63,20 +62,18 @@ class BrowseViewController: SeriesCollectionViewController {
      */
     func getSeriesList() {
         
-        seriesCollectionView.alpha = 0.0
-        activityIndicatorView.startAnimating()
-        UIView.animate(withDuration: 0.25) {
-            self.activityIndicatorView.alpha = 1.0
-        }
+        activityIndicatorView.startAnimatingAndFadeIn()
         
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 return
             }
             
             guard let seriesList = seriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 return
             }
             
@@ -86,11 +83,10 @@ class BrowseViewController: SeriesCollectionViewController {
             
             DataSource.shared.browseSeriesList = seriesList
             
+            self.activityIndicatorView.stopAnimatingAndFadeOut()
             DispatchQueue.main.async {
                 self.seriesCollectionView.reloadData()
-                self.activityIndicatorView.stopAnimating()
                 UIView.animate(withDuration: 0.25) {
-                    self.activityIndicatorView.alpha = 0.0
                     self.seriesCollectionView.alpha = 1.0
                 }
             }

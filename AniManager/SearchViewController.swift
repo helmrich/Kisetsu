@@ -26,6 +26,7 @@ class SearchViewController: SeriesCollectionViewController {
     @IBOutlet weak var seriesCollectionView: UICollectionView!
     @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var nothingFoundLabel: UILabel!
     
     // MARK: - Actions
@@ -51,10 +52,7 @@ class SearchViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-            Add an error message view and configure the collection
-            view's flow layout
-         */
+        // Configure the collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
         
         /*
@@ -76,10 +74,14 @@ class SearchViewController: SeriesCollectionViewController {
         parameter
      */
     func getSeriesList(withSearchText searchText: String) {
+        
+        activityIndicatorView.startAnimatingAndFadeIn()
+        
         AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, errorMessage) in
             
             // Error Handling
             guard errorMessage == nil else {
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 DispatchQueue.main.async {
                     self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
                     UIView.animate(withDuration: 0.25) {
@@ -91,6 +93,7 @@ class SearchViewController: SeriesCollectionViewController {
             
             guard let seriesList = seriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series")
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 return
             }
             
@@ -103,6 +106,7 @@ class SearchViewController: SeriesCollectionViewController {
             
             DispatchQueue.main.async {
                 self.seriesCollectionView.reloadData()
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 UIView.animate(withDuration: 0.25) {
                     self.nothingFoundLabel.alpha = 0.0
                     self.seriesCollectionView.alpha = 1.0

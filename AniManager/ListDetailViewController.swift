@@ -40,16 +40,34 @@ class ListDetailViewController: SeriesCollectionViewController {
             // Error Handling
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    UIView.animate(withDuration: 0.25) {
+                        self.activityIndicatorView.alpha = 0.0
+                    }
+                }
                 return
             }
             
             guard let user = user else {
                 self.errorMessageView.showError(withMessage: "Couldn't get user")
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    UIView.animate(withDuration: 0.25) {
+                        self.activityIndicatorView.alpha = 0.0
+                    }
+                }
                 return
             }
             
             guard let seriesType = self.seriesType else {
                 self.errorMessageView.showError(withMessage: "No valid series type given")
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    UIView.animate(withDuration: 0.25) {
+                        self.activityIndicatorView.alpha = 0.0
+                    }
+                }
                 return
             }
             
@@ -70,10 +88,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             }
             
             // Show the activity indicator
-            self.activityIndicatorView.startAnimating()
-            UIView.animate(withDuration: 0.25) {
-                self.activityIndicatorView.alpha = 1.0
-            }
+            self.activityIndicatorView.startAnimatingAndFadeIn()
             
             // Request a series list
             AniListClient.shared.getList(ofType: seriesType, withStatus: status, andUserId: user.id, andDisplayName: nil) { (seriesList, errorMessage) in
@@ -82,17 +97,14 @@ class ListDetailViewController: SeriesCollectionViewController {
                 guard errorMessage == nil else {
                     DispatchQueue.main.async {
                         self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
-                        self.activityIndicatorView.stopAnimating()
-                        UIView.animate(withDuration: 0.25) {
-                            self.nothingFoundLabel.alpha = 1.0
-                            self.activityIndicatorView.alpha = 0.0
-                        }
                     }
+                    self.activityIndicatorView.stopAnimatingAndFadeOut()
                     return
                 }
                 
                 guard let generalSeriesList = seriesList else {
                     self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                    self.activityIndicatorView.stopAnimatingAndFadeOut()
                     return
                 }
                 
@@ -109,6 +121,7 @@ class ListDetailViewController: SeriesCollectionViewController {
                     DataSource.shared.selectedMangaList = mangaSeriesList
                 } else {
                     self.errorMessageView.showError(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
+                    self.activityIndicatorView.stopAnimatingAndFadeOut()
                     return
                 }
                 
@@ -117,11 +130,10 @@ class ListDetailViewController: SeriesCollectionViewController {
                     indicator's animation and hide it and the "nothing found"-
                     label
                  */
+                self.activityIndicatorView.stopAnimatingAndFadeOut()
                 DispatchQueue.main.async {
                     self.seriesCollectionView.reloadData()
-                    self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
-                        self.activityIndicatorView.alpha = 0.0
                         self.nothingFoundLabel.alpha = 0.0
                         self.seriesCollectionView.alpha = 1.0
                     }

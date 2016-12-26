@@ -12,10 +12,15 @@ extension AniListClient {
     
     // MARK: - GET
     
+    /*
+        This method gets a series list of a certain type with a specified status (e.g. watching,
+        reading, completed, etc.) for a specified user
+     */
     func getList(ofType type: SeriesType, withStatus status: String, andUserId userId: Int?, andDisplayName displayName: String?, completionHandlerForList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         getStatusListsDictionary(ofType: type, forUserId: userId, forDisplayName: displayName) { (allStatusListsDictionary, errorMessage) in
             
+            // Error Handling
             guard errorMessage == nil else {
                 completionHandlerForList(nil, errorMessage!)
                 return
@@ -26,15 +31,25 @@ extension AniListClient {
                 return
             }
             
+            /*
+                Try to get an array of series dictionaries for the specified status
+             */
             guard let statusList = allStatusListsDictionary[status] as? [[String:Any]] else {
                 completionHandlerForList(nil, "Couldn't get series list from dictionary")
                 return
             }
             
+            /*
+                Create an empty array of anime/manga series, iterate over all series
+                in the status list, try casting the series to a dictionary and creating
+                an Anime/MangaSeries object from it. Also get values for watched episodes/
+                read chapters/read volumes and assign it to the series' belonging property.
+                Then append the series list to the array.
+             */
             if type == .anime {
                 var animeSeriesList = [AnimeSeries]()
-                for list in statusList {
-                    guard let seriesDictionary = list[type.rawValue] as? [String:Any] else {
+                for series in statusList {
+                    guard let seriesDictionary = series[type.rawValue] as? [String:Any] else {
                         completionHandlerForList(nil, "Couldn't get series from list")
                         return
                     }
@@ -44,7 +59,7 @@ extension AniListClient {
                         return
                     }
                     
-                    if let watchedEpisodes = list[AniListConstant.ResponseKey.List.AnimeList.watchedEpisodes] as? Int {
+                    if let watchedEpisodes = series[AniListConstant.ResponseKey.List.AnimeList.watchedEpisodes] as? Int {
                         animeSeries.watchedEpisodes = watchedEpisodes
                     }
                     
@@ -54,8 +69,8 @@ extension AniListClient {
                 return
             } else if type == .manga {
                 var mangaSeriesList = [MangaSeries]()
-                for list in statusList {
-                    guard let seriesDictionary = list[type.rawValue] as? [String:Any] else {
+                for series in statusList {
+                    guard let seriesDictionary = series[type.rawValue] as? [String:Any] else {
                         completionHandlerForList(nil, "Couldn't get series from list")
                         return
                     }
@@ -65,11 +80,11 @@ extension AniListClient {
                         return
                     }
                     
-                    if let readChapters = list[AniListConstant.ResponseKey.List.MangaList.readChapters] as? Int {
+                    if let readChapters = series[AniListConstant.ResponseKey.List.MangaList.readChapters] as? Int {
                         mangaSeries.readChapters = readChapters
                     }
                     
-                    if let readVolumes = list[AniListConstant.ResponseKey.List.MangaList.readVolumes] as? Int {
+                    if let readVolumes = series[AniListConstant.ResponseKey.List.MangaList.readVolumes] as? Int {
                         mangaSeries.readVolumes = readVolumes
                     }
                     
@@ -84,8 +99,14 @@ extension AniListClient {
         }
     }
     
-    func getStatusListsDictionary(ofType type: SeriesType, forUserId userId: Int?, forDisplayName displayName: String?, completionHandlerForLists: @escaping (_ lists: [String:Any]?, _ errorMessage: String?) -> Void) {
+    /*
+        This method gets a dictionary with all status lists for a series type for a user
+        that's either specified by an ID or a display name.
+     */
+    fileprivate func getStatusListsDictionary(ofType type: SeriesType, forUserId userId: Int?, forDisplayName displayName: String?, completionHandlerForLists: @escaping (_ lists: [String:Any]?, _ errorMessage: String?) -> Void) {
         validateAccessToken { (errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
                 completionHandlerForLists(nil, errorMessage!)
                 return
@@ -93,6 +114,7 @@ extension AniListClient {
             
             // URL creation and request configuration
             
+            // Create a path based on the series type
             let path: String
             if type == .anime {
                 if let userId = userId {
@@ -121,6 +143,7 @@ extension AniListClient {
                 return
             }
             
+            // Create a URL with the path and create a request with it
             guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
                 completionHandlerForLists(nil, "Couldn't create AniList URL")
                 return
@@ -129,6 +152,8 @@ extension AniListClient {
             let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForLists(nil, errorMessage)
                     return
@@ -136,6 +161,7 @@ extension AniListClient {
                 
                 let data = data!
                 
+                // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
                     completionHandlerForLists(nil, "Couldn't deserialize data into a JSON object")
                     return
@@ -146,6 +172,7 @@ extension AniListClient {
                     return
                 }
                 
+                // Try to get the dictionary with all status lists
                 guard let allStatusLists = listsDictionary[AniListConstant.ResponseKey.List.allLists] as? [String:Any] else {
                     completionHandlerForLists(nil, "Couldn't get series list from dictionary")
                     return
@@ -160,8 +187,17 @@ extension AniListClient {
         }
     }
     
+    /*
+        This method requests list informations for a series specified by type and an ID.
+        In this case the series informations that can eventually be received are:
+        - List status
+        - User score
+        - Progress-related values (watched episodes, read chapters/volumes)
+     */
     func getListInformations(forSeriesOfType type: SeriesType, withId seriesId: Int, forUserId userId: Int?, forDisplayName displayName: String?, completionHandlerForInformations: @escaping (_ status: String?, _ userScore: Int?, _ watchedEpisodes: Int?, _ readChapters: Int?, _ readVolumes: Int?, _ errorMessage: String?) -> Void) {
         getStatusListsDictionary(ofType: type, forUserId: userId, forDisplayName: displayName) { (allStatusListsDictionary, errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
                 completionHandlerForInformations(nil, nil, nil, nil, nil, errorMessage!)
                 return
@@ -172,11 +208,12 @@ extension AniListClient {
                 return
             }
             
-            
-            // Create allStatusListSeries variable that contains all
-            // series dictionaries that are in ANY status list, then
-            // check if there is a series with the specified ID,
-            // if there is, extract all values from this series
+            /*
+                Create allStatusListSeries variable that contains all
+                series dictionaries that are in ANY status list, then
+                check if there is a series with the specified ID,
+                if there is, extract all values from this series
+             */
             var statusKeys: [String]
             if type == .anime {
                 statusKeys = AnimeListName.allKeys
@@ -241,7 +278,6 @@ extension AniListClient {
                 completionHandlerForSubmission("Invalid type and/or HTTP method")
                 return
             }
-            
             
             /*
              Check if the passed in list status string is "on hold" in which
@@ -329,6 +365,7 @@ extension AniListClient {
     
     // MARK: - DELETE
     
+    // This method deletes an entry (series) from the list it currently is in
     func deleteListEntry(ofType type: SeriesType, withSeriesId seriesId: Int, completionHandlerForDeletion: @escaping (_ errorMessage: String?) -> Void) {
         
         validateAccessToken { (errorMessage) in
@@ -366,6 +403,8 @@ extension AniListClient {
             request.httpMethod = "DELETE"
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForDeletion(errorMessage)
                     return
@@ -373,6 +412,7 @@ extension AniListClient {
                 
                 let data = data!
                 
+                // JSON Deserialization
                 guard let _ = self.deserializeJson(fromData: data) else {
                     completionHandlerForDeletion("Couldn't deserialize data to JSON object")
                     return

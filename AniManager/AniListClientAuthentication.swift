@@ -29,6 +29,8 @@ extension AniListClient {
             let request = self.createDefaultRequest(withUrl: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                
+                // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                     completionHandlerForUser(nil, errorMessage)
                     return
@@ -105,6 +107,7 @@ extension AniListClient {
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             
+            // Error Handling
             if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
                 completionHandlerForTokens(nil, nil, errorMessage)
                 return
@@ -170,6 +173,8 @@ extension AniListClient {
         }
         
         getAccessToken(withRefreshToken: true) { (accessToken, _, errorMessage) in
+            
+            // Error Handling
             guard errorMessage == nil else {
                 completionHandlerForValidation(errorMessage!)
                 return
@@ -180,6 +185,7 @@ extension AniListClient {
                 return
             }
             
+            // Set the new access token value and its expiration time stamp in the user defaults
             UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
             UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
             

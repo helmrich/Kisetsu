@@ -244,8 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				D25EDF011DE8CBEB00267243 /* DataSource.swift */,
-				D25EDF001DE8CBC300267243 /* Series */,
 				D2F32C6E1DFDE2B70044D195 /* User.swift */,
+				D25EDF001DE8CBC300267243 /* Series */,
 				D25EDEC01DE2552700267243 /* Clients */,
 			);
 			name = Models;

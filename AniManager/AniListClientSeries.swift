@@ -279,6 +279,12 @@ extension AniListClient {
                 return
             }
             
+            /*
+                Create and configure a request with the created URL. Assign "POST"
+                to the request's httpMethod property and create HTTP body data from
+                a JSON-like formatted string and assign it to the request's httpBody
+                property.
+             */
             let request = NSMutableURLRequest(url: url)
             request.httpMethod = "POST"
             request.httpBody = "{\"id\":\"\(id)\"}".data(using: .utf8)

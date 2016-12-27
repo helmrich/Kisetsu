@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class BrowseViewController: SeriesCollectionViewController {
 
     // MARK: - Properties
     
+    var refreshControl: UIRefreshControl!
     var showsAllAvailableSeriesItems = false
+    var managedContext: NSManagedObjectContext!
+    var browseList: SeriesList?
+    
+    var numberOfBasicSeriesInBrowseList: Int {
+        guard let browseList = browseList,
+            let basicSeries = browseList.basicSeries else {
+                return 0
+        }
+        
+        return basicSeries.count
+    }
     
     
     // MARK: - Outlets and Actions
@@ -30,17 +43,70 @@ class BrowseViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
+            Get the data with the selected browse filters from the user defaults and
+            unarchive the data so it becomes an object. Try casting the object to the
+            shared data source's selectedBrowseFilters' properties type and assign the
+            user default's selected browse filters to the shared data source's
+            selectedBrowseFilters property
+         */
+        if let selectedBrowseFiltersDictionaryData = UserDefaults.standard.object(forKey: "selectedBrowseFilters") as? Data,
+            let selectedBrowseFiltersObject = NSKeyedUnarchiver.unarchiveObject(with: selectedBrowseFiltersDictionaryData),
+            let selectedBrowseFilters = selectedBrowseFiltersObject as? [String:[IndexPath:String]?] {
+            DataSource.shared.selectedBrowseFilters = selectedBrowseFilters
+        }
+        
+        if let userDefaultsSeriesTypeString = UserDefaults.standard.value(forKey: "browseSeriesType") as? String,
+            let userDefaultsSeriesType = SeriesType(rawValue: userDefaultsSeriesTypeString) {
+            seriesType = userDefaultsSeriesType
+        }
+        
         navigationController?.navigationBar.barStyle = .blackTranslucent
         
         /*
-            - Add the error message view
-            - Configure the series collection view's flow layout
-            - Get a series list
+            Create the refresh control, add a target-action to it and assign it
+            to the series collection view's refreshControl property
          */
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(getSeriesList), for: [.valueChanged])
+        seriesCollectionView.refreshControl = refreshControl
         
+        // Get the managed context from the app delegate
+        managedContext = (UIApplication.shared.delegate as! AppDelegate).coreDataStack.managedContext
+        
+        // Configure the series collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
         
-        getSeriesList()
+        /*
+            Fetch all series lists whose type is "browse" which should normally
+            return one result. If the number of results is higher than 0, the
+            first item of the results should be assigned to the browseList property
+            and the series collection view should be refreshed
+         
+            If there are no results it means that it's the first time a browse list
+            is requested. Thus, when it's the first time a SeriesList managed object
+            should be created and assigned to the browseList property. Then, its
+            type property should be set, the managed context should be saved and a
+            series list should be requested by calling getSeriesList.
+         */
+        let browseListFetchRequest: NSFetchRequest<SeriesList> = SeriesList.fetchRequest()
+        browseListFetchRequest.predicate = NSPredicate(format: "type == %@", argumentArray: ["browse"])
+        
+        do {
+            let results = try managedContext.fetch(browseListFetchRequest)
+            print("Number of results for browse list: \(results.count)")
+            if results.count > 0 {
+                browseList = results.first
+                seriesCollectionView.reloadData()
+            } else {
+                browseList = SeriesList(context: managedContext)
+                browseList?.type = "browse"
+                try managedContext.save()
+                getSeriesList()
+            }
+        } catch let error as NSError {
+            print("Error when fetching browse list: \(error), \(error.userInfo)")
+        }
     }
     
     
@@ -81,16 +147,55 @@ class BrowseViewController: SeriesCollectionViewController {
                 self.showsAllAvailableSeriesItems = true
             }
             
-            DataSource.shared.browseSeriesList = seriesList
+            guard self.browseList != nil else {
+                print("Couldn't find browse list")
+                return
+            }
             
+            /*
+                When getSeriesList is called an entirely new browse list should
+                be requested, so the browseList property's basicSeries property
+                should be set to an empty set
+             */
+            self.browseList!.basicSeries = []
+            
+            /*
+                Iterate over all series in the received series list, create a
+                BasicSeries object for each series, set its properties and add
+                it to the browse list
+             */
+            for series in seriesList {
+                let basicSeries = BasicSeries(context: self.managedContext)
+                basicSeries.id = Int32(series.id)
+                basicSeries.titleEnglish = series.titleEnglish
+                basicSeries.titleRomaji = series.titleRomaji
+                basicSeries.averageScore = series.averageScore
+                basicSeries.popularity = Int32(series.popularity)
+                basicSeries.imageMediumUrlString = series.imageMediumUrlString
+                basicSeries.seriesType = series.seriesType.rawValue
+                self.browseList!.addToBasicSeries(basicSeries)
+            }
+            
+            // Save the managed context
+            do {
+                try self.managedContext.save()
+            } catch let error as NSError {
+                print("Error when trying to save context: \(error), \(error.userInfo)")
+            }
+            
+            /*
+                - Hide the activity indicator view
+                - Reload and show the series collection view
+                - End the refresh control's refreshing status
+             */
             self.activityIndicatorView.stopAnimatingAndFadeOut()
             DispatchQueue.main.async {
                 self.seriesCollectionView.reloadData()
+                self.refreshControl.endRefreshing()
                 UIView.animate(withDuration: 0.25) {
                     self.seriesCollectionView.alpha = 1.0
                 }
             }
-            
         }
     }
     
@@ -117,7 +222,7 @@ class BrowseViewController: SeriesCollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        guard DataSource.shared.browseSeriesList != nil else {
+        guard browseList != nil else {
             return
         }
         
@@ -129,15 +234,15 @@ class BrowseViewController: SeriesCollectionViewController {
             a new series list should be requested from the page that comes
             after the page the last series list was downloaded from
         */
-        if indexPath.row + 1 == DataSource.shared.browseSeriesList!.count && !showsAllAvailableSeriesItems {
+        if indexPath.row + 1 == numberOfBasicSeriesInBrowseList && !showsAllAvailableSeriesItems {
             
             /*
                 Get the last cell's index paths so that new items can be inserted
                 after it
             */
-            let lastCellIndexPathItem = DataSource.shared.browseSeriesList!.count - 1
+            let lastCellIndexPathItem = numberOfBasicSeriesInBrowseList - 1
             
-            AniListClient.shared.getSeriesList(fromPage: Int(DataSource.shared.browseSeriesList!.count / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
+            AniListClient.shared.getSeriesList(fromPage: Int(numberOfBasicSeriesInBrowseList / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {
@@ -145,13 +250,13 @@ class BrowseViewController: SeriesCollectionViewController {
                     return
                 }
 
-                guard let generalSeriesList = seriesList else {
+                guard let seriesList = seriesList else {
                     self.errorMessageView.showError(withMessage: "Couldn't get series list")
                     return
                 }
                 
                 // Check if it's the last page with new series
-                if generalSeriesList.count < 40 {
+                if seriesList.count < 40 {
                     self.showsAllAvailableSeriesItems = true
                 }
 
@@ -159,34 +264,25 @@ class BrowseViewController: SeriesCollectionViewController {
                     Create an empty array that should hold all the new items'
                     index paths. 
                  
-                    Then cast the received series list to the
-                    appropriate type and loop through the casted array and
-                    append each series to the data source's browseSeriesList
-                    array, create an index path for the series and append it
-                    to the indexPathsForNewItems array
+                    Then iterate over all series in the seriesList, create
+                    a basic series object and an index path for each series,
+                    set the basic series object's properties and add it to
+                    the browse list's basic series.
                  */
                 var indexPathsForNewItems = [IndexPath]()
-                if self.seriesType == .anime {
-                    if let animeSeriesList = generalSeriesList as? [AnimeSeries],
-                        let _ = DataSource.shared.browseSeriesList as? [AnimeSeries] {
-                        for animeSeries in animeSeriesList {
-                            DataSource.shared.browseSeriesList!.append(animeSeries)
-                            let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
-                            indexPathsForNewItems.append(indexPath)
-                        }
-                        
-                    }
-                } else if self.seriesType == .manga {
-                    if let mangaSeriesList = generalSeriesList as? [MangaSeries],
-                        let _ = DataSource.shared.browseSeriesList as? [MangaSeries] {
-                        for mangaSeries in mangaSeriesList {
-                            DataSource.shared.browseSeriesList!.append(mangaSeries)
-                            let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
-                            indexPathsForNewItems.append(indexPath)
-                        }
-                    }
-                } else {
-                    return
+                for series in seriesList {
+                    let basicSeries = BasicSeries(context: self.managedContext)
+                    basicSeries.id = Int32(series.id)
+                    basicSeries.titleEnglish = series.titleEnglish
+                    basicSeries.titleRomaji = series.titleRomaji
+                    basicSeries.averageScore = series.averageScore
+                    basicSeries.popularity = Int32(series.popularity)
+                    basicSeries.imageMediumUrlString = series.imageMediumUrlString
+                    basicSeries.seriesType = series.seriesType.rawValue
+                    self.browseList?.addToBasicSeries(basicSeries)
+                    
+                    let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)
+                    indexPathsForNewItems.append(indexPath)
                 }
                 
                 /*
@@ -208,29 +304,19 @@ class BrowseViewController: SeriesCollectionViewController {
 
 extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let browseSeriesList = DataSource.shared.browseSeriesList else {
-            return 0
-        }
-        
-        return browseSeriesList.count
-        
+        return numberOfBasicSeriesInBrowseList
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
-        /*
-            Check if the browse series list in the data source is not nil
-            and if the number of items in the browse series list is higher
-            than the current index path's row (because the index path's row
-            starts at 0 but the count at 1)
-         */
-        guard let browseSeriesList = DataSource.shared.browseSeriesList else {
-            return cell
+        guard let browseList = browseList,
+            let basicSeries = browseList.basicSeries else {
+                return cell
         }
         
-        guard browseSeriesList.count > indexPath.row else {
+        guard numberOfBasicSeriesInBrowseList > indexPath.row else {
             return cell
         }
         
@@ -244,10 +330,12 @@ extension BrowseViewController: UICollectionViewDataSource {
             Then download the cover image and set the cell's image
             view's image property to the received image
          */
-        let currentSeries = browseSeriesList[indexPath.row]
+        guard let currentSeries = basicSeries[indexPath.row] as? BasicSeries else {
+            return cell
+        }
         
         if cell.seriesId == nil {
-            cell.seriesId = currentSeries.id
+            cell.seriesId = Int(currentSeries.id)
         }
         
         DispatchQueue.main.async {
@@ -255,8 +343,9 @@ extension BrowseViewController: UICollectionViewDataSource {
             cell.titleLabel.isHidden = false
         }
         
-        if cell.imageView.image == nil {
-            AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
+        if cell.imageView.image == nil,
+            let imageMediumUrlString = currentSeries.imageMediumUrlString {
+            AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
                     return
                 }

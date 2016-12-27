@@ -60,9 +60,11 @@ class FilterModalPresentationController: UIPresentationController {
                 
                 if presentedBrowseFilterController.seriesTypeButtonManga.isOn {
                     presentingBrowseViewController.seriesType = .manga
+                    UserDefaults.standard.set("manga", forKey: "browseSeriesType")
                     presentingBrowseViewController.getSeriesList()
                 } else {
                     presentingBrowseViewController.seriesType = .anime
+                    UserDefaults.standard.set("anime", forKey: "browseSeriesType")
                     presentingBrowseViewController.getSeriesList()
                 }
             }
@@ -145,6 +147,8 @@ class FilterModalPresentationController: UIPresentationController {
                     break
                 }
             }
+            let selectedBrowseFiltersDictionaryData = NSKeyedArchiver.archivedData(withRootObject: DataSource.shared.selectedBrowseFilters)
+            UserDefaults.standard.set(selectedBrowseFiltersDictionaryData, forKey: "selectedBrowseFilters")
         }
     }
     

@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
+    lazy var coreDataStack = CoreDataStack(modelName: "AniManager")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -61,6 +62,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        coreDataStack.saveContext()
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        coreDataStack.saveContext()
     }
 }
 

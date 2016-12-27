@@ -114,10 +114,10 @@
 		D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
 		D2180E141E11E6360072B1EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AniManager.xcdatamodel; sourceTree = "<group>"; };
-		D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BasicSeries+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BasicSeries+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SeriesList+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SeriesList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BasicSeries+CoreDataClass.swift"; path = "../BasicSeries+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BasicSeries+CoreDataProperties.swift"; path = "../BasicSeries+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SeriesList+CoreDataClass.swift"; path = "../SeriesList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SeriesList+CoreDataProperties.swift"; path = "../SeriesList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
 		D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerHelper.swift; sourceTree = "<group>"; };
@@ -232,6 +232,10 @@
 			children = (
 				D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */,
 				D2180E141E11E6360072B1EF /* CoreDataStack.swift */,
+				D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */,
+				D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */,
+				D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */,
+				D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -467,10 +471,6 @@
 		D27A77A81DDF861700228EF2 = {
 			isa = PBXGroup;
 			children = (
-				D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */,
-				D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */,
-				D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */,
-				D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */,
 				D27A77B31DDF861700228EF2 /* AniManager */,
 				D27A77B21DDF861700228EF2 /* Products */,
 			);

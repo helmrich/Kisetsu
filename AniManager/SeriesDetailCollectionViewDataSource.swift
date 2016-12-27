@@ -50,17 +50,14 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
         
         AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
             guard errorMessage == nil else {
-                print(errorMessage)
                 return
             }
             
             guard let imageData = imageData else {
-                print("Couldn't get image data")
                 return
             }
             
             guard let image = UIImage(data: imageData) else {
-                print("Couldn't create image from image data")
                 return
             }
             

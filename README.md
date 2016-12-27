@@ -19,7 +19,7 @@ Note: This is *not* an official AniList application
 6. The Client ID and Client Secret should now be filled out automatically.
 7. Open the project
 8. Open the ```AniListConstant``` file in ```Models/Clients/AniList/Constants/```
-9. Assign your AniList Client ID and Client Secret to the corresponding constants (**Client ID**: ```clientId```, **Client Secret**: ```clientSecret```)
+9. Assign your AniList Client ID and Client Secret to the corresponding constants (**Client ID**: ```clientId```, **Client Secret**: ```clientSecret```) by replacing the placeholders in them
 10. Run the app
 
 ## Current Features

@@ -99,7 +99,6 @@ class BrowseViewController: SeriesCollectionViewController {
         
         do {
             let results = try managedContext.fetch(browseListFetchRequest)
-            print("Number of results for browse list: \(results.count)")
             if results.count > 0 {
                 browseList = results.first
                 seriesCollectionView.reloadData()
@@ -153,7 +152,7 @@ class BrowseViewController: SeriesCollectionViewController {
             }
             
             guard self.browseList != nil else {
-                print("Couldn't find browse list")
+                self.errorMessageView.showError(withMessage: "Couldn't find browse list")
                 return
             }
             

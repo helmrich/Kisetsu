@@ -147,7 +147,6 @@ extension AniListClient {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
             return jsonObject
         } catch {
-            print("Error when trying to deserialize JSON: \(error.localizedDescription)")
             return nil
         }
     }

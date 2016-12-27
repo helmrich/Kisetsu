@@ -81,12 +81,12 @@ class CharacterDetailViewController: UIViewController {
         
         AniListClient.shared.getPageModelCharacter(forCharacterId: character.id) { (pageModelCharacter, errorMessage) in
             guard errorMessage == nil else {
-                print("ERROR: \(errorMessage)")
+                self.errorMessageView.showError(withMessage: errorMessage!)
                 return
             }
             
             guard let pageModelCharacter = pageModelCharacter else {
-                print("ERROR: Couldn't get character page model")
+                self.errorMessageView.showError(withMessage: "Couldn't get character page model")
                 return
             }
             

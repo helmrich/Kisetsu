@@ -135,8 +135,6 @@ class AuthenticationViewController: UIViewController {
                 }
                 
             }
-        } else {
-            print("No authorization code available")
         }
     }
     

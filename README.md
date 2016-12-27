@@ -22,7 +22,7 @@ Note: This is *not* an official AniList application
 10. Assign your AniList Client ID and Client Secret to the corresponding constants (**Client ID**: ```clientId```, **Client Secret**: ```clientSecret```) by replacing the placeholders in them
 11. Run the app
 12. Tap on the **Login with AniList** button and login with your AniList account's username/email and password
-13. Tap on **Approve** to authenticate the application and grant it permissions to modify your AniList on your behalf
+13. Tap on **Approve** to authenticate the application and grant it permissions to modify your AniList data on your behalf
 
 ## Current Features
 

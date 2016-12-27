@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */; };
+		D2180E151E11E6360072B1EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E141E11E6360072B1EF /* CoreDataStack.swift */; };
+		D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */; };
+		D2180E1D1E11E9890072B1EF /* BasicSeries+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */; };
+		D2180E1E1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */; };
+		D2180E1F1E11E9890072B1EF /* SeriesList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */; };
+		D2180E201E11E9890072B1EF /* SeriesList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */; };
 		D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */; };
 		D21EC74D1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */; };
 		D21EC74F1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */; };
@@ -106,6 +112,12 @@
 
 /* Begin PBXFileReference section */
 		D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
+		D2180E141E11E6360072B1EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AniManager.xcdatamodel; sourceTree = "<group>"; };
+		D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BasicSeries+CoreDataClass.swift"; path = "../BasicSeries+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BasicSeries+CoreDataProperties.swift"; path = "../BasicSeries+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SeriesList+CoreDataClass.swift"; path = "../SeriesList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SeriesList+CoreDataProperties.swift"; path = "../SeriesList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDataSource.swift; sourceTree = "<group>"; };
 		D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerTableViewDelegate.swift; sourceTree = "<group>"; };
 		D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailViewControllerHelper.swift; sourceTree = "<group>"; };
@@ -215,6 +227,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2180E131E11E6280072B1EF /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */,
+				D2180E141E11E6360072B1EF /* CoreDataStack.swift */,
+				D2180E191E11E9890072B1EF /* BasicSeries+CoreDataClass.swift */,
+				D2180E1A1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift */,
+				D2180E1B1E11E9890072B1EF /* SeriesList+CoreDataClass.swift */,
+				D2180E1C1E11E9890072B1EF /* SeriesList+CoreDataProperties.swift */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
 		D22198071E0B489200B6F20A /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +268,7 @@
 		D25EDE9B1DDF8FE500267243 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D2180E131E11E6280072B1EF /* Core Data */,
 				D25EDF011DE8CBEB00267243 /* DataSource.swift */,
 				D2F32C6E1DFDE2B70044D195 /* User.swift */,
 				D25EDF001DE8CBC300267243 /* Series */,
@@ -650,9 +676,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2180E1F1E11E9890072B1EF /* SeriesList+CoreDataClass.swift in Sources */,
 				D2F32C561DFCAA360044D195 /* Tag.swift in Sources */,
 				D2F32C631DFCD5AF0044D195 /* ListSelectionViewController.swift in Sources */,
 				D25EDF131DECD21F00267243 /* OnOffButton.swift in Sources */,
+				D2180E1D1E11E9890072B1EF /* BasicSeries+CoreDataClass.swift in Sources */,
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D224A2681DF061F00085C532 /* BannerView.swift in Sources */,
 				D227408A1DFA35E700C3E776 /* ExternalLinkButton.swift in Sources */,
@@ -687,6 +715,7 @@
 				D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */,
 				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
+				D2180E1E1E11E9890072B1EF /* BasicSeries+CoreDataProperties.swift in Sources */,
 				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
 				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D2786F8C1DF39C9200F4368F /* Studio.swift in Sources */,
@@ -702,13 +731,16 @@
 				D2786F851DF3993C00F4368F /* Staff.swift in Sources */,
 				D22197FE1E0ADBEA00B6F20A /* PathConstant.swift in Sources */,
 				D2786F8A1DF39A4000F4368F /* Actor.swift in Sources */,
+				D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */,
 				D2786FA11DF5F79C00F4368F /* BasicInformationsLabel.swift in Sources */,
 				D22198061E0ADD0500B6F20A /* ResponseConstant.swift in Sources */,
 				D22198021E0ADCB500B6F20A /* ParameterConstant.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D2786F961DF5C09100F4368F /* StackViewExtension.swift in Sources */,
+				D2180E151E11E6360072B1EF /* CoreDataStack.swift in Sources */,
 				D27A77B51DDF861700228EF2 /* AppDelegate.swift in Sources */,
 				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
+				D2180E201E11E9890072B1EF /* SeriesList+CoreDataProperties.swift in Sources */,
 				D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */,
 				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
@@ -899,6 +931,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */,
+			);
+			currentVersion = D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */;
+			path = AniManager.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D27A77A91DDF861700228EF2 /* Project object */;
 }

@@ -15,12 +15,14 @@ Note: This is *not* an official AniList application
 	![](https://github.com/helmrich/AniManager/blob/master/screenshots/anilist-client-creation.png?raw=true)
   
 5. The value for ```Client Redirect Uri``` should be ```AniManager://```, the value for ```Name``` should be ```AniManager```
-5. Click on **Save**
-6. The Client ID and Client Secret should now be filled out automatically.
-7. Open the project
-8. Open the ```AniListConstant``` file in ```Models/Clients/AniList/Constants/```
-9. Assign your AniList Client ID and Client Secret to the corresponding constants (**Client ID**: ```clientId```, **Client Secret**: ```clientSecret```)
-10. Run the app
+6. Click on **Save**
+7. The Client ID and Client Secret text fields should now be filled out automatically
+8. Open the project
+9. Open the ```AniListConstant``` file in ```Models/Clients/AniList/Constants/```
+10. Assign your AniList Client ID and Client Secret to the corresponding constants (**Client ID**: ```clientId```, **Client Secret**: ```clientSecret```) by replacing the placeholders in them
+11. Run the app
+12. Tap on the **Login with AniList** button and login with your AniList account's username/email and password
+13. Tap on **Approve** to authenticate the application and grant it permissions to modify your AniList on your behalf
 
 ## Current Features
 

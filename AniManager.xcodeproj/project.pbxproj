@@ -300,16 +300,11 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */,
 				D25EDF061DE8ECC400267243 /* Authentication */,
 				D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */,
 				D22740951DFC99EF00C3E776 /* SeriesCollectionViewController.swift */,
 				D25EDF101DECBFB300267243 /* FilterModalPresentationController.swift */,
-				D28A5E8E1DEDE05B00D62BDC /* SeriesDetailViewController.swift */,
-				D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */,
-				D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */,
-				D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */,
-				D2786FAC1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift */,
-				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
 				D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */,
 			);
 			name = Controllers;
@@ -505,6 +500,19 @@
 				D2786F921DF5B9B600F4368F /* Table View */,
 			);
 			name = "Series Detail Views";
+			sourceTree = "<group>";
+		};
+		D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D28A5E8E1DEDE05B00D62BDC /* SeriesDetailViewController.swift */,
+				D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */,
+				D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */,
+				D21EC74E1E01B31D008027E4 /* SeriesDetailViewControllerHelper.swift */,
+				D2786FAC1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift */,
+				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
+			);
+			name = "Series Detail View Controller";
 			sourceTree = "<group>";
 		};
 		D2C6358E1DECFE7C00959D75 /* Browse Filter Table View */ = {

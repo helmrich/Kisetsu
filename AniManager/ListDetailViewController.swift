@@ -97,6 +97,9 @@ class ListDetailViewController: SeriesCollectionViewController {
                 guard errorMessage == nil else {
                     DispatchQueue.main.async {
                         self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
+                        UIView.animate(withDuration: 0.25) {
+                            self.nothingFoundLabel.alpha = 1.0
+                        }
                     }
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
                     return

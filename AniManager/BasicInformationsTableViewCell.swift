@@ -34,17 +34,19 @@ class BasicInformationsTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0))
+        
         // Configure the series cover image view
         seriesCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         seriesCoverImageView.contentMode = .scaleAspectFill
+        seriesCoverImageView.clipsToBounds = true
         seriesCoverImageView.alpha = 0.0
         addSubview(seriesCoverImageView)
         addConstraints([
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 177),
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 125),
-            NSLayoutConstraint(item: seriesCoverImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 10.0),
-            NSLayoutConstraint(item: seriesCoverImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
-            NSLayoutConstraint(item: seriesCoverImageView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0)
+            NSLayoutConstraint(item: seriesCoverImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 15.0),
+            NSLayoutConstraint(item: seriesCoverImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
             ])
         
         // Assign values to the static labels
@@ -55,6 +57,14 @@ class BasicInformationsTableViewCell: UITableViewCell {
         numberOfEpisodesLabel.text = "Episodes"
         durationPerEpisodeLabel.text = "Duration"
         
+        /*
+            Let value labels that could potentially have long texts
+            adjust their font size to fit into the labels' bounding
+            rectangles
+         */
+        statusValueLabel.adjustsFontSizeToFitWidth = true
+        seasonValueLabel.adjustsFontSizeToFitWidth = true
+        
         // Assign a different font to the average rating value label
         averageRatingValueLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 18.0)
         
@@ -63,9 +73,9 @@ class BasicInformationsTableViewCell: UITableViewCell {
         typeStackView.translatesAutoresizingMaskIntoConstraints = false
         let averageRatingStackView = UIStackView.createStackView(fromArrangedSubviews: [averageRatingLabel, averageRatingValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         averageRatingStackView.translatesAutoresizingMaskIntoConstraints = false
-        let statusStackView = UIStackView.createStackView(fromArrangedSubviews: [statusLabel, statusValueLabel], withAxis: .horizontal, andSpacing: 0.0)
+        let statusStackView = UIStackView.createStackView(fromArrangedSubviews: [statusLabel, statusValueLabel], withAxis: .horizontal, andSpacing: 5.0)
         statusStackView.translatesAutoresizingMaskIntoConstraints = false
-        let seasonStackView = UIStackView.createStackView(fromArrangedSubviews: [seasonLabel, seasonValueLabel], withAxis: .horizontal, andSpacing: 0.0)
+        let seasonStackView = UIStackView.createStackView(fromArrangedSubviews: [seasonLabel, seasonValueLabel], withAxis: .horizontal, andSpacing: 5.0)
         seasonStackView.translatesAutoresizingMaskIntoConstraints = false
         let numberOfEpisodesStackView = UIStackView.createStackView(fromArrangedSubviews: [numberOfEpisodesLabel, numberOfEpisodesValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         numberOfEpisodesStackView.translatesAutoresizingMaskIntoConstraints = false

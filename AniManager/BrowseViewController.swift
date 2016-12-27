@@ -38,6 +38,24 @@ class BrowseViewController: SeriesCollectionViewController {
     
     // MARK: - Actions
     
+    @IBAction func openFilterModal() {
+        /*
+            Instantiate the browse filter view controller from the storyboard
+            and set its properties. The modal presentation style should be custom
+            and the browse view controller should be its transitioning delegate
+            as it implements the necessary UIViewControllerTransitioningDelegate's
+            method
+         */
+        let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
+        filterViewController.modalPresentationStyle = .custom
+        filterViewController.transitioningDelegate = self
+        filterViewController.seriesType = seriesType
+        UIView.animate(withDuration: 0.5) {
+            self.seriesCollectionView.alpha = 0.5
+        }
+        self.present(filterViewController, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
@@ -203,24 +221,6 @@ class BrowseViewController: SeriesCollectionViewController {
         }
     }
     
-    @IBAction func openFilterModal() {
-        /*
-            Instantiate the browse filter view controller from the storyboard
-            and set its properties. The modal presentation style should be custom
-            and the browse view controller should be its transitioning delegate
-            as it implements the necessary UIViewControllerTransitioningDelegate's
-            method
-         */
-        let filterViewController = storyboard!.instantiateViewController(withIdentifier: "browseFilterViewController") as! BrowseFilterViewController
-        filterViewController.modalPresentationStyle = .custom
-        filterViewController.transitioningDelegate = self
-        filterViewController.seriesType = seriesType
-        UIView.animate(withDuration: 0.5) {
-            self.seriesCollectionView.alpha = 0.5
-        }
-        self.present(filterViewController, animated: true, completion: nil)
-    }
-    
     
     // MARK: - Collection View Delegate
     
@@ -300,75 +300,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 }
             }
         }
-    }
-}
-
-
-// MARK: - Collection View Data Source
-
-extension BrowseViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfBasicSeriesInBrowseList
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
-        
-        guard let browseList = browseList,
-            let basicSeries = browseList.basicSeries else {
-                return cell
-        }
-        
-        guard numberOfBasicSeriesInBrowseList > indexPath.row else {
-            return cell
-        }
-        
-        /*
-            Get the current series from the browse series list,
-            if the cell doesn't have a series ID, assign the current
-            series' ID to the cells seriesId property and set the
-            cell's title label to the current series' title and
-            show it
-         
-            Then download the cover image and set the cell's image
-            view's image property to the received image
-         */
-        guard let currentSeries = basicSeries[indexPath.row] as? BasicSeries else {
-            return cell
-        }
-        
-        if cell.seriesId == nil {
-            cell.seriesId = Int(currentSeries.id)
-        }
-        
-        DispatchQueue.main.async {
-            cell.titleLabel.text = currentSeries.titleEnglish
-            cell.titleLabel.isHidden = false
-        }
-        
-        if cell.imageView.image == nil,
-            let imageMediumUrlString = currentSeries.imageMediumUrlString {
-            AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    return
-                }
-                
-                if let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        cell.imageOverlay.isHidden = false
-                        cell.imageView.image = image
-                    }
-                }
-            }
-        }
-        
-        return cell
-        
     }
 }
 

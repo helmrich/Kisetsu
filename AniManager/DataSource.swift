@@ -55,4 +55,91 @@ class DataSource {
         browseParameters["\(parameterName)"] = parameterValue
     }
     
+    // This method sets the data source's browse parameters
+    func setBrowseParameters() {
+        typealias BrowseParameterKey = AniListConstant.ParameterKey.Browse
+        
+        /*
+         At first, the current shared data source's browse parameters
+         should be set to an empty dictionary so that it's guaranteed
+         that only the currently set filters are set browse parameters
+         */
+        DataSource.shared.browseParameters = [String:Any]()
+        
+        /*
+            Iterate over all filter names and values in the data source's
+            selectedBrowseFilters property
+         */
+        for (filterName, filterValues) in DataSource.shared.selectedBrowseFilters {
+            
+            guard let filterValues = filterValues else {
+                print("No filter values available")
+                break
+            }
+            
+            /*
+             If the filter name is "Genres" an empty array of strings should
+             be created and filled with all dictionary values in the filter
+             values.
+             
+             Afterwards a genre parameter value should be created
+             and set in the shared data source. After that the loop can
+             continue to its next iteration.
+             
+             Currently this only has to be done for the "Genres" filter
+             as it's the only one that can have multiple selected filters
+             */
+            if filterName == "Genres" {
+                var genres = [String]()
+                for (_, filterValue) in filterValues {
+                    genres.append(filterValue)
+                }
+                let genreParameterValue = createGenreParameterString(fromGenres: genres)
+                DataSource.shared.set(parameterValue: genreParameterValue, forBrowseParameterWithName: BrowseParameterKey.genres)
+                continue
+            }
+            
+            /*
+             Iterate over all filter values, then switch over the filter
+             names and set the appropriate parameter values in the shared
+             data source
+             */
+            for (_, filterValue) in filterValues {
+                switch filterName {
+                case "Sort By":
+                    DataSource.shared.set(parameterValue: "\(filterValue)-desc", forBrowseParameterWithName: BrowseParameterKey.sort)
+                case "Season":
+                    DataSource.shared.set(parameterValue: filterValue, forBrowseParameterWithName: BrowseParameterKey.season)
+                case "Status":
+                    DataSource.shared.set(parameterValue: filterValue, forBrowseParameterWithName: BrowseParameterKey.status)
+                case "Type":
+                    DataSource.shared.set(parameterValue: filterValue, forBrowseParameterWithName: BrowseParameterKey.type)
+                case "Year":
+                    DataSource.shared.set(parameterValue: filterValue, forBrowseParameterWithName: BrowseParameterKey.year)
+                default:
+                    print("Unknown filter name \(filterName)")
+                    break
+                }
+            }
+            let selectedBrowseFiltersDictionaryData = NSKeyedArchiver.archivedData(withRootObject: DataSource.shared.selectedBrowseFilters)
+            UserDefaults.standard.set(selectedBrowseFiltersDictionaryData, forKey: "selectedBrowseFilters")
+        }
+    }
+    
+    /*
+     This function creates a parameter string by taking in an array of genre
+     strings and connecting all genres with a separating comma
+     */
+    func createGenreParameterString(fromGenres genres: [String]) -> String {
+        var genreParameterString = ""
+        for genre in genres {
+            if genreParameterString == "" {
+                genreParameterString = genre
+            } else {
+                genreParameterString = "\(genreParameterString),\(genre)"
+            }
+        }
+        return genreParameterString
+    }
+    
 }

@@ -121,8 +121,13 @@ class DataSource {
                     break
                 }
             }
+            
+            /*
+                Archive the shared data source's selected browse filters dictionary into
+                raw data and set it in the user defaults
+             */
             let selectedBrowseFiltersDictionaryData = NSKeyedArchiver.archivedData(withRootObject: DataSource.shared.selectedBrowseFilters)
-            UserDefaults.standard.set(selectedBrowseFiltersDictionaryData, forKey: "selectedBrowseFilters")
+            UserDefaults.standard.set(selectedBrowseFiltersDictionaryData, forKey: "selectedBrowseFiltersData")
         }
     }
     

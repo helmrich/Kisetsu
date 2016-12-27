@@ -50,7 +50,7 @@ class BrowseViewController: SeriesCollectionViewController {
             user default's selected browse filters to the shared data source's
             selectedBrowseFilters property
          */
-        if let selectedBrowseFiltersDictionaryData = UserDefaults.standard.object(forKey: "selectedBrowseFilters") as? Data,
+        if let selectedBrowseFiltersDictionaryData = UserDefaults.standard.object(forKey: "selectedBrowseFiltersData") as? Data,
             let selectedBrowseFiltersObject = NSKeyedUnarchiver.unarchiveObject(with: selectedBrowseFiltersDictionaryData),
             let selectedBrowseFilters = selectedBrowseFiltersObject as? [String:[IndexPath:String]?] {
             DataSource.shared.selectedBrowseFilters = selectedBrowseFilters

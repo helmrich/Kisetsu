@@ -40,9 +40,17 @@ class CharacterDetailViewController: UIViewController {
     }
     
     @IBAction func favorite(_ sender: Any) {
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         AniListClient.shared.favorite(characterWithId: character.id) { (errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -53,6 +61,12 @@ class CharacterDetailViewController: UIViewController {
                     self.favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
                 }
             }
+            
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            }
+            
         }
     }
     
@@ -79,14 +93,25 @@ class CharacterDetailViewController: UIViewController {
             characterNameLabel.text = "\(character.firstName!) \(character.lastName!)"
         }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         AniListClient.shared.getPageModelCharacter(forCharacterId: character.id) { (pageModelCharacter, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
             guard let pageModelCharacter = pageModelCharacter else {
                 self.errorMessageView.showError(withMessage: "Couldn't get character page model")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -118,15 +143,32 @@ class CharacterDetailViewController: UIViewController {
                 }
             }
             
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            }
+            
         }
         
         if let imageLargeUrlString = character.imageLargeUrlString {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getImageData(fromUrlString: imageLargeUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let imageData = imageData else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -138,9 +180,12 @@ class CharacterDetailViewController: UIViewController {
                         }
                     }
                 }
+                
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
             }
         }
     }
-    
-
 }

@@ -35,12 +35,17 @@ class ListDetailViewController: SeriesCollectionViewController {
         // Hide the series collection view initially
         seriesCollectionView.alpha = 0.0
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
             
             // Error Handling
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -51,7 +56,9 @@ class ListDetailViewController: SeriesCollectionViewController {
             
             guard let user = user else {
                 self.errorMessageView.showError(withMessage: "Couldn't get user")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -62,7 +69,9 @@ class ListDetailViewController: SeriesCollectionViewController {
             
             guard let seriesType = self.seriesType else {
                 self.errorMessageView.showError(withMessage: "No valid series type given")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -84,6 +93,10 @@ class ListDetailViewController: SeriesCollectionViewController {
                 status = MangaListName(rawValue: self.title!)!.asKey()
             } else {
                 self.errorMessageView.showError(withMessage: "Invalid series type")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -95,8 +108,10 @@ class ListDetailViewController: SeriesCollectionViewController {
                 
                 // Error Handling
                 guard errorMessage == nil else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                         UIView.animate(withDuration: 0.25) {
                             self.nothingFoundLabel.alpha = 1.0
                         }
@@ -108,6 +123,10 @@ class ListDetailViewController: SeriesCollectionViewController {
                 guard let generalSeriesList = seriesList else {
                     self.errorMessageView.showError(withMessage: "Couldn't get series list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -125,6 +144,10 @@ class ListDetailViewController: SeriesCollectionViewController {
                 } else {
                     self.errorMessageView.showError(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -134,7 +157,9 @@ class ListDetailViewController: SeriesCollectionViewController {
                     label
                  */
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.seriesCollectionView.reloadData()
                     UIView.animate(withDuration: 0.25) {
                         self.nothingFoundLabel.alpha = 0.0
@@ -206,13 +231,30 @@ extension ListDetailViewController: UICollectionViewDataSource {
         }
         
         if cell.imageView.image == nil {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let imageData = imageData else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
+                }
+                
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
                 
                 if let image = UIImage(data: imageData) {

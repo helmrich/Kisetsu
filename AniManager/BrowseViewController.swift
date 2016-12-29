@@ -152,16 +152,29 @@ class BrowseViewController: SeriesCollectionViewController {
         
         activityIndicatorView.startAnimatingAndFadeIn()
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
             guard let seriesList = seriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series list")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -171,6 +184,11 @@ class BrowseViewController: SeriesCollectionViewController {
             
             guard self.browseList != nil else {
                 self.errorMessageView.showError(withMessage: "Couldn't find browse list")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -211,7 +229,9 @@ class BrowseViewController: SeriesCollectionViewController {
                 - End the refresh control's refreshing status
              */
             self.activityIndicatorView.stopAnimatingAndFadeOut()
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 self.seriesCollectionView.reloadData()
                 self.refreshControl.endRefreshing()
                 UIView.animate(withDuration: 0.25) {
@@ -246,16 +266,27 @@ class BrowseViewController: SeriesCollectionViewController {
             */
             let lastCellIndexPathItem = numberOfBasicSeriesInBrowseList - 1
             
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getSeriesList(fromPage: Int(numberOfBasicSeriesInBrowseList / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
 
                 guard let seriesList = seriesList else {
                     self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -293,7 +324,9 @@ class BrowseViewController: SeriesCollectionViewController {
                     Insert new items in the series collection view at all the index
                     paths in the indexPathsForNewItems array
                  */
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.seriesCollectionView.performBatchUpdates({
                         collectionView.insertItems(at: indexPathsForNewItems)
                     }, completion: nil)

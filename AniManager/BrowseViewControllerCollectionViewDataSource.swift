@@ -51,12 +51,24 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         if cell.imageView.image == nil,
             let imageMediumUrlString = currentSeries.imageMediumUrlString {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let imageData = imageData else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -66,6 +78,12 @@ extension BrowseViewController: UICollectionViewDataSource {
                         cell.imageView.image = image
                     }
                 }
+                
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
+                
             }
         }
         

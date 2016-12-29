@@ -30,19 +30,33 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 set the cell's cover image when the image data could be
                 downloaded and turned into an image successfully
              */
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getImageData(fromUrlString: series.imageLargeUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let imageData = imageData else {
                     self.errorMessageView.showError(withMessage: "Couldn't get image")
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 let image = UIImage(data: imageData)
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     cell.seriesCoverImageView.image = image
                     UIView.animate(withDuration: 0.25) {
                         cell.seriesCoverImageView.alpha = 1.0
@@ -125,16 +139,28 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 First, get the authenticated user in order to be able to request
                 list informations for the user's ID
              */
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let user = user else {
                     self.errorMessageView.showError(withMessage: "Couldn't get authenticated user")
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -153,15 +179,17 @@ extension SeriesDetailViewController: UITableViewDataSource {
                             series isn't in a list (rate button, progress-related
                             elements)
                          */
+                        NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                         DispatchQueue.main.async {
                             cell.setupCellForStatus(isSeriesInList: false)
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                         }
                         return
                     }
                     
                     DispatchQueue.main.async {
                         
-                        // When the series in a list set up the cell appropriately
+                        // When the series is in a list set up the cell appropriately
                         cell.setupCellForStatus(isSeriesInList: true)
                         
                         // Set the user list status button's title
@@ -200,6 +228,12 @@ extension SeriesDetailViewController: UITableViewDataSource {
                                 cell.volumesReadTextField.text = "\(readVolumes)"
                             }
                         }
+                        
+                        NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                        DispatchQueue.main.async {
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                        }
+                        
                     }
                 }
             }
@@ -496,12 +530,19 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 userScore = 0
             }
             
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             // Submit the list
             AniListClient.shared.submitList(ofType: seriesType, withHttpMethod: "PUT", seriesId: seriesId, listStatusString: listStatus, userScore: userScore, episodesWatched: watchedEpisodes, readChapters: readChapters, readVolumes: readVolumes) { (errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {
                     self.errorMessageView.showError(withMessage: errorMessage!)
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -510,7 +551,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
                     so make sure, that the cell is set up so it indicates
                     that it's in a list and that values can be changed
                 */
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     actionsCell.setupCellForStatus(isSeriesInList: true)
                 }
                 

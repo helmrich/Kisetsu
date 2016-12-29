@@ -77,15 +77,30 @@ class SearchViewController: SeriesCollectionViewController {
         
         activityIndicatorView.startAnimatingAndFadeIn()
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, errorMessage) in
             
             // Error Handling
             guard errorMessage == nil else {
+                print(errorMessage!)
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
-                    UIView.animate(withDuration: 0.25) {
-                        self.nothingFoundLabel.alpha = 1.0
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    
+                    guard errorMessage! != "The resource could not be loaded because the App Transport Security policy requires the use of a secure connection." else {
+                        return
+                    }
+                    
+                    if errorMessage! == "Couldn't cast JSON to array of dictionaries" {
+                        self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
+                        UIView.animate(withDuration: 0.25) {
+                            self.nothingFoundLabel.alpha = 1.0
+                        }
+                    } else {
+                        self.errorMessageView.showError(withMessage: errorMessage!)
                     }
                 }
                 return
@@ -94,6 +109,10 @@ class SearchViewController: SeriesCollectionViewController {
             guard let seriesList = seriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
                 return
             }
             
@@ -104,7 +123,9 @@ class SearchViewController: SeriesCollectionViewController {
              */
             DataSource.shared.searchResultsSeriesList = seriesList
             
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 self.seriesCollectionView.reloadData()
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 UIView.animate(withDuration: 0.25) {
@@ -198,12 +219,24 @@ extension SearchViewController: UICollectionViewDataSource {
             and set the image when the data was successfully downloaded
          */
         if cell.imageView.image == nil {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
                 guard errorMessage == nil else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
                 guard let imageData = imageData else {
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    }
                     return
                 }
                 
@@ -212,6 +245,11 @@ extension SearchViewController: UICollectionViewDataSource {
                         cell.imageOverlay.isHidden = false
                         cell.imageView.image = image
                     }
+                }
+                
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
             }
         }

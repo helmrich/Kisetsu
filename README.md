@@ -1,12 +1,12 @@
 # AniManager
 
+![](https://github.com/helmrich/AniManager/blob/master/images/animanager-iphone-preview.png?raw=true)
+
 AniManager is an application for iOS that lets the user track and explore anime and manga. This app was created as my last project for the [iOS Developer Nanodegree by Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003) which is supposed to be an own iOS application. 
 
 The app is written in Swift 3 and uses the [AniList](https://anilist.co) API to get and modify data. As of now the app *requires* an AniList account but it's planned to implement a mode without login that has limited functionality in the future.
 
 Note: This is *not* an official AniList application
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-browse-list.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-list-detail.png?raw=true) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-1.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-search.png?raw=true)
 
 ## Get Started
 1. Download/clone the repository

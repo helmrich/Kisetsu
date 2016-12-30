@@ -55,6 +55,11 @@ class SearchViewController: SeriesCollectionViewController {
         // Configure the collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
         
+        // Add a tap gesture recognizer to the main view
+        let mainViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        mainViewTapGestureRecognizer.delegate = self
+        view.addGestureRecognizer(mainViewTapGestureRecognizer)
+        
         /*
             Set the search bar's background image property
             to an empty image object so that there is no
@@ -67,6 +72,10 @@ class SearchViewController: SeriesCollectionViewController {
     
     
     // MARK: - Functions
+    
+    func hideKeyboard() {
+        view.endEditing(true)
+    }
     
     /*
         This method takes a search text string as a parameter
@@ -264,6 +273,25 @@ extension SearchViewController: UICollectionViewDataSource {
      */
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+}
+
+extension SearchViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        /*
+            Check if the touch happens in one of the series collection
+            view's visible cells. If it does, the gesture recognizer
+            shouldn't receive the touch or otherwise nothing will happen
+            when the collection view's cells are touched because the
+            main view's gesture recognizer will receive the touches instead
+         */
+        var touchIsInCollectionViewCell = false
+        for cell in seriesCollectionView.visibleCells {
+            if cell.bounds.contains(touch.location(in: cell)) {
+                touchIsInCollectionViewCell = true
+            }
+        }
+        return !touchIsInCollectionViewCell
     }
 }
 

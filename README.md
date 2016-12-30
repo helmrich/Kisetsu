@@ -1,10 +1,12 @@
 # AniManager
-## Description
+
 AniManager is an application for iOS that lets the user track and explore anime and manga. This app was created as my last project for the [iOS Developer Nanodegree by Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003) which is supposed to be an own iOS application. 
 
 The app is written in Swift 3 and uses the [AniList](https://anilist.co) API to get and modify data. As of now the app *requires* an AniList account but it's planned to implement a mode without login that has limited functionality in the future.
 
 Note: This is *not* an official AniList application
+
+![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-browse-list.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-list-detail.png?raw=true) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-1.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-search.png?raw=true)
 
 ## Get Started
 1. Download/clone the repository
@@ -49,38 +51,6 @@ See anime/manga series details such as...
 - Season
 - Status
 - Type
-
-## Screenshots
-### Authentication
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-authentication-login.png?raw=true)
-
-### Browse
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-browse-list.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-browse-filter.png?raw=true)
-
-### List Selection
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-animelists.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-mangalists.png?raw=true)
-
-### List Detail
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-list-detail.png?raw=true)
-
-### Search
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-search.png?raw=true)
-
-### Series Details
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-1.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-2.png?raw=true)
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-3.png) ![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-series-detail-4.png?raw=true)
-
-### Character Detail
-
-![](https://github.com/helmrich/AniManager/blob/master/screenshots/animanager-character-detail.png?raw=true)
-
 
 ## Plans for the Future
 I'm not 100% sure if or when I'll submit the application to the App Store but there are still quite many things I want to add to or refine in the application before I consider submitting it to the App Store.

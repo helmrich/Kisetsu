@@ -15,10 +15,6 @@ class CharacterDetailViewController: UIViewController {
     let errorMessageView = ErrorMessageView()
     var character: Character!
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     
     // MARK: - Outlets and Actions
     

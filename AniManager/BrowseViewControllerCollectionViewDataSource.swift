@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
     
 extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,44 +47,19 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         DispatchQueue.main.async {
             cell.titleLabel.text = currentSeries.titleEnglish
-            cell.titleLabel.isHidden = false
+            cell.titleLabel.alpha = 1.0
+            cell.imageOverlay.alpha = 0.7
         }
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
         if cell.imageView.image == nil,
-            let imageMediumUrlString = currentSeries.imageMediumUrlString {
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-            
-            AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                if let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        cell.imageOverlay.isHidden = false
-                        cell.imageView.image = image
-                    }
-                }
-                
+            let imageMediumUrlString = currentSeries.imageMediumUrlString,
+            let imageMediumUrl = URL(string: imageMediumUrlString) {
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
-                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
         
@@ -91,3 +67,11 @@ extension BrowseViewController: UICollectionViewDataSource {
         
     }
 }
+
+
+
+
+
+
+
+

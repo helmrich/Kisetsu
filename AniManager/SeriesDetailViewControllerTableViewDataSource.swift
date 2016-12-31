@@ -58,6 +58,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     cell.seriesCoverImageView.image = image
+                    cell.seriesCoverImageView.alpha = 0.0
                     UIView.animate(withDuration: 0.25) {
                         cell.seriesCoverImageView.alpha = 1.0
                     }

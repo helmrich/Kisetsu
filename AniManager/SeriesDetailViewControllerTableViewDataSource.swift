@@ -34,36 +34,14 @@ extension SeriesDetailViewController: UITableViewDataSource {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getImageData(fromUrlString: series.imageLargeUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
+            if let imageLargeUrl = URL(string: series.imageLargeUrlString) {
+                cell.seriesCoverImageView.kf.setImage(with: imageLargeUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: CGSize(width: 125.0, height: 177.0)), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get image")
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                let image = UIImage(data: imageData)
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    cell.seriesCoverImageView.image = image
-                    cell.seriesCoverImageView.alpha = 0.0
-                    UIView.animate(withDuration: 0.25) {
-                        cell.seriesCoverImageView.alpha = 1.0
-                    }
                 }
-                
+            } else {
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
             
             // Set cell property values that both series types have

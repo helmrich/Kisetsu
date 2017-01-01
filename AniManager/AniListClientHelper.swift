@@ -9,35 +9,6 @@
 import Foundation
 
 extension AniListClient {
-    
-    // This method is used to get data for a single image from a specified URL string
-    func getImageData(fromUrlString urlString: String, completionHandlerForImageData: @escaping (_ imageData: Data?, _ errorMessage: String?) -> Void) {
-        
-        // URL creation and request configuration
-        guard let url = URL(string: urlString) else {
-            completionHandlerForImageData(nil, "Couldn't create a URL from the provided URL string")
-            return
-        }
-        
-        let request = URLRequest(url: url)
-        
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-            // Error Handling
-            if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
-                completionHandlerForImageData(nil, errorMessage)
-                return
-            }
-            
-            let data = data!
-            
-            completionHandlerForImageData(data, nil)
-            
-        }
-        
-        task.resume()
-    }
-    
     /*
      This method takes the three arguments of data task's completion handler
      as parameters and checks if:

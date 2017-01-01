@@ -116,7 +116,8 @@ class SeriesDetailViewController: UIViewController {
             }
             
             // Check if the series has an URL string for a banner image
-            guard let imageBannerUrlString = series.imageBannerUrlString else {
+            guard let imageBannerUrlString = series.imageBannerUrlString,
+                let imageBannerUrl = URL(string: imageBannerUrlString) else {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -124,36 +125,13 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             // Get the banner image from the banner image URL string
-            AniListClient.shared.getImageData(fromUrlString: imageBannerUrlString) { (data, errorMessage) in
-                
-                // Error Handling
-                guard errorMessage == nil else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let data = data else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                // Create and set the banner view image
-                let bannerImage = UIImage(data: data)
+            (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: imageBannerUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.image = bannerImage
-                    UIView.animate(withDuration: 0.25) {
-                        (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.alpha = 1.0
-                    }
-                }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
     }

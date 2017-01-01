@@ -44,7 +44,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
         addSubview(seriesCoverImageView)
         addConstraints([
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 177),
-            NSLayoutConstraint(item: seriesCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 125),
+            NSLayoutConstraint(item: seriesCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 125.0),
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 15.0),
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
             ])

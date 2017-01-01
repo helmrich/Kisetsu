@@ -15,7 +15,6 @@ typealias ResponseConstant = AniListConstant
 typealias PayloadConstant = AniListConstant
 
 struct AniListConstant {
-    
     struct Account {
         static let clientId = "YOURCLIENTID"
         static let clientSecret = "YOURCLIENTSECRET"

@@ -230,42 +230,21 @@ extension ListDetailViewController: UICollectionViewDataSource {
             cell.seriesId = currentSeries.id
         }
         
-        if cell.imageView.image == nil {
+        cell.titleLabel.text = currentSeries.titleEnglish
+        cell.titleLabel.alpha = 1.0
+        cell.imageOverlay.alpha = 0.7
+        
+        if cell.imageView.image == nil,
+            let imageMediumUrl = URL(string: currentSeries.imageMediumUrlString) {
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
-                
-                if let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        cell.imageOverlay.isHidden = false
-                        cell.titleLabel.text = currentSeries.titleEnglish
-                        cell.titleLabel.isHidden = false
-                        cell.imageView.image = image
-                    }
-                }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
+            
         }
         
         return cell

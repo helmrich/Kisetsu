@@ -52,7 +52,6 @@ class BannerView: UIView {
         imageView.backgroundColor = UIColor.aniManagerGray
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.alpha = 0.0
         containerView.addSubview(imageView)
         containerView.addConstraints([
             NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 0.0),

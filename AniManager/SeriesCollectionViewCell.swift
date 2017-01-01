@@ -24,7 +24,6 @@ class SeriesCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         seriesId = nil
         imageView.image = nil
-        imageOverlay.alpha = 0.0
         titleLabel.alpha = 0.0
     }
 }

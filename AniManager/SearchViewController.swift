@@ -220,46 +220,23 @@ extension SearchViewController: UICollectionViewDataSource {
             and show it
          */
         cell.titleLabel.text = currentSeries.titleEnglish
-        cell.titleLabel.isHidden = false
+        cell.titleLabel.alpha = 1.0
+        cell.imageOverlay.alpha = 0.7
         
         /*
             Check if the cell image view's image property is nil. If it is,
             get image data for the current series' medium image URL string
             and set the image when the data was successfully downloaded
          */
-        if cell.imageView.image == nil {
+        if cell.imageView.image == nil,
+            let imageMediumUrl = URL(string: currentSeries.imageMediumUrlString) {
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getImageData(fromUrlString: currentSeries.imageMediumUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                if let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        cell.imageOverlay.isHidden = false
-                        cell.imageView.image = image
-                    }
-                }
-                
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
         

@@ -44,47 +44,24 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             return cell
         }
         
-        guard let imageMediumUrlString = characters[indexPath.row].imageMediumUrlString else {
+        guard let imageMediumUrlString = characters[indexPath.row].imageMediumUrlString,
+            let imageMediumUrl = URL(string: imageMediumUrlString) else {
             return cell
         }
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
-        AniListClient.shared.getImageData(fromUrlString: imageMediumUrlString) { (imageData, errorMessage) in
-            guard errorMessage == nil else {
+        if cell.imageView.image == nil {
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
-                return
-            }
-            
-            guard let imageData = imageData else {
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
-                return
-            }
-            
-            guard let image = UIImage(data: imageData) else {
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
-                return
-            }
-            
-            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-            DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                cell.imageView.image = image
+                collectionView.reloadItems(at: [indexPath])
             }
-            
+        } else {
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
         }
-        
-        collectionView.reloadItems(at: [indexPath])
         
         return cell
         

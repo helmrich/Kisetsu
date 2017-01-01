@@ -146,41 +146,14 @@ class CharacterDetailViewController: UIViewController {
             
         }
         
-        if let imageLargeUrlString = character.imageLargeUrlString {
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-            
-            AniListClient.shared.getImageData(fromUrlString: imageLargeUrlString) { (imageData, errorMessage) in
-                guard errorMessage == nil else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let imageData = imageData else {
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                if let image = UIImage(data: imageData) {
-                    DispatchQueue.main.async {
-                        self.characterImageView.image = image
-                        UIView.animate(withDuration: 0.25) {
-                            self.characterImageView.alpha = 1.0
-                        }
-                    }
-                }
-                
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        
+        if let imageLargeUrlString = character.imageLargeUrlString,
+            let imageLargeUrl = URL(string: imageLargeUrlString) {
+            characterImageView.kf.setImage(with: imageLargeUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
     }

@@ -51,12 +51,13 @@ extension BrowseViewController: UICollectionViewDataSource {
             cell.imageOverlay.alpha = 0.7
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-        
         if cell.imageView.image == nil,
             let imageMediumUrlString = currentSeries.imageMediumUrlString,
             let imageMediumUrl = URL(string: imageMediumUrlString) {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            
             cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0

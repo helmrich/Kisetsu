@@ -63,5 +63,11 @@ I'm not 100% sure if or when I'll submit the application to the App Store but th
 - Staff info
 - Countdown to new episodes and optional push notifications for new episodes/chapters
 
+## Feedback/Bug Reports
 
+I'd highly appreciate any kind of constructive feedback or bug reports. If you find a bug or have any suggestions on how to improve the app, just open an issue and let me know!
+
+## Author
+
+I'm Tobias Helmrich, you can find me on Twitter [@tobias_helmrich](https://twitter.com/tobias_helmrich) or send me an email to [me@tobias-helmrich.de](mailto:me@tobias-helmrich.de).
 

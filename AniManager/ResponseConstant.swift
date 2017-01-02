@@ -41,6 +41,11 @@ extension ResponseConstant {
             static let tags = "tags"
         }
         
+        struct GenreList {
+            static let genre = "genre"
+            static let id = "id"
+        }
+        
         struct AnimeSeries {
             static let numberOfTotalEpisodes = "total_episodes"
             static let durationPerEpisode = "duration"

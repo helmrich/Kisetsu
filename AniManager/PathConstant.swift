@@ -34,6 +34,7 @@ extension PathConstant {
             static let airingAnime = "anime/{id}/airing"
             static let browse = "browse/{seriesType}"
             static let search = "{seriesType}/search/{query}"
+            static let genreList = "genre_list"
         }
         
         struct SeriesPost {

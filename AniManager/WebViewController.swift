@@ -13,50 +13,71 @@ class WebViewController: UIViewController {
     // MARK: - Properties
     
     var url: URL!
+    let errorMessageView = ErrorMessageView()
     
     
     // MARK: - Outlets and Actions
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var reloadButton: UIButton!
+    
+    // MARK: - Action
     
     @IBAction func cancel() {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func reload(_ sender: Any) {
+        UIView.animate(withDuration: 0.25) {
+            self.reloadButton.alpha = 0.0
+            self.errorMessageView.alpha = 0.0
+        }
+        load()
+    }
+    
+    
     
     // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
+        toolbar.clipsToBounds = true
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setActivityIndicator(enabled: true)
-        
-        let request = URLRequest(url: url)
-        webView.loadRequest(request)
+        load()
     }
     
     
     // MARK: - Functions
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     func setActivityIndicator(enabled: Bool) {
         if enabled {
-            UIView.animate(withDuration: 0.25, animations: {
+            UIView.animate(withDuration: 0.25) {
                 self.activityIndicatorView.alpha = 1
-            })
+            }
             self.activityIndicatorView.startAnimating()
         } else {
-            UIView.animate(withDuration: 0.25, animations: {
+            UIView.animate(withDuration: 0.25) {
                 self.activityIndicatorView.alpha = 0
-            })
+            }
             self.activityIndicatorView.stopAnimating()
         }
     }
-
+    
+    func load() {
+        setActivityIndicator(enabled: true)
+        let request = URLRequest(url: url)
+        webView.loadRequest(request)
+    }
 }
 
 extension WebViewController: UIWebViewDelegate {
@@ -111,6 +132,14 @@ extension WebViewController: UIWebViewDelegate {
              */
             (presentingViewController as! AuthenticationViewController).errorMessageView.showError(withMessage: "The authorization request was denied")
             dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        errorMessageView.showError(withMessage: error.localizedDescription)
+        setActivityIndicator(enabled: false)
+        UIView.animate(withDuration: 0.25) {
+            self.reloadButton.alpha = 1.0
         }
     }
 }

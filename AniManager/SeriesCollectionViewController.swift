@@ -44,7 +44,8 @@ class SeriesCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         addErrorMessageViewToBottomOfView(withOffsetToBottom: -49.0, errorMessageView: errorMessageView)
-        navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,10 +83,6 @@ extension SeriesCollectionViewController: UICollectionViewDelegate {
         seriesDetailViewController.seriesId = selectedCell.seriesId
         seriesDetailViewController.seriesTitle = selectedCell.titleLabel.text
         seriesDetailViewController.seriesType = seriesType
-//        statusBarShouldBeHidden = true
-//        UIView.animate(withDuration: 0.5) {
-//            self.setNeedsStatusBarAppearanceUpdate()
-//        }
         present(seriesDetailViewController, animated: true, completion: nil)
     }
 }

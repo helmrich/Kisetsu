@@ -41,6 +41,7 @@ class BasicInformationsTableViewCell: UITableViewCell {
         seriesCoverImageView.contentMode = .scaleAspectFill
         seriesCoverImageView.backgroundColor = .aniManagerGray
         seriesCoverImageView.clipsToBounds = true
+        seriesCoverImageView.layer.cornerRadius = 2.0
         addSubview(seriesCoverImageView)
         addConstraints([
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 177),

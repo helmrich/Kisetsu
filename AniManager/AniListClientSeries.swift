@@ -241,6 +241,58 @@ extension AniListClient {
         }
     }
     
+    func getGenreList(completionHandlerForGenreList: @escaping (_ genreList: [String]?, _ errorMessage: String?) -> Void) {
+        validateAccessToken { (errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForGenreList(nil, errorMessage!)
+                return
+            }
+         
+            guard let url = self.createAniListUrl(withPath: AniListConstant.Path.SeriesGet.genreList, andParameters: [:]) else {
+                completionHandlerForGenreList(nil, "Couldn't create AniList URL")
+                return
+            }
+            
+            let request = self.createDefaultRequest(withUrl: url)
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
+                if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
+                    completionHandlerForGenreList(nil, errorMessage)
+                    return
+                }
+                
+                let data = data!
+                
+                guard let jsonObject = self.deserializeJson(fromData: data) else {
+                    completionHandlerForGenreList(nil, "Couldn't deserialize data into a JSON object")
+                    return
+                }
+                
+                guard let genreDictionaries = jsonObject as? [[String:Any]] else {
+                    completionHandlerForGenreList(nil, "Couldn't cast JSON object to a usable array")
+                    return
+                }
+                
+                var genreList = [String]()
+                for genreDictionary in genreDictionaries {
+                    if let genre = genreDictionary[AniListConstant.ResponseKey.GenreList.genre] as? String {
+                        genreList.append(genre)
+                    }
+                }
+                
+                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileUrl = documentsUrl.appendingPathComponent("genres.plist")
+                (genreList as NSArray).write(to: fileUrl, atomically: true)
+                
+                completionHandlerForGenreList(genreList, nil)
+                
+            }
+            
+            task.resume()
+            
+        }
+    }
+    
     // MARK: - POST/PUT
     
     // This method is used to favorite a series with a specified type and ID

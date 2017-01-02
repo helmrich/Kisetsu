@@ -213,6 +213,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 basicSeries.popularity = Int32(series.popularity)
                 basicSeries.imageMediumUrlString = series.imageMediumUrlString
                 basicSeries.seriesType = series.seriesType.rawValue
+                basicSeries.isAdult = series.isAdult
                 self.browseList!.addToBasicSeries(basicSeries)
             }
             
@@ -314,6 +315,7 @@ class BrowseViewController: SeriesCollectionViewController {
                     basicSeries.popularity = Int32(series.popularity)
                     basicSeries.imageMediumUrlString = series.imageMediumUrlString
                     basicSeries.seriesType = series.seriesType.rawValue
+                    basicSeries.isAdult = series.isAdult
                     self.browseList?.addToBasicSeries(basicSeries)
                     
                     let indexPath = IndexPath(item: lastCellIndexPathItem + 1, section: 0)

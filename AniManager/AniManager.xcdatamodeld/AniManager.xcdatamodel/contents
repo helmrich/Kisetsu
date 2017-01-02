@@ -5,6 +5,7 @@
         <attribute name="coverImageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imageMediumUrlString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAdult" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="popularity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="seriesType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleEnglish" optional="YES" attributeType="String" syncable="YES"/>
@@ -16,7 +17,7 @@
         <relationship name="basicSeries" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BasicSeries" inverseName="seriesList" inverseEntity="BasicSeries" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BasicSeries" positionX="-45" positionY="0" width="128" height="180"/>
+        <element name="BasicSeries" positionX="-45" positionY="0" width="128" height="195"/>
         <element name="SeriesList" positionX="-18" positionY="27" width="128" height="75"/>
     </elements>
 </model>

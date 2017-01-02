@@ -129,6 +129,19 @@ class BrowseViewController: SeriesCollectionViewController {
         } catch let error as NSError {
             print("Error when fetching browse list: \(error), \(error.userInfo)")
         }
+        
+        AniListClient.shared.getGenreList { (genreList, errorMessage) in
+            guard errorMessage == nil else {
+                return
+            }
+            
+            guard genreList != nil else {
+                return
+            }
+            
+            DataSource.shared.getGenres()
+            
+        }
     }
     
     

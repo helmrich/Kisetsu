@@ -20,12 +20,12 @@ class DataSource {
     var selectedSeries: Series? = nil
     
     // Browse
-    let browseFilters: [[String:[Any]]] = [
+    var browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
         ["Season": Season.allSeasonStrings],
         ["Status": AnimeAiringStatus.allStatusStrings],
         ["Type": MediaType.allMediaTypeStrings],
-        ["Genres": Genre.allGenreStrings],
+        ["Genres": [String]()],
         ["Year": [Int](1951...2018).reversed()]
     ]
     var selectedBrowseFilters: [String:[IndexPath:String]?] = [
@@ -48,11 +48,39 @@ class DataSource {
     var selectedAnimeList: [AnimeSeries]? = nil
     var selectedMangaList: [MangaSeries]? = nil
     
+    // Settings
+    var settings: [[String:[String]]] = [
+        ["Content": [
+                    "Show Explicit Content",
+                    "Rating System",
+                    "Favorite Genres"
+        ]],
+        ["Advanced": ["Clear Disk Image Cache"]],
+        ["Feedback": ["Send Feedback"]],
+        ["Account": ["Logout"]]
+    ]
+    
     
     // MARK: - Functions
     
     func set(parameterValue: String, forBrowseParameterWithName parameterName: String) {
         browseParameters["\(parameterName)"] = parameterValue
+    }
+    
+    func getGenres() {
+        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileUrl = documentsUrl.appendingPathComponent("genres.plist")
+        
+        if let genres = NSArray(contentsOf: fileUrl) as? [String],
+            genres.count > 0 {
+            for (index, browseFilter) in browseFilters.enumerated() {
+                for (filterName, _) in browseFilter {
+                    if filterName == "Genres" {
+                        browseFilters[index]["Genres"] = genres
+                    }
+                }
+            }
+        }
     }
     
     // This method sets the data source's browse parameters

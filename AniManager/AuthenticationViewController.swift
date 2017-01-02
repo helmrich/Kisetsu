@@ -24,8 +24,8 @@ class AuthenticationViewController: UIViewController {
     
     var errorMessageView = ErrorMessageView()
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     
@@ -101,23 +101,17 @@ class AuthenticationViewController: UIViewController {
                 
                 // Error Handling
                 guard errorMessage == nil else {
-                    DispatchQueue.main.async {
-                        self.errorMessageView.showError(withMessage: errorMessage!)
-                    }
+                    self.errorMessageView.showError(withMessage: errorMessage!)
                     return
                 }
                 
                 guard let accessToken = accessToken else {
-                    DispatchQueue.main.async {
-                        self.errorMessageView.showError(withMessage: "Couldn't get access token")
-                    }
+                    self.errorMessageView.showError(withMessage: "Couldn't get access token")
                     return
                 }
                 
                 guard let refreshToken = refreshToken else {
-                    DispatchQueue.main.async {
-                        self.errorMessageView.showError(withMessage: "Couldn't get refresh token")
-                    }
+                    self.errorMessageView.showError(withMessage: "Couldn't get refresh token")
                     return
                 }
                 

@@ -124,14 +124,13 @@ extension SettingsViewController: UITableViewDelegate {
                 ImageCache.default.clearDiskCache {
                     tableView.reloadRows(at: [indexPath], with: .fade)
                 }
-            }
-            
-            if currentSettingName.uppercased() == "SEND FEEDBACK" {
+            } else if currentSettingName.uppercased() == "SEND FEEDBACK" {
                 UIApplication.shared.open(URL(string: "mailto:me@tobias-helmrich.de")!, options: [:], completionHandler: nil)
-            }
-            
-            if currentSettingName.uppercased() == "LOGOUT" {
+            } else if currentSettingName.uppercased() == "LOGOUT" {
                 logout()
+            } else if currentSettingName.uppercased() == "FAVORITE GENRES" {
+                let favoriteGenresTableViewController = storyboard?.instantiateViewController(withIdentifier: "favoriteGenresTableViewController") as! FavoriteGenresTableViewController
+                navigationController?.pushViewController(favoriteGenresTableViewController, animated: true)
             }
         }
     }

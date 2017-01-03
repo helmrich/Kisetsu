@@ -19,6 +19,9 @@ class DataSource {
     // General
     var selectedSeries: Series? = nil
     
+    // Genres
+    var genres = [String]()
+    
     // Browse
     var browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
@@ -71,8 +74,10 @@ class DataSource {
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileUrl = documentsUrl.appendingPathComponent("genres.plist")
         
-        if let genres = NSArray(contentsOf: fileUrl) as? [String],
-            genres.count > 0 {
+        if let genresFromFile = NSArray(contentsOf: fileUrl) as? [String],
+            genresFromFile.count > 0 {
+            genres = genresFromFile
+            
             for (index, browseFilter) in browseFilters.enumerated() {
                 for (filterName, _) in browseFilter {
                     if filterName == "Genres" {

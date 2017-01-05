@@ -101,8 +101,6 @@ class ExternalLinksTableViewCell: UITableViewCell {
         for stackView in stackViews {
             mainStackView.addArrangedSubview(stackView)
         }
-        
-        print(mainStackView.arrangedSubviews.count)
     }
 
 }

@@ -83,6 +83,10 @@ extension SeriesCollectionViewController: UICollectionViewDelegate {
         seriesDetailViewController.seriesId = selectedCell.seriesId
         seriesDetailViewController.seriesTitle = selectedCell.titleLabel.text
         seriesDetailViewController.seriesType = seriesType
+        statusBarShouldBeHidden = true
+        UIView.animate(withDuration: 0.25) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
         present(seriesDetailViewController, animated: true, completion: nil)
     }
 }

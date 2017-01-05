@@ -18,6 +18,10 @@ class SeriesDetailViewController: UIViewController {
     var seriesId: Int!
     var seriesTitle: String!
     var seriesType: SeriesType! = .manga
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     
     // MARK: - Outlets and Actions

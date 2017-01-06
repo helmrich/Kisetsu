@@ -96,14 +96,7 @@ extension AniListClient {
                     }
                 }
                 
-                /*
-                    TODO: Filter adult series from series list and pass it to the
-                    completion handler's nonAdultSeriesList parameter
-                 */
                 let nonAdultSeriesList = seriesList.filter { !($0.isAdult) }
-                
-                print("Adult series list count: \(seriesList.count)")
-                print("Non-adult series list count: \(nonAdultSeriesList.count)")
                 
                 completionHandlerForSeriesList(seriesList, nonAdultSeriesList, nil)
                 

@@ -43,6 +43,8 @@ class SeriesDetailViewController: UIViewController {
         seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
         seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "imagesCell")
         
+        // MARK: - Rating Picker Setup
+        
         // Instantiate and configure rating picker:
         ratingPicker = RatingPicker(frame: CGRect(x: 0, y: view.frame.maxY, width: view.frame.width, height: 300.0))
         // - Toolbar buttons target-actions
@@ -55,6 +57,8 @@ class SeriesDetailViewController: UIViewController {
         ratingPicker!.pickerView.delegate = self
         // - Add to main view
         view.addSubview(ratingPicker!)
+        
+        // MARK: - Banner View Setup
         
         // Create and configure the banner view
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
@@ -128,9 +132,6 @@ class SeriesDetailViewController: UIViewController {
                 }
                 return
             }
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
             // Get the banner image from the banner image URL string
             (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: imageBannerUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in

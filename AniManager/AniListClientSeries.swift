@@ -14,11 +14,11 @@ extension AniListClient {
         page with a defined type (e.g. anime or manga) and parameters (such as
         release year, genres, sorting, etc.)
      */
-    func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], matchingQuery query: String? = nil, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getSeriesList(fromPage page: Int = 1, ofType seriesType: SeriesType, andParameters parameters: [String:Any], matchingQuery query: String? = nil, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ nonAdultSeriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         validateAccessToken { (errorMessage) in
             guard errorMessage == nil else {
-                completionHandlerForSeriesList(nil, errorMessage!)
+                completionHandlerForSeriesList(nil, nil, errorMessage!)
                 return
             }
             
@@ -38,7 +38,7 @@ extension AniListClient {
             }
             
             guard let url = self.createAniListUrl(withPath: path, andParameters: allParameters) else {
-                completionHandlerForSeriesList(nil, "Couldn't create AniList URL")
+                completionHandlerForSeriesList(nil, nil, "Couldn't create AniList URL")
                 return
             }
             
@@ -48,7 +48,7 @@ extension AniListClient {
                 
                 // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
-                    completionHandlerForSeriesList(nil, errorMessage)
+                    completionHandlerForSeriesList(nil, nil, errorMessage)
                     return
                 }
                 
@@ -56,12 +56,12 @@ extension AniListClient {
 
                 // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
-                    completionHandlerForSeriesList(nil, "Couldn't deserialize data into a JSON object")
+                    completionHandlerForSeriesList(nil, nil, "Couldn't deserialize data into a JSON object")
                     return
                 }
                 
                 guard let rawSeriesList = jsonObject as? [[String:Any]] else {
-                    completionHandlerForSeriesList(nil, "Couldn't cast JSON to array of dictionaries")
+                    completionHandlerForSeriesList(nil, nil, "Couldn't cast JSON to array of dictionaries")
                     return
                 }
                 
@@ -80,7 +80,7 @@ extension AniListClient {
                         if let animeSeries = AnimeSeries(fromDictionary: series) {
                             seriesList.append(animeSeries)
                         } else {
-                            completionHandlerForSeriesList(nil, "Couldn't get anime series")
+                            completionHandlerForSeriesList(nil, nil, "Couldn't get anime series")
                             return
                         }
                     }
@@ -90,13 +90,22 @@ extension AniListClient {
                         if let mangaSeries = MangaSeries(fromDictionary: series) {
                             seriesList.append(mangaSeries)
                         } else {
-                            completionHandlerForSeriesList(nil, "Couldn't get manga series")
+                            completionHandlerForSeriesList(nil, nil, "Couldn't get manga series")
                             return
                         }
                     }
                 }
                 
-                completionHandlerForSeriesList(seriesList, nil)
+                /*
+                    TODO: Filter adult series from series list and pass it to the
+                    completion handler's nonAdultSeriesList parameter
+                 */
+                let nonAdultSeriesList = seriesList.filter { !($0.isAdult) }
+                
+                print("Adult series list count: \(seriesList.count)")
+                print("Non-adult series list count: \(nonAdultSeriesList.count)")
+                
+                completionHandlerForSeriesList(seriesList, nonAdultSeriesList, nil)
                 
             }
             

@@ -84,7 +84,8 @@ class BrowseViewController: SeriesCollectionViewController {
             seriesType = userDefaultsSeriesType
         }
         
-        navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = true
         
         /*
             Create the refresh control, add a target-action to it and assign it
@@ -168,7 +169,7 @@ class BrowseViewController: SeriesCollectionViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
-        AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
+        AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showError(withMessage: errorMessage!)
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
@@ -210,6 +211,16 @@ class BrowseViewController: SeriesCollectionViewController {
                 be requested, so the browseList property's basicSeries property
                 should be set to an empty set
              */
+            guard self.browseList != nil else {
+                self.errorMessageView.showError(withMessage: "Couldn't get browse list")
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
+                return
+            }
+            
             self.browseList!.basicSeries = []
             
             /*
@@ -283,7 +294,7 @@ class BrowseViewController: SeriesCollectionViewController {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getSeriesList(fromPage: Int(numberOfBasicSeriesInBrowseList / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, errorMessage) in
+            AniListClient.shared.getSeriesList(fromPage: Int(numberOfBasicSeriesInBrowseList / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {

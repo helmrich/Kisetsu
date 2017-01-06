@@ -89,7 +89,7 @@ class SearchViewController: SeriesCollectionViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
-        AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, errorMessage) in
+        AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, nonAdultSeriesList, errorMessage) in
             
             // Error Handling
             guard errorMessage == nil else {
@@ -230,14 +230,7 @@ extension SearchViewController: UICollectionViewDataSource {
          */
         if cell.imageView.image == nil,
             let imageMediumUrl = URL(string: currentSeries.imageMediumUrlString) {
-            
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-            
-            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-            }
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
         }
         
         return cell

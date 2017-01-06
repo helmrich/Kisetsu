@@ -49,18 +49,8 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             return cell
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-        
         if cell.imageView.image == nil {
-            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                collectionView.reloadItems(at: [indexPath])
-            }
-        } else {
-            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
         }
         
         return cell

@@ -62,11 +62,3 @@ extension BrowseViewController: UICollectionViewDataSource {
         
     }
 }
-
-
-
-
-
-
-
-

@@ -11,6 +11,17 @@ import Kingfisher
     
 extension BrowseViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if numberOfBasicSeriesInBrowseList == 0 {
+            nothingFoundLabel.text = "No \(seriesType.rawValue) found"
+            UIView.animate(withDuration: 0.25) {
+                self.nothingFoundLabel.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.nothingFoundLabel.alpha = 0.0
+            }
+        }
+        print(numberOfBasicSeriesInBrowseList)
         return numberOfBasicSeriesInBrowseList
     }
     

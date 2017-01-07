@@ -316,14 +316,22 @@
                                     <outlet property="delegate" destination="645-XW-Nu9" id="Sdx-Z0-1T7"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFE-0X-qlT">
+                                <rect key="frame" x="124" y="322" width="127" height="24"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
+                                <color key="textColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-f6-oBt">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <rect key="frame" x="178" y="324" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rvd-Cs-y1a" firstAttribute="top" secondItem="cfK-zV-nGh" secondAttribute="top" id="1PN-cn-WNH"/>
                             <constraint firstItem="rvd-Cs-y1a" firstAttribute="leading" secondItem="cfK-zV-nGh" secondAttribute="leading" id="5oH-wO-d66"/>
+                            <constraint firstItem="CFE-0X-qlT" firstAttribute="centerX" secondItem="rvd-Cs-y1a" secondAttribute="centerX" id="Guc-r9-dHp"/>
+                            <constraint firstItem="CFE-0X-qlT" firstAttribute="centerY" secondItem="rvd-Cs-y1a" secondAttribute="centerY" id="HHR-cN-yvh"/>
                             <constraint firstAttribute="bottom" secondItem="rvd-Cs-y1a" secondAttribute="bottom" id="TKb-wF-AjV"/>
                             <constraint firstAttribute="trailing" secondItem="rvd-Cs-y1a" secondAttribute="trailing" id="awy-BF-mUp"/>
                             <constraint firstItem="Wld-f6-oBt" firstAttribute="centerX" secondItem="cfK-zV-nGh" secondAttribute="centerX" id="tO2-KV-lEt"/>
@@ -340,6 +348,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="Wld-f6-oBt" id="MGu-Th-3j3"/>
+                        <outlet property="nothingFoundLabel" destination="CFE-0X-qlT" id="VaH-Im-TlA"/>
                         <outlet property="seriesCollectionView" destination="rvd-Cs-y1a" id="8Lr-Nw-xwN"/>
                         <outlet property="seriesCollectionViewFlowLayout" destination="JX1-AT-KA9" id="ccY-CN-NQc"/>
                     </connections>

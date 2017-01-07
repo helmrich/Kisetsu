@@ -35,6 +35,7 @@ class BrowseViewController: SeriesCollectionViewController {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var seriesCollectionView: UICollectionView!
     @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var nothingFoundLabel: UILabel!
     
     // MARK: - Actions
     
@@ -92,7 +93,7 @@ class BrowseViewController: SeriesCollectionViewController {
             to the series collection view's refreshControl property
          */
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(getSeriesList), for: [.valueChanged])
+        refreshControl.addTarget(self, action: #selector(refreshList), for: [.valueChanged])
         seriesCollectionView.refreshControl = refreshControl
         
         // Get the managed context from the app delegate
@@ -148,6 +149,11 @@ class BrowseViewController: SeriesCollectionViewController {
     
     // MARK: - Functions
     
+    func refreshList() {
+        showsAllAvailableSeriesItems = false
+        getSeriesList()
+    }
+    
     /*
         This function gets a new series list by calling the
         shared AniListClient's getSeriesList method.
@@ -181,7 +187,8 @@ class BrowseViewController: SeriesCollectionViewController {
                 return
             }
             
-            guard let seriesList = seriesList else {
+            guard let seriesList = seriesList,
+            let nonAdultSeriesList = nonAdultSeriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series list")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
@@ -224,11 +231,13 @@ class BrowseViewController: SeriesCollectionViewController {
             self.browseList!.basicSeries = []
             
             /*
-                Iterate over all series in the received series list, create a
-                BasicSeries object for each series, set its properties and add
-                it to the browse list
+                Iterate over all series in the received series list or non-adult
+                series list (depending on whether explicit content is activated
+                or not), create a BasicSeries object for each series, set its
+                properties and add it to the browse list
              */
-            for series in seriesList {
+            let seriesListToShow = UserDefaults.standard.bool(forKey: "showExplicitContent") ? seriesList : nonAdultSeriesList
+            for series in seriesListToShow {
                 let basicSeries = BasicSeries(context: self.managedContext)
                 basicSeries.id = Int32(series.id)
                 basicSeries.titleEnglish = series.titleEnglish
@@ -294,7 +303,14 @@ class BrowseViewController: SeriesCollectionViewController {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getSeriesList(fromPage: Int(numberOfBasicSeriesInBrowseList / 40) + 1, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
+            let pageNumber: Int
+            if numberOfBasicSeriesInBrowseList % 40 != 0 {
+                pageNumber = Int(numberOfBasicSeriesInBrowseList / 40 + 1) + 1
+            } else {
+                pageNumber = Int(numberOfBasicSeriesInBrowseList / 40) + 1
+            }
+            print(pageNumber)
+            AniListClient.shared.getSeriesList(fromPage: pageNumber, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {
@@ -306,7 +322,8 @@ class BrowseViewController: SeriesCollectionViewController {
                     return
                 }
 
-                guard let seriesList = seriesList else {
+                guard let seriesList = seriesList,
+                let nonAdultSeriesList = nonAdultSeriesList else {
                     self.errorMessageView.showError(withMessage: "Couldn't get series list")
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
@@ -324,13 +341,15 @@ class BrowseViewController: SeriesCollectionViewController {
                     Create an empty array that should hold all the new items'
                     index paths. 
                  
-                    Then iterate over all series in the seriesList, create
-                    a basic series object and an index path for each series,
-                    set the basic series object's properties and add it to
-                    the browse list's basic series.
+                    Then - depending on whether explicit content should be displayed or
+                    not - define which list ("normal" or non-adult) should be used and
+                    iterate over all series in this series list, create a basic series
+                    object and an index path for each series, set the basic series
+                    object's properties and add it to the browse list's basic series.
                  */
+                let seriesListToShow = UserDefaults.standard.bool(forKey: "showExplicitContent") ? seriesList : nonAdultSeriesList
                 var indexPathsForNewItems = [IndexPath]()
-                for series in seriesList {
+                for series in seriesListToShow {
                     let basicSeries = BasicSeries(context: self.managedContext)
                     basicSeries.id = Int32(series.id)
                     basicSeries.titleEnglish = series.titleEnglish

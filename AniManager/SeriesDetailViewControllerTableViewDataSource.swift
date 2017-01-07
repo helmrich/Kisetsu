@@ -299,6 +299,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
         } else if indexPath.row == 4 {
+            
+            // MARK: - Character Images Cell
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
             
             // Check if there are available characters for the series

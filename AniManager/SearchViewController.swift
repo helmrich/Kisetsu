@@ -115,7 +115,8 @@ class SearchViewController: SeriesCollectionViewController {
                 return
             }
             
-            guard let seriesList = seriesList else {
+            guard let seriesList = seriesList,
+            let nonAdultSeriesList = nonAdultSeriesList else {
                 self.errorMessageView.showError(withMessage: "Couldn't get series")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
@@ -126,11 +127,13 @@ class SearchViewController: SeriesCollectionViewController {
             }
             
             /*
-                Assign the received series list to the data source's
-                searchResultsSeriesList property, reload the series
-                collection view and make it visible
+                Depending on whether the display of explicit content is
+                activated or not, assign the received series list to the
+                data source's searchResultsSeriesList property, reload the
+                series collection view and make it visible
              */
-            DataSource.shared.searchResultsSeriesList = seriesList
+            let seriesListToShow = UserDefaults.standard.bool(forKey: "showExplicitContent") ? seriesList : nonAdultSeriesList
+            DataSource.shared.searchResultsSeriesList = seriesListToShow
             
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {

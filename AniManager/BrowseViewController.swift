@@ -303,13 +303,18 @@ class BrowseViewController: SeriesCollectionViewController {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
+            /*
+                Set the page number the series list should be requested from
+                depending on whether all series are in the browse list or not
+                (for example when adult series are filtered from the list)
+             */
             let pageNumber: Int
             if numberOfBasicSeriesInBrowseList % 40 != 0 {
                 pageNumber = Int(numberOfBasicSeriesInBrowseList / 40 + 1) + 1
             } else {
                 pageNumber = Int(numberOfBasicSeriesInBrowseList / 40) + 1
             }
-            print(pageNumber)
+            
             AniListClient.shared.getSeriesList(fromPage: pageNumber, ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
                 
                 // Error Handling

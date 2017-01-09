@@ -48,9 +48,10 @@ class ActionsTableViewCell: UITableViewCell {
     // Anime Actions
     @IBAction func increaseWatchedEpisodes(_ sender: Any) {
         if let watchedEpisodesText = watchedEpisodesTextField.text,
-            let watchedEpisodes = Int(watchedEpisodesText),
-            watchedEpisodes < Int(maximumNumberOfEpisodesLabel.text!)! {
+            let watchedEpisodes = Int(watchedEpisodesText) {
+            if (Int(maximumNumberOfEpisodesLabel.text!)! > 0 && watchedEpisodes < Int(maximumNumberOfEpisodesLabel.text!)!) || Int(maximumNumberOfEpisodesLabel.text!)! == 0 {
                 watchedEpisodesTextField.text = "\(watchedEpisodes + 1)"
+            }
         }
     }
     

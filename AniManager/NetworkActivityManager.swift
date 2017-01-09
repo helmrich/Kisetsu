@@ -28,7 +28,13 @@ class NetworkActivityManager {
         appropriately
      */
     
-    var numberOfActiveConnections = 0
+    var numberOfActiveConnections = 0 {
+        didSet {
+            if numberOfActiveConnections < 0 {
+                numberOfActiveConnections = 0
+            }
+        }
+    }
     
     static let shared = NetworkActivityManager()
     fileprivate init() {}

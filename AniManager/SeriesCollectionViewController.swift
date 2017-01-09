@@ -51,6 +51,8 @@ class SeriesCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        NetworkActivityManager.shared.numberOfActiveConnections = 0
+        
         statusBarShouldBeHidden = false
         UIView.animate(withDuration: 0.25) {
             self.setNeedsStatusBarAppearanceUpdate()

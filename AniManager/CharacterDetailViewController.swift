@@ -161,4 +161,10 @@ class CharacterDetailViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NetworkActivityManager.shared.numberOfActiveConnections = 0
+    }
 }

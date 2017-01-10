@@ -34,8 +34,6 @@ class BasicInformationsTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 200.0))
-        
         // Configure the series cover image view
         seriesCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         seriesCoverImageView.contentMode = .scaleAspectFill
@@ -43,11 +41,14 @@ class BasicInformationsTableViewCell: UITableViewCell {
         seriesCoverImageView.clipsToBounds = true
         seriesCoverImageView.layer.cornerRadius = 2.0
         addSubview(seriesCoverImageView)
+        let seriesCoverImageViewBottomConstraint = NSLayoutConstraint(item: seriesCoverImageView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0)
+        seriesCoverImageViewBottomConstraint.priority = 999
         addConstraints([
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 177),
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 125.0),
             NSLayoutConstraint(item: seriesCoverImageView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 15.0),
-            NSLayoutConstraint(item: seriesCoverImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0)
+            NSLayoutConstraint(item: seriesCoverImageView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
+            seriesCoverImageViewBottomConstraint
             ])
         
         // Assign values to the static labels

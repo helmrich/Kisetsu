@@ -57,7 +57,20 @@ extension BrowseViewController: UICollectionViewDataSource {
         }
         
         DispatchQueue.main.async {
-            cell.titleLabel.text = currentSeries.titleEnglish
+            if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage") {
+                switch titleLanguage {
+                case "english":
+                    cell.titleLabel.text = currentSeries.titleEnglish
+                case "romaji":
+                    cell.titleLabel.text = currentSeries.titleRomaji
+                case "japanese":
+                    cell.titleLabel.text = currentSeries.titleJapanese
+                default:
+                    cell.titleLabel.text = currentSeries.titleEnglish
+                }
+            } else {
+                cell.titleLabel.text = currentSeries.titleEnglish
+            }
             cell.titleLabel.alpha = 1.0
             cell.imageOverlay.alpha = 0.7
         }

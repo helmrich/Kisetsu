@@ -22,6 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = .aniManagerBlack
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
         
+        /*
+            Check if a title language is set in the user defaults and set
+            the value to "english" if there is no value
+         */
+        if UserDefaults.standard.string(forKey: "titleLanguage") == nil {
+            UserDefaults.standard.set("english", forKey: "titleLanguage")
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         /*

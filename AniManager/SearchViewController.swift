@@ -52,6 +52,9 @@ class SearchViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add observer for the "settingValueChanged" notification
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        
         // Configure the collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
         
@@ -75,6 +78,10 @@ class SearchViewController: SeriesCollectionViewController {
     
     func hideKeyboard() {
         view.endEditing(true)
+    }
+    
+    func settingValueChanged() {
+        seriesCollectionView.reloadData()
     }
     
     /*
@@ -222,7 +229,20 @@ extension SearchViewController: UICollectionViewDataSource {
             Set the cell's title label to the current series' title
             and show it
          */
-        cell.titleLabel.text = currentSeries.titleEnglish
+        if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage") {
+            switch titleLanguage {
+            case "english":
+                cell.titleLabel.text = currentSeries.titleEnglish
+            case "romaji":
+                cell.titleLabel.text = currentSeries.titleRomaji
+            case "japanese":
+                cell.titleLabel.text = currentSeries.titleJapanese
+            default:
+                cell.titleLabel.text = currentSeries.titleEnglish
+            }
+        } else {
+            cell.titleLabel.text = currentSeries.titleEnglish
+        }
         cell.titleLabel.alpha = 1.0
         cell.imageOverlay.alpha = 0.7
         

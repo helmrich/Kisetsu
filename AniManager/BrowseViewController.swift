@@ -62,6 +62,9 @@ class BrowseViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add observer for the "settingValueChanged" notification
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        
         /*
             Get the data with the selected browse filters from the user defaults and
             unarchive the data so it becomes an object. Try casting the object to the
@@ -154,6 +157,10 @@ class BrowseViewController: SeriesCollectionViewController {
         getSeriesList()
     }
     
+    func settingValueChanged() {
+        seriesCollectionView.reloadData()
+    }
+    
     /*
         This function gets a new series list by calling the
         shared AniListClient's getSeriesList method.
@@ -242,6 +249,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 basicSeries.id = Int32(series.id)
                 basicSeries.titleEnglish = series.titleEnglish
                 basicSeries.titleRomaji = series.titleRomaji
+                basicSeries.titleJapanese = series.titleJapanese
                 basicSeries.averageScore = series.averageScore
                 basicSeries.popularity = Int32(series.popularity)
                 basicSeries.imageMediumUrlString = series.imageMediumUrlString
@@ -359,6 +367,7 @@ class BrowseViewController: SeriesCollectionViewController {
                     basicSeries.id = Int32(series.id)
                     basicSeries.titleEnglish = series.titleEnglish
                     basicSeries.titleRomaji = series.titleRomaji
+                    basicSeries.titleJapanese = series.titleJapanese
                     basicSeries.averageScore = series.averageScore
                     basicSeries.popularity = Int32(series.popularity)
                     basicSeries.imageMediumUrlString = series.imageMediumUrlString

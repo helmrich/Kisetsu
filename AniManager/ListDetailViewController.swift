@@ -25,6 +25,9 @@ class ListDetailViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add observer for the "settingValueChanged" notification
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        
         // Configure the series collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
     }
@@ -171,7 +174,15 @@ class ListDetailViewController: SeriesCollectionViewController {
             }
         }
     }
+    
+    // MARK: - Functions
+    
+    func settingValueChanged() {
+        seriesCollectionView.reloadData()
+    }
 }
+
+// MARK: - Collection View Data Source
 
 extension ListDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -232,7 +243,20 @@ extension ListDetailViewController: UICollectionViewDataSource {
             cell.seriesId = currentSeries.id
         }
         
-        cell.titleLabel.text = currentSeries.titleEnglish
+        if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage") {
+            switch titleLanguage {
+            case "english":
+                cell.titleLabel.text = currentSeries.titleEnglish
+            case "romaji":
+                cell.titleLabel.text = currentSeries.titleRomaji
+            case "japanese":
+                cell.titleLabel.text = currentSeries.titleJapanese
+            default:
+                cell.titleLabel.text = currentSeries.titleEnglish
+            }
+        } else {
+            cell.titleLabel.text = currentSeries.titleEnglish
+        }
         cell.titleLabel.alpha = 1.0
         cell.imageOverlay.alpha = 0.7
         

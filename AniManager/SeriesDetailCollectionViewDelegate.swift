@@ -56,7 +56,20 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             
             let seriesDetailViewController = storyboard?.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
             seriesDetailViewController.seriesType = (collectionView.cellForItem(at: indexPath) as! ImagesCollectionViewCell).seriesType
-            seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
+            if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage") {
+                switch titleLanguage {
+                case "english":
+                    seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
+                case "romaji":
+                    seriesDetailViewController.seriesTitle = selectedRelation.titleRomaji
+                case "japanese":
+                    seriesDetailViewController.seriesTitle = selectedRelation.titleJapanese
+                default:
+                    seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
+                }
+            } else {
+                seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
+            }
             seriesDetailViewController.seriesId = selectedRelation.id
             present(seriesDetailViewController, animated: true, completion: nil)
         case .actors:

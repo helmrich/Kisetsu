@@ -22,6 +22,13 @@ class DataSource {
     // Genres
     var genres = [String]()
     
+    // Title Languages
+    var titleLanguages = [
+        "English",
+        "Romaji",
+        "Japanese"
+    ]
+    
     // Browse
     var browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
@@ -56,7 +63,8 @@ class DataSource {
         ["Content": [
                     "Show Explicit Content",
                     "Rating System",
-                    "Favorite Genres"
+                    "Favorite Genres",
+                    "Preferred Title Language"
         ]],
         ["Advanced": ["Clear Disk Image Cache"]],
         ["Feedback": ["Send Feedback"]],
@@ -93,9 +101,9 @@ class DataSource {
         typealias BrowseParameterKey = AniListConstant.ParameterKey.Browse
         
         /*
-         At first, the current shared data source's browse parameters
-         should be set to an empty dictionary so that it's guaranteed
-         that only the currently set filters are set browse parameters
+            At first, the current shared data source's browse parameters
+            should be set to an empty dictionary so that it's guaranteed
+            that only the currently set filters are set browse parameters
          */
         DataSource.shared.browseParameters = [String:Any]()
         
@@ -111,16 +119,16 @@ class DataSource {
             }
             
             /*
-             If the filter name is "Genres" an empty array of strings should
-             be created and filled with all dictionary values in the filter
-             values.
+                If the filter name is "Genres" an empty array of strings should
+                be created and filled with all dictionary values in the filter
+                values.
              
-             Afterwards a genre parameter value should be created
-             and set in the shared data source. After that the loop can
-             continue to its next iteration.
+                Afterwards a genre parameter value should be created
+                and set in the shared data source. After that the loop can
+                continue to its next iteration.
              
-             Currently this only has to be done for the "Genres" filter
-             as it's the only one that can have multiple selected filters
+                Currently this only has to be done for the "Genres" filter
+                as it's the only one that can have multiple selected filters
              */
             if filterName == "Genres" {
                 var genres = [String]()
@@ -133,9 +141,9 @@ class DataSource {
             }
             
             /*
-             Iterate over all filter values, then switch over the filter
-             names and set the appropriate parameter values in the shared
-             data source
+                Iterate over all filter values, then switch over the filter
+                names and set the appropriate parameter values in the shared
+                data source
              */
             for (_, filterValue) in filterValues {
                 switch filterName {
@@ -165,8 +173,8 @@ class DataSource {
     }
     
     /*
-     This function creates a parameter string by taking in an array of genre
-     strings and connecting all genres with a separating comma
+        This function creates a parameter string by taking in an array of genre
+        strings and connecting all genres with a separating comma
      */
     func createGenreParameterString(fromGenres genres: [String]) -> String {
         var genreParameterString = ""

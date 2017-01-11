@@ -131,6 +131,9 @@ extension SettingsViewController: UITableViewDelegate {
             } else if currentSettingName.uppercased() == "FAVORITE GENRES" {
                 let favoriteGenresTableViewController = storyboard?.instantiateViewController(withIdentifier: "favoriteGenresTableViewController") as! FavoriteGenresTableViewController
                 navigationController?.pushViewController(favoriteGenresTableViewController, animated: true)
+            } else if currentSettingName.uppercased() == "PREFERRED TITLE LANGUAGE" {
+                let preferredLanguageTableViewController = storyboard?.instantiateViewController(withIdentifier: "preferredLanguageTableViewController") as! PreferredLanguageTableViewController
+                navigationController?.pushViewController(preferredLanguageTableViewController, animated: true)
             }
         }
     }

@@ -36,7 +36,7 @@ extension FavoriteGenresTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath) as! FavoriteGenreTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath) as! SettingSelectionTableViewCell
         cell.textLabel?.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
         cell.textLabel?.textColor = .aniManagerBlack
         cell.textLabel?.text = DataSource.shared.genres[indexPath.row]
@@ -58,7 +58,7 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             by getting the cell for the row at the selected row's index path
             and unwrap the cell's text label and its text value
          */
-        guard let selectedCell = tableView.cellForRow(at: indexPath) as? FavoriteGenreTableViewCell,
+        guard let selectedCell = tableView.cellForRow(at: indexPath) as? SettingSelectionTableViewCell,
             let textLabel = selectedCell.textLabel,
             let text = textLabel.text else {
                 return
@@ -91,7 +91,7 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             return
         }
         
-        guard let deselectedCell = tableView.cellForRow(at: indexPath) as? FavoriteGenreTableViewCell,
+        guard let deselectedCell = tableView.cellForRow(at: indexPath) as? SettingSelectionTableViewCell,
             let textLabel = deselectedCell.textLabel,
             let text = textLabel.text else {
                 return
@@ -115,7 +115,7 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             let textLabel = cell.textLabel,
             let text = textLabel.text {
             if favoriteGenres.contains(text) {
-                if let _ = cell as? FavoriteGenreTableViewCell {
+                if let _ = cell as? SettingSelectionTableViewCell {
                     tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 }
             }

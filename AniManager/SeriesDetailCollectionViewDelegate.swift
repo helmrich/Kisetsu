@@ -30,7 +30,13 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
          */
         switch cellType {
         case .characters:
-            guard let selectedCharacter = DataSource.shared.selectedSeries?.characters?[indexPath.row] else {
+            /*
+                Get the selected character by using the index path's row property as
+                an index. Then instantiate a character detail view controller
+                and set its character property to the selected character
+                and present the character detail view controller
+             */
+            guard let selectedCharacter = series?.characters?[indexPath.row] else {
                 return
             }
             
@@ -38,7 +44,21 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             characterDetailViewController.character = selectedCharacter
             present(characterDetailViewController, animated: true, completion: nil)
         case .relations:
-            break
+            /*
+                Get the selected relation by using the index path's row property as
+                an index. Then instantiate a series detail view controller
+                and set its properties to the relation's appropriate values and
+                present the series detail view controller
+             */
+            guard let selectedRelation = series?.allRelations?[indexPath.row] else {
+                return
+            }
+            
+            let seriesDetailViewController = storyboard?.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
+            seriesDetailViewController.seriesType = (collectionView.cellForItem(at: indexPath) as! ImagesCollectionViewCell).seriesType
+            seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
+            seriesDetailViewController.seriesId = selectedRelation.id
+            present(seriesDetailViewController, animated: true, completion: nil)
         case .actors:
             break
         }

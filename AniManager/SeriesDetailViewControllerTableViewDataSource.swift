@@ -10,12 +10,12 @@ import UIKit
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let series = DataSource.shared.selectedSeries else {
+        guard let series = series else {
             return UITableViewCell(frame: CGRect.zero)
         }
         
@@ -302,7 +302,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             // MARK: - Character Images Cell
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "imagesCell") as! ImagesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
+            print(cell)
             
             // Check if there are available characters for the series
             guard let characters = series.characters,
@@ -310,6 +311,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                     return UITableViewCell(frame: CGRect.zero)
             }
             
+            print(cell.imagesCollectionView)
             // Register the images collection view cell's nib file
             cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
             
@@ -325,8 +327,42 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.imagesCollectionView.dataSource = self
             cell.imagesCollectionView.delegate = self
             
+            cell.imagesCollectionView.reloadData()
+            
             return cell
         } else if indexPath.row == 5 {
+            
+            // MARK: - Relations Images Cell
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "relationImagesCell") as! ImagesTableViewCell
+            
+            // Check if there are available relations for the series
+            guard let allRelations = series.allRelations,
+                allRelations.count > 0 else {
+                    return UITableViewCell(frame: CGRect.zero)
+            }
+            
+            cell.titleLabel.text = "Relations"
+            
+            // Register the images collection view cell's nib file
+            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
+            
+            // Configure the images collection view's flow layout and set the cell's type
+            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
+            cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
+            cell.type = ImagesTableViewCellType.relations
+            
+            /*
+                Assign the series detail view controller as the images collection view's
+                data source and delegate
+             */
+            cell.imagesCollectionView.dataSource = self
+            cell.imagesCollectionView.delegate = self
+            
+            cell.imagesCollectionView.reloadData()
+            
+            return cell
+        } else if indexPath.row == 6 {
             
             // MARK: - Additional Informations Cell
             
@@ -367,7 +403,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-        } else if indexPath.row == 6 {
+        } else if indexPath.row == 7 {
             
             // MARK: - Tags Cell
             
@@ -397,7 +433,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
             
-        } else if indexPath.row == 7 {
+        } else if indexPath.row == 8 {
             
             // MARK: - External Links Cell
             
@@ -426,7 +462,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             return cell
             
-        } else if indexPath.row == 8 {
+        } else if indexPath.row == 9 {
             
             // MARK: - Videos Cell
             

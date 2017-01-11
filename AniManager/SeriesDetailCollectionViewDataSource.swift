@@ -20,7 +20,7 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             Make sure the shared data source's selectedSeries property
             is not nil
          */
-        guard let series = DataSource.shared.selectedSeries else {
+        guard let series = series else {
             return cell
         }
         
@@ -30,42 +30,102 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             Note: The first superview property is the table view cell's
             content view, the second one is the actual table view cell.
          */
-        if let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type {
-            cell.type = imagesTableViewCellType
-        }
-        
-        /*
-            Make sure the series' characters property is not nil and that
-            the current character has an URL string for a medium image,
-            try downloading and creating an image with the URL string and
-            set the cell's image
-         */
-        guard let characters = series.characters else {
+        guard let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type else {
             return cell
         }
         
-        guard let imageMediumUrlString = characters[indexPath.row].imageMediumUrlString,
-            let imageMediumUrl = URL(string: imageMediumUrlString) else {
-            return cell
-        }
+        cell.type = imagesTableViewCellType
         
-        if cell.imageView.image == nil {
-            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                collectionView.reloadItems(at: [indexPath])
+        switch imagesTableViewCellType {
+        case .characters:
+            /*
+             Make sure the series' characters property is not nil and that
+             the current character has an URL string for a medium image,
+             try downloading and creating an image with the URL string and
+             set the cell's image
+             */
+            guard let characters = series.characters else {
+                return cell
             }
+            
+            guard let imageMediumUrlString = characters[indexPath.row].imageMediumUrlString,
+                let imageMediumUrl = URL(string: imageMediumUrlString) else {
+                    return cell
+            }
+            
+            if cell.imageView.image == nil {
+                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                    collectionView.reloadItems(at: [indexPath])
+                }
+            }
+        case .relations:
+            /*
+                Check if the series' allRelations property is not nil,
+                get the current relation by using the current index path's row
+                as the index. Then
+                check the relation's series type and set the cell's seriesType
+                property depending on it. Lastly try to create an image URL
+                and set the cell's image
+             */
+            guard let allRelations = series.allRelations else {
+                return cell
+            }
+            
+            let currentRelation = allRelations[indexPath.row]
+            
+            let currentRelationSeriesType: SeriesType
+            if let _ = currentRelation as? AnimeSeries {
+                currentRelationSeriesType = .anime
+            } else if let _ = currentRelation as? MangaSeries {
+                currentRelationSeriesType = .manga
+            } else {
+                return cell
+            }
+            cell.seriesType = currentRelationSeriesType
+            
+            let imageMediumUrlString = currentRelation.imageMediumUrlString
+            
+            guard let imageMediumUrl = URL(string: imageMediumUrlString) else {
+                    return cell
+            }
+            
+            if cell.imageView.image == nil {
+                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                    collectionView.reloadItems(at: [indexPath])
+                }
+            }
+        default:
+            return cell
         }
-        
+
         return cell
         
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // The number of items should be equal to the number of series characters
-        guard let characters = DataSource.shared.selectedSeries?.characters else {
+        
+        guard let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type else {
             return 0
         }
-        
-        return characters.count
+
+        switch imagesTableViewCellType {
+        case .characters:
+            // The number of items should be equal to the number of series characters
+            guard let characters = series?.characters else {
+                return 0
+            }
+            
+            return characters.count
+        case .relations:
+            // The number of items should be equal to the number of relations
+            guard let allRelations = series?.allRelations else {
+                return 0
+            }
+            
+            return allRelations.count
+        default:
+            return 0
+        }
         
     }
 }

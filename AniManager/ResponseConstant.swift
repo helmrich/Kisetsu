@@ -39,6 +39,8 @@ extension ResponseConstant {
             static let favourite = "favourite"
             static let characters = "characters"
             static let tags = "tags"
+            static let relationsAnime = "relations"
+            static let relationsManga = "relations_manga"
         }
         
         struct GenreList {

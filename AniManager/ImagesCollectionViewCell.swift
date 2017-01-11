@@ -14,6 +14,7 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     
     var id: Int?
     var type: ImagesTableViewCellType?
+    var seriesType: SeriesType?
     
     
     // MARK: - Outlets and Actions

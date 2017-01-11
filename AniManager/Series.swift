@@ -32,6 +32,30 @@ class Series {
     
     // Additional informations
     let characters: [Character]?
+    let relationsAnime: [AnimeSeries]?
+    let relationsManga: [MangaSeries]?
+    
+    /*
+        This property stores the combined values of the relationsAnime
+        and relationsManga arrays
+     */
+    
+    var allRelations: [Series]? {
+        get {
+            guard let relationsAnime = relationsAnime,
+                let relationsManga = relationsManga else {
+                    return nil
+            }
+            var combinedRelations = [Series]()
+            for relation in relationsAnime {
+                combinedRelations.append(relation)
+            }
+            for relation in relationsManga {
+                combinedRelations.append(relation)
+            }
+            return combinedRelations
+        }
+    }
     
     // List-specific properties
     var finishedOn: String?
@@ -125,9 +149,9 @@ class Series {
             self.tags = nil
         }
         
-        if let charactersArrayOfDictionaries = dictionary[SeriesKey.characters] as? [[String:Any]] {
+        if let characterDictionaries = dictionary[SeriesKey.characters] as? [[String:Any]] {
             var characters = [Character]()
-            for characterDictionary in charactersArrayOfDictionaries {
+            for characterDictionary in characterDictionaries {
                 if let character = Character(fromDictionary: characterDictionary) {
                     characters.append(character)
                 }
@@ -136,6 +160,35 @@ class Series {
         } else {
             self.characters = nil
         }
+        
+        if let relationAnimeDictionaries = dictionary[SeriesKey.relationsAnime] as? [[String:Any]] {
+            var relationsAnime = [AnimeSeries]()
+            for relationAnimeDictionary in relationAnimeDictionaries {
+                if let animeSeries = AnimeSeries(fromDictionary: relationAnimeDictionary) {
+                    relationsAnime.append(animeSeries)
+                    print(animeSeries.titleEnglish)
+                }
+            }
+            self.relationsAnime = relationsAnime
+        } else {
+            self.relationsAnime = nil
+        }
+        
+        if let relationMangaDictionaries = dictionary[SeriesKey.relationsManga] as? [[String:Any]] {
+            var relationsManga = [MangaSeries]()
+            for relationMangaDictionary in relationMangaDictionaries {
+                if let mangaSeries = MangaSeries(fromDictionary: relationMangaDictionary) {
+                    relationsManga.append(mangaSeries)
+                    print(mangaSeries.titleEnglish)
+                }
+            }
+            self.relationsManga = relationsManga
+        } else {
+            self.relationsManga = nil
+        }
+        
+        
+        
         
         if let finishedOn = dictionary[AniListConstant.ResponseKey.List.finishedOn] as? String {
             self.finishedOn = finishedOn

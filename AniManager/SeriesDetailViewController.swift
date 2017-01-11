@@ -19,6 +19,8 @@ class SeriesDetailViewController: UIViewController {
     var seriesTitle: String!
     var seriesType: SeriesType! = .manga
     
+    var series: Series?
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -41,7 +43,8 @@ class SeriesDetailViewController: UIViewController {
         
         // Register the nibs for the actions and images table view cells
         seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
-        seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "imagesCell")
+        seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "characterImagesCell")
+        seriesDataTableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "relationImagesCell")
         
         // MARK: - Rating Picker Setup
         
@@ -100,6 +103,8 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
+            self.series = DataSource.shared.selectedSeries
+            
             // Reload the table view's data
             DispatchQueue.main.async {
                 self.seriesDataTableView.reloadData()
@@ -144,6 +149,8 @@ class SeriesDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        seriesDataTableView.reloadData()
+        
         NetworkActivityManager.shared.numberOfActiveConnections = 0
         
         // Add keyboard notifications
@@ -163,7 +170,6 @@ class SeriesDetailViewController: UIViewController {
     // MARK: - Functions
     
     func goBack() {
-        DataSource.shared.selectedSeries = nil
         dismiss(animated: true, completion: nil)
     }
     

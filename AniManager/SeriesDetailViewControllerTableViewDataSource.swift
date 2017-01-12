@@ -70,7 +70,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             switch series.seriesType {
             case .anime:
                 let animeSeries = series as! AnimeSeries
-                cell.toggleAnimeSpecificLabels(hidden: false)
+                cell.set(seriesType: .anime)
                 cell.statusValueLabel.text = animeSeries.airingStatus != nil ? animeSeries.airingStatus!.rawValue : "n/a"
                 cell.durationPerEpisodeValueLabel.text = animeSeries.durationPerEpisode != nil ? "\(animeSeries.durationPerEpisode!)min" : "n/a"
                 cell.numberOfEpisodesValueLabel.text = "\(animeSeries.numberOfTotalEpisodes)"
@@ -86,7 +86,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             case .manga:
                 let mangaSeries = series as! MangaSeries
                 cell.statusValueLabel.text = mangaSeries.publishingStatus?.rawValue
-                cell.toggleAnimeSpecificLabels(hidden: true)
+                cell.set(seriesType: .manga)
+                cell.numberOfTotalChaptersValueLabel.text = "\(mangaSeries.numberOfTotalChapters)"
+                cell.numberOfTotalVolumesValueLabel.text = "\(mangaSeries.numberOfTotalVolumes)"
                 
                 /*
                      layoutSubviews has to be called so that the the cell's labels
@@ -303,7 +305,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Character Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
-            print(cell)
             
             // Check if there are available characters for the series
             guard let characters = series.characters,
@@ -311,7 +312,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                     return UITableViewCell(frame: CGRect.zero)
             }
             
-            print(cell.imagesCollectionView)
             // Register the images collection view cell's nib file
             cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
             

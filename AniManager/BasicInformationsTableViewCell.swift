@@ -12,21 +12,35 @@ class BasicInformationsTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var seriesType: SeriesType = .anime
+    
     let seriesCoverImageView = UIImageView()
+    
+    var mainStackView = UIStackView()
     
     let typeLabel = BasicInformationsLabel()
     let averageRatingLabel = BasicInformationsLabel()
     let statusLabel = BasicInformationsLabel()
-    let seasonLabel = BasicInformationsLabel()
-    let numberOfEpisodesLabel = BasicInformationsLabel()
-    let durationPerEpisodeLabel = BasicInformationsLabel()
 
     let typeValueLabel = BasicInformationsValueLabel()
     let averageRatingValueLabel = BasicInformationsValueLabel()
     let statusValueLabel = BasicInformationsValueLabel()
+    
+    // Anime-specific
+    let seasonLabel = BasicInformationsLabel()
+    let numberOfEpisodesLabel = BasicInformationsLabel()
+    let durationPerEpisodeLabel = BasicInformationsLabel()
+    
     let seasonValueLabel = BasicInformationsValueLabel()
     let numberOfEpisodesValueLabel = BasicInformationsValueLabel()
     let durationPerEpisodeValueLabel = BasicInformationsValueLabel()
+    
+    // Manga-specific
+    let numberOfTotalChaptersLabel = BasicInformationsLabel()
+    let numberOfTotalVolumesLabel = BasicInformationsLabel()
+    
+    let numberOfTotalChaptersValueLabel = BasicInformationsValueLabel()
+    let numberOfTotalVolumesValueLabel = BasicInformationsValueLabel()
     
     
     // MARK: - Initializer
@@ -55,9 +69,15 @@ class BasicInformationsTableViewCell: UITableViewCell {
         typeLabel.text = "Type"
         averageRatingLabel.text = "Avg. Rating"
         statusLabel.text = "Status"
+        
+        // Anime-specific
         seasonLabel.text = "Season"
         numberOfEpisodesLabel.text = "Episodes"
         durationPerEpisodeLabel.text = "Duration"
+        
+        // Manga-specific
+        numberOfTotalChaptersLabel.text = "Chapters"
+        numberOfTotalVolumesLabel.text = "Volumes"
         
         /*
             Let value labels that could potentially have long texts
@@ -70,6 +90,13 @@ class BasicInformationsTableViewCell: UITableViewCell {
         // Assign a different font to the average rating value label
         averageRatingValueLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 18.0)
         
+        setupStackViews(forSeriesType: seriesType)
+        
+    }
+    
+    func setupStackViews(forSeriesType seriesType: SeriesType) {
+        mainStackView = UIStackView()
+        
         // Create all stack views
         let typeStackView = UIStackView.createStackView(fromArrangedSubviews: [typeLabel, typeValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         typeStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,6 +104,8 @@ class BasicInformationsTableViewCell: UITableViewCell {
         averageRatingStackView.translatesAutoresizingMaskIntoConstraints = false
         let statusStackView = UIStackView.createStackView(fromArrangedSubviews: [statusLabel, statusValueLabel], withAxis: .horizontal, andSpacing: 5.0)
         statusStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Anime-specific Stack Views
         let seasonStackView = UIStackView.createStackView(fromArrangedSubviews: [seasonLabel, seasonValueLabel], withAxis: .horizontal, andSpacing: 5.0)
         seasonStackView.translatesAutoresizingMaskIntoConstraints = false
         let numberOfEpisodesStackView = UIStackView.createStackView(fromArrangedSubviews: [numberOfEpisodesLabel, numberOfEpisodesValueLabel], withAxis: .horizontal, andSpacing: 0.0)
@@ -84,35 +113,38 @@ class BasicInformationsTableViewCell: UITableViewCell {
         let durationPerEpisodeStackView = UIStackView.createStackView(fromArrangedSubviews: [durationPerEpisodeLabel, durationPerEpisodeValueLabel], withAxis: .horizontal, andSpacing: 0.0)
         durationPerEpisodeStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let mainStackView = UIStackView.createStackView(fromArrangedSubviews: [typeStackView, averageRatingStackView, statusStackView, seasonStackView, numberOfEpisodesStackView, durationPerEpisodeStackView], withAxis: .vertical, andSpacing: 10.0)
+        // Manga-specific Stack Views
+        let numberOfTotalChaptersStackView = UIStackView.createStackView(fromArrangedSubviews: [numberOfTotalChaptersLabel, numberOfTotalChaptersValueLabel], withAxis: .horizontal, andSpacing: 5.0)
+        numberOfTotalChaptersStackView.translatesAutoresizingMaskIntoConstraints = false
+        let numberOfTotalVolumesStackView = UIStackView.createStackView(fromArrangedSubviews: [numberOfTotalVolumesLabel, numberOfTotalVolumesValueLabel], withAxis: .horizontal, andSpacing: 5.0)
+        numberOfTotalVolumesStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var mainStackViewArrangedSubviews = [typeStackView, averageRatingStackView, statusStackView]
+        if seriesType == .anime {
+            numberOfTotalChaptersStackView.removeFromSuperview()
+            numberOfTotalVolumesStackView.removeFromSuperview()
+            mainStackViewArrangedSubviews.append(contentsOf: [seasonStackView, numberOfEpisodesStackView, durationPerEpisodeStackView])
+        } else if seriesType == .manga {
+            seasonStackView.removeFromSuperview()
+            numberOfEpisodesStackView.removeFromSuperview()
+            durationPerEpisodeStackView.removeFromSuperview()
+            mainStackViewArrangedSubviews.append(contentsOf: [numberOfTotalChaptersStackView, numberOfTotalVolumesStackView])
+        }
+        
+        mainStackView = UIStackView.createStackView(fromArrangedSubviews: mainStackViewArrangedSubviews, withAxis: .vertical, andSpacing: 10.0)
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainStackView)
         addConstraints([
-                NSLayoutConstraint(item: mainStackView, attribute: .leading, relatedBy: .equal, toItem: seriesCoverImageView, attribute: .trailing, multiplier: 1.0, constant: 15.0),
-                NSLayoutConstraint(item: mainStackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
-                NSLayoutConstraint(item: mainStackView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -15.0)
+            NSLayoutConstraint(item: mainStackView, attribute: .leading, relatedBy: .equal, toItem: seriesCoverImageView, attribute: .trailing, multiplier: 1.0, constant: 15.0),
+            NSLayoutConstraint(item: mainStackView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 15.0),
+            NSLayoutConstraint(item: mainStackView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -15.0)
             ])
-        
-        
     }
     
     // This method hides or shows labels specific to anime series
-    func toggleAnimeSpecificLabels(hidden: Bool) {
-        if hidden {
-            seasonLabel.isHidden = true
-            seasonValueLabel.isHidden = true
-            durationPerEpisodeLabel.isHidden = true
-            durationPerEpisodeValueLabel.isHidden = true
-            numberOfEpisodesLabel.isHidden = true
-            numberOfEpisodesValueLabel.isHidden = true
-        } else {
-            seasonLabel.isHidden = false
-            seasonValueLabel.isHidden = false
-            durationPerEpisodeLabel.isHidden = false
-            durationPerEpisodeValueLabel.isHidden = false
-            numberOfEpisodesLabel.isHidden = false
-            numberOfEpisodesValueLabel.isHidden = false
-        }
+    func set(seriesType: SeriesType) {
+        self.seriesType = seriesType
+        setupStackViews(forSeriesType: seriesType)
     }
     
     override func prepareForReuse() {

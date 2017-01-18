@@ -88,6 +88,8 @@ class BrowseViewController: SeriesCollectionViewController {
             seriesType = userDefaultsSeriesType
         }
         
+        tabBarController?.delegate = self
+        
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = true
         
@@ -401,5 +403,29 @@ class BrowseViewController: SeriesCollectionViewController {
 extension BrowseViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return FilterModalPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+extension BrowseViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        /*
+            Check if the selected view controller's navigation bar's tag
+            property is 1 which indicates that it's the browse view controller's
+            navigation controller.
+         
+            Also check if the tab bar controller's currently active view controller
+            is the same as the selected view controller because the browse view
+            controller should only scroll to the top if its tab bar button item
+            is tapped when it's already active.
+         
+            Finally, try casting the selected view controller's (navigation controller)
+            first child view controller to BrowseViewController type and scroll to
+            its series collection view's topmost item
+         */
+        if (viewController as? UINavigationController)?.navigationBar.tag == 1 && viewController == tabBarController.selectedViewController,
+            let browseViewController = viewController.childViewControllers.first as? BrowseViewController {
+            browseViewController.seriesCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        }
+        return true
     }
 }

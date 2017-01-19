@@ -62,6 +62,7 @@ class DataSource {
     var settings: [[String:[String]]] = [
         ["Content": [
                     "Show Explicit Content",
+                    "Show Tags with Spoilers",
                     "Rating System",
                     "Favorite Genres",
                     "Preferred Title Language"

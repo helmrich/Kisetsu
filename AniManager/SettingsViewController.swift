@@ -40,6 +40,10 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(sender.isOn, forKey: "showExplicitContent")
     }
     
+    func tagsWithSpoilersSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "showTagsWithSpoilers")
+    }
+    
     func logout() {
         /*
             Reset all values in the user defaults that are related to the
@@ -94,6 +98,12 @@ extension SettingsViewController: UITableViewDataSource {
                 (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
                 (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: "showExplicitContent")
                 (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(explicitContentSwitchChanged), for: .valueChanged)
+                return (cell as! SettingSwitchTableViewCell)
+            } else if currentSettingName.uppercased() == "SHOW TAGS WITH SPOILERS" {
+                cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
+                (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
+                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: "showTagsWithSpoilers")
+                (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(tagsWithSpoilersSwitchChanged), for: .valueChanged)
                 return (cell as! SettingSwitchTableViewCell)
             } else if currentSettingName.uppercased() == "CLEAR DISK IMAGE CACHE" {
                 ImageCache.default.calculateDiskCacheSize { sizeInBytes in

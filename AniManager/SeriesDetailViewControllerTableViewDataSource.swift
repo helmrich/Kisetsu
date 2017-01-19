@@ -426,9 +426,11 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 cell's genre label stack view
              */
             for tag in tags {
-                let tagLabel = GenreLabel()
-                tagLabel.text = tag.name
-                cell.genreLabelStackView.addArrangedSubview(tagLabel)
+                if UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") || (!UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") && !tag.isSpoiler) {
+                    let tagLabel = GenreLabel()
+                    tagLabel.text = tag.name
+                    cell.genreLabelStackView.addArrangedSubview(tagLabel)
+                }
             }
             
             return cell

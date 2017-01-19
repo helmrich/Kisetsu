@@ -32,6 +32,7 @@ class Series {
     
     // Additional informations
     let characters: [Character]?
+    let relations: [Series]?
     let relationsAnime: [AnimeSeries]?
     let relationsManga: [MangaSeries]?
     
@@ -42,16 +43,21 @@ class Series {
     
     var allRelations: [Series]? {
         get {
-            guard let relationsAnime = relationsAnime,
-                let relationsManga = relationsManga else {
-                    return nil
-            }
             var combinedRelations = [Series]()
-            for relation in relationsAnime {
-                combinedRelations.append(relation)
+            if let relationsAnime = relationsAnime {
+                for relation in relationsAnime {
+                    combinedRelations.append(relation)
+                }
             }
-            for relation in relationsManga {
-                combinedRelations.append(relation)
+            if let relationsManga = relationsManga {
+                for relation in relationsManga {
+                    combinedRelations.append(relation)
+                }
+            }
+            if let relations = relations {
+                for relation in relations {
+                    combinedRelations.append(relation)
+                }
             }
             return combinedRelations
         }
@@ -95,7 +101,6 @@ class Series {
                 let popularity = dictionary[SeriesKey.popularity] as? Int,
                 let imageMediumUrlString = dictionary[SeriesKey.imageMediumUrl] as? String,
                 let imageLargeUrlString = dictionary[SeriesKey.imageLargeUrl] as? String else {
-                    print("Couldn't extract values from dictionary needed to create series...")
                     return nil
         }
         
@@ -161,12 +166,25 @@ class Series {
             self.characters = nil
         }
         
+        if let relationDictionaries = dictionary[SeriesKey.relations] as? [[String:Any]] {
+            var relations = [Series]()
+            for relationDictionary in relationDictionaries {
+                if let animeSeries = AnimeSeries(fromDictionary: relationDictionary) {
+                    relations.append(animeSeries)
+                } else if let mangaSeries = MangaSeries(fromDictionary: relationDictionary) {
+                    relations.append(mangaSeries)
+                }
+            }
+            self.relations = relations
+        } else {
+            self.relations = nil
+        }
+        
         if let relationAnimeDictionaries = dictionary[SeriesKey.relationsAnime] as? [[String:Any]] {
             var relationsAnime = [AnimeSeries]()
             for relationAnimeDictionary in relationAnimeDictionaries {
                 if let animeSeries = AnimeSeries(fromDictionary: relationAnimeDictionary) {
                     relationsAnime.append(animeSeries)
-                    print(animeSeries.titleEnglish)
                 }
             }
             self.relationsAnime = relationsAnime
@@ -179,16 +197,12 @@ class Series {
             for relationMangaDictionary in relationMangaDictionaries {
                 if let mangaSeries = MangaSeries(fromDictionary: relationMangaDictionary) {
                     relationsManga.append(mangaSeries)
-                    print(mangaSeries.titleEnglish)
                 }
             }
             self.relationsManga = relationsManga
         } else {
             self.relationsManga = nil
         }
-        
-        
-        
         
         if let finishedOn = dictionary[AniListConstant.ResponseKey.List.finishedOn] as? String {
             self.finishedOn = finishedOn

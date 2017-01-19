@@ -28,6 +28,7 @@ extension ResponseConstant {
             static let synonyms = "synonyms"
             static let genres = "genres"
             static let adult = "adult"
+            static let classification = "classification"
             static let averageScore = "average_score"
             static let popularity = "popularity"
             static let imageSmallUrl = "image_url_sml"
@@ -39,7 +40,8 @@ extension ResponseConstant {
             static let favourite = "favourite"
             static let characters = "characters"
             static let tags = "tags"
-            static let relationsAnime = "relations"
+            static let relations = "relations"
+            static let relationsAnime = "relations_anime"
             static let relationsManga = "relations_manga"
         }
         

@@ -19,7 +19,63 @@ class SeriesDetailViewController: UIViewController {
     var seriesTitle: String!
     var seriesType: SeriesType! = .manga
     
-    var series: Series?
+    var series: Series? {
+        didSet {
+            
+            /*
+                Add the cell types that should always be available to the
+                availableCellTypes array
+             */
+            availableCellTypes = [.basicInformations, .actions, .additionalInformations]
+            
+            guard let series = series else {
+                return
+            }
+            
+            /*
+                Check the data that's available for the selected series and
+                add the appropriate cell type to the availableCellTypes array
+                when data is available
+             */
+            
+            if series.genres.count > 0 {
+                availableCellTypes?.append(.genres)
+            }
+            
+            if series.description != nil {
+                availableCellTypes?.append(.description)
+            }
+            
+            if let characters = series.characters,
+                characters.count > 0 {
+                availableCellTypes?.append(.characters)
+            }
+            
+            if let allRelations = series.allRelations,
+                allRelations.count > 0 {
+                availableCellTypes?.append(.relations)
+            }
+            
+            if let tags = series.tags,
+                tags.count > 0 {
+                availableCellTypes?.append(.tags)
+            }
+            
+            if let animeSeries = series as? AnimeSeries,
+                let externalLinks = animeSeries.externalLinks,
+                externalLinks.count > 0 {
+                availableCellTypes?.append(.externalLinks)
+            }
+            
+            if let animeSeries = series as? AnimeSeries,
+                let youtubeVideoId = animeSeries.youtubeVideoId,
+                let _ = URL(string: "https://www.youtube.com/embed/\(youtubeVideoId)") {
+                availableCellTypes?.append(.video)
+            }
+        }
+    }
+    
+    var availableCellTypes: [SeriesDetailCellType]?
     
     override var prefersStatusBarHidden: Bool {
         return true

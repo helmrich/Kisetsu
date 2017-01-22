@@ -10,17 +10,24 @@ import UIKit
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let availableCellTypes = availableCellTypes else {
+            return 0
+        }
+        
+        return availableCellTypes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let series = series else {
+        guard let series = series,
+        let availableCellTypes = availableCellTypes else {
             return UITableViewCell(frame: CGRect.zero)
         }
         
-        if indexPath.row == 0 {
-            
+        let currentCellType = availableCellTypes[indexPath.row]
+        
+        switch currentCellType {
+        case .basicInformations:
             // MARK: - Basic Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInformationsCell") as! BasicInformationsTableViewCell
@@ -91,14 +98,13 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 cell.numberOfTotalVolumesValueLabel.text = "\(mangaSeries.numberOfTotalVolumes)"
                 
                 /*
-                     layoutSubviews has to be called so that the the cell's labels
-                     with dynamic content will update their width based on the values
+                    layoutSubviews has to be called so that the the cell's labels
+                    with dynamic content will update their width based on the values
                  */
                 cell.layoutSubviews()
                 return cell
             }
-        } else if indexPath.row == 1 {
-            
+        case .actions:
             // MARK: - Actions Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
@@ -255,9 +261,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-            
-        } else if indexPath.row == 2 {
-            
+        case .genres:
             // MARK: - Genre Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell") as! GenreTableViewCell
@@ -279,9 +283,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-            
-        } else if indexPath.row == 3 {
-            
+        case .description:
             // MARK: - Description Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "descriptionCell") as! DescriptionTableViewCell
@@ -300,8 +302,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.descriptionTextView.text = cleanDescription
             
             return cell
-        } else if indexPath.row == 4 {
-            
+        case .characters:
             // MARK: - Character Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
@@ -330,8 +331,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.imagesCollectionView.reloadData()
             
             return cell
-        } else if indexPath.row == 5 {
-            
+        case .relations:
             // MARK: - Relations Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "relationImagesCell") as! ImagesTableViewCell
@@ -362,14 +362,13 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.imagesCollectionView.reloadData()
             
             return cell
-        } else if indexPath.row == 6 {
-            
+        case .additionalInformations:
             // MARK: - Additional Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
             
             /*
-                If the series type is anime and a studio is available, 
+                If the series type is anime and a studio is available,
                 set the cell's studio value label's text
              */
             if series.seriesType == .anime,
@@ -403,15 +402,15 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-        } else if indexPath.row == 7 {
-            
+        case .tags:
             // MARK: - Tags Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell") as! GenreTableViewCell
             
             // Check if the series has tags
-            guard let tags = series.tags else {
-                return UITableViewCell(frame: CGRect.zero)
+            guard let tags = series.tags,
+                tags.count > 0 else {
+                    return UITableViewCell(frame: CGRect.zero)
             }
             
             /*
@@ -426,6 +425,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 cell's genre label stack view
              */
             for tag in tags {
+                /*
+                    Only create and add tags if either the option to show tags with
+                    spoilers is activated or if it doesn't contain spoilers
+                 */
                 if UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") || (!UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") && !tag.isSpoiler) {
                     let tagLabel = GenreLabel()
                     tagLabel.text = tag.name
@@ -434,9 +437,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-            
-        } else if indexPath.row == 8 {
-            
+        case .externalLinks:
             // MARK: - External Links Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
@@ -450,8 +451,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             // Check if the anime series has external links
-            guard let externalLinks = animeSeries.externalLinks else {
-                return UITableViewCell(frame: CGRect.zero)
+            guard let externalLinks = animeSeries.externalLinks,
+                externalLinks.count > 0 else {
+                    return UITableViewCell(frame: CGRect.zero)
             }
             
             /*
@@ -463,10 +465,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell()
             
             return cell
-            
-        } else if indexPath.row == 9 {
-            
-            // MARK: - Videos Cell
+
+        case .video:
+            // MARK: - Video Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
             
@@ -475,8 +476,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 to the AnimeSeries type as only anime have a YouTube video ID
              */
             guard series.seriesType == .anime,
-            let animeSeries = series as? AnimeSeries else {
-                return UITableViewCell(frame: CGRect.zero)
+                let animeSeries = series as? AnimeSeries else {
+                    return UITableViewCell(frame: CGRect.zero)
             }
             
             /*
@@ -496,9 +497,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.videoWebView.load(request)
             
             return cell
-            
-        } else {
-            return UITableViewCell(frame: CGRect.zero)
         }
     }
     

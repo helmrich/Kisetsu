@@ -38,6 +38,7 @@
 		D2341CD81DF74C87004773B3 /* ImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */; };
 		D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */; };
 		D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */; };
+		D258E3DA1E351463003074BD /* SeriesDetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258E3D91E351463003074BD /* SeriesDetailCellType.swift */; };
 		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
 		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
 		D25EDEA91DDF979600267243 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA51DDF979600267243 /* Lato-Light.ttf */; };
@@ -151,6 +152,7 @@
 		D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCellType.swift; sourceTree = "<group>"; };
 		D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		D258E3D91E351463003074BD /* SeriesDetailCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCellType.swift; sourceTree = "<group>"; };
 		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
 		D25EDEA51DDF979600267243 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 		D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D258E3D91E351463003074BD /* SeriesDetailCellType.swift */,
 				D28A5E8E1DEDE05B00D62BDC /* SeriesDetailViewController.swift */,
 				D21EC74A1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift */,
 				D21EC74C1E01B2CD008027E4 /* SeriesDetailViewControllerTableViewDelegate.swift */,
@@ -857,6 +860,7 @@
 				D21EC7571E0326F3008027E4 /* AniListClientSeries.swift in Sources */,
 				D25EDF111DECBFB300267243 /* FilterModalPresentationController.swift in Sources */,
 				D2786F851DF3993C00F4368F /* Staff.swift in Sources */,
+				D258E3DA1E351463003074BD /* SeriesDetailCellType.swift in Sources */,
 				D22197FE1E0ADBEA00B6F20A /* PathConstant.swift in Sources */,
 				D2786F8A1DF39A4000F4368F /* Actor.swift in Sources */,
 				D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */,

@@ -115,7 +115,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
         var filterValueString = ""
         for (_, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
-            filterValueString = "\(filterValues[indexPath.row])"
+            filterValueString = "\(filterValues[indexPath.row])".capitalized
         }
         cell.filterNameLabel.text = filterValueString
         return cell

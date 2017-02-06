@@ -9,10 +9,10 @@
 import Foundation
 
 enum AnimeAiringStatus: String {
-    case finishedAiring = "finished airing"
-    case currentlyAiring = "currently airing"
-    case notYetAired = "not yet aired"
-    case cancelled = "cancelled"
+    case finishedAiring = "Finished Airing"
+    case currentlyAiring = "Currently Airing"
+    case notYetAired = "Not Yet Aired"
+    case cancelled = "Cancelled"
     
     static let allStatusStrings = [
         finishedAiring.rawValue,
@@ -23,10 +23,10 @@ enum AnimeAiringStatus: String {
 }
 
 enum MangaPublishingStatus: String {
-    case finishedPublishing = "finished publishing"
-    case publishing = "publishing"
-    case notYetPublished = "not yet published"
-    case cancelled = "cancelled"
+    case finishedPublishing = "Finished Publishing"
+    case publishing = "Publishing"
+    case notYetPublished = "Not Yet Published"
+    case cancelled = "Cancelled"
     
     static let allStatusStrings = [
         finishedPublishing.rawValue,

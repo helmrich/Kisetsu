@@ -186,7 +186,7 @@ class BrowseViewController: SeriesCollectionViewController {
         
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
@@ -198,7 +198,7 @@ class BrowseViewController: SeriesCollectionViewController {
             
             guard let seriesList = seriesList,
             let nonAdultSeriesList = nonAdultSeriesList else {
-                self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get series list")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
@@ -213,7 +213,7 @@ class BrowseViewController: SeriesCollectionViewController {
             }
             
             guard self.browseList != nil else {
-                self.errorMessageView.showError(withMessage: "Couldn't find browse list")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't find browse list")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
@@ -228,7 +228,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 should be set to an empty set
              */
             guard self.browseList != nil else {
-                self.errorMessageView.showError(withMessage: "Couldn't get browse list")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get browse list")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
@@ -329,7 +329,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 
                 // Error Handling
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
+                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -339,7 +339,7 @@ class BrowseViewController: SeriesCollectionViewController {
 
                 guard let seriesList = seriesList,
                 let nonAdultSeriesList = nonAdultSeriesList else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get series list")
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0

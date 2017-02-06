@@ -26,7 +26,7 @@ class SeriesDetailViewController: UIViewController {
                 Add the cell types that should always be available to the
                 availableCellTypes array
              */
-            availableCellTypes = [.basicInformations, .actions, .additionalInformations]
+            availableCellTypes = [.basicInformations, .actions]
             
             guard let series = series else {
                 return
@@ -55,6 +55,12 @@ class SeriesDetailViewController: UIViewController {
                 allRelations.count > 0 {
                 availableCellTypes?.append(.relations)
             }
+            
+            /*
+                Append the additionalInformations cell type as additional
+                informations should always be available
+             */
+            availableCellTypes?.append(.additionalInformations)
             
             if let tags = series.tags,
                 tags.count > 0 {
@@ -95,7 +101,7 @@ class SeriesDetailViewController: UIViewController {
         super.viewDidLoad()
         
         // Add error message view to main view
-        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
+        errorMessageView.addToBottom(of: view)
         
         // Register the nibs for the actions and images table view cells
         seriesDataTableView.register(UINib(nibName: "ActionsTableViewCell", bundle: nil), forCellReuseIdentifier: "actionsCell")
@@ -142,7 +148,7 @@ class SeriesDetailViewController: UIViewController {
             
             // Error Handling
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -151,7 +157,7 @@ class SeriesDetailViewController: UIViewController {
             }
             
             guard let series = series else {
-                self.errorMessageView.showError(withMessage: "Couldn't get series information")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get series information")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -257,7 +263,7 @@ class SeriesDetailViewController: UIViewController {
         
         AniListClient.shared.favorite(seriesOfType: seriesType, withId: seriesId) { (errorMessage) in
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -332,7 +338,7 @@ class SeriesDetailViewController: UIViewController {
         let removeFromListAction = UIAlertAction(title: "Remove from List", style: .default) { (alertAction) in
             AniListClient.shared.deleteListEntry(ofType: self.seriesType, withSeriesId: self.seriesId) { (errorMessage) in
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: "Couldn't remove \(self.seriesType.rawValue) from list")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't remove \(self.seriesType.rawValue) from list")
                     return
                 }
                 

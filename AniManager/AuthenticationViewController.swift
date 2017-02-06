@@ -42,7 +42,7 @@ class AuthenticationViewController: UIViewController {
         if let url = URL(string: Constant.URL.aniListSignUpString) {
             presentWebViewController(with: url)
         } else {
-            errorMessageView.showError(withMessage: "Couldn't open Sign-Up page. Try again.")
+            errorMessageView.showAndHide(withMessage: "Couldn't open Sign-Up page. Try again.")
         }
     }
     
@@ -50,7 +50,7 @@ class AuthenticationViewController: UIViewController {
         if let url = URL(string: Constant.URL.aniListForgotPasswordUrlString) {
             presentWebViewController(with: url)
         } else {
-            errorMessageView.showError(withMessage: "Couldn't open Forgot Password page. Try again.")
+            errorMessageView.showAndHide(withMessage: "Couldn't open Forgot Password page. Try again.")
         }
     }
     
@@ -80,7 +80,7 @@ class AuthenticationViewController: UIViewController {
             Add an error message view to the main view and change
             the login button's background color to white
          */
-        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
+        errorMessageView.addToBottom(of: view)
         loginButton.backgroundColor = .white
     }
     
@@ -101,17 +101,17 @@ class AuthenticationViewController: UIViewController {
                 
                 // Error Handling
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
+                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     return
                 }
                 
                 guard let accessToken = accessToken else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get access token")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get access token")
                     return
                 }
                 
                 guard let refreshToken = refreshToken else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get refresh token")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get refresh token")
                     return
                 }
                 

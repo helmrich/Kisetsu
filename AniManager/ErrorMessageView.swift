@@ -9,11 +9,14 @@
 import UIKit
 
 class ErrorMessageView: UIView {
-
+    
     // MARK: - Properties
     
     let cancelButton = UIButton()
     let errorLabel = UILabel()
+    
+    var topConstraint: NSLayoutConstraint!
+    var bottomOffset: CGFloat!
     
     
     // MARK: - Initializers
@@ -21,39 +24,22 @@ class ErrorMessageView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.alpha = 0
+        self.alpha = 0.0
         self.backgroundColor = UIColor(red: 1, green: 82 / 255, blue: 82 / 255, alpha: 1)
-        
-        // Add a cancel button to the error message view
-        cancelButton.setImage(#imageLiteral(resourceName: "CancelCross"), for: .normal)
-        self.addSubview(cancelButton)
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: cancelButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: cancelButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 15),
-            NSLayoutConstraint(item: cancelButton, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -10),
-            NSLayoutConstraint(item: cancelButton, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 10)
-        ])
-        
-        /*
-             Add a target-action to the button that calls the hideError method when
-             the cancel button is touched
-         */
-        cancelButton.addTarget(self, action: #selector(hideError), for: .touchUpInside)
         
         // Add an error label that displays the error message's text
         errorLabel.numberOfLines = 2
-        errorLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14)
+        errorLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14.0)
         errorLabel.textColor = .white
         errorLabel.textAlignment = .center
         self.addSubview(errorLabel)
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: errorLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 290),
-            NSLayoutConstraint(item: errorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 34)
-        ])
+            NSLayoutConstraint(item: errorLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: errorLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: errorLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 290.0),
+            NSLayoutConstraint(item: errorLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 34.0)
+            ])
     }
     
     convenience init() {
@@ -67,41 +53,66 @@ class ErrorMessageView: UIView {
     
     // MARK: - Functions
     
-    func showError(withMessage message: String) {
+    /*
+     This method adds an error message view at the bottom of a view
+     (usually a view controller's main view). It has to be called before
+     calling any other methods of the error message view (such as show,
+     hide and showAndHide)
+     */
+    func addToBottom(of view: UIView, withOffsetToBottom bottomOffset: CGFloat = 0.0) {
+        
+        self.bottomOffset = bottomOffset
+        
+        topConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        view.addSubview(self)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 60.0),
+                NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0),
+                topConstraint
+            ])
+    }
+    
+    func showAndHide(withMessage message: String) {
         DispatchQueue.main.async {
             self.errorLabel.text = "Error: \(message)"
-            UIView.animate(withDuration: 0.2, animations: {
-                self.alpha = 1
+            UIView.animate(withDuration: 0.33, animations: {
+                self.alpha = 1.0
+                self.topConstraint.constant = -(60.0 + self.bottomOffset)
+                self.superview!.layoutIfNeeded()
+            })
+            
+            UIView.animate(withDuration: 0.33, delay: 5.33, options: [], animations: {
+                self.alpha = 0.0
+                self.topConstraint.constant = 0.0
+                self.superview!.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
+    func show(withMessage message: String) {
+        DispatchQueue.main.async {
+            self.errorLabel.text = "Error: \(message)"
+            UIView.animate(withDuration: 0.33, animations: {
+                self.alpha = 1.0
+                self.topConstraint.constant = -(60.0 + self.bottomOffset)
+                self.superview!.layoutIfNeeded()
             })
         }
     }
     
-    func hideError() {
+    func hide() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.alpha = 0
+            self.layer.removeAllAnimations()
+            
+            UIView.animate(withDuration: 0.33, animations: {
+                self.alpha = 0.0
+                self.topConstraint.constant = 0.0
+                self.superview!.layoutIfNeeded()
             })
         }
     }
-
-}
-
-
-// MARK: - UIViewController extension
-
-extension UIViewController {
-    /*
-        This method adds an error message view at the bottom of a view
-        controller's main view
-     */
-    func addErrorMessageViewToBottomOfView(withOffsetToBottom bottomOffset: CGFloat = 0, errorMessageView: ErrorMessageView) {
-        view.addSubview(errorMessageView)
-        errorMessageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: errorMessageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 60),
-            NSLayoutConstraint(item: errorMessageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorMessageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: errorMessageView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: bottomOffset)
-            ])
-    }
+    
 }

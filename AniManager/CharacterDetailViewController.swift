@@ -46,7 +46,7 @@ class CharacterDetailViewController: UIViewController {
         
         AniListClient.shared.favorite(characterWithId: character.id) { (errorMessage) in
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -98,7 +98,7 @@ class CharacterDetailViewController: UIViewController {
         
         AniListClient.shared.getPageModelCharacter(forCharacterId: character.id) { (pageModelCharacter, errorMessage) in
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -107,7 +107,7 @@ class CharacterDetailViewController: UIViewController {
             }
             
             guard let pageModelCharacter = pageModelCharacter else {
-                self.errorMessageView.showError(withMessage: "Couldn't get character page model")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get character page model")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0

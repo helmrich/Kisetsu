@@ -47,7 +47,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             
             // Error Handling
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -60,7 +60,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             }
             
             guard let user = user else {
-                self.errorMessageView.showError(withMessage: "Couldn't get user")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get user")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -73,7 +73,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             }
             
             guard let seriesType = self.seriesType else {
-                self.errorMessageView.showError(withMessage: "No valid series type given")
+                self.errorMessageView.showAndHide(withMessage: "No valid series type given")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -97,7 +97,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             } else if seriesType == .manga {
                 status = MangaListName(rawValue: self.title!)!.asKey()
             } else {
-                self.errorMessageView.showError(withMessage: "Invalid series type")
+                self.errorMessageView.showAndHide(withMessage: "Invalid series type")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -126,7 +126,7 @@ class ListDetailViewController: SeriesCollectionViewController {
                 }
                 
                 guard let generalSeriesList = seriesList else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get series list")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get series list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
@@ -147,7 +147,7 @@ class ListDetailViewController: SeriesCollectionViewController {
                     let mangaSeriesList = generalSeriesList as? [MangaSeries] {
                     DataSource.shared.selectedMangaList = mangaSeriesList
                 } else {
-                    self.errorMessageView.showError(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {

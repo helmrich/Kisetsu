@@ -49,7 +49,7 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
+        errorMessageView.addToBottom(of: view)
         
         getAccessToken()
     }
@@ -63,13 +63,13 @@ class LoadingViewController: UIViewController {
         
         AniListClient.shared.getAccessToken(withRefreshToken: true) { accessToken, _, errorMessage in
             guard errorMessage == nil else {
-                self.errorMessageView.showError(withMessage: errorMessage!)
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 self.toggleStatus(loading: false)
                 return
             }
             
             guard let accessToken = accessToken else {
-                self.errorMessageView.showError(withMessage: "Couldn't get access token. Try again.")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get access token. Try again.")
                 self.toggleStatus(loading: false)
                 return
             }

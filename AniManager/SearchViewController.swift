@@ -116,7 +116,7 @@ class SearchViewController: SeriesCollectionViewController {
                             self.nothingFoundLabel.alpha = 1.0
                         }
                     } else {
-                        self.errorMessageView.showError(withMessage: errorMessage!)
+                        self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     }
                 }
                 return
@@ -124,7 +124,7 @@ class SearchViewController: SeriesCollectionViewController {
             
             guard let seriesList = seriesList,
             let nonAdultSeriesList = nonAdultSeriesList else {
-                self.errorMessageView.showError(withMessage: "Couldn't get series")
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get series")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {

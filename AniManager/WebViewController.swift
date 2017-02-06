@@ -46,7 +46,7 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addErrorMessageViewToBottomOfView(errorMessageView: errorMessageView)
+        errorMessageView.addToBottom(of: view)
         toolbar.clipsToBounds = true
     }
     
@@ -130,13 +130,13 @@ extension WebViewController: UIWebViewDelegate {
                 displayed on the presenting AuthenticationViewController and the
                 WebViewController should be dismissed
              */
-            (presentingViewController as! AuthenticationViewController).errorMessageView.showError(withMessage: "The authorization request was denied")
+            (presentingViewController as! AuthenticationViewController).errorMessageView.showAndHide(withMessage: "The authorization request was denied")
             dismiss(animated: true, completion: nil)
         }
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        errorMessageView.showError(withMessage: error.localizedDescription)
+        errorMessageView.showAndHide(withMessage: error.localizedDescription)
         setActivityIndicator(enabled: false)
         UIView.animate(withDuration: 0.25) {
             self.reloadButton.alpha = 1.0

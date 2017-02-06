@@ -134,7 +134,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 
                 // Error Handling
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
+                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -143,7 +143,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 }
                 
                 guard let user = user else {
-                    self.errorMessageView.showError(withMessage: "Couldn't get authenticated user")
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -556,7 +556,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 
                 // Error Handling
                 guard errorMessage == nil else {
-                    self.errorMessageView.showError(withMessage: errorMessage!)
+                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0

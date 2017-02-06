@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -250,14 +251,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="IqI-4e-MHt" firstAttribute="leading" secondItem="dcS-MR-x5z" secondAttribute="leading" constant="15" id="4bc-Dp-Gxe"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IqI-4e-MHt" secondAttribute="bottom" constant="72" id="4dP-1W-XVv"/>
+                    <constraint firstItem="ziN-r0-JP3" firstAttribute="top" secondItem="IqI-4e-MHt" secondAttribute="bottom" constant="15" id="E4T-rr-5E2"/>
                     <constraint firstAttribute="trailing" secondItem="IqI-4e-MHt" secondAttribute="trailing" constant="15" id="EMb-Qn-tkc"/>
-                    <constraint firstAttribute="bottom" secondItem="f6n-Dh-igt" secondAttribute="bottom" constant="15.5" id="MMj-YY-xZG"/>
                     <constraint firstItem="IqI-4e-MHt" firstAttribute="top" secondItem="dcS-MR-x5z" secondAttribute="top" constant="15" id="Qr6-b9-UiJ"/>
                     <constraint firstItem="f6n-Dh-igt" firstAttribute="centerX" secondItem="dcS-MR-x5z" secondAttribute="centerX" id="XGO-hL-LKK"/>
-                    <constraint firstItem="f6n-Dh-igt" firstAttribute="top" secondItem="IqI-4e-MHt" secondAttribute="bottom" constant="15" id="hAh-Jv-qwL"/>
+                    <constraint firstItem="f6n-Dh-igt" firstAttribute="top" secondItem="IqI-4e-MHt" secondAttribute="bottom" constant="15" id="csi-x7-2rv"/>
                     <constraint firstItem="ziN-r0-JP3" firstAttribute="centerX" secondItem="dcS-MR-x5z" secondAttribute="centerX" id="lPx-G7-SPR"/>
-                    <constraint firstItem="ziN-r0-JP3" firstAttribute="top" secondItem="IqI-4e-MHt" secondAttribute="bottom" constant="15" id="oGH-fs-aoI"/>
-                    <constraint firstAttribute="bottom" secondItem="ziN-r0-JP3" secondAttribute="bottom" constant="15.5" id="oS3-vo-syo"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

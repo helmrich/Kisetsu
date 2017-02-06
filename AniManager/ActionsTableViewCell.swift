@@ -39,10 +39,6 @@ class ActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var volumesReadTextField: UITextField!
     
     
-    
-    
-    
-    
     // MARK: - Actions
 
     // Anime Actions
@@ -93,8 +89,6 @@ class ActionsTableViewCell: UITableViewCell {
             volumesReadTextField.text = "\(readVolumes - 1)"
         }
     }
-    
-    
     
     
     // MARK: - Functions
@@ -202,6 +196,4 @@ class ActionsTableViewCell: UITableViewCell {
         return userScore
         
     }
-    
-    
 }

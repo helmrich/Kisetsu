@@ -100,7 +100,6 @@ class SearchViewController: SeriesCollectionViewController {
             
             // Error Handling
             guard errorMessage == nil else {
-                print(errorMessage!)
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {

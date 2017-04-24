@@ -54,7 +54,7 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             }
             
             if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     collectionView.reloadItems(at: [indexPath])
                 }
             }

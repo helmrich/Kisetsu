@@ -42,7 +42,7 @@ class AnimeSeries: Series {
         }
         
         if let airingStatusString = dictionary[AnimeSeriesKey.airingStatus] as? String,
-            let airingStatus = AnimeAiringStatus(rawValue: airingStatusString) {
+            let airingStatus = AnimeAiringStatus(rawValue: airingStatusString.capitalized) {
                 self.airingStatus = airingStatus
         } else {
             self.airingStatus = nil

@@ -1,11 +1,11 @@
 PODS:
-  - Kingfisher (3.2.4)
+  - Kingfisher (3.6.2)
 
 DEPENDENCIES:
   - Kingfisher (~> 3.0)
 
 SPEC CHECKSUMS:
-  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
+  Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
 
 PODFILE CHECKSUM: 9421b513caa5dff39a90f80707b28d2e7d3df101
 

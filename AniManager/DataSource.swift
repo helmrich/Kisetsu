@@ -16,7 +16,7 @@ class DataSource {
     static let shared = DataSource()
     fileprivate init() {}
     
-    // General
+    // Series Detail
     var selectedSeries: Series? = nil
     
     // Genres
@@ -79,6 +79,11 @@ class DataSource {
         browseParameters["\(parameterName)"] = parameterValue
     }
     
+    /*
+        This function gets all genres from the genres.plist file and sets
+        the browseFilters property's value for the "Genres" key to the
+        retrieved genres
+     */
     func getGenres() {
         let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileUrl = documentsUrl.appendingPathComponent("genres.plist")

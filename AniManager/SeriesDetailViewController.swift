@@ -213,7 +213,11 @@ class SeriesDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        seriesDataTableView.alpha = 0.0
         seriesDataTableView.reloadData()
+        UIView.animate(withDuration: 1.0) {
+            self.seriesDataTableView.alpha = 0.75
+        }
         
         NetworkActivityManager.shared.numberOfActiveConnections = 0
         

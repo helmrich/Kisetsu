@@ -114,8 +114,12 @@ extension BrowseFilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
         var filterValueString = ""
-        for (_, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
-            filterValueString = "\(filterValues[indexPath.row])".capitalized
+        for (filterName, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
+            if filterName == "Type" {
+                filterValueString = "\(filterValues[indexPath.row])"
+            } else {
+                filterValueString = "\(filterValues[indexPath.row])".capitalized
+            }
         }
         cell.filterNameLabel.text = filterValueString
         return cell

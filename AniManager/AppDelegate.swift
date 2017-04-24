@@ -10,6 +10,11 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    override init() {
+        super.init()
+        UIView.classInit
+    }
 
     var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     lazy var coreDataStack = CoreDataStack(modelName: "AniManager")

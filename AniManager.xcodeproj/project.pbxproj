@@ -96,6 +96,7 @@
 		D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */; };
 		D2A78DAA1E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */; };
 		D2A78DAC1E1490E500F45CF9 /* NetworkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */; };
+		D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */; };
 		D2C6358D1DECFE7600959D75 /* FilterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */; };
 		D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */; };
 		D2C9BF951E181BF500AD1060 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9BF941E181BF500AD1060 /* ImageExtension.swift */; };
@@ -212,6 +213,7 @@
 		D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewControllerCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityManager.swift; sourceTree = "<group>"; };
+		D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBUIKitMainThreadGuard.swift; sourceTree = "<group>"; };
 		D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNameTableViewCell.swift; sourceTree = "<group>"; };
 		D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterValueTableViewCell.swift; sourceTree = "<group>"; };
 		D2C9BF941E181BF500AD1060 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 			isa = PBXGroup;
 			children = (
 				D27A77B41DDF861700228EF2 /* AppDelegate.swift */,
+				D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */,
 				D25EDEB51DE0909300267243 /* Constant.swift */,
 				D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */,
 				D25EDE9B1DDF8FE500267243 /* Models */,
@@ -699,7 +702,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Tobias Helmrich";
 				TargetAttributes = {
 					D27A77B01DDF861700228EF2 = {
@@ -832,6 +835,7 @@
 				D21EC74B1E01B275008027E4 /* SeriesDetailViewControllerTableViewDataSource.swift in Sources */,
 				D2C9BF9F1E1951B600AD1060 /* SettingsViewController.swift in Sources */,
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
+				D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */,
 				D21EC7511E0321B0008027E4 /* AniListClientAuthentication.swift in Sources */,
 				D2F32C6D1DFCE4570044D195 /* ListNameTableViewCell.swift in Sources */,
 				D28A5E981DEF5F8400D62BDC /* BasicInformationsTableViewCell.swift in Sources */,
@@ -967,6 +971,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1011,6 +1017,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";

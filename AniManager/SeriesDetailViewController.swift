@@ -201,9 +201,11 @@ class SeriesDetailViewController: UIViewController {
             }
             
             // Get the banner image from the banner image URL string
-            (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: imageBannerUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            DispatchQueue.main.async {
+                (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: imageBannerUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                }
             }
         }
     }
@@ -247,7 +249,10 @@ class SeriesDetailViewController: UIViewController {
             return
         }
         
-        let keyboardFrameEndRect = keyboardFrameEnd as CGRect
+        guard let keyboardFrameEndRect = keyboardFrameEnd as? CGRect else {
+            return
+        }
+        
         view.frame.origin.y -= keyboardFrameEndRect.height
     }
     

@@ -106,13 +106,12 @@ extension WebViewController: UIWebViewDelegate {
         inside of the app this solution is used for now.
      */
     func webViewDidStartLoad(_ webView: UIWebView) {
-        
         guard let request = webView.request,
-            let url = request.url else {
+            let mainDocumentURLString = request.mainDocumentURL?.absoluteString else {
             return
         }
         
-        if url.absoluteString.contains("?code=") {
+        if mainDocumentURLString.contains("?code=") {
             /*
                 If the URL string contains "?code=" the URL's string should be split
                 up in two components of which the second one will contain the
@@ -120,11 +119,14 @@ extension WebViewController: UIWebViewDelegate {
                 property should be set to the received authorization code and the
                 web view controller should be dismissed.
              */
-            let components = url.absoluteString.components(separatedBy: "?code=")
-            let authorizationCode = components[1]
+            let components = mainDocumentURLString.components(separatedBy: "?code=")
+            guard let authorizationCode = components.last else {
+                errorMessageView.showAndHide(withMessage: "Couldn't get Authorization Code")
+                return
+            }
             AniListClient.shared.authorizationCode = authorizationCode
             dismiss(animated: true, completion: nil)
-        } else if url.absoluteString.contains("?error=access_denied") {
+        } else if mainDocumentURLString.contains("?error=access_denied") {
             /*
                 If the URL string contains "?error=access_denied" an error should be
                 displayed on the presenting AuthenticationViewController and the

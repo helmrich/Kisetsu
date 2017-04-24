@@ -174,10 +174,13 @@ extension SearchViewController: UISearchBarDelegate {
         /*
             Every time the search bar's text changed, the series
             collection view should be hidden and a new series list
-            should be requested with the current search text
+            should be requested with the current search text, if the
+            search text contains at least one character
          */
         seriesCollectionView.alpha = 0.0
-        getSeriesList(withSearchText: searchText)
+        if searchText.characters.count > 0 {
+            getSeriesList(withSearchText: searchText)
+        }
     }
 }
 

@@ -18,6 +18,8 @@ class BrowseViewController: SeriesCollectionViewController {
     var managedContext: NSManagedObjectContext!
     var browseList: SeriesList?
     
+    var seriesCollectionViewOverlay = UIView()
+    
     var numberOfBasicSeriesInBrowseList: Int {
         guard let browseList = browseList,
             let basicSeries = browseList.basicSeries else {
@@ -87,6 +89,11 @@ class BrowseViewController: SeriesCollectionViewController {
             let userDefaultsSeriesType = SeriesType(rawValue: userDefaultsSeriesTypeString) {
             seriesType = userDefaultsSeriesType
         }
+        
+        seriesCollectionViewOverlay.frame = seriesCollectionView.frame
+        seriesCollectionViewOverlay.backgroundColor = seriesCollectionView.backgroundColor
+        seriesCollectionViewOverlay.alpha = 0.0
+        view.insertSubview(seriesCollectionViewOverlay, aboveSubview: seriesCollectionView)
         
         tabBarController?.delegate = self
         
@@ -178,6 +185,9 @@ class BrowseViewController: SeriesCollectionViewController {
         animating
      */
     func getSeriesList() {
+        UIView.animate(withDuration: 0.25) {
+            self.seriesCollectionViewOverlay.alpha = 1.0
+        }
         
         activityIndicatorView.startAnimatingAndFadeIn()
         
@@ -277,10 +287,10 @@ class BrowseViewController: SeriesCollectionViewController {
             DispatchQueue.main.async {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 self.seriesCollectionView.reloadData()
-                self.refreshControl.endRefreshing()
                 UIView.animate(withDuration: 0.25) {
-                    self.seriesCollectionView.alpha = 1.0
+                    self.seriesCollectionViewOverlay.alpha = 0.0
                 }
+                self.refreshControl.endRefreshing()
             }
         }
     }

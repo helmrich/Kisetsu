@@ -37,6 +37,7 @@ extension ParameterConstant {
     struct ParameterValue {
         struct Authentication {
             static let grantTypeAuthorizationCode = "authorization_code"
+            static let grantTypeClientCredentials = "client_credentials"
             static let grantTypeRefreshToken = "refresh_token"
             static let redirectUri = "AniManager://"
             static let responseTypeCode = "code"

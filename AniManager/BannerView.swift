@@ -30,8 +30,8 @@ class BannerView: UIView {
     let dismissButton = UIButton()
     let favoriteButton = UIButton()
     
-    let seriesTitleLabel = UILabel()
-    let seriesReleaseYearLabel = UILabel()
+    let titleLabel = UILabel()
+    let releaseYearLabel = UILabel()
     
     
     // MARK: - Initializer
@@ -96,14 +96,14 @@ class BannerView: UIView {
             Set the series title and release year labels' properties
             and create a stack view with them
          */
-        seriesTitleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 24.0)
-        seriesTitleLabel.textColor = .white
-        seriesTitleLabel.numberOfLines = 3
-        seriesReleaseYearLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14.0)
-        seriesReleaseYearLabel.textColor = .white
+        titleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 24.0)
+        titleLabel.textColor = .white
+        titleLabel.numberOfLines = 3
+        releaseYearLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14.0)
+        releaseYearLabel.textColor = .white
         let stackView = UIStackView(arrangedSubviews: [
-            seriesTitleLabel,
-            seriesReleaseYearLabel
+            titleLabel,
+            releaseYearLabel
             ])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false

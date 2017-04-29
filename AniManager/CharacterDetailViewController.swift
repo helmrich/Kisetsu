@@ -15,6 +15,8 @@ class CharacterDetailViewController: UIViewController {
     let errorMessageView = ErrorMessageView()
     var character: Character!
     
+    var bannerImageURL: URL?
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
@@ -24,13 +26,15 @@ class CharacterDetailViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak fileprivate var characterImageView: UIImageView!
+    @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var bannerView: UIView!
+    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var nameStackView: UIStackView!
     @IBOutlet weak fileprivate var characterNameLabel: UILabel!
     @IBOutlet weak fileprivate var characterJapaneseNameLabel: UILabel!
     @IBOutlet weak fileprivate var infoTextView: UITextView!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
-    
     
     
     // MARK: - Actions
@@ -75,7 +79,23 @@ class CharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        nameStackView.alpha = 0.0
+        infoTextView.alpha = 0.0
+        characterImageView.alpha = 0.0
+        
+        // Banner Configuration
         favoriteButton.alpha = 0
+        bannerView.backgroundColor = .aniManagerBlack
+        bannerView.alpha = 0.85
+        bannerImageView.contentMode = .scaleAspectFill
+        if let bannerImageURL = bannerImageURL {
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            bannerImageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: bannerView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+            }
+        }
         
         /*
             Switch over the character's first and last name
@@ -92,6 +112,11 @@ class CharacterDetailViewController: UIViewController {
         default:
             characterNameLabel.text = "\(character.firstName!) \(character.lastName!)"
         }
+        
+        characterImageView.layer.cornerRadius = 2.0
+        
+        infoTextView.textContainerInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 20.0)
+        infoTextView.layer.cornerRadius = 2.0
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
@@ -121,9 +146,33 @@ class CharacterDetailViewController: UIViewController {
                 }
             }
             
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.25) {
+                    self.nameStackView.alpha = 1.0
+                }
+            }
+            
             if let info = pageModelCharacter.info {
                 DispatchQueue.main.async {
-                    self.infoTextView.text = info
+                    /*
+                        Check if the character info has content or not, if it has
+                        create an attributed string with the "Biography" heading and
+                        the character info. If not, display a message that indicates
+                        this
+                     */
+                    if info.characters.count > 0 {
+                        let attributedString = NSMutableAttributedString(string: "Biography\n\n\(info)")
+                        attributedString.addAttributes([
+                            NSFontAttributeName: UIFont(name: Constant.FontName.mainBlack, size: 24.0)!,
+                            NSForegroundColorAttributeName: UIColor.aniManagerBlack
+                            ], range: NSRange(location: 0, length: 9))
+                        self.infoTextView.attributedText = attributedString
+                    } else {
+                        self.infoTextView.text = "There is no biography available for this character at the moment. >_<"
+                    }
+                    UIView.animate(withDuration: 0.25) {
+                        self.infoTextView.alpha = 1.0
+                    }
                 }
             }
             
@@ -156,10 +205,14 @@ class CharacterDetailViewController: UIViewController {
         if let imageLargeUrlString = character.imageLargeUrlString,
             let imageLargeUrl = URL(string: imageLargeUrlString) {
             characterImageView.kf.setImage(with: imageLargeUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                UIView.animate(withDuration: 0.25) {
+                    self.characterImageView.alpha = 1.0
+                }
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

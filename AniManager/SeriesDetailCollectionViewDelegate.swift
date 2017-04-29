@@ -42,6 +42,9 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             
             let characterDetailViewController = storyboard?.instantiateViewController(withIdentifier: "characterDetailViewController") as! CharacterDetailViewController
             characterDetailViewController.character = selectedCharacter
+            if let bannerImageURL = bannerImageURL {
+                characterDetailViewController.bannerImageURL = bannerImageURL
+            }
             present(characterDetailViewController, animated: true, completion: nil)
         case .relations:
             /*

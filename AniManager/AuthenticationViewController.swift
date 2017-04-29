@@ -70,6 +70,10 @@ class AuthenticationViewController: UIViewController {
         }
     }
     
+    @IBAction func skipLogin() {
+        // TODO: Request client credentials-specific access token
+    }
+    
     
     // MARK: - Lifecycle Methods
     

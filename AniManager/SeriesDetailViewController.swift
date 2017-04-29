@@ -18,6 +18,7 @@ class SeriesDetailViewController: UIViewController {
     var seriesId: Int!
     var seriesTitle: String!
     var seriesType: SeriesType! = .manga
+    var bannerImageURL: URL?
     
     var series: Series? {
         didSet {
@@ -129,7 +130,7 @@ class SeriesDetailViewController: UIViewController {
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
         bannerView.dismissButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         bannerView.favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
-        bannerView.seriesTitleLabel.text = seriesTitle
+        bannerView.titleLabel.text = seriesTitle
         seriesDataTableView.tableHeaderView = bannerView
         
         // Set the table view's row height properties
@@ -178,7 +179,7 @@ class SeriesDetailViewController: UIViewController {
             if let seasonId = series.seasonId,
                 let releaseYear = self.getReleaseYear(fromSeasonId: seasonId) {
                 DispatchQueue.main.async {
-                    (self.seriesDataTableView.tableHeaderView as! BannerView).seriesReleaseYearLabel.text = "\(releaseYear)"
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).releaseYearLabel.text = "\(releaseYear)"
                 }
             }
             
@@ -191,8 +192,8 @@ class SeriesDetailViewController: UIViewController {
             }
             
             // Check if the series has an URL string for a banner image
-            guard let imageBannerUrlString = series.imageBannerUrlString,
-                let imageBannerUrl = URL(string: imageBannerUrlString) else {
+            guard let bannerImageURLString = series.imageBannerUrlString,
+                let bannerImageURL = URL(string: bannerImageURLString) else {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
@@ -200,9 +201,11 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
+            self.bannerImageURL = bannerImageURL
+            
             // Get the banner image from the banner image URL string
             DispatchQueue.main.async {
-                (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: imageBannerUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
@@ -215,8 +218,8 @@ class SeriesDetailViewController: UIViewController {
         
         seriesDataTableView.alpha = 0.0
         seriesDataTableView.reloadData()
-        UIView.animate(withDuration: 1.0) {
-            self.seriesDataTableView.alpha = 0.75
+        UIView.animate(withDuration: 0.75) {
+            self.seriesDataTableView.alpha = 1.0
         }
         
         NetworkActivityManager.shared.numberOfActiveConnections = 0

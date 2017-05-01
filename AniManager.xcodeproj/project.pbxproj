@@ -96,6 +96,8 @@
 		D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */; };
 		D2A78DAA1E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */; };
 		D2A78DAC1E1490E500F45CF9 /* NetworkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */; };
+		D2ACA1F01EB5AD8700190958 /* RequiredLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */; };
+		D2ACA1F31EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */; };
 		D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */; };
 		D2C6358D1DECFE7600959D75 /* FilterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */; };
 		D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */; };
@@ -213,6 +215,8 @@
 		D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewControllerCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityManager.swift; sourceTree = "<group>"; };
+		D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequiredLoginViewController.swift; sourceTree = "<group>"; };
+		D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLoadingStatusExtension.swift; sourceTree = "<group>"; };
 		D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBUIKitMainThreadGuard.swift; sourceTree = "<group>"; };
 		D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNameTableViewCell.swift; sourceTree = "<group>"; };
 		D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterValueTableViewCell.swift; sourceTree = "<group>"; };
@@ -328,12 +332,14 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D2ACA1F11EB71F8900190958 /* Extensions */,
 				D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */,
 				D25EDF061DE8ECC400267243 /* Authentication */,
 				D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */,
 				D22740951DFC99EF00C3E776 /* SeriesCollectionViewController.swift */,
 				D25EDF101DECBFB300267243 /* FilterModalPresentationController.swift */,
 				D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */,
+				D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -546,6 +552,14 @@
 				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
 			);
 			name = "Series Detail View Controller";
+			sourceTree = "<group>";
+		};
+		D2ACA1F11EB71F8900190958 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		D2C6358E1DECFE7C00959D75 /* Browse Filter Table View */ = {
@@ -808,6 +822,7 @@
 			files = (
 				D2F32C561DFCAA360044D195 /* Tag.swift in Sources */,
 				D2CE68331E265205005C4931 /* PreferredLanguageTableViewController.swift in Sources */,
+				D2ACA1F01EB5AD8700190958 /* RequiredLoginViewController.swift in Sources */,
 				D2C9BFA51E1AFED700AD1060 /* FavoriteGenresTableViewController.swift in Sources */,
 				D2F32C631DFCD5AF0044D195 /* ListSelectionViewController.swift in Sources */,
 				D25EDF131DECD21F00267243 /* OnOffButton.swift in Sources */,
@@ -890,6 +905,7 @@
 				D2786FAD1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift in Sources */,
 				D2786FA31DF5F88600F4368F /* BasicInformationsValueLabel.swift in Sources */,
 				D21EC7791E055961008027E4 /* BrowseFilterHeaderLabel.swift in Sources */,
+				D2ACA1F31EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift in Sources */,
 				D2786F7F1DF2F36300F4368F /* GenreLabel.swift in Sources */,
 				D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */,
 				D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */,

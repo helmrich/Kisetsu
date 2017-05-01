@@ -99,7 +99,7 @@ class ActionsTableViewCell: UITableViewCell {
         series type (which is the series type whose stack view
         should be visible)
      */
-    func setupCell(forSeriesType seriesType: SeriesType) {
+    func setupCell(for seriesType: SeriesType) {
         if seriesType == .anime {
             mangaProgressStackView.isHidden = true
             animeProgressStackView.isHidden = false
@@ -123,6 +123,7 @@ class ActionsTableViewCell: UITableViewCell {
                 self.rateButton.alpha = 1.0
                 self.animeProgressStackView.alpha = 1.0
                 self.mangaProgressStackView.alpha = 1.0
+                self.userListStatusButton.alpha = 1.0
             }
         } else {
             watchedEpisodesTextField.text = "0"
@@ -137,6 +138,28 @@ class ActionsTableViewCell: UITableViewCell {
                 self.animeProgressStackView.alpha = 0.4
                 self.mangaProgressStackView.alpha = 0.4
             }
+        }
+    }
+    
+    func setupCell(for grantType: GrantType) {
+        /*
+            Deactivate the rate and user list status buttons and the anime/manga
+            progress stack views if the user is not logged in with an AniList account
+         */
+        if grantType == .clientCredentials {
+            rateButton.isEnabled = false
+            rateButton.alpha = 0.4
+            userListStatusButton.isEnabled = false
+            userListStatusButton.alpha = 0.4
+            animeProgressStackView.alpha = 0.4
+            mangaProgressStackView.alpha = 0.4
+        } else {
+            rateButton.isEnabled = true
+            rateButton.alpha = 1.0
+            userListStatusButton.isEnabled = true
+            userListStatusButton.alpha = 1.0
+            animeProgressStackView.alpha = 1.0
+            mangaProgressStackView.alpha = 1.0
         }
     }
     

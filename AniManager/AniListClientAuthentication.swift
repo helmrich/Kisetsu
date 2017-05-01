@@ -66,7 +66,7 @@ extension AniListClient {
      authorization happens with an authorization code) by using either
      an authorization code (for the first authorization) or a refresh token
      */
-    func getAccessToken(withAuthorizationCode: Bool = false, withRefreshToken: Bool = false, completionHandlerForTokens: @escaping (_ accessToken: AccessToken?, _ refreshToken: String?, _ errorMessage: String?) -> Void) {
+    func getAccessToken(withGrantType grantType: GrantType = .clientCredentials, completionHandlerForTokens: @escaping (_ accessToken: AccessToken?, _ refreshToken: String?, _ errorMessage: String?) -> Void) {
         
         /*
             Create a parameters array with parameters that are necessary to get
@@ -82,17 +82,20 @@ extension AniListClient {
             code or a refresh token and add the appropriate parameters to the parameters
             array based on the this
          */
-        if withAuthorizationCode == true,
-            let authorizationCode = authorizationCode {
-            parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeAuthorizationCode
-            parameters[AniListConstant.ParameterKey.Authentication.redirectUri] = AniListConstant.ParameterValue.Authentication.redirectUri
-            parameters[AniListConstant.ParameterKey.Authentication.code] = authorizationCode
-        }
-        
-        if withRefreshToken == true,
-            let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
-            parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeRefreshToken
-            parameters[AniListConstant.ParameterKey.Authentication.refreshToken] = refreshToken
+        switch grantType {
+        case .clientCredentials:
+            parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeClientCredentials
+        case .authorizationCode:
+            if let authorizationCode = authorizationCode {
+                parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeAuthorizationCode
+                parameters[AniListConstant.ParameterKey.Authentication.redirectUri] = AniListConstant.ParameterValue.Authentication.redirectUri
+                parameters[AniListConstant.ParameterKey.Authentication.code] = authorizationCode
+            }
+        case .refreshToken:
+            if let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") {
+                parameters[AniListConstant.ParameterKey.Authentication.grantType] = AniListConstant.ParameterValue.Authentication.grantTypeRefreshToken
+                parameters[AniListConstant.ParameterKey.Authentication.refreshToken] = refreshToken
+            }
         }
         
         // URL creation and request configuration
@@ -137,7 +140,12 @@ extension AniListClient {
                     return
             }
             
-            let accessToken = AccessToken(accessTokenValue: accessTokenValue, tokenType: tokenType, expirationTimestamp: expirationTimestamp)
+            let accessToken = AccessToken(accessTokenValue: accessTokenValue, tokenType: tokenType, expirationTimestamp: expirationTimestamp, type: grantType)
+            
+            UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
+            UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
+            UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
+            UserDefaults.standard.set(grantType.rawValue, forKey: "grantType")
             
             /*
                 If the authentication is done via an authorization code, the refresh token
@@ -146,11 +154,12 @@ extension AniListClient {
                 made with a refresh token OR the access token *and* the refresh token if the
                 access token was requested with an authorization code
             */
-            if withAuthorizationCode == true {
+            if grantType == .authorizationCode {
                 guard let refreshTokenValue = jsonDictionary[AniListConstant.ResponseKey.Authentication.refreshToken] as? String else {
                     completionHandlerForTokens(nil, nil, "Couldn't parse refresh token value from JSON object")
                     return
                 }
+                UserDefaults.standard.set(refreshTokenValue, forKey: "refreshToken")
                 completionHandlerForTokens(accessToken, refreshTokenValue, nil)
             } else {
                 completionHandlerForTokens(accessToken, nil, nil)
@@ -172,22 +181,17 @@ extension AniListClient {
             return
         }
         
-        getAccessToken(withRefreshToken: true) { (accessToken, _, errorMessage) in
-            
+        getAccessToken(withGrantType: .refreshToken) { (accessToken, _, errorMessage) in
             // Error Handling
             guard errorMessage == nil else {
                 completionHandlerForValidation(errorMessage!)
                 return
             }
             
-            guard let accessToken = accessToken else {
+            guard let _ = accessToken else {
                 completionHandlerForValidation("Couldn't get access token")
                 return
             }
-            
-            // Set the new access token value and its expiration time stamp in the user defaults
-            UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
-            UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
             
             completionHandlerForValidation(nil)
             

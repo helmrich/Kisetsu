@@ -54,6 +54,7 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(nil, forKey: "expirationTimestamp")
         UserDefaults.standard.set(nil, forKey: "tokenType")
         UserDefaults.standard.set(nil, forKey: "refreshToken")
+        UserDefaults.standard.set(nil, forKey: "grantType")
         AniListClient.shared.authorizationCode = nil
         
         let authenticationViewController = storyboard!.instantiateViewController(withIdentifier: "authenticationViewController")

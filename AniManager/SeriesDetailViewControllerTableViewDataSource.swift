@@ -109,6 +109,11 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
             
+            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
+                let grantType = GrantType(rawValue: grantTypeString) {
+                cell.setupCell(for: grantType)
+            }
+            
             /*
                 - Set up the cell depending on the series type
                 - Add a target-action to the rate button that will show
@@ -117,7 +122,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 shows the available lists in an alert controller when tapped
                 - Add a toolbar input accessory view to all progress text fields
              */
-            cell.setupCell(forSeriesType: seriesType)
+            cell.setupCell(for: seriesType)
             cell.rateButton.addTarget(self, action: #selector(toggleRatingPickerVisibility), for: [.touchUpInside])
             cell.userListStatusButton.addTarget(self, action: #selector(showLists), for: [.touchUpInside])
             cell.addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
@@ -130,97 +135,107 @@ extension SeriesDetailViewController: UITableViewDataSource {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
-                
-                // Error Handling
-                guard errorMessage == nil else {
-                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                guard let user = user else {
-                    self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
-                    return
-                }
-                
-                /*
-                    Get list informations for the authenticated user whose information was
-                    requested before
-                 */
-                AniListClient.shared.getListInformations(forSeriesOfType: self.seriesType, withId: self.seriesId, forUserId: user.id, forDisplayName: nil) { (status, userScore, episodesWatched, readChapters, readVolumes, errorMessage) in
+            /*
+                Check which grant type was used to authenticate and only try
+                to get the authenticated user and list informations when the
+                user is logged in, thus client credentials were NOT used to
+                authenticate
+             */
+            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
+                let grantType = GrantType(rawValue: grantTypeString),
+                grantType != .clientCredentials {
+                AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                     
                     // Error Handling
                     guard errorMessage == nil else {
-                        /*
-                            Assume that the series is not in a list when an error
-                            is received and set up the cell appropriately, i.e.
-                            deactivate elements that should not be usable when a
-                            series isn't in a list (rate button, progress-related
-                            elements)
-                         */
+                        self.errorMessageView.showAndHide(withMessage: errorMessage!)
                         NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                         DispatchQueue.main.async {
-                            cell.setupCellForStatus(isSeriesInList: false)
                             UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                         }
                         return
                     }
                     
-                    DispatchQueue.main.async {
-                        
-                        // When the series is in a list set up the cell appropriately
-                        cell.setupCellForStatus(isSeriesInList: true)
-                        
-                        // Set the user list status button's title
-                        if let status = status {
-                            cell.userListStatusButton.setTitle(status.capitalized, for: .normal)
-                        }
-                        
-                        /*
-                            When a user score is available and it's higher than 0,
-                            set the button's title to "Your Rating: <USERRATING>"
-                            and also pre-select the corresponding value in the rating
-                            picker view so that it's already selected when the rating
-                            picker will be shown
-                         */
-                        if let userScore = userScore,
-                            userScore > 0 {
-                            cell.rateButton.setTitle("Your Rating: \(userScore)", for: .normal)
-                            self.ratingPicker?.pickerView.selectRow(userScore - 1, inComponent: 0, animated: false)
-                        }
-                        
-                        /*
-                            Set the appropriate progress text fields depending on the
-                            series type (watched episodes text field for anime, read
-                            chapters and volumes for manga)
-                         */
-                        if self.seriesType == .anime {
-                            if let episodesWatched = episodesWatched {
-                                cell.watchedEpisodesTextField.text = "\(episodesWatched)"
-                            }
-                        } else if self.seriesType == .manga {
-                            if let readChapters = readChapters {
-                                cell.chaptersReadTextField.text = "\(readChapters)"
-                            }
-                            
-                            if let readVolumes = readVolumes {
-                                cell.volumesReadTextField.text = "\(readVolumes)"
-                            }
-                        }
-                        
+                    guard let user = user else {
+                        self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
                         NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                         DispatchQueue.main.async {
                             UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                         }
+                        return
+                    }
+                    
+                    /*
+                     Get list informations for the authenticated user whose information was
+                     requested before
+                     */
+                    AniListClient.shared.getListInformations(forSeriesOfType: self.seriesType, withId: self.seriesId, forUserId: user.id, forDisplayName: nil) { (status, userScore, episodesWatched, readChapters, readVolumes, errorMessage) in
                         
+                        // Error Handling
+                        guard errorMessage == nil else {
+                            /*
+                             Assume that the series is not in a list when an error
+                             is received and set up the cell appropriately, i.e.
+                             deactivate elements that should not be usable when a
+                             series isn't in a list (rate button, progress-related
+                             elements)
+                             */
+                            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                            DispatchQueue.main.async {
+                                cell.setupCellForStatus(isSeriesInList: false)
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                            }
+                            return
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            // When the series is in a list set up the cell appropriately
+                            cell.setupCellForStatus(isSeriesInList: true)
+                            
+                            // Set the user list status button's title
+                            if let status = status {
+                                cell.userListStatusButton.setTitle(status.capitalized, for: .normal)
+                            }
+                            
+                            /*
+                             When a user score is available and it's higher than 0,
+                             set the button's title to "Your Rating: <USERRATING>"
+                             and also pre-select the corresponding value in the rating
+                             picker view so that it's already selected when the rating
+                             picker will be shown
+                             */
+                            if let userScore = userScore,
+                                userScore > 0 {
+                                cell.rateButton.setTitle("Your Rating: \(userScore)", for: .normal)
+                                self.ratingPicker?.pickerView.selectRow(userScore - 1, inComponent: 0, animated: false)
+                            }
+                            
+                            /*
+                             Set the appropriate progress text fields depending on the
+                             series type (watched episodes text field for anime, read
+                             chapters and volumes for manga)
+                             */
+                            if self.seriesType == .anime {
+                                if let episodesWatched = episodesWatched {
+                                    cell.watchedEpisodesTextField.text = "\(episodesWatched)"
+                                }
+                            } else if self.seriesType == .manga {
+                                if let readChapters = readChapters {
+                                    cell.chaptersReadTextField.text = "\(readChapters)"
+                                }
+                                
+                                if let readVolumes = readVolumes {
+                                    cell.volumesReadTextField.text = "\(readVolumes)"
+                                }
+                            }
+                            
+                            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                            DispatchQueue.main.async {
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                            }
+                            
+                        }
                     }
                 }
             }

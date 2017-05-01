@@ -14,6 +14,7 @@ class WebViewController: UIViewController {
     
     var url: URL!
     let errorMessageView = ErrorMessageView()
+    var loadingView: UIView?
     
     
     // MARK: - Outlets and Actions
@@ -56,25 +57,7 @@ class WebViewController: UIViewController {
         load()
     }
     
-    
-    // MARK: - Functions
-    
-    func setActivityIndicator(enabled: Bool) {
-        if enabled {
-            UIView.animate(withDuration: 0.25) {
-                self.activityIndicatorView.alpha = 1
-            }
-            self.activityIndicatorView.startAnimating()
-        } else {
-            UIView.animate(withDuration: 0.25) {
-                self.activityIndicatorView.alpha = 0
-            }
-            self.activityIndicatorView.stopAnimating()
-        }
-    }
-    
     func load() {
-        setActivityIndicator(enabled: true)
         let request = URLRequest(url: url)
         webView.loadRequest(request)
     }
@@ -86,7 +69,9 @@ extension WebViewController: UIWebViewDelegate {
         view did finish loading
      */
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        setActivityIndicator(enabled: false)
+        if loadingView != nil {
+            hideLoadingStatus(of: loadingView!)
+        }
     }
     
     /*
@@ -106,6 +91,9 @@ extension WebViewController: UIWebViewDelegate {
         inside of the app this solution is used for now.
      */
     func webViewDidStartLoad(_ webView: UIWebView) {
+        
+        loadingView = showLoadingStatus()
+        
         guard let request = webView.request,
             let mainDocumentURLString = request.mainDocumentURL?.absoluteString else {
             return
@@ -139,7 +127,9 @@ extension WebViewController: UIWebViewDelegate {
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         errorMessageView.showAndHide(withMessage: error.localizedDescription)
-        setActivityIndicator(enabled: false)
+        if loadingView != nil {
+            hideLoadingStatus(of: loadingView!)
+        }
         UIView.animate(withDuration: 0.25) {
             self.reloadButton.alpha = 1.0
         }

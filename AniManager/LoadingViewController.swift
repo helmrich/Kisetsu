@@ -61,21 +61,18 @@ class LoadingViewController: UIViewController {
         
         toggleStatus(loading: true)
         
-        AniListClient.shared.getAccessToken(withRefreshToken: true) { accessToken, _, errorMessage in
+        AniListClient.shared.getAccessToken(withGrantType: .refreshToken) { accessToken, _, errorMessage in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 self.toggleStatus(loading: false)
                 return
             }
             
-            guard let accessToken = accessToken else {
+            guard accessToken != nil else {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get access token. Try again.")
                 self.toggleStatus(loading: false)
                 return
             }
-            
-            UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
-            UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
             
             DispatchQueue.main.async {
                 let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController

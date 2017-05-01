@@ -53,14 +53,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*
             If an access token is available, its expiration timestamp should be checked.
             If it expired, the loading view controller should be used as the root view
-            controller where a new access token will be requested using a refresh token
+            controller where a new access token will be requested using a refresh token.
+            If the client credentials grant type was used as a grant type before, the
+            authentication view controller should be presented, so the user can decide
+            between either skip the login once again to authenticate with client credentials
+            or logging in
          */
         let expirationTimestamp = UserDefaults.standard.integer(forKey: "expirationTimestamp")
         
         guard expirationTimestamp > Int(Date().timeIntervalSince1970) else {
-            let loadingViewController = storyboard.instantiateViewController(withIdentifier: "loadingViewController") as! LoadingViewController
-            window?.rootViewController = loadingViewController
-            window?.makeKeyAndVisible()
+            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
+                let grantType = GrantType(rawValue: grantTypeString),
+                grantType == .authorizationCode || grantType == .refreshToken {
+                let loadingViewController = storyboard.instantiateViewController(withIdentifier: "loadingViewController") as! LoadingViewController
+                window?.rootViewController = loadingViewController
+                window?.makeKeyAndVisible()
+            } else {
+                let authenticationViewController = storyboard.instantiateViewController(withIdentifier: "authenticationViewController") as! AuthenticationViewController
+                window?.rootViewController = authenticationViewController
+                window?.makeKeyAndVisible()
+            }
             return true
         }
 

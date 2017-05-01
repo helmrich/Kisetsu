@@ -71,7 +71,20 @@ class AuthenticationViewController: UIViewController {
     }
     
     @IBAction func skipLogin() {
-        // TODO: Request client credentials-specific access token
+        let loadingView = showLoadingStatus()
+        AniListClient.shared.getAccessToken(withGrantType: .clientCredentials) { (accessToken, refreshToken, errorMessage) in
+            DispatchQueue.main.async {
+                self.hideLoadingStatus(of: loadingView)
+            }
+            guard errorMessage == nil else {
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get access token")
+                return
+            }
+            DispatchQueue.main.async {
+                let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+                self.present(tabBarController, animated: true, completion: nil)
+            }
+        }
     }
     
     
@@ -100,8 +113,11 @@ class AuthenticationViewController: UIViewController {
             controller
          */
         if AniListClient.shared.authorizationCode != nil {
-            
-            AniListClient.shared.getAccessToken(withAuthorizationCode: true) { (accessToken, refreshToken, errorMessage) in
+            let loadingView = showLoadingStatus()
+            AniListClient.shared.getAccessToken(withGrantType: .authorizationCode) { (accessToken, refreshToken, errorMessage) in
+                DispatchQueue.main.async {
+                    self.hideLoadingStatus(of: loadingView)
+                }
                 
                 // Error Handling
                 guard errorMessage == nil else {
@@ -109,21 +125,15 @@ class AuthenticationViewController: UIViewController {
                     return
                 }
                 
-                guard let accessToken = accessToken else {
+                guard accessToken != nil else {
                     self.errorMessageView.showAndHide(withMessage: "Couldn't get access token")
                     return
                 }
                 
-                guard let refreshToken = refreshToken else {
+                guard refreshToken != nil else {
                     self.errorMessageView.showAndHide(withMessage: "Couldn't get refresh token")
                     return
                 }
-                
-                // Set user default values
-                UserDefaults.standard.set(accessToken.accessTokenValue, forKey: "accessToken")
-                UserDefaults.standard.set(accessToken.expirationTimestamp, forKey: "expirationTimestamp")
-                UserDefaults.standard.set(accessToken.tokenType, forKey: "tokenType")
-                UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
                 
                 DispatchQueue.main.async {
                     // Instantiate and present tab bar controller
@@ -143,5 +153,4 @@ class AuthenticationViewController: UIViewController {
         webViewController.url = url
         present(webViewController, animated: true, completion: nil)
     }
-    
 }

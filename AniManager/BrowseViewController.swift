@@ -90,11 +90,6 @@ class BrowseViewController: SeriesCollectionViewController {
             seriesType = userDefaultsSeriesType
         }
         
-        seriesCollectionViewOverlay.frame = seriesCollectionView.frame
-        seriesCollectionViewOverlay.backgroundColor = seriesCollectionView.backgroundColor
-        seriesCollectionViewOverlay.alpha = 0.0
-        view.insertSubview(seriesCollectionViewOverlay, aboveSubview: seriesCollectionView)
-        
         tabBarController?.delegate = self
         
         navigationController?.navigationBar.barStyle = .black
@@ -156,6 +151,10 @@ class BrowseViewController: SeriesCollectionViewController {
             DataSource.shared.getGenres()
             
         }
+        seriesCollectionViewOverlay.frame = seriesCollectionView.frame
+        seriesCollectionViewOverlay.backgroundColor = seriesCollectionView.backgroundColor
+        seriesCollectionViewOverlay.alpha = 0.0
+        view.insertSubview(seriesCollectionViewOverlay, aboveSubview: seriesCollectionView)
     }
     
     
@@ -185,6 +184,7 @@ class BrowseViewController: SeriesCollectionViewController {
         animating
      */
     func getSeriesList() {
+        self.seriesCollectionViewOverlay.frame = seriesCollectionView.frame
         UIView.animate(withDuration: 0.25) {
             self.seriesCollectionViewOverlay.alpha = 1.0
         }

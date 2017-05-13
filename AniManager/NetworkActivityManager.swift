@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NetworkActivityManager {
     
@@ -41,10 +42,18 @@ class NetworkActivityManager {
     
     func increaseNumberOfActiveConnections() {
         numberOfActiveConnections += 1
+        setupStatusBarActivityIndicator()
     }
     
     func decreaseNumberOfActiveConnections() {
         numberOfActiveConnections -= 1
+        setupStatusBarActivityIndicator()
+    }
+    
+    func setupStatusBarActivityIndicator() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+        }
     }
     
 }

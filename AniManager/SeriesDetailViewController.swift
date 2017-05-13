@@ -142,7 +142,6 @@ class SeriesDetailViewController: UIViewController {
             when the view controller is loaded
          */
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.getSingleSeries(ofType: seriesType, withId: seriesId) { (series, errorMessage) in
@@ -151,18 +150,12 @@ class SeriesDetailViewController: UIViewController {
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
             guard let series = series else {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get series information")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -195,9 +188,6 @@ class SeriesDetailViewController: UIViewController {
             guard let bannerImageURLString = series.imageBannerUrlString,
                 let bannerImageURL = URL(string: bannerImageURLString) else {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -207,7 +197,6 @@ class SeriesDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
             }
         }
@@ -270,16 +259,12 @@ class SeriesDetailViewController: UIViewController {
     // This function favorites or unfavorites a series with a given type and ID
     func favorite() {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.favorite(seriesOfType: seriesType, withId: seriesId) { (errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -296,7 +281,6 @@ class SeriesDetailViewController: UIViewController {
                 } else {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
                 }
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
             
         }

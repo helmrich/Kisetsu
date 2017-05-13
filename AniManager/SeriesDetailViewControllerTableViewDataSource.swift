@@ -38,17 +38,14 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 downloaded and turned into an image successfully
              */
             
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
             if let imageLargeUrl = URL(string: series.imageLargeUrlString) {
                 cell.seriesCoverImageView.kf.setImage(with: imageLargeUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: CGSize(width: 125.0, height: 177.0)), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
             } else {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
             
             // Set cell property values that both series types have
@@ -132,7 +129,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 list informations for the user's ID
              */
             
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
             /*
@@ -150,18 +146,12 @@ extension SeriesDetailViewController: UITableViewDataSource {
                     guard errorMessage == nil else {
                         self.errorMessageView.showAndHide(withMessage: errorMessage!)
                         NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                        DispatchQueue.main.async {
-                            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                        }
                         return
                     }
                     
                     guard let user = user else {
                         self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
                         NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                        DispatchQueue.main.async {
-                            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                        }
                         return
                     }
                     
@@ -183,7 +173,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                             DispatchQueue.main.async {
                                 cell.setupCellForStatus(isSeriesInList: false)
-                                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                             }
                             return
                         }
@@ -231,9 +220,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                             }
                             
                             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                            DispatchQueue.main.async {
-                                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                            }
                             
                         }
                     }
@@ -441,7 +427,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
              */
             for tag in tags {
                 /*
-                    Only create and add tags if either the option to show tags with
+                    Only create and add a tag if either the option to show tags with
                     spoilers is activated or if it doesn't contain spoilers
                  */
                 if UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") || (!UserDefaults.standard.bool(forKey: "showTagsWithSpoilers") && !tag.isSpoiler) {
@@ -563,7 +549,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 userScore = 0
             }
             
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
             // Submit the list
@@ -573,9 +558,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 guard errorMessage == nil else {
                     self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
                     return
                 }
                 
@@ -586,7 +568,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 */
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     actionsCell.setupCellForStatus(isSeriesInList: true)
                 }
                 

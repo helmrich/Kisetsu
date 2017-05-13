@@ -191,7 +191,6 @@ class BrowseViewController: SeriesCollectionViewController {
         
         activityIndicatorView.startAnimatingAndFadeIn()
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.getSeriesList(ofType: seriesType, andParameters: DataSource.shared.browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
@@ -201,7 +200,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
+                    
                 }
                 return
             }
@@ -213,7 +212,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
                 return
             }
@@ -227,7 +225,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
                 return
             }
@@ -242,7 +239,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
                     self.refreshControl.endRefreshing()
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 }
                 return
             }
@@ -285,7 +281,6 @@ class BrowseViewController: SeriesCollectionViewController {
             self.activityIndicatorView.stopAnimatingAndFadeOut()
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 self.seriesCollectionView.reloadData()
                 UIView.animate(withDuration: 0.25) {
                     self.seriesCollectionViewOverlay.alpha = 0.0
@@ -320,7 +315,6 @@ class BrowseViewController: SeriesCollectionViewController {
             */
             let lastCellIndexPathItem = numberOfBasicSeriesInBrowseList - 1
             
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
             /*
@@ -341,9 +335,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 guard errorMessage == nil else {
                     self.errorMessageView.showAndHide(withMessage: errorMessage!)
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
                     return
                 }
 
@@ -351,9 +342,6 @@ class BrowseViewController: SeriesCollectionViewController {
                 let nonAdultSeriesList = nonAdultSeriesList else {
                     self.errorMessageView.showAndHide(withMessage: "Couldn't get series list")
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
                     return
                 }
                 
@@ -397,7 +385,6 @@ class BrowseViewController: SeriesCollectionViewController {
                  */
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.seriesCollectionView.performBatchUpdates({
                         collectionView.insertItems(at: indexPathsForNewItems)
                     }, completion: nil)

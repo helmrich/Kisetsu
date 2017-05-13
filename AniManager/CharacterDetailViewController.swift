@@ -45,16 +45,12 @@ class CharacterDetailViewController: UIViewController {
     
     @IBAction func favorite(_ sender: Any) {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.favorite(characterWithId: character.id) { (errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -67,9 +63,6 @@ class CharacterDetailViewController: UIViewController {
             }
             
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-            }
             
         }
     }
@@ -90,10 +83,8 @@ class CharacterDetailViewController: UIViewController {
         bannerImageView.contentMode = .scaleAspectFill
         if let bannerImageURL = bannerImageURL {
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             bannerImageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: bannerView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
         
@@ -118,25 +109,18 @@ class CharacterDetailViewController: UIViewController {
         infoTextView.textContainerInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 20.0)
         infoTextView.layer.cornerRadius = 2.0
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.getPageModelCharacter(forCharacterId: character.id) { (pageModelCharacter, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
             guard let pageModelCharacter = pageModelCharacter else {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get character page model")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -193,13 +177,9 @@ class CharacterDetailViewController: UIViewController {
             }
             
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-            }
             
         }
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         if let imageLargeUrlString = character.imageLargeUrlString,
@@ -209,7 +189,6 @@ class CharacterDetailViewController: UIViewController {
                     self.characterImageView.alpha = 1.0
                 }
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
             }
         }
         

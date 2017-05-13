@@ -40,7 +40,6 @@ class ListDetailViewController: SeriesCollectionViewController {
         // Hide the series collection view initially
         seriesCollectionView.alpha = 0.0
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
@@ -50,7 +49,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -63,7 +61,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get user")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -76,7 +73,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                 self.errorMessageView.showAndHide(withMessage: "No valid series type given")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.activityIndicatorView.stopAnimating()
                     UIView.animate(withDuration: 0.25) {
                         self.activityIndicatorView.alpha = 0.0
@@ -99,9 +95,6 @@ class ListDetailViewController: SeriesCollectionViewController {
             } else {
                 self.errorMessageView.showAndHide(withMessage: "Invalid series type")
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -116,7 +109,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                     DispatchQueue.main.async {
                         self.nothingFoundLabel.text = "No \(self.seriesType.rawValue) found"
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                         UIView.animate(withDuration: 0.25) {
                             self.nothingFoundLabel.alpha = 1.0
                         }
@@ -129,9 +121,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                     self.errorMessageView.showAndHide(withMessage: "Couldn't get series list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
                     return
                 }
                 
@@ -150,9 +139,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                     self.errorMessageView.showAndHide(withMessage: "Couldn't create \(self.seriesType.rawValue) list")
                     self.activityIndicatorView.stopAnimatingAndFadeOut()
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                    DispatchQueue.main.async {
-                        UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    }
                     return
                 }
                 
@@ -164,7 +150,6 @@ class ListDetailViewController: SeriesCollectionViewController {
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                     self.seriesCollectionView.reloadData()
                     UIView.animate(withDuration: 0.25) {
                         self.nothingFoundLabel.alpha = 0.0

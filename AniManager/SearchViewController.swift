@@ -93,7 +93,6 @@ class SearchViewController: SeriesCollectionViewController {
         
         activityIndicatorView.startAnimatingAndFadeIn()
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
         AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, nonAdultSeriesList, errorMessage) in
@@ -103,8 +102,6 @@ class SearchViewController: SeriesCollectionViewController {
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                    
                     guard errorMessage! != "The resource could not be loaded because the App Transport Security policy requires the use of a secure connection." else {
                         return
                     }
@@ -126,9 +123,6 @@ class SearchViewController: SeriesCollectionViewController {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get series")
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
-                }
                 return
             }
             
@@ -143,7 +137,6 @@ class SearchViewController: SeriesCollectionViewController {
             
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = NetworkActivityManager.shared.numberOfActiveConnections > 0
                 self.seriesCollectionView.reloadData()
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
                 UIView.animate(withDuration: 0.25) {

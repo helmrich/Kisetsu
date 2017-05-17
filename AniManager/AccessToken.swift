@@ -14,7 +14,3 @@ struct AccessToken {
     let expirationTimestamp: Int
     let type: GrantType
 }
-
-enum GrantType: String {
-    case authorizationCode, clientCredentials, refreshToken
-}

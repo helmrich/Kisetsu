@@ -96,8 +96,10 @@
 		D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */; };
 		D2A78DAA1E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */; };
 		D2A78DAC1E1490E500F45CF9 /* NetworkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */; };
+		D2AB60051EC7274D00243C3A /* LoadingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB60041EC7274D00243C3A /* LoadingStatusView.swift */; };
+		D2AB60071EC9F30600243C3A /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB60061EC9F30600243C3A /* DateManager.swift */; };
+		D2AB60091ECAFB3C00243C3A /* GrantType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB60081ECAFB3C00243C3A /* GrantType.swift */; };
 		D2ACA1F01EB5AD8700190958 /* RequiredLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */; };
-		D2ACA1F31EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */; };
 		D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */; };
 		D2C6358D1DECFE7600959D75 /* FilterNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */; };
 		D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */; };
@@ -215,8 +217,10 @@
 		D28A5E9B1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewControllerCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityManager.swift; sourceTree = "<group>"; };
+		D2AB60041EC7274D00243C3A /* LoadingStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingStatusView.swift; sourceTree = "<group>"; };
+		D2AB60061EC9F30600243C3A /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		D2AB60081ECAFB3C00243C3A /* GrantType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrantType.swift; sourceTree = "<group>"; };
 		D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequiredLoginViewController.swift; sourceTree = "<group>"; };
-		D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLoadingStatusExtension.swift; sourceTree = "<group>"; };
 		D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBUIKitMainThreadGuard.swift; sourceTree = "<group>"; };
 		D2C6358C1DECFE7600959D75 /* FilterNameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterNameTableViewCell.swift; sourceTree = "<group>"; };
 		D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterValueTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				D22740891DFA35E700C3E776 /* ExternalLinkButton.swift */,
 				D25EDF121DECD21F00267243 /* OnOffButton.swift */,
 				D25EDEBB1DE1F3EE00267243 /* ErrorMessageView.swift */,
+				D2AB60041EC7274D00243C3A /* LoadingStatusView.swift */,
 				D21EC7761E0368FC008027E4 /* RatingPicker.swift */,
 			);
 			name = Views;
@@ -332,7 +337,6 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2ACA1F11EB71F8900190958 /* Extensions */,
 				D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */,
 				D25EDF061DE8ECC400267243 /* Authentication */,
 				D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */,
@@ -394,6 +398,7 @@
 				D21EC7521E0322FE008027E4 /* AniListClientUserList.swift */,
 				D21EC7541E032475008027E4 /* AniListClientHelper.swift */,
 				D25EDEC31DE3AF9900267243 /* AccessToken.swift */,
+				D2AB60081ECAFB3C00243C3A /* GrantType.swift */,
 			);
 			name = AniList;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */,
 				D25EDEB51DE0909300267243 /* Constant.swift */,
 				D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */,
+				D2AB60061EC9F30600243C3A /* DateManager.swift */,
 				D25EDE9B1DDF8FE500267243 /* Models */,
 				D25EDE9C1DDF8FEF00267243 /* Views */,
 				D25EDE9D1DDF8FFA00267243 /* Controllers */,
@@ -552,14 +558,6 @@
 				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
 			);
 			name = "Series Detail View Controller";
-			sourceTree = "<group>";
-		};
-		D2ACA1F11EB71F8900190958 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D2ACA1F21EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 		D2C6358E1DECFE7C00959D75 /* Browse Filter Table View */ = {
@@ -827,6 +825,7 @@
 				D2F32C631DFCD5AF0044D195 /* ListSelectionViewController.swift in Sources */,
 				D25EDF131DECD21F00267243 /* OnOffButton.swift in Sources */,
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
+				D2AB60071EC9F30600243C3A /* DateManager.swift in Sources */,
 				D2C9BFA21E19B4D400AD1060 /* SettingSwitchTableViewCell.swift in Sources */,
 				D2CE683D1E266361005C4931 /* BasicSeries+CoreDataProperties.swift in Sources */,
 				D224A2681DF061F00085C532 /* BannerView.swift in Sources */,
@@ -863,6 +862,7 @@
 				D25EDEAE1DDFAE5200267243 /* AniManagerButton.swift in Sources */,
 				D2A78DAC1E1490E500F45CF9 /* NetworkActivityManager.swift in Sources */,
 				D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */,
+				D2AB60091ECAFB3C00243C3A /* GrantType.swift in Sources */,
 				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
 				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
@@ -887,6 +887,7 @@
 				D2C9BF9B1E1895CA00AD1060 /* SeriesList+CoreDataProperties.swift in Sources */,
 				D22198061E0ADD0500B6F20A /* ResponseConstant.swift in Sources */,
 				D22198021E0ADCB500B6F20A /* ParameterConstant.swift in Sources */,
+				D2AB60051EC7274D00243C3A /* LoadingStatusView.swift in Sources */,
 				D25EDEB41DE08B9700267243 /* WebViewController.swift in Sources */,
 				D2786F961DF5C09100F4368F /* StackViewExtension.swift in Sources */,
 				D2180E151E11E6360072B1EF /* CoreDataStack.swift in Sources */,
@@ -905,7 +906,6 @@
 				D2786FAD1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift in Sources */,
 				D2786FA31DF5F88600F4368F /* BasicInformationsValueLabel.swift in Sources */,
 				D21EC7791E055961008027E4 /* BrowseFilterHeaderLabel.swift in Sources */,
-				D2ACA1F31EB71FA700190958 /* ViewControllerLoadingStatusExtension.swift in Sources */,
 				D2786F7F1DF2F36300F4368F /* GenreLabel.swift in Sources */,
 				D28A5E9C1DEF6CEF00D62BDC /* DescriptionTableViewCell.swift in Sources */,
 				D227408C1DFAE31A00C3E776 /* ActionsTableViewCell.swift in Sources */,

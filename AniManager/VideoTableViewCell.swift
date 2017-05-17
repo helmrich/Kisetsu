@@ -38,13 +38,13 @@ class VideoTableViewCell: UITableViewCell {
         // Set the video web view's constraints
         videoWebView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(videoWebView)
-        addConstraints([
-                NSLayoutConstraint(item: videoWebView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1.0, constant: 15.0),
-                NSLayoutConstraint(item: videoWebView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0),
-                NSLayoutConstraint(item: videoWebView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 230.0),
-                NSLayoutConstraint(item: videoWebView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0),
-                NSLayoutConstraint(item: videoWebView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
-            ])
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: videoWebView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1.0, constant: 15.0),
+            NSLayoutConstraint(item: videoWebView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: -15.0),
+            NSLayoutConstraint(item: videoWebView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300.0),
+            NSLayoutConstraint(item: videoWebView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: videoWebView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+        ])
     }
 
 }

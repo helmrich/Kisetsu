@@ -20,6 +20,10 @@ class AnimeSeries: Series {
     // List-specific properties
     var watchedEpisodes: Int?
     
+    // Airing-specific properties
+    var countdownUntilNextEpisodeInSeconds: Int?
+    var nextEpisodeNumber: Int?
+    
     typealias AnimeSeriesKey = AniListConstant.ResponseKey.AnimeSeries
     
     /*
@@ -90,6 +94,16 @@ class AnimeSeries: Series {
             self.watchedEpisodes = watchedEpisodes
         } else {
             self.watchedEpisodes = nil
+        }
+        
+        if let airingInformations = dictionary[AniListConstant.ResponseKey.AnimeSeries.airing] as? [String:Any],
+            let countdownUntilNextEpisodeInSeconds = airingInformations[AniListConstant.ResponseKey.AnimeSeries.airingCountdownUntilNextEpisodeInSeconds] as? Int,
+            let nextEpisodeNumber = airingInformations[AniListConstant.ResponseKey.AnimeSeries.airingNextEpisodeNumber] as? Int {
+            self.countdownUntilNextEpisodeInSeconds = countdownUntilNextEpisodeInSeconds
+            self.nextEpisodeNumber = nextEpisodeNumber
+        } else {
+            self.countdownUntilNextEpisodeInSeconds = nil
+            self.nextEpisodeNumber = nil
         }
         
         super.init(fromDictionary: dictionary)

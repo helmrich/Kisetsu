@@ -58,6 +58,9 @@ extension ResponseConstant {
             static let source = "source"
             static let externalLinksStrings = "external_links"
             static let studios = "studio"
+            static let airing = "airing"
+            static let airingCountdownUntilNextEpisodeInSeconds = "countdown"
+            static let airingNextEpisodeNumber = "next_episode"
         }
         
         struct MangaSeries {

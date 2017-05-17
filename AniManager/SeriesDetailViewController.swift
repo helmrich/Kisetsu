@@ -14,10 +14,18 @@ class SeriesDetailViewController: UIViewController {
     
     let errorMessageView = ErrorMessageView()
     var ratingPicker: RatingPicker?
+    let seriesDataTableViewActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     var seriesId: Int!
     var seriesTitle: String!
     var seriesType: SeriesType! = .manga
+    var grantType: GrantType? {
+        guard let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
+            let grantType = GrantType(rawValue: grantTypeString) else {
+                return nil
+        }
+        return grantType
+    }
     var bannerImageURL: URL?
     
     var series: Series? {
@@ -127,7 +135,7 @@ class SeriesDetailViewController: UIViewController {
         // MARK: - Banner View Setup
         
         // Create and configure the banner view
-        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 200))
+        let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.3))
         bannerView.dismissButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         bannerView.favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
         bannerView.titleLabel.text = seriesTitle
@@ -136,6 +144,24 @@ class SeriesDetailViewController: UIViewController {
         // Set the table view's row height properties
         seriesDataTableView.estimatedRowHeight = 300
         seriesDataTableView.rowHeight = UITableViewAutomaticDimension
+
+        /*
+            Add an activity indicator that gets displayed centered
+            in the area below the banner view. It should be displayed
+            until the series detail is done loading.
+         */
+        let seriesDataTableViewActivityIndicatorHelperView = UIView()
+        seriesDataTableViewActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        seriesDataTableViewActivityIndicatorHelperView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(seriesDataTableViewActivityIndicator)
+        view.addSubview(seriesDataTableViewActivityIndicatorHelperView)
+        NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: seriesDataTableViewActivityIndicatorHelperView, attribute: .top, relatedBy: .equal, toItem: bannerView, attribute: .bottom, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: seriesDataTableViewActivityIndicatorHelperView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.7, constant: 0.0),
+                NSLayoutConstraint(item: seriesDataTableViewActivityIndicator, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: seriesDataTableViewActivityIndicator, attribute: .centerY, relatedBy: .equal, toItem: seriesDataTableViewActivityIndicatorHelperView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
+            ])
+        seriesDataTableViewActivityIndicator.startAnimatingAndFadeIn()
         
         /*
             Get a single series object for the specified series ID and series type
@@ -149,15 +175,19 @@ class SeriesDetailViewController: UIViewController {
             // Error Handling
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
+                self.seriesDataTableViewActivityIndicator.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 return
             }
             
             guard let series = series else {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get series information")
+                self.seriesDataTableViewActivityIndicator.stopAnimatingAndFadeOut()
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 return
             }
+            
+            self.seriesDataTableViewActivityIndicator.stopAnimatingAndFadeOut()
             
             self.series = DataSource.shared.selectedSeries
             
@@ -181,6 +211,12 @@ class SeriesDetailViewController: UIViewController {
                 isFavorite {
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.setImage(#imageLiteral(resourceName: "HeartIconActive"), for: .normal)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.25) {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).favoriteButton.alpha = 1.0
                 }
             }
             
@@ -344,7 +380,9 @@ class SeriesDetailViewController: UIViewController {
                  */
                 if let actionsCell = self.seriesDataTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? ActionsTableViewCell {
                     DispatchQueue.main.async {
-                        actionsCell.setupCellForStatus(isSeriesInList: false)
+                        if let grantType = self.grantType {
+                            actionsCell.setupCell(forGrantType: grantType, seriesType: self.seriesType, isSeriesInList: false)
+                        }
                     }
                 }
             }

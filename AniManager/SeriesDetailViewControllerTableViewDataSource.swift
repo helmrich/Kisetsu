@@ -106,20 +106,13 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
             
-            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
-                let grantType = GrantType(rawValue: grantTypeString) {
-                cell.setupCell(for: grantType)
-            }
-            
             /*
-                - Set up the cell depending on the series type
                 - Add a target-action to the rate button that will show
                 the rating picker when tapped
                 - Addd a target-action to the user list status button that
                 shows the available lists in an alert controller when tapped
                 - Add a toolbar input accessory view to all progress text fields
              */
-            cell.setupCell(for: seriesType)
             cell.rateButton.addTarget(self, action: #selector(toggleRatingPickerVisibility), for: [.touchUpInside])
             cell.userListStatusButton.addTarget(self, action: #selector(showLists), for: [.touchUpInside])
             cell.addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget: self, doneButtonAction: #selector(progressTextFieldWasEdited))
@@ -137,8 +130,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 user is logged in, thus client credentials were NOT used to
                 authenticate
              */
-            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
-                let grantType = GrantType(rawValue: grantTypeString),
+            if let grantType = grantType,
                 grantType != .clientCredentials {
                 AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
                     
@@ -164,35 +156,29 @@ extension SeriesDetailViewController: UITableViewDataSource {
                         // Error Handling
                         guard errorMessage == nil else {
                             /*
-                             Assume that the series is not in a list when an error
-                             is received and set up the cell appropriately, i.e.
-                             deactivate elements that should not be usable when a
-                             series isn't in a list (rate button, progress-related
-                             elements)
+                                 Assume that the series is not in a list when an error
+                                 is received and set up the cell appropriately, i.e.
+                                 deactivate elements that should not be usable when a
+                                 series isn't in a list (rate button, progress-related
+                                 elements)
                              */
+                            cell.setupCell(forGrantType: grantType, seriesType: self.seriesType, isSeriesInList: false)
                             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                            DispatchQueue.main.async {
-                                cell.setupCellForStatus(isSeriesInList: false)
-                            }
                             return
                         }
                         
                         DispatchQueue.main.async {
-                            
-                            // When the series is in a list set up the cell appropriately
-                            cell.setupCellForStatus(isSeriesInList: true)
-                            
                             // Set the user list status button's title
                             if let status = status {
                                 cell.userListStatusButton.setTitle(status.capitalized, for: .normal)
                             }
                             
                             /*
-                             When a user score is available and it's higher than 0,
-                             set the button's title to "Your Rating: <USERRATING>"
-                             and also pre-select the corresponding value in the rating
-                             picker view so that it's already selected when the rating
-                             picker will be shown
+                                 When a user score is available and it's higher than 0,
+                                 set the button's title to "Your Rating: <USERRATING>"
+                                 and also pre-select the corresponding value in the rating
+                                 picker view so that it's already selected when the rating
+                                 picker will be shown
                              */
                             if let userScore = userScore,
                                 userScore > 0 {
@@ -220,7 +206,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
                             }
                             
                             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                            
+                            cell.setupCell(forGrantType: grantType, seriesType: self.seriesType, isSeriesInList: true)
                         }
                     }
                 }
@@ -231,8 +217,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 to the belonging buttons. To get the buttons a loop should iterate
                 over all arranged subviews in the appropriate stack view and check
                 if the arranged subview can be casted to the UIButton type. The target-
-                actions should be added to those buttons as there progress-related
-                buttons are the only bumttons in those stack views
+                actions should be added to those buttons as the progress-related
+                buttons are the only buttons in those stack views
              */
             if let animeSeries = series as? AnimeSeries {
                 cell.maximumNumberOfEpisodesLabel.text = "\(animeSeries.numberOfTotalEpisodes)"
@@ -512,7 +498,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
     func listValueChanged() {
         // Try to get the actions cell from the series data table view
         if let actionsCell = seriesDataTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as? ActionsTableViewCell {
-            
             // Create constants for all list values
             let listStatus = actionsCell.userListStatusButton.title(for: .normal)!.lowercased()
             
@@ -568,7 +553,9 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 */
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 DispatchQueue.main.async {
-                    actionsCell.setupCellForStatus(isSeriesInList: true)
+                    if let grantType = self.grantType {
+                        actionsCell.setupCell(forGrantType: grantType, seriesType: self.seriesType, isSeriesInList: true)
+                    }
                 }
                 
             }

@@ -93,73 +93,47 @@ class ActionsTableViewCell: UITableViewCell {
     
     // MARK: - Functions
     
-    /*
-        This function toggles the visibility of the manga
-        and anime progress stack views depending on a given
-        series type (which is the series type whose stack view
-        should be visible)
-     */
-    func setupCell(for seriesType: SeriesType) {
+    func setupCell(forGrantType grantType: GrantType, seriesType: SeriesType, isSeriesInList: Bool) {
+        if grantType != .clientCredentials {
+            toggleStatus(of: userListStatusButton, active: true)
+        }
+        
         if seriesType == .anime {
-            mangaProgressStackView.isHidden = true
-            animeProgressStackView.isHidden = false
-        } else if seriesType == .manga {
-            animeProgressStackView.isHidden = true
-            mangaProgressStackView.isHidden = false
+            DispatchQueue.main.async {
+                self.mangaProgressStackView.alpha = 0.0
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.animeProgressStackView.alpha = 0.0
+            }
         }
-    }
-    
-    /*
-        This function sets the affected properties of UI elements
-        that should look different depending on whether they're
-        in a list or not to appropriate values
-     */
-    func setupCellForStatus(isSeriesInList: Bool) {
+        
         if isSeriesInList {
-            rateButton.isEnabled = true
-            animeProgressStackView.isUserInteractionEnabled = true
-            mangaProgressStackView.isUserInteractionEnabled = true
-            UIView.animate(withDuration: 0.25) {
-                self.rateButton.alpha = 1.0
-                self.animeProgressStackView.alpha = 1.0
-                self.mangaProgressStackView.alpha = 1.0
-                self.userListStatusButton.alpha = 1.0
+            toggleStatus(of: rateButton, active: true)
+            if seriesType == .anime {
+                self.toggleStatus(of: self.animeProgressStackView, active: true)
+            } else {
+                self.toggleStatus(of: self.mangaProgressStackView, active: true)
             }
         } else {
-            watchedEpisodesTextField.text = "0"
-            chaptersReadTextField.text = "0"
-            volumesReadTextField.text = "0"
-            userListStatusButton.setTitle("Add to List", for: .normal)
-            rateButton.isEnabled = false
-            animeProgressStackView.isUserInteractionEnabled = false
-            mangaProgressStackView.isUserInteractionEnabled = false
-            UIView.animate(withDuration: 0.25) {
-                self.rateButton.alpha = 0.4
-                self.animeProgressStackView.alpha = 0.4
-                self.mangaProgressStackView.alpha = 0.4
+            DispatchQueue.main.async {
+                self.watchedEpisodesTextField.text = "0"
+                self.chaptersReadTextField.text = "0"
+                self.volumesReadTextField.text = "0"
+                self.userListStatusButton.setTitle("Add to List", for: .normal)
             }
         }
     }
     
-    func setupCell(for grantType: GrantType) {
-        /*
-            Deactivate the rate and user list status buttons and the anime/manga
-            progress stack views if the user is not logged in with an AniList account
-         */
-        if grantType == .clientCredentials {
-            rateButton.isEnabled = false
-            rateButton.alpha = 0.4
-            userListStatusButton.isEnabled = false
-            userListStatusButton.alpha = 0.4
-            animeProgressStackView.alpha = 0.4
-            mangaProgressStackView.alpha = 0.4
-        } else {
-            rateButton.isEnabled = true
-            rateButton.alpha = 1.0
-            userListStatusButton.isEnabled = true
-            userListStatusButton.alpha = 1.0
-            animeProgressStackView.alpha = 1.0
-            mangaProgressStackView.alpha = 1.0
+    func toggleStatus(of view: UIView, active: Bool) {
+        DispatchQueue.main.async {
+            if active {
+                view.alpha = 1.0
+                view.isUserInteractionEnabled = true
+            } else {
+                view.alpha = 0.4
+                view.isUserInteractionEnabled = false
+            }
         }
     }
     

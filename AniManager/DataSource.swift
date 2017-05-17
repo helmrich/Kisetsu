@@ -36,7 +36,7 @@ class DataSource {
         ["Status": AnimeAiringStatus.allStatusStrings],
         ["Type": MediaType.allMediaTypeStrings],
         ["Genres": [String]()],
-        ["Year": [Int](1951...2018).reversed()]
+        ["Year": [Int](1951...DateManager.currentYear + 1).reversed()]
     ]
     var selectedBrowseFilters: [String:[IndexPath:String]?] = [
         "Sort By": [IndexPath:String](),
@@ -193,5 +193,4 @@ class DataSource {
         }
         return genreParameterString
     }
-    
 }

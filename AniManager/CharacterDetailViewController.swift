@@ -106,7 +106,7 @@ class CharacterDetailViewController: UIViewController {
         
         characterImageView.layer.cornerRadius = 2.0
         
-        infoTextView.textContainerInset = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 0.0, right: 20.0)
+        infoTextView.textContainerInset = UIEdgeInsets(top: 20.0, left: 15.0, bottom: 20.0, right: 15.0)
         infoTextView.layer.cornerRadius = 2.0
         
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()

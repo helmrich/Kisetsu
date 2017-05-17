@@ -83,6 +83,7 @@ class BannerView: UIView {
         
         favoriteButton.translatesAutoresizingMaskIntoConstraints = false
         favoriteButton.setImage(#imageLiteral(resourceName: "HeartIcon"), for: .normal)
+        favoriteButton.alpha = 0.0
         containerView.addSubview(favoriteButton)
         containerView.addConstraints([
             NSLayoutConstraint(item: favoriteButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 25.0),

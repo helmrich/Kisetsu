@@ -14,7 +14,7 @@ class WebViewController: UIViewController {
     
     var url: URL!
     let errorMessageView = ErrorMessageView()
-    var loadingView: UIView?
+    var loadingStatusView = LoadingStatusView()
     
     
     // MARK: - Outlets and Actions
@@ -29,6 +29,8 @@ class WebViewController: UIViewController {
     // MARK: - Action
     
     @IBAction func cancel() {
+        NetworkActivityManager.shared.numberOfActiveConnections = 0
+        NetworkActivityManager.shared.setupStatusBarActivityIndicator()
         dismiss(animated: true, completion: nil)
     }
     
@@ -48,6 +50,9 @@ class WebViewController: UIViewController {
         super.viewDidLoad()
         
         errorMessageView.addToBottom(of: view)
+        view.addSubview(loadingStatusView)
+        let loadingStatusViewFrame = CGRect(x: view.frame.origin.x, y: toolbar.frame.maxY, width: view.frame.width, height: view.frame.height)
+        loadingStatusView.frame = loadingStatusViewFrame
         toolbar.clipsToBounds = true
     }
     
@@ -69,9 +74,8 @@ extension WebViewController: UIWebViewDelegate {
         view did finish loading
      */
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        if loadingView != nil {
-            hideLoadingStatus(of: loadingView!)
-        }
+        NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+        loadingStatusView.setVisibilityDependingOnNetworkStatus()
     }
     
     /*
@@ -92,14 +96,17 @@ extension WebViewController: UIWebViewDelegate {
      */
     func webViewDidStartLoad(_ webView: UIWebView) {
         
-        loadingView = showLoadingStatus()
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        loadingStatusView.setVisibilityDependingOnNetworkStatus()
         
         guard let request = webView.request,
             let mainDocumentURLString = request.mainDocumentURL?.absoluteString else {
-            return
+                return
         }
         
         if mainDocumentURLString.contains("?code=") {
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            loadingStatusView.setVisibilityDependingOnNetworkStatus()
             /*
                 If the URL string contains "?code=" the URL's string should be split
                 up in two components of which the second one will contain the
@@ -115,21 +122,20 @@ extension WebViewController: UIWebViewDelegate {
             AniListClient.shared.authorizationCode = authorizationCode
             dismiss(animated: true, completion: nil)
         } else if mainDocumentURLString.contains("?error=access_denied") {
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            self.loadingStatusView.setVisibilityDependingOnNetworkStatus()
             /*
-                If the URL string contains "?error=access_denied" an error should be
-                displayed on the presenting AuthenticationViewController and the
-                WebViewController should be dismissed
+                If the URL string contains "?error=access_denied" the WebViewController
+                should be dismissed
              */
-            (presentingViewController as! AuthenticationViewController).errorMessageView.showAndHide(withMessage: "The authorization request was denied")
             dismiss(animated: true, completion: nil)
         }
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         errorMessageView.showAndHide(withMessage: error.localizedDescription)
-        if loadingView != nil {
-            hideLoadingStatus(of: loadingView!)
-        }
+        NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+        loadingStatusView.setVisibilityDependingOnNetworkStatus()
         UIView.animate(withDuration: 0.25) {
             self.reloadButton.alpha = 1.0
         }

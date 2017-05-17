@@ -23,6 +23,7 @@ class AuthenticationViewController: UIViewController {
     // MARK: - Properties
     
     var errorMessageView = ErrorMessageView()
+    var loadingStatusView = LoadingStatusView()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -71,11 +72,11 @@ class AuthenticationViewController: UIViewController {
     }
     
     @IBAction func skipLogin() {
-        let loadingView = showLoadingStatus()
+        NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+        loadingStatusView.setVisibilityDependingOnNetworkStatus()
         AniListClient.shared.getAccessToken(withGrantType: .clientCredentials) { (accessToken, refreshToken, errorMessage) in
-            DispatchQueue.main.async {
-                self.hideLoadingStatus(of: loadingView)
-            }
+            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            self.loadingStatusView.setVisibilityDependingOnNetworkStatus()
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: "Couldn't get access token")
                 return
@@ -98,6 +99,7 @@ class AuthenticationViewController: UIViewController {
             the login button's background color to white
          */
         errorMessageView.addToBottom(of: view)
+        loadingStatusView.frame = view.frame
         loginButton.backgroundColor = .white
     }
     
@@ -113,11 +115,11 @@ class AuthenticationViewController: UIViewController {
             controller
          */
         if AniListClient.shared.authorizationCode != nil {
-            let loadingView = showLoadingStatus()
+            NetworkActivityManager.shared.increaseNumberOfActiveConnections()
+            loadingStatusView.setVisibilityDependingOnNetworkStatus()
             AniListClient.shared.getAccessToken(withGrantType: .authorizationCode) { (accessToken, refreshToken, errorMessage) in
-                DispatchQueue.main.async {
-                    self.hideLoadingStatus(of: loadingView)
-                }
+                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                self.loadingStatusView.setVisibilityDependingOnNetworkStatus()
                 
                 // Error Handling
                 guard errorMessage == nil else {

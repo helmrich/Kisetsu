@@ -74,7 +74,6 @@ class CharacterDetailViewController: UIViewController {
         
         nameStackView.alpha = 0.0
         infoTextView.alpha = 0.0
-        characterImageView.alpha = 0.0
         
         // Banner Configuration
         favoriteButton.alpha = 0
@@ -184,10 +183,7 @@ class CharacterDetailViewController: UIViewController {
         
         if let imageLargeUrlString = character.imageLargeUrlString,
             let imageLargeUrl = URL(string: imageLargeUrlString) {
-            characterImageView.kf.setImage(with: imageLargeUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                UIView.animate(withDuration: 0.25) {
-                    self.characterImageView.alpha = 1.0
-                }
+            characterImageView.kf.setImage(with: imageLargeUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: characterImageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             }
         }

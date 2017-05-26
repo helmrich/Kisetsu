@@ -16,6 +16,8 @@ class SearchViewController: SeriesCollectionViewController {
         return .lightContent
     }
     
+    var seriesCollectionViewBottomConstraint: NSLayoutConstraint! = NSLayoutConstraint()
+    
     
     // MARK: - Outlets and Actions
     
@@ -25,6 +27,7 @@ class SearchViewController: SeriesCollectionViewController {
     @IBOutlet weak var seriesTypeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var seriesCollectionView: UICollectionView!
     @IBOutlet weak var seriesCollectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var originalSeriesCollectionViewBottomConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var nothingFoundLabel: UILabel!
@@ -52,8 +55,12 @@ class SearchViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        seriesCollectionViewBottomConstraint = NSLayoutConstraint(item: seriesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: tabBarController != nil ? tabBarController!.tabBar : view, attribute: .top, multiplier: 1.0, constant: 0.0)
+        
         // Add observer for the "settingValueChanged" notification
         NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         // Configure the collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
@@ -70,11 +77,39 @@ class SearchViewController: SeriesCollectionViewController {
          */
         searchBar.backgroundImage = UIImage()
         setSeriesTypeFromSelectedSegment()
-        
     }
     
     
     // MARK: - Functions
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let originalSeriesCollectionViewBottomConstraint = originalSeriesCollectionViewBottomConstraint {
+            view.removeConstraint(originalSeriesCollectionViewBottomConstraint)
+            self.originalSeriesCollectionViewBottomConstraint = nil
+        }
+        
+        guard let userInfo = notification.userInfo,
+            let keyboardSizeValue = userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+                return
+        }
+        
+        let keyboardHeight = keyboardSizeValue.cgRectValue.height
+        view.removeConstraint(seriesCollectionViewBottomConstraint)
+        seriesCollectionViewBottomConstraint = NSLayoutConstraint(item: seriesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: -keyboardHeight)
+        view.addConstraint(seriesCollectionViewBottomConstraint)
+        UIView.animate(withDuration: 1.0) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        view.removeConstraint(seriesCollectionViewBottomConstraint)
+        seriesCollectionViewBottomConstraint = NSLayoutConstraint(item: seriesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: tabBarController != nil ? -tabBarController!.tabBar.frame.height : 0.0)
+        view.addConstraint(seriesCollectionViewBottomConstraint)
+        UIView.animate(withDuration: 1.0) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     func hideKeyboard() {
         view.endEditing(true)

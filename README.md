@@ -2,7 +2,7 @@
 
 AniManager is an application for iOS that lets the user track and explore anime and manga. This app was created as my last project for the [iOS Developer Nanodegree by Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003) which is supposed to be an own iOS application. 
 
-The app is written in Swift 3 and uses the [AniList](https://anilist.co) API to get and modify data. As of now the app *requires* an AniList account but it's planned to implement a mode without login that has limited functionality in the future.
+The app is written in Swift 3 and uses the [AniList](https://anilist.co) API to get and modify data.
 
 Note: This is *not* an official AniList application
 
@@ -56,9 +56,9 @@ I'm not 100% sure if or when I'll submit the application to the App Store but th
 **Some of the planned additions/features are**:
 
 - Additional rating systems (currently only ratings from 1 to 10 are available)
-- Settings tab (with options to change the rating systems, title language (English, Romaji, Japanese), favourite genres and an option for WiFi-only image downloads)
+- Settings tab (with options to change the rating systems, title language (English, Romaji, Japanese), favourite genres and an option for WiFi-only image downloads) ✅
 - Home tab (with sections like "recommended", "new", "current season", etc.)
-- Relations to connected series in the series detail
+- Relations to connected series in the series detail ✅
 - Actors/Actresses info
 - Staff info
 - Countdown to new episodes and optional push notifications for new episodes/chapters

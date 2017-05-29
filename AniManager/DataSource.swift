@@ -22,13 +22,6 @@ class DataSource {
     // Genres
     var genres = [String]()
     
-    // Title Languages
-    var titleLanguages = [
-        "English",
-        "Romaji",
-        "Japanese"
-    ]
-    
     // Browse
     var browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
@@ -47,7 +40,7 @@ class DataSource {
         "Year": [IndexPath:String]()
     ]
     var browseParameters: [String:Any] = [
-        AniListConstant.ParameterKey.Browse.sort: "score-desc"
+        AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Score.descending
     ]
     var browseSeriesList: [Series]? = nil
     

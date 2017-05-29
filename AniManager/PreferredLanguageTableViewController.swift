@@ -32,14 +32,14 @@ class PreferredLanguageTableViewController: UIViewController {
 
 extension PreferredLanguageTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataSource.shared.titleLanguages.count
+        return TitleLanguage.all.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath) as! SettingSelectionTableViewCell
         cell.textLabel?.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
         cell.textLabel?.textColor = .aniManagerBlack
-        cell.textLabel?.text = DataSource.shared.titleLanguages[indexPath.row]
+        cell.textLabel?.text = TitleLanguage.all[indexPath.row]
         return cell
     }
 }
@@ -64,7 +64,7 @@ extension PreferredLanguageTableViewController: UITableViewDelegate {
                 return
         }
      
-        UserDefaults.standard.set(text.lowercased(), forKey: "titleLanguage")
+        UserDefaults.standard.set(text, forKey: "titleLanguage")
         NotificationCenter.default.post(name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: self)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -79,7 +79,7 @@ extension PreferredLanguageTableViewController: UITableViewDelegate {
         if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage"),
             let textLabel = cell.textLabel,
             let text = textLabel.text {
-            if titleLanguage == text.lowercased() {
+            if titleLanguage == text {
                 if let _ = cell as? SettingSelectionTableViewCell {
                     tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
                 }

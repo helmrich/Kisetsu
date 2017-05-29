@@ -11,7 +11,6 @@ import Foundation
 class AnimeSeries: Series {
     let numberOfTotalEpisodes: Int
     let durationPerEpisode: Int?
-    let airingStatus: AnimeAiringStatus?
     let youtubeVideoId: String?
     let source: AnimeSource?
     let studios: [Studio]?
@@ -21,6 +20,7 @@ class AnimeSeries: Series {
     var watchedEpisodes: Int?
     
     // Airing-specific properties
+    let airingStatus: AnimeAiringStatus?
     var countdownUntilNextEpisodeInSeconds: Int?
     var nextEpisodeNumber: Int?
     

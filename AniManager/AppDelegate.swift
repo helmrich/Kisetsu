@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             the value to "english" if there is no value
          */
         if UserDefaults.standard.string(forKey: "titleLanguage") == nil {
-            UserDefaults.standard.set("english", forKey: "titleLanguage")
+            UserDefaults.standard.set(TitleLanguage.english.rawValue, forKey: "titleLanguage")
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

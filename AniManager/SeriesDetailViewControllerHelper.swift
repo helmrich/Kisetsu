@@ -60,7 +60,7 @@ extension SeriesDetailViewController {
         /*
             Because the API just returns two digits for the year and
             the database currently has series since 1951 it has to be
-            assumed for now that if the season ID is larger than 504
+            assumed for now that if the season ID is larger than 504 (fall 1950)
             the series was released in the 20th century whereas if it's
             smaller the series was released in the 21th century
          */

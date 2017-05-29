@@ -34,7 +34,7 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             return cell
         }
         
-        cell.type = imagesTableViewCellType
+        cell.imagesTableViewCellType = imagesTableViewCellType
         
         switch imagesTableViewCellType {
         case .characters:
@@ -55,6 +55,8 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             
             if cell.imageView.image == nil {
                 cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                    // TODO: App is crashing here sometimes:
+                    // attempt to delete item 1 from section 0 which only contains 0 items before the update
                     collectionView.reloadItems(at: [indexPath])
                 }
             }

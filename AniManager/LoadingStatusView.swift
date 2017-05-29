@@ -22,7 +22,7 @@ class LoadingStatusView: UIView {
         
         alpha = 0.0
         
-        backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.7)
+        backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.6)
         
         activityIndicatorView.startAnimating()
         addSubview(activityIndicatorView)

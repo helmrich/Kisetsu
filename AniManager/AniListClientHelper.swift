@@ -134,3 +134,9 @@ extension AniListClient {
         return isAccessTokenValid
     }
 }
+
+extension AniListClient {
+    enum SortParameter {
+        case popularity, score
+    }
+}

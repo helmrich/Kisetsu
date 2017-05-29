@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+enum TitleLanguage: String {
+    case english = "English"
+    case romaji = "Romaji"
+    case japanese = "Japanese"
+    
+    static let all = [
+        english.rawValue,
+        romaji.rawValue,
+        japanese.rawValue
+    ]
+}

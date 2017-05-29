@@ -42,5 +42,30 @@ extension ParameterConstant {
             static let redirectUri = "AniManager://"
             static let responseTypeCode = "code"
         }
+        
+        struct Browse {
+            struct Sort {
+                struct Score {
+                    static let ascending = "score-asc"
+                    static let descending = "score-desc"
+                }
+                struct Popularity {
+                    static let ascending = "popularity-asc"
+                    static let descending = "popularity-desc"
+                }
+                struct Id {
+                    static let ascending = "id-asc"
+                    static let descending = "id-desc"
+                }
+                struct StartDate {
+                    static let ascending = "start_date-asc"
+                    static let descending = "start_date-desc"
+                }
+                struct EndDate {
+                    static let ascending = "end_date-asc"
+                    static let descending = "end_date-desc"
+                }
+            }
+        }
     }
 }

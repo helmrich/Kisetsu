@@ -138,6 +138,7 @@ class SeriesDetailViewController: UIViewController {
         let bannerView = BannerView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.3))
         bannerView.dismissButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         bannerView.favoriteButton.addTarget(self, action: #selector(favorite), for: .touchUpInside)
+        bannerView.titleReleaseYearStackView.alpha = 0.0
         bannerView.titleLabel.text = seriesTitle
         seriesDataTableView.tableHeaderView = bannerView
         
@@ -203,6 +204,12 @@ class SeriesDetailViewController: UIViewController {
                 let releaseYear = self.getReleaseYear(fromSeasonId: seasonId) {
                 DispatchQueue.main.async {
                     (self.seriesDataTableView.tableHeaderView as! BannerView).releaseYearLabel.text = "\(releaseYear)"
+                }
+            }
+            
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.25) {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).titleReleaseYearStackView.alpha = 1.0
                 }
             }
             

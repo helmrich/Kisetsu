@@ -32,6 +32,7 @@ class BannerView: UIView {
     
     let titleLabel = UILabel()
     let releaseYearLabel = UILabel()
+    var titleReleaseYearStackView = UIStackView()
     
     
     // MARK: - Initializer
@@ -61,7 +62,7 @@ class BannerView: UIView {
         // Create and configure the image overlay view
         let imageOverlayView = UIView()
         imageOverlayView.translatesAutoresizingMaskIntoConstraints = false
-        imageOverlayView.backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.7)
+        imageOverlayView.backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.6)
         imageOverlayView.clipsToBounds = true
         containerView.addSubview(imageOverlayView)
         containerView.addConstraints([
@@ -102,17 +103,17 @@ class BannerView: UIView {
         titleLabel.numberOfLines = 3
         releaseYearLabel.font = UIFont(name: Constant.FontName.mainLight, size: 14.0)
         releaseYearLabel.textColor = .white
-        let stackView = UIStackView(arrangedSubviews: [
-            titleLabel,
-            releaseYearLabel
+        titleReleaseYearStackView = UIStackView(arrangedSubviews: [
+                titleLabel,
+                releaseYearLabel
             ])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(stackView)
+        titleReleaseYearStackView.axis = .vertical
+        titleReleaseYearStackView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(titleReleaseYearStackView)
         containerView.addConstraints([
-                NSLayoutConstraint(item: stackView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 15.0),
-                NSLayoutConstraint(item: stackView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.0, constant: -15.0),
-                NSLayoutConstraint(item: stackView, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.0, constant: -10.0)
+                NSLayoutConstraint(item: titleReleaseYearStackView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1.0, constant: 15.0),
+                NSLayoutConstraint(item: titleReleaseYearStackView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1.0, constant: -15.0),
+                NSLayoutConstraint(item: titleReleaseYearStackView, attribute: .bottom, relatedBy: .equal, toItem: containerView, attribute: .bottom, multiplier: 1.0, constant: -10.0)
             ])
         
         

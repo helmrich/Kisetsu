@@ -107,6 +107,125 @@ extension AniListClient {
         }
     }
     
+    func getTopSeries(basedOn sortParameter: SortParameter = .popularity, fromYear year: Int?, amount: Int = 5, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+        var browseParameters: [String:Any] = [String:Any]()
+        switch sortParameter {
+        case .score:
+            browseParameters[AniListConstant.ParameterKey.Browse.sort] = AniListConstant.ParameterValue.Browse.Sort.Score.descending
+        default:
+            browseParameters[AniListConstant.ParameterKey.Browse.sort] = AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
+        }
+        if let year = year {
+            browseParameters[AniListConstant.ParameterKey.Browse.year] = year
+        }
+        
+        AniListClient.shared.getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForSeriesList(nil, errorMessage!)
+                return
+            }
+            
+            guard let seriesList = seriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get top series")
+                return
+            }
+            
+            guard let nonAdultSeriesList = nonAdultSeriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get non-adult top series")
+                return
+            }
+            
+            let filteredSeriesList: [Series]
+            if UserDefaults.standard.bool(forKey: "showExplicitContent") {
+                filteredSeriesList = seriesList.filter { $0.imageBannerUrlString != nil }
+            } else {
+                filteredSeriesList = nonAdultSeriesList.filter { $0.imageBannerUrlString != nil }
+            }
+            
+            let topSeriesList = Array(filteredSeriesList.prefix(amount))
+            completionHandlerForSeriesList(topSeriesList, nil)
+            
+        }
+    }
+    
+    func getCurrentSeasonAnime(amount: Int = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+        let browseParameters: [String:Any] = [
+            AniListConstant.ParameterKey.Browse.season: Season.current.rawValue,
+            AniListConstant.ParameterKey.Browse.year: String(DateManager.currentYear),
+            AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
+        ]
+        getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForSeriesList(nil, errorMessage!)
+                return
+            }
+            
+            guard let seriesList = seriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get anime for the current season")
+                return
+            }
+            
+            guard let nonAdultSeriesList = nonAdultSeriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get non-adult anime for the current season")
+                return
+            }
+            
+            let seriesListToUse: [Series]
+            if UserDefaults.standard.bool(forKey: "showExplicitContent") {
+                seriesListToUse = seriesList
+            } else {
+                seriesListToUse = nonAdultSeriesList
+            }
+            
+            guard let animeSeriesList = seriesListToUse as? [AnimeSeries] else {
+                completionHandlerForSeriesList(nil, "Couldn't get currently airing anime series")
+                return
+            }
+            
+            let animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            completionHandlerForSeriesList(animeSeriesListWithSelectedAmount, nil)
+        }
+    }
+    
+    func getCurrentlyAiringAnime(amount: Int = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+        let browseParameters: [String:Any] = [
+            AniListConstant.ParameterKey.Browse.status: AnimeAiringStatus.currentlyAiring.rawValue,
+            AniListConstant.ParameterKey.Browse.fullPage: amount > 40 ? "true" : "false",
+            AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
+        ]
+        getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForSeriesList(nil, errorMessage!)
+                return
+            }
+            
+            guard let seriesList = seriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get series list for airing anime")
+                return
+            }
+            
+            guard let nonAdultSeriesList = nonAdultSeriesList else {
+                completionHandlerForSeriesList(nil, "Couldn't get non-adult series list for airing anime")
+                return
+            }
+            
+            let seriesListToUse: [Series]
+            if UserDefaults.standard.bool(forKey: "showExplicitContent") {
+                seriesListToUse = seriesList
+            } else {
+                seriesListToUse = nonAdultSeriesList
+            }
+            
+            guard let animeSeriesList = seriesListToUse as? [AnimeSeries] else {
+                completionHandlerForSeriesList(nil, "Couldn't get currently airing anime series")
+                return
+            }
+            
+            let animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            completionHandlerForSeriesList(animeSeriesListWithSelectedAmount, nil)
+        }
+    }
+    
     /*
         This method gets a single series with a specified ID and series type
      */

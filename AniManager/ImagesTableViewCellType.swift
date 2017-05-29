@@ -8,6 +8,10 @@
 
 import Foundation
 
-enum ImagesTableViewCellType {
+enum ImagesTableViewCellType: String {
+    // Series Detail
     case relations, characters, actors
+    
+    // Home
+    case currentlyAiring, currentSeason, continueReading, continueWatching, recommendations, topRated, popular
 }

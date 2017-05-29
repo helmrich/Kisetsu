@@ -23,9 +23,6 @@ class MangaListSelectionViewController: ListSelectionViewController {
             present(requiredLoginViewController, animated: true, completion: nil)
         }
         
-        tabBarController?.navigationItem.title = "Manga Lists"
-        tabBarController?.navigationItem.leftBarButtonItem = nil
-        
         seriesType = .manga
     }
 

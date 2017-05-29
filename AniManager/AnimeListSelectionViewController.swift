@@ -23,9 +23,6 @@ class AnimeListSelectionViewController: ListSelectionViewController {
             present(requiredLoginViewController, animated: true, completion: nil)
         }
         
-        tabBarController?.navigationItem.title = "Anime Lists"
-        tabBarController?.navigationItem.leftBarButtonItem = nil
-        
         seriesType = .anime
     }
 

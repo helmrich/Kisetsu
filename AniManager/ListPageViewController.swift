@@ -10,26 +10,49 @@ import UIKit
 
 class ListPageViewController: UIPageViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - Properties
+    var animeListSelectionViewController: AnimeListSelectionViewController!
+    var mangaListSelectionViewController: MangaListSelectionViewController!
+    
+    
+    // MARK: - Outlets and Actions
+    
+    // MARK: - Actions
+    
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        setViewController(forSelectedIndex: sender.selectedSegmentIndex)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Lifecycle Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        animeListSelectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "animeListSelectionViewController") as! AnimeListSelectionViewController
+        mangaListSelectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mangaListSelectionViewController") as! MangaListSelectionViewController
+        
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = true
+        setViewController(forSelectedIndex: 0)
     }
-    */
+    
+    
+    // MARK: - Functions
+    
+    func setViewController(forSelectedIndex selectedIndex: Int) {
+        setViewControllers([selectedIndex == 0 ? animeListSelectionViewController : mangaListSelectionViewController], direction: .forward, animated: false, completion: nil)
+    }
+}
 
+extension ListPageViewController: UIPageViewControllerDataSource {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if viewController == animeListSelectionViewController { return mangaListSelectionViewController }
+        return nil
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if viewController == mangaListSelectionViewController { return animeListSelectionViewController }
+        return nil
+    }
 }

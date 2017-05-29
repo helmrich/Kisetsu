@@ -28,8 +28,6 @@ class ListSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

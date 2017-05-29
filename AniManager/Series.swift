@@ -63,6 +63,22 @@ class Series {
         }
     }
     
+    var titleForSelectedTitleLanguageSetting: String {
+        if let titleLanguageString = UserDefaults.standard.string(forKey: "titleLanguage"),
+            let titleLanguage = TitleLanguage(rawValue: titleLanguageString) {
+            switch titleLanguage {
+            case .english:
+                return titleEnglish
+            case .romaji:
+                return titleRomaji
+            case .japanese:
+                return titleJapanese
+            }
+        } else {
+            return titleEnglish
+        }
+    }
+    
     // List-specific properties
     var finishedOn: String?
     var itemListStatus: String?
@@ -104,6 +120,15 @@ class Series {
                     return nil
         }
         
+        /*
+            Remove empty strings from the genres array as the
+            API sometimes returns an array that contains empty
+            string(s)
+         */
+        let filteredGenres = genres.filter {
+            $0 != ""
+        }
+        
         self.id = id
         self.seriesType = seriesType
         self.titleRomaji = titleRomaji
@@ -111,7 +136,7 @@ class Series {
         self.titleJapanese = titleJapanese
         self.mediaType = type
         self.synonyms = synonyms
-        self.genres = genres
+        self.genres = filteredGenres
         self.isAdult = isAdult
         self.averageScore = averageScore
         self.popularity = popularity

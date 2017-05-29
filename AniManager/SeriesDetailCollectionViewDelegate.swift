@@ -18,7 +18,7 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
         let selectedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
         
         // Check if the selected cell has a type
-        guard let cellType = selectedCell.type else {
+        guard let imagesTableViewCellType = selectedCell.imagesTableViewCellType else {
             return
         }
         
@@ -28,7 +28,7 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             Currently, only characters are available, thus other cases were not
             implemented yet.
          */
-        switch cellType {
+        switch imagesTableViewCellType {
         case .characters:
             /*
                 Get the selected character by using the index path's row property as
@@ -59,23 +59,12 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             
             let seriesDetailViewController = storyboard?.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
             seriesDetailViewController.seriesType = (collectionView.cellForItem(at: indexPath) as! ImagesCollectionViewCell).seriesType
-            if let titleLanguage = UserDefaults.standard.string(forKey: "titleLanguage") {
-                switch titleLanguage {
-                case "english":
-                    seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
-                case "romaji":
-                    seriesDetailViewController.seriesTitle = selectedRelation.titleRomaji
-                case "japanese":
-                    seriesDetailViewController.seriesTitle = selectedRelation.titleJapanese
-                default:
-                    seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
-                }
-            } else {
-                seriesDetailViewController.seriesTitle = selectedRelation.titleEnglish
-            }
+                seriesDetailViewController.seriesTitle = selectedRelation.titleForSelectedTitleLanguageSetting
             seriesDetailViewController.seriesId = selectedRelation.id
             present(seriesDetailViewController, animated: true, completion: nil)
         case .actors:
+            break
+        default:
             break
         }
         

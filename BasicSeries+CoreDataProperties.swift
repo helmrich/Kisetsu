@@ -27,5 +27,26 @@ extension BasicSeries {
     @NSManaged public var titleRomaji: String?
     @NSManaged public var titleJapanese: String?
     @NSManaged public var seriesList: SeriesList?
-
+    
+    var titleForSelectedTitleLanguageSetting: String {
+        guard let titleEnglish = titleEnglish,
+        let titleRomaji = titleRomaji,
+            let titleJapanese = titleJapanese else {
+                return ""
+        }
+        
+        if let titleLanguageString = UserDefaults.standard.string(forKey: "titleLanguage"),
+            let titleLanguage = TitleLanguage(rawValue: titleLanguageString) {
+            switch titleLanguage {
+            case .english:
+                return titleEnglish
+            case .romaji:
+                return titleRomaji
+            case .japanese:
+                return titleJapanese
+            }
+        } else {
+            return titleEnglish
+        }
+    }
 }

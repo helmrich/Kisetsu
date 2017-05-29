@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,10 +26,20 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kAj-Ms-Mq9">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
-                    <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUy-VX-JoE">
+                    <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUy-VX-JoE">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-T7-RiS">
+                        <rect key="frame" x="5" y="52" width="90" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="73X-qW-q59"/>
+                            <constraint firstAttribute="height" constant="45" id="Ut0-7X-gEx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,16 +50,20 @@
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="Lhk-mg-cSB"/>
                 <constraint firstAttribute="trailing" secondItem="lUy-VX-JoE" secondAttribute="trailing" id="WM0-7X-4KK"/>
                 <constraint firstAttribute="bottom" secondItem="lUy-VX-JoE" secondAttribute="bottom" id="bgd-x4-BWi"/>
+                <constraint firstAttribute="bottom" secondItem="Vxf-T7-RiS" secondAttribute="bottom" constant="3" id="fYF-nT-CL4"/>
                 <constraint firstAttribute="bottom" secondItem="kAj-Ms-Mq9" secondAttribute="bottom" id="hRp-gu-MMR"/>
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" id="huA-j1-Kxu"/>
+                <constraint firstItem="Vxf-T7-RiS" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" constant="5" id="ozJ-Cb-t1R"/>
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" id="r81-P5-W31"/>
                 <constraint firstAttribute="trailing" secondItem="kAj-Ms-Mq9" secondAttribute="trailing" id="ssx-v7-FBI"/>
                 <constraint firstAttribute="bottom" secondItem="kAj-Ms-Mq9" secondAttribute="bottom" id="x7F-d6-3UF"/>
+                <constraint firstAttribute="trailing" secondItem="Vxf-T7-RiS" secondAttribute="trailing" constant="5" id="ymd-M4-xxi"/>
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="z6p-Wc-Xgf"/>
             </constraints>
             <connections>
                 <outlet property="imageOverlayView" destination="lUy-VX-JoE" id="JCE-Pl-HHk"/>
                 <outlet property="imageView" destination="kAj-Ms-Mq9" id="Ph4-fH-dR0"/>
+                <outlet property="titleLabel" destination="Vxf-T7-RiS" id="TdZ-7T-kpx"/>
             </connections>
             <point key="canvasLocation" x="-168" y="15"/>
         </collectionViewCell>

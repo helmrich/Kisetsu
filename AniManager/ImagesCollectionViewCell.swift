@@ -13,7 +13,7 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     var id: Int?
-    var type: ImagesTableViewCellType?
+    var imagesTableViewCellType: ImagesTableViewCellType?
     var seriesType: SeriesType?
     
     
@@ -23,12 +23,13 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageOverlayView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     // MARK: - Functions
     
     override func prepareForReuse() {
         imageView.image = nil
+        titleLabel.alpha = 0.0
     }
-    
 }

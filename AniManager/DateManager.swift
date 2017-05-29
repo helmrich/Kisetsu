@@ -9,10 +9,15 @@
 import Foundation
 
 class DateManager {
+    static let dateFormatter = DateFormatter()
+    
     static var currentYear: Int {
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
-        let currentYear = Int(dateFormatter.string(from: Date()))
-        return currentYear!
+        return Int(dateFormatter.string(from: Date()))!
+    }
+    
+    static var currentMonth: String {
+        dateFormatter.dateFormat = "MMMM"
+        return dateFormatter.string(from: Date())
     }
 }

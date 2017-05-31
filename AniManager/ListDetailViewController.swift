@@ -102,7 +102,7 @@ class ListDetailViewController: SeriesCollectionViewController {
             self.activityIndicatorView.startAnimatingAndFadeIn()
             
             // Request a series list
-            AniListClient.shared.getList(ofType: seriesType, withStatus: status, andUserId: user.id, andDisplayName: nil) { (seriesList, errorMessage) in
+            AniListClient.shared.getList(ofType: seriesType, withStatus: status, userId: user.id, andDisplayName: nil) { (seriesList, errorMessage) in
                 
                 // Error Handling
                 guard errorMessage == nil else {

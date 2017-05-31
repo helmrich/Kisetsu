@@ -138,5 +138,10 @@ extension AniListClient {
 extension AniListClient {
     enum SortParameter {
         case popularity, score
+        
+        static var allValues = [
+            popularity,
+            score
+        ]
     }
 }

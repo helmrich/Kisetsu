@@ -16,7 +16,7 @@ extension AniListClient {
         This method gets a series list of a certain type with a specified status (e.g. watching,
         reading, completed, etc.) for a specified user
      */
-    func getList(ofType type: SeriesType, withStatus status: String, andUserId userId: Int?, andDisplayName displayName: String?, completionHandlerForList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getList(ofType type: SeriesType, withStatus status: String, userId: Int?, andDisplayName displayName: String?, completionHandlerForList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         
         getStatusListsDictionary(ofType: type, forUserId: userId, forDisplayName: displayName) { (allStatusListsDictionary, errorMessage) in
             

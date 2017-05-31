@@ -19,6 +19,29 @@ class HomeViewController: UIViewController {
     var continueWatchingSeriesList = [Series]()
     var continueReadingSeriesList = [Series]()
     var recommendationsSeriesList = [Series]()
+    var mostPopularAnimeSeriesList = [Series]()
+    var topRatedAnimeSeriesList = [Series]()
+    
+    var allSeriesLists: [[Series]] {
+        return [
+            currentlyAiringSeriesList,
+            currentSeasonSeriesList,
+            mostPopularAnimeSeriesList,
+            topRatedAnimeSeriesList,
+            continueWatchingSeriesList,
+            continueReadingSeriesList,
+//            recommendationsSeriesList
+        ]
+    }
+    
+    var notLoggedInSeriesLists: [[Series]] {
+        return [
+            currentlyAiringSeriesList,
+            currentSeasonSeriesList,
+            mostPopularAnimeSeriesList,
+            topRatedAnimeSeriesList
+        ]
+    }
     
     var statusBarShouldBeHidden = false
     
@@ -59,6 +82,8 @@ class HomeViewController: UIViewController {
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "continueWatchingCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "continueReadingCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "recommendationsCell")
+        tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "mostPopularAnimeCell")
+        tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "topRatedAnimeCell")
         
         featuredSlider.setBackgroundColor()
         
@@ -130,7 +155,7 @@ class HomeViewController: UIViewController {
             self.currentlyAiringSeriesList = seriesList
             
             DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                self.tableView.reloadData()
             }
             
         }
@@ -153,7 +178,72 @@ class HomeViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                self.tableView.reloadData()
+            }
+        }
+        
+        AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
+            guard errorMessage == nil else {
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
+                return
+            }
+            
+            guard let user = user else {
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
+                return
+            }
+            
+            for seriesType in SeriesType.allValues {
+                let statusKey: String
+                switch seriesType {
+                case .anime:
+                    statusKey = AnimeListName.watching.asKey()
+                case .manga:
+                    statusKey = MangaListName.reading.asKey()
+                }
+                AniListClient.shared.getList(ofType: seriesType, withStatus: statusKey, userId: user.id, andDisplayName: user.displayName) { (seriesList, errorMessage) in
+                    guard errorMessage == nil else {
+                        return
+                    }
+                    
+                    guard let seriesList = seriesList else {
+                        return
+                    }
+                    
+                    switch seriesType {
+                    case .anime:
+                        self.continueWatchingSeriesList = seriesList
+                    case .manga:
+                        self.continueReadingSeriesList = seriesList
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        
+        for sortParameter in AniListClient.SortParameter.allValues {
+            AniListClient.shared.getTopSeries(basedOn: sortParameter, fromYear: nil, amount: 20) { (seriesList, errorMessage) in
+                guard errorMessage == nil else {
+                    return
+                }
+                
+                guard let seriesList = seriesList else {
+                    return
+                }
+                
+                switch sortParameter {
+                case .popularity:
+                    self.mostPopularAnimeSeriesList = seriesList
+                case .score:
+                    self.topRatedAnimeSeriesList = seriesList
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -184,6 +274,10 @@ class HomeViewController: UIViewController {
             return continueReadingSeriesList
         case .recommendations:
             return recommendationsSeriesList
+        case .mostPopularAnime:
+            return mostPopularAnimeSeriesList
+        case .topRatedAnime:
+            return topRatedAnimeSeriesList
         default:
             return currentlyAiringSeriesList
         }
@@ -226,14 +320,20 @@ extension HomeViewController: UITableViewDataSource {
             cellType = .currentSeason
             cellTitle = "Current Season"
         } else if indexPath.row == 2 {
-            cellType = .recommendations
-            cellTitle = "Recommendations"
+            cellType = .mostPopularAnime
+            cellTitle = "Most Popular Anime"
         } else if indexPath.row == 3 {
+            cellType = .topRatedAnime
+            cellTitle = "Top Rated Anime"
+        } else if indexPath.row == 4 {
             cellType = .continueWatching
             cellTitle = "Continue Watching"
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             cellType = .continueReading
             cellTitle = "Continue Reading"
+        } else if indexPath.row == 6 {
+            cellType = .recommendations
+            cellTitle = "Recommendations"
         } else {
             return UITableViewCell(frame: CGRect.zero)
         }
@@ -257,21 +357,15 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
             let grantType = GrantType(rawValue: grantTypeString) else {
-                return 3
+                return notLoggedInSeriesLists.count
         }
         
         if grantType == .clientCredentials {
-            return 3
+            return notLoggedInSeriesLists.count
         } else {
-            return 5
+            return allSeriesLists.count
         }
     }
-}
-
-// MARK: - Table View Delegate
-
-extension HomeViewController: UITableViewDelegate {
-    
 }
 
 
@@ -364,9 +458,3 @@ extension HomeViewController: UICollectionViewDelegate {
         
     }
 }
-
-
-
-
-
-

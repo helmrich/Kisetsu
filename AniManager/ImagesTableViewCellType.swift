@@ -13,5 +13,5 @@ enum ImagesTableViewCellType: String {
     case relations, characters, actors
     
     // Home
-    case currentlyAiring, currentSeason, continueReading, continueWatching, recommendations, topRated, popular
+    case currentlyAiring, currentSeason, continueReading, continueWatching, recommendations, topRatedAnime, mostPopularAnime, topRatedManga, mostPopularManga
 }

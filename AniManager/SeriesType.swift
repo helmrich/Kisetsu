@@ -10,4 +10,9 @@ import Foundation
 
 enum SeriesType: String {
     case anime, manga
+    
+    static let allValues = [
+        anime,
+        manga
+    ]
 }

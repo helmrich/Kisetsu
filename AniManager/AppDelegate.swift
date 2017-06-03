@@ -95,5 +95,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         coreDataStack.saveContext()
     }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let presentedViewController = window?.rootViewController?.presentedViewController {
+            let className = String(describing: type(of: presentedViewController))
+            if ["MPInlineVideoFullscreenViewController", "MPMoviePlayerViewController", "AVFullScreenViewController"].contains(className)
+            {
+                return UIInterfaceOrientationMask.allButUpsideDown
+            }
+        }
+        return UIInterfaceOrientationMask.portrait
+    }
 }
 

@@ -22,5 +22,5 @@ class ImagesTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var imagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }

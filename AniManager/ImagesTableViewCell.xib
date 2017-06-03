@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gPb-zz-uGI" id="uBz-Tf-efj">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLv-G0-TC3">
@@ -42,10 +42,15 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="stX-Ki-tiU">
+                        <rect key="frame" x="177" y="94" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="o7b-9P-EYu" firstAttribute="top" secondItem="ZLv-G0-TC3" secondAttribute="bottom" constant="10" id="Bon-GY-eFW"/>
+                    <constraint firstItem="stX-Ki-tiU" firstAttribute="centerY" secondItem="o7b-9P-EYu" secondAttribute="centerY" id="J5s-zW-HMD"/>
                     <constraint firstItem="o7b-9P-EYu" firstAttribute="leading" secondItem="uBz-Tf-efj" secondAttribute="leading" id="NKQ-BP-Odi"/>
+                    <constraint firstItem="stX-Ki-tiU" firstAttribute="centerX" secondItem="o7b-9P-EYu" secondAttribute="centerX" id="QT4-hP-UyP"/>
                     <constraint firstItem="ZLv-G0-TC3" firstAttribute="leading" secondItem="uBz-Tf-efj" secondAttribute="leading" constant="15" id="XSE-cr-bGk"/>
                     <constraint firstAttribute="bottom" secondItem="o7b-9P-EYu" secondAttribute="bottom" constant="15.5" id="bZB-25-eLQ"/>
                     <constraint firstAttribute="trailing" secondItem="o7b-9P-EYu" secondAttribute="trailing" id="l4A-lo-eJp"/>
@@ -53,6 +58,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="activityIndicator" destination="stX-Ki-tiU" id="egC-Dr-FdZ"/>
                 <outlet property="imagesCollectionView" destination="o7b-9P-EYu" id="FHa-iK-y32"/>
                 <outlet property="imagesCollectionViewFlowLayout" destination="nkC-d0-aOs" id="pqr-UL-ACq"/>
                 <outlet property="titleLabel" destination="ZLv-G0-TC3" id="rqy-48-7d4"/>

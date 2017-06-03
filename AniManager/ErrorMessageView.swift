@@ -17,6 +17,7 @@ class ErrorMessageView: UIView {
     
     var topConstraint: NSLayoutConstraint!
     var bottomOffset: CGFloat!
+    var isCurrentlyShowing: Bool = false
     
     
     // MARK: - Initializers
@@ -76,6 +77,12 @@ class ErrorMessageView: UIView {
     }
     
     func showAndHide(withMessage message: String) {
+        guard !isCurrentlyShowing else {
+            return
+        }
+        
+        isCurrentlyShowing = true
+        
         DispatchQueue.main.async {
             self.errorLabel.text = "Error: \(message)"
             UIView.animate(withDuration: 0.33, animations: {
@@ -88,7 +95,9 @@ class ErrorMessageView: UIView {
                 self.alpha = 0.0
                 self.topConstraint.constant = 0.0
                 self.superview!.layoutIfNeeded()
-            }, completion: nil)
+            }, completion: { _ in
+                self.isCurrentlyShowing = false
+            })
         }
     }
     

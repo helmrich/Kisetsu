@@ -14,35 +14,6 @@ class HomeViewController: UIViewController {
     let featuredSlider = FeaturedSlider()
     let errorMessageView = ErrorMessageView()
     
-    var currentlyAiringSeriesList = [Series]()
-    var currentSeasonSeriesList = [Series]()
-    var continueWatchingSeriesList = [Series]()
-    var continueReadingSeriesList = [Series]()
-    var recommendationsSeriesList = [Series]()
-    var mostPopularAnimeSeriesList = [Series]()
-    var topRatedAnimeSeriesList = [Series]()
-    
-    var allSeriesLists: [[Series]] {
-        return [
-            currentlyAiringSeriesList,
-            currentSeasonSeriesList,
-            mostPopularAnimeSeriesList,
-            topRatedAnimeSeriesList,
-            continueWatchingSeriesList,
-            continueReadingSeriesList,
-//            recommendationsSeriesList
-        ]
-    }
-    
-    var notLoggedInSeriesLists: [[Series]] {
-        return [
-            currentlyAiringSeriesList,
-            currentSeasonSeriesList,
-            mostPopularAnimeSeriesList,
-            topRatedAnimeSeriesList
-        ]
-    }
-    
     var statusBarShouldBeHidden = false
     
     override var prefersStatusBarHidden: Bool {
@@ -77,6 +48,7 @@ class HomeViewController: UIViewController {
         // Add observer for the "settingValueChanged" notification
         NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
         
+        // Register nibs
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "currentlyAiringCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "currentSeasonCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "continueWatchingCell")
@@ -84,6 +56,9 @@ class HomeViewController: UIViewController {
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "recommendationsCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "mostPopularAnimeCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "topRatedAnimeCell")
+        tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "mostPopularMangaCell")
+        tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "topRatedMangaCell")
+        
         
         featuredSlider.setBackgroundColor()
         
@@ -120,7 +95,7 @@ class HomeViewController: UIViewController {
         
         view.layoutIfNeeded()
         
-        AniListClient.shared.getTopSeries(fromYear: DateManager.currentYear) { (featuredSeriesList, errorMessage) in
+        AniListClient.shared.getTopSeries(ofType: .anime, fromYear: DateManager.currentYear) { (featuredSeriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 return
@@ -152,7 +127,7 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            self.currentlyAiringSeriesList = seriesList
+            DataSource.shared.currentlyAiringSeriesList = seriesList
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -171,11 +146,7 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            self.currentSeasonSeriesList = seriesList
-            
-            seriesList.forEach {
-                print("\($0.titleRomaji): \($0.popularity)")
-            }
+            DataSource.shared.currentSeasonSeriesList = seriesList
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -212,9 +183,9 @@ class HomeViewController: UIViewController {
                     
                     switch seriesType {
                     case .anime:
-                        self.continueWatchingSeriesList = seriesList
+                        DataSource.shared.continueWatchingSeriesList = seriesList
                     case .manga:
-                        self.continueReadingSeriesList = seriesList
+                        DataSource.shared.continueReadingSeriesList = seriesList
                     }
                     
                     DispatchQueue.main.async {
@@ -224,25 +195,31 @@ class HomeViewController: UIViewController {
             }
         }
         
-        for sortParameter in AniListClient.SortParameter.allValues {
-            AniListClient.shared.getTopSeries(basedOn: sortParameter, fromYear: nil, amount: 20) { (seriesList, errorMessage) in
-                guard errorMessage == nil else {
-                    return
-                }
-                
-                guard let seriesList = seriesList else {
-                    return
-                }
-                
-                switch sortParameter {
-                case .popularity:
-                    self.mostPopularAnimeSeriesList = seriesList
-                case .score:
-                    self.topRatedAnimeSeriesList = seriesList
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        for seriesType in SeriesType.allValues {
+            for sortParameter in AniListClient.SortParameter.allValues {
+                AniListClient.shared.getTopSeries(ofType: seriesType, basedOn: sortParameter, fromYear: nil, amount: 20) { (seriesList, errorMessage) in
+                    guard errorMessage == nil else {
+                        return
+                    }
+                    
+                    guard let seriesList = seriesList else {
+                        return
+                    }
+                    
+                    switch (seriesType, sortParameter) {
+                    case (.anime, .popularity):
+                        DataSource.shared.mostPopularAnimeSeriesList = seriesList
+                    case (.anime, .score):
+                        DataSource.shared.topRatedAnimeSeriesList = seriesList
+                    case (.manga, .popularity):
+                        DataSource.shared.mostPopularMangaSeriesList = seriesList
+                    case (.manga, .score):
+                        DataSource.shared.topRatedMangaSeriesList = seriesList
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
@@ -267,19 +244,23 @@ class HomeViewController: UIViewController {
     func getSeriesList(forCellOfType type: ImagesTableViewCellType) -> [Series] {
         switch type {
         case .currentSeason:
-            return currentSeasonSeriesList
+            return DataSource.shared.currentSeasonSeriesList
         case .continueWatching:
-            return continueWatchingSeriesList
+            return DataSource.shared.continueWatchingSeriesList
         case .continueReading:
-            return continueReadingSeriesList
+            return DataSource.shared.continueReadingSeriesList
         case .recommendations:
-            return recommendationsSeriesList
+            return DataSource.shared.recommendationsSeriesList
         case .mostPopularAnime:
-            return mostPopularAnimeSeriesList
+            return DataSource.shared.mostPopularAnimeSeriesList
         case .topRatedAnime:
-            return topRatedAnimeSeriesList
+            return DataSource.shared.topRatedAnimeSeriesList
+        case .mostPopularManga:
+            return DataSource.shared.mostPopularMangaSeriesList
+        case .topRatedManga:
+            return DataSource.shared.topRatedMangaSeriesList
         default:
-            return currentlyAiringSeriesList
+            return DataSource.shared.currentlyAiringSeriesList
         }
     }
     
@@ -302,159 +283,5 @@ class HomeViewController: UIViewController {
             self.setNeedsStatusBarAppearanceUpdate()
         }
         present(seriesDetailViewController, animated: true, completion: nil)
-    }
-}
-
-
-// MARK: - Table View Delegate
-
-extension HomeViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellTitle: String
-        let cellType: ImagesTableViewCellType
-        
-        if indexPath.row == 0 {
-            cellType = .currentlyAiring
-            cellTitle = "Currently Airing"
-        } else if indexPath.row == 1 {
-            cellType = .currentSeason
-            cellTitle = "Current Season"
-        } else if indexPath.row == 2 {
-            cellType = .mostPopularAnime
-            cellTitle = "Most Popular Anime"
-        } else if indexPath.row == 3 {
-            cellType = .topRatedAnime
-            cellTitle = "Top Rated Anime"
-        } else if indexPath.row == 4 {
-            cellType = .continueWatching
-            cellTitle = "Continue Watching"
-        } else if indexPath.row == 5 {
-            cellType = .continueReading
-            cellTitle = "Continue Reading"
-        } else if indexPath.row == 6 {
-            cellType = .recommendations
-            cellTitle = "Recommendations"
-        } else {
-            return UITableViewCell(frame: CGRect.zero)
-        }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(cellType.rawValue)Cell") as! ImagesTableViewCell
-        cell.type = cellType
-        cell.titleLabel.text = cellTitle
-        
-        cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
-        cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
-        cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
-        
-        cell.imagesCollectionView.dataSource = self
-        cell.imagesCollectionView.delegate = self
-        
-        cell.imagesCollectionView.reloadData()
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
-            let grantType = GrantType(rawValue: grantTypeString) else {
-                return notLoggedInSeriesLists.count
-        }
-        
-        if grantType == .clientCredentials {
-            return notLoggedInSeriesLists.count
-        } else {
-            return allSeriesLists.count
-        }
-    }
-}
-
-
-// MARK: - Collection View Data Source
-
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        
-        cell.imageOverlayView.alpha = 0.6
-        
-        /*
-             Set the cell's type property to the same value as its
-             collection view's table view cell's type property.
-             Note: The first superview property is the table view cell's
-             content view, the second one is the actual table view cell.
-         */
-        guard let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type else {
-            return cell
-        }
-        
-        cell.imagesTableViewCellType = imagesTableViewCellType
-        
-        let seriesList = getSeriesList(forCellOfType: imagesTableViewCellType)
-        
-        // TODO: Just using featured series for testing purposes, replace with
-        // appropriate series
-        guard seriesList.count > 0,
-            seriesList.count > indexPath.row else {
-            return cell
-        }
-        
-        let currentSeries = seriesList[indexPath.row]
-        
-        guard let imageMediumUrl = URL(string: currentSeries.imageMediumUrlString) else {
-                return cell
-        }
-        
-        cell.titleLabel.text = currentSeries.titleForSelectedTitleLanguageSetting
-        UIView.animate(withDuration: 0.25) {
-            cell.titleLabel.alpha = 1.0
-        }
-        
-        if cell.imageView.image == nil {
-            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                collectionView.reloadItems(at: [indexPath])
-            }
-        }
-    
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type else {
-            return 0
-        }
-        
-        let seriesList = getSeriesList(forCellOfType: imagesTableViewCellType)
-        
-        if seriesList.count == 0 {
-            return 20
-        }
-        
-        return seriesList.count
-        
-    }
-}
-
-
-// MARK: - Collection View Delegate
-
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        guard let cellType = cell.imagesTableViewCellType else {
-            return
-        }
-        
-        let seriesList = getSeriesList(forCellOfType: cellType)
-        
-        guard indexPath.row < seriesList.count else {
-            return
-        }
-        
-        let selectedSeries = seriesList[indexPath.row]
-        
-        let seriesTitle = selectedSeries.titleForSelectedTitleLanguageSetting
-        
-        presentSeriesDetail(forSeriesWithId: seriesList[indexPath.row].id, seriesTitle: seriesTitle, seriesType: seriesList[indexPath.row].seriesType)
-        
     }
 }

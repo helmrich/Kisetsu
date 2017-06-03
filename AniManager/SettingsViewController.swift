@@ -11,6 +11,11 @@ import Kingfisher
 
 class SettingsViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    let errorMessageView = ErrorMessageView()
+    
+    
     // MARK: - Outlets and Actions
     
     // MARK: - Outlets
@@ -22,6 +27,8 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        errorMessageView.addToBottom(of: view, withOffsetToBottom: 49.0)
         
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = true
@@ -145,6 +152,31 @@ extension SettingsViewController: UITableViewDelegate {
             } else if currentSettingName.uppercased() == "PREFERRED TITLE LANGUAGE" {
                 let preferredLanguageTableViewController = storyboard?.instantiateViewController(withIdentifier: "preferredLanguageTableViewController") as! PreferredLanguageTableViewController
                 navigationController?.pushViewController(preferredLanguageTableViewController, animated: true)
+            } else if currentSettingName.uppercased() == "FORUM" {
+                if let forumURL = URL(string: Constant.URL.aniListForumRecentUrlString) {
+                    presentWebViewController(with: forumURL)
+                } else {
+                    errorMessageView.showAndHide(withMessage: "Couldn't open forum")
+                }
+            } else if currentSettingName.uppercased() == "USER PROFILE" {
+                AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
+                    guard errorMessage == nil else {
+                        self.errorMessageView.showAndHide(withMessage: errorMessage!)
+                        return
+                    }
+                    
+                    guard let user = user else {
+                        self.errorMessageView.showAndHide(withMessage: "Can't show user profile")
+                        return
+                    }
+                    
+                    if let userProfileURL = URL(string: "https://anilist.co/user/\(user.id)") {
+                        print(userProfileURL)
+                        self.presentWebViewController(with: userProfileURL)
+                    } else {
+                        self.errorMessageView.showAndHide(withMessage: "Can't open user profile")
+                    }
+                }
             }
         }
     }

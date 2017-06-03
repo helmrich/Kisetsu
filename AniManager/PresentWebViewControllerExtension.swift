@@ -7,3 +7,14 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIViewController {
+    func presentWebViewController(with url: URL) {
+        DispatchQueue.main.async {
+            let webViewController = self.storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+            webViewController.url = url
+            self.present(webViewController, animated: true, completion: nil)
+        }
+    }
+}

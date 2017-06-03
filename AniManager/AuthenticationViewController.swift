@@ -99,8 +99,16 @@ class AuthenticationViewController: UIViewController {
             the login button's background color to white
          */
         errorMessageView.addToBottom(of: view)
-        loadingStatusView.frame = view.frame
         loginButton.backgroundColor = .white
+        
+        view.addSubview(loadingStatusView)
+        loadingStatusView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+                NSLayoutConstraint(item: loadingStatusView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: loadingStatusView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: loadingStatusView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0),
+                NSLayoutConstraint(item: loadingStatusView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+            ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,14 +153,5 @@ class AuthenticationViewController: UIViewController {
                 
             }
         }
-    }
-    
-    
-    // MARK: - Functions
-    
-    func presentWebViewController(with url: URL) {
-        let webViewController = storyboard?.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
-        webViewController.url = url
-        present(webViewController, animated: true, completion: nil)
     }
 }

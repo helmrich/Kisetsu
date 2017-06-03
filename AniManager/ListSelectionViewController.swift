@@ -27,7 +27,7 @@ class ListSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,10 +55,10 @@ extension ListSelectionViewController: UITableViewDataSource {
             returned
          */
         guard seriesType == .anime else {
-            return MangaListName.allNames.count
+            return MangaListName.allNameStrings.count
         }
         
-        return AnimeListName.allNames.count
+        return AnimeListName.allNameStrings.count
         
     }
     
@@ -76,15 +76,32 @@ extension ListSelectionViewController: UITableViewDataSource {
             the name from all manga list names
          */
         guard seriesType == .anime else {
-            let currentMangaListName = MangaListName.allNames[indexPath.row]
-            cell.listNameLabel.text = currentMangaListName
+            let currentMangaListNameString = MangaListName.allNameStrings[indexPath.row]
+            cell.listNameLabel.text = currentMangaListNameString
+            if let bannerImageURL = DataSource.shared.getUserListPreviewImageURL(forSeriesType: seriesType, andListNameString: currentMangaListNameString) {
+                cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.25) {
+                            cell.previewImageView.alpha = 1.0
+                        }
+                    }
+                })
+            }
             return cell
         }
         
-        let currentAnimeListName = AnimeListName.allNames[indexPath.row]
-        cell.listNameLabel.text = currentAnimeListName
+        let currentAnimeListNameString = AnimeListName.allNameStrings[indexPath.row]
+        cell.listNameLabel.text = currentAnimeListNameString
+        if let bannerImageURL = DataSource.shared.getUserListPreviewImageURL(forSeriesType: seriesType, andListNameString: currentAnimeListNameString) {
+            cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.25) {
+                        cell.previewImageView.alpha = 1.0
+                    }
+                }
+            })
+        }
         return cell
-        
     }
 }
 
@@ -129,9 +146,9 @@ extension ListSelectionViewController: UITableViewDelegate {
         let fullHeight = tableView.frame.height
         let heightForRow: CGFloat
         if seriesType == .anime {
-            heightForRow = fullHeight / CGFloat(AnimeListName.allNames.count)
+            heightForRow = fullHeight / CGFloat(AnimeListName.allNameStrings.count)
         } else {
-            heightForRow = fullHeight / CGFloat(MangaListName.allNames.count)
+            heightForRow = fullHeight / CGFloat(MangaListName.allNameStrings.count)
         }
         return heightForRow
     }

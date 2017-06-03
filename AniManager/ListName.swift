@@ -15,7 +15,7 @@ enum AnimeListName: String {
     case onHold = "On Hold"
     case dropped = "Dropped"
     
-    static let allNames = [
+    static let allNameStrings = [
             watching.rawValue,
             planToWatch.rawValue,
             completed.rawValue,
@@ -29,6 +29,14 @@ enum AnimeListName: String {
             completed.asKey(),
             onHold.asKey(),
             dropped.asKey()
+    ]
+    
+    static let allValues = [
+        watching,
+        planToWatch,
+        completed,
+        onHold,
+        dropped
     ]
     
     func asKey() -> String {
@@ -54,7 +62,7 @@ enum MangaListName: String {
     case onHold = "On Hold"
     case dropped = "Dropped"
     
-    static let allNames = [
+    static let allNameStrings = [
             reading.rawValue,
             planToRead.rawValue,
             completed.rawValue,
@@ -68,6 +76,14 @@ enum MangaListName: String {
             completed.asKey(),
             onHold.asKey(),
             dropped.asKey()
+    ]
+    
+    static let allValues = [
+        reading,
+        planToRead,
+        completed,
+        onHold,
+        dropped
     ]
     
     func asKey() -> String {

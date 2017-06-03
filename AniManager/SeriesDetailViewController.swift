@@ -353,7 +353,7 @@ class SeriesDetailViewController: UIViewController {
          */
         if seriesType == .anime {
             
-            for animeListName in AnimeListName.allNames {
+            for animeListName in AnimeListName.allNameStrings {
                 let listAction = UIAlertAction(title: animeListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
                     self.listValueChanged()
@@ -361,7 +361,7 @@ class SeriesDetailViewController: UIViewController {
                 listsAlertController.addAction(listAction)
             }
         } else if seriesType == .manga {
-            for mangaListName  in MangaListName.allNames {
+            for mangaListName  in MangaListName.allNameStrings {
                 let listAction = UIAlertAction(title: mangaListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)
                     self.listValueChanged()

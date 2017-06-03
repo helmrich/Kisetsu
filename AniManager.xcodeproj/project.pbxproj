@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D4C6103DD831A32C21686A0 /* Pods_AniManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C702D453F50800361936C81 /* Pods_AniManager.framework */; };
+		D20E26311EDFF96400FC8A95 /* HomeViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */; };
+		D20E26351EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */; };
+		D20E26381EE018E400FC8A95 /* PresentWebViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */; };
 		D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */; };
 		D2180E151E11E6360072B1EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E141E11E6360072B1EF /* CoreDataStack.swift */; };
 		D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */; };
@@ -131,6 +134,9 @@
 		359EE2FA48B512F1E12F68A0 /* Pods-AniManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AniManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-AniManager/Pods-AniManager.release.xcconfig"; sourceTree = "<group>"; };
 		4C702D453F50800361936C81 /* Pods_AniManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AniManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBE03A6AF6B276A5B82BEAD5 /* Pods-AniManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AniManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AniManager/Pods-AniManager.debug.xcconfig"; sourceTree = "<group>"; };
+		D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableView.swift; sourceTree = "<group>"; };
+		D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerCollectionView.swift; sourceTree = "<group>"; };
+		D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentWebViewControllerExtension.swift; sourceTree = "<group>"; };
 		D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
 		D2180E141E11E6360072B1EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AniManager.xcdatamodel; sourceTree = "<group>"; };
@@ -272,6 +278,42 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D20E262D1EDFF90A00FC8A95 /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
+				D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */,
+				D25EDF0C1DEBAFF800267243 /* BrowseFilterViewController.swift */,
+			);
+			name = Browse;
+			sourceTree = "<group>";
+		};
+		D20E262E1EDFF91600FC8A95 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D28306311ED2E80F00C444FC /* HomeViewController.swift */,
+				D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */,
+				D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		D20E262F1EDFF91F00FC8A95 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D21EC77A1E07271C008027E4 /* SearchViewController.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		D20E26361EE018C400FC8A95 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		D2180E131E11E6280072B1EF /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +388,7 @@
 		D25EDE9D1DDF8FFA00267243 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D20E26361EE018C400FC8A95 /* Extensions */,
 				D2A78DA81E12EF2B00F45CF9 /* Series Detail View Controller */,
 				D25EDF061DE8ECC400267243 /* Authentication */,
 				D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */,
@@ -458,13 +501,11 @@
 		D25EDF071DE8ECE200267243 /* Tab Bar Main View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D20E262F1EDFF91F00FC8A95 /* Search */,
+				D20E262E1EDFF91600FC8A95 /* Home */,
+				D20E262D1EDFF90A00FC8A95 /* Browse */,
 				D2C9BFA31E1AFE8200AD1060 /* Settings */,
-				D2F32C611DFCD16E0044D195 /* List Controllers */,
-				D25EDED31DE4DE3300267243 /* BrowseViewController.swift */,
-				D2A78DA91E1329DC00F45CF9 /* BrowseViewControllerCollectionViewDataSource.swift */,
-				D25EDF0C1DEBAFF800267243 /* BrowseFilterViewController.swift */,
-				D21EC77A1E07271C008027E4 /* SearchViewController.swift */,
-				D28306311ED2E80F00C444FC /* HomeViewController.swift */,
+				D2F32C611DFCD16E0044D195 /* List */,
 			);
 			name = "Tab Bar Main View Controllers";
 			sourceTree = "<group>";
@@ -667,7 +708,7 @@
 			name = Genre;
 			sourceTree = "<group>";
 		};
-		D2F32C611DFCD16E0044D195 /* List Controllers */ = {
+		D2F32C611DFCD16E0044D195 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				D2F32C591DFCCFFB0044D195 /* AnimeListSelectionViewController.swift */,
@@ -676,7 +717,7 @@
 				D2F32C701DFEDDBA0044D195 /* ListDetailViewController.swift */,
 				D2AB60281ECD5E3500243C3A /* ListPageViewController.swift */,
 			);
-			name = "List Controllers";
+			name = List;
 			sourceTree = "<group>";
 		};
 		D2F32C671DFCE1E20044D195 /* List Names Table View */ = {
@@ -883,6 +924,7 @@
 				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
 				D25EDEE51DE5161900267243 /* LoadingViewController.swift in Sources */,
 				D2C9BF951E181BF500AD1060 /* ImageExtension.swift in Sources */,
+				D20E26381EE018E400FC8A95 /* PresentWebViewControllerExtension.swift in Sources */,
 				D2786F8C1DF39C9200F4368F /* Studio.swift in Sources */,
 				D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */,
 				D2341CD21DF74793004773B3 /* ImagesTableViewCell.swift in Sources */,
@@ -910,6 +952,7 @@
 				D2CE68351E265416005C4931 /* SettingSelectionTableViewCell.swift in Sources */,
 				D25EDED81DE4E64600267243 /* ColorExtension.swift in Sources */,
 				D22740881DFA34A900C3E776 /* ExternalLinksTableViewCell.swift in Sources */,
+				D20E26311EDFF96400FC8A95 /* HomeViewControllerTableView.swift in Sources */,
 				D25EDEFF1DE78B7900267243 /* Season.swift in Sources */,
 				D25EDEBF1DE2515C00267243 /* AniListConstant.swift in Sources */,
 				D22198001E0ADC1400B6F20A /* PayloadConstant.swift in Sources */,
@@ -929,6 +972,7 @@
 				D25EDEFD1DE76DCE00267243 /* MediaStatus.swift in Sources */,
 				D2786F9D1DF5F3EC00F4368F /* AdditionalInformationsValueLabel.swift in Sources */,
 				D2AB60291ECD5E3500243C3A /* ListPageViewController.swift in Sources */,
+				D20E26351EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift in Sources */,
 				D22198041E0ADCE500B6F20A /* HeaderFieldConstant.swift in Sources */,
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 				D2786FA51DF5FD1D00F4368F /* VideoTableViewCell.swift in Sources */,

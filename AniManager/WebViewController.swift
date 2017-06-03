@@ -51,8 +51,13 @@ class WebViewController: UIViewController {
         
         errorMessageView.addToBottom(of: view)
         view.addSubview(loadingStatusView)
-        let loadingStatusViewFrame = CGRect(x: view.frame.origin.x, y: toolbar.frame.maxY, width: view.frame.width, height: view.frame.height)
-        loadingStatusView.frame = loadingStatusViewFrame
+        loadingStatusView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            NSLayoutConstraint(item: loadingStatusView, attribute: .top, relatedBy: .equal, toItem: toolbar, attribute: .bottom, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: loadingStatusView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: loadingStatusView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: loadingStatusView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0)
+            ])
         toolbar.clipsToBounds = true
     }
     

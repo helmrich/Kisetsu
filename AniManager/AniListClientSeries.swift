@@ -107,19 +107,19 @@ extension AniListClient {
         }
     }
     
-    func getTopSeries(basedOn sortParameter: SortParameter = .popularity, fromYear year: Int?, amount: Int = 5, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getTopSeries(ofType type: SeriesType, basedOn sortParameter: SortParameter = .popularity, fromYear year: Int?, amount: Int = 5, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         var browseParameters: [String:Any] = [String:Any]()
         switch sortParameter {
         case .score:
             browseParameters[AniListConstant.ParameterKey.Browse.sort] = AniListConstant.ParameterValue.Browse.Sort.Score.descending
-        default:
+        case .popularity:
             browseParameters[AniListConstant.ParameterKey.Browse.sort] = AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
         }
         if let year = year {
             browseParameters[AniListConstant.ParameterKey.Browse.year] = year
         }
         
-        AniListClient.shared.getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
+        AniListClient.shared.getSeriesList(ofType: type, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
             guard errorMessage == nil else {
                 completionHandlerForSeriesList(nil, errorMessage!)
                 return

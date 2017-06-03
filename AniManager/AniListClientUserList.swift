@@ -35,7 +35,7 @@ extension AniListClient {
                 Try to get an array of series dictionaries for the specified status
              */
             guard let statusList = allStatusListsDictionary[status] as? [[String:Any]] else {
-                completionHandlerForList(nil, "Couldn't get series list from dictionary")
+                completionHandlerForList(nil, "Couldn't get status list from dictionary")
                 return
             }
             

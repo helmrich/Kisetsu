@@ -122,7 +122,7 @@
                             <constraint firstAttribute="height" constant="50" id="9TB-Xg-fMf"/>
                         </constraints>
                     </stackView>
-                    <stackView hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="f6n-Dh-igt">
+                    <stackView opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="f6n-Dh-igt">
                         <rect key="frame" x="54" y="140" width="268" height="50"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cap-DW-Xib">

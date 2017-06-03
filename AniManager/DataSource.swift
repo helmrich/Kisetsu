@@ -12,17 +12,58 @@ class DataSource {
     
     // MARK: - Properties
     
-    // Singleton
+    // MARK: - Singleton
     static let shared = DataSource()
     fileprivate init() {}
     
-    // Series Detail
+    // MARK: - Series Detail
     var selectedSeries: Series? = nil
     
-    // Genres
+    // MARK: - Genres
     var genres = [String]()
     
-    // Browse
+    // MARK: - Home
+    var currentlyAiringSeriesList = [Series]()
+    var currentSeasonSeriesList = [Series]()
+    var continueWatchingSeriesList = [Series]()
+    var continueReadingSeriesList = [Series]()
+    var recommendationsSeriesList = [Series]()
+    var mostPopularAnimeSeriesList = [Series]()
+    var topRatedAnimeSeriesList = [Series]()
+    
+    var mostPopularMangaSeriesList = [Series]() {
+        didSet {
+            mostPopularMangaSeriesList.forEach { print($0.seriesType) }
+        }
+    }
+    var topRatedMangaSeriesList = [Series]()
+    
+    var allSeriesLists: [[Series]] {
+        return [
+            currentlyAiringSeriesList,
+            currentSeasonSeriesList,
+            mostPopularAnimeSeriesList,
+            topRatedAnimeSeriesList,
+            mostPopularMangaSeriesList,
+            topRatedMangaSeriesList,
+            continueWatchingSeriesList,
+            continueReadingSeriesList,
+//            recommendationsSeriesList
+        ]
+    }
+    
+    var notLoggedInSeriesLists: [[Series]] {
+        return [
+            currentlyAiringSeriesList,
+            currentSeasonSeriesList,
+            mostPopularAnimeSeriesList,
+            topRatedAnimeSeriesList,
+            mostPopularMangaSeriesList,
+            topRatedMangaSeriesList
+        ]
+    }
+    
+    // MARK: - Browse
     var browseFilters: [[String:[Any]]] = [
         ["Sort By": ["Score", "Popularity"]],
         ["Season": Season.allSeasonStrings],
@@ -44,14 +85,26 @@ class DataSource {
     ]
     var browseSeriesList: [Series]? = nil
     
-    // Search
+    // MARK: - Search
     var searchResultsSeriesList: [Series]? = nil
     
-    // Lists
+    // MARK: - Lists
     var selectedAnimeList: [AnimeSeries]? = nil
     var selectedMangaList: [MangaSeries]? = nil
     
-    // Settings
+    var animeWatchingList = [Series]()
+    var animePlanToWatchList = [Series]()
+    var animeCompletedList = [Series]()
+    var animeOnHoldList = [Series]()
+    var animeDroppedList = [Series]()
+    
+    var mangaReadingList = [Series]()
+    var mangaPlanToReadList = [Series]()
+    var mangaCompletedList = [Series]()
+    var mangaOnHoldList = [Series]()
+    var mangaDroppedList = [Series]()
+    
+    // MARK: - Settings
     var settings: [[String:[String]]] = [
         ["Content": [
                     "Show Explicit Content",
@@ -62,7 +115,11 @@ class DataSource {
         ]],
         ["Advanced": ["Clear Disk Image Cache"]],
         ["Feedback": ["Send Feedback"]],
-        ["Account": ["Logout"]]
+        ["AniList": ["Forum"]],
+        ["Account": [
+                    "User Profile",
+                    "Logout"
+        ]]
     ]
     
     
@@ -185,5 +242,56 @@ class DataSource {
             }
         }
         return genreParameterString
+    }
+    
+    func getUserListPreviewImageURL(forSeriesType seriesType: SeriesType, andListNameString listNameString: String) -> URL? {
+        
+        let seriesListForPreviewImage: [Series]
+        
+        switch seriesType {
+        case .anime:
+            guard let listName = AnimeListName(rawValue: listNameString) else {
+                return nil
+            }
+            
+            switch listName {
+            case .watching:
+                seriesListForPreviewImage = animeWatchingList
+            case .planToWatch:
+                seriesListForPreviewImage = animePlanToWatchList
+            case .completed:
+                seriesListForPreviewImage = animeCompletedList
+            case .onHold:
+                seriesListForPreviewImage = animeOnHoldList
+            case .dropped:
+                seriesListForPreviewImage = animeDroppedList
+            }
+        case .manga:
+            guard let listName = MangaListName(rawValue: listNameString) else {
+                return nil
+            }
+            
+            switch listName {
+            case .reading:
+                seriesListForPreviewImage = mangaReadingList
+            case .planToRead:
+                seriesListForPreviewImage = mangaPlanToReadList
+            case .completed:
+                seriesListForPreviewImage = mangaCompletedList
+            case .onHold:
+                seriesListForPreviewImage = mangaOnHoldList
+            case .dropped:
+                seriesListForPreviewImage = mangaDroppedList
+            }
+        }
+        
+        for series in seriesListForPreviewImage {
+            if let imageBannerUrlString = series.imageBannerUrlString,
+                let imageBannerUrl = URL(string: imageBannerUrlString) {
+                return imageBannerUrl
+            }
+        }
+        
+        return nil
     }
 }

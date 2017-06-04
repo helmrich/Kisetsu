@@ -12,8 +12,8 @@ struct Actor {
     let id: Int
     let firstName: String?
     let lastName: String?
-    let imageMediumUrlString: String?
-    let imageLargeUrlString: String?
+    let imageMediumURLString: String?
+    let imageLargeURLString: String?
     let language: String?
     
 //    let characters: [Character]?
@@ -44,16 +44,16 @@ struct Actor {
             self.language = nil
         }
         
-        if let imageMediumUrlString = dictionary[actorKey.imageMediumUrl] as? String {
-            self.imageMediumUrlString = imageMediumUrlString
+        if let imageMediumURLString = dictionary[actorKey.imageMediumURL] as? String {
+            self.imageMediumURLString = imageMediumURLString
         } else {
-            self.imageMediumUrlString = nil
+            self.imageMediumURLString = nil
         }
         
-        if let imageLargeUrlString = dictionary[actorKey.imageLargeUrl] as? String {
-            self.imageLargeUrlString = imageLargeUrlString
+        if let imageLargeURLString = dictionary[actorKey.imageLargeURL] as? String {
+            self.imageLargeURLString = imageLargeURLString
         } else {
-            self.imageLargeUrlString = nil
+            self.imageLargeURLString = nil
         }
     }
 }

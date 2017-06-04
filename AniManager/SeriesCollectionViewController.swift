@@ -43,7 +43,7 @@ class SeriesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        errorMessageView.addToBottom(of: view, withOffsetToBottom: 49.0)
+        errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = true
     }

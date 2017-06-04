@@ -181,9 +181,9 @@ class CharacterDetailViewController: UIViewController {
         
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
         
-        if let imageLargeUrlString = character.imageLargeUrlString,
-            let imageLargeUrl = URL(string: imageLargeUrlString) {
-            characterImageView.kf.setImage(with: imageLargeUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: characterImageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+        if let imageLargeURLString = character.imageLargeURLString,
+            let imageLargeURL = URL(string: imageLargeURLString) {
+            characterImageView.kf.setImage(with: imageLargeURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: characterImageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             }
         }

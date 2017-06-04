@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = true
         
-        errorMessageView.addToBottom(of: view, withOffsetToBottom: 49.0)
+        errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         
         // Add observer for the "settingValueChanged" notification
         NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)

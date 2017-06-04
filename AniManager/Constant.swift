@@ -11,8 +11,8 @@ import Foundation
 struct Constant {
     struct URL {
         static let aniListSignUpString = "https://anilist.co/register"
-        static let aniListForgotPasswordUrlString = "https://anilist.co/forgot"
-        static let aniListForumRecentUrlString = "https://anilist.co/forum/recent"
+        static let aniListForgotPasswordURLString = "https://anilist.co/forgot"
+        static let aniListForumRecentURLString = "https://anilist.co/forum/recent"
     }
     
     struct FontName {

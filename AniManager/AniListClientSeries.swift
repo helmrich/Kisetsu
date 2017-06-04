@@ -37,12 +37,12 @@ extension AniListClient {
                 allParameters[AniListConstant.ParameterKey.Browse.page] = page
             }
             
-            guard let url = self.createAniListUrl(withPath: path, andParameters: allParameters) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: allParameters) else {
                 completionHandlerForSeriesList(nil, nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -137,9 +137,9 @@ extension AniListClient {
             
             let filteredSeriesList: [Series]
             if UserDefaults.standard.bool(forKey: "showExplicitContent") {
-                filteredSeriesList = seriesList.filter { $0.imageBannerUrlString != nil }
+                filteredSeriesList = seriesList.filter { $0.imageBannerURLString != nil }
             } else {
-                filteredSeriesList = nonAdultSeriesList.filter { $0.imageBannerUrlString != nil }
+                filteredSeriesList = nonAdultSeriesList.filter { $0.imageBannerURLString != nil }
             }
             
             let topSeriesList = Array(filteredSeriesList.prefix(amount))
@@ -189,6 +189,7 @@ extension AniListClient {
     
     func getCurrentlyAiringAnime(amount: Int = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
         let browseParameters: [String:Any] = [
+            AniListConstant.ParameterKey.Browse.airingData: "true",
             AniListConstant.ParameterKey.Browse.status: AnimeAiringStatus.currentlyAiring.rawValue,
             AniListConstant.ParameterKey.Browse.fullPage: amount > 40 ? "true" : "false",
             AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
@@ -245,12 +246,12 @@ extension AniListClient {
             
             let path = self.replacePlaceholders(inPath: AniListConstant.Path.SeriesGet.pageSeriesModel, withReplacingPairs: replacingPairs)
             
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForSeries(nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -324,12 +325,12 @@ extension AniListClient {
                 AniListConstant.Path.Placeholder.id: "\(id)"
             ]
             let path = self.replacePlaceholders(inPath: AniListConstant.Path.CharacterGet.pageCharacterModel, withReplacingPairs: replacingPairs)
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForCharacterPageModel(nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -369,12 +370,12 @@ extension AniListClient {
                 return
             }
          
-            guard let url = self.createAniListUrl(withPath: AniListConstant.Path.SeriesGet.genreList, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: AniListConstant.Path.SeriesGet.genreList, andParameters: [:]) else {
                 completionHandlerForGenreList(nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
@@ -401,9 +402,9 @@ extension AniListClient {
                     }
                 }
                 
-                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let fileUrl = documentsUrl.appendingPathComponent("genres.plist")
-                (genreList as NSArray).write(to: fileUrl, atomically: true)
+                let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let fileURL = documentsURL.appendingPathComponent("genres.plist")
+                (genreList as NSArray).write(to: fileURL, atomically: true)
                 
                 completionHandlerForGenreList(genreList, nil)
                 
@@ -447,7 +448,7 @@ extension AniListClient {
             }
             
             // URL creation and request configuration
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForFavoriting("Couldn't create AniList URL")
                 return
             }

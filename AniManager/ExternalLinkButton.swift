@@ -12,7 +12,7 @@ class ExternalLinkButton: AniManagerButton {
 
     // MARK: - Properties
     
-    var siteUrlString: String?
+    var siteURLString: String?
 
     
     // MARK: - Initializers
@@ -33,11 +33,11 @@ class ExternalLinkButton: AniManagerButton {
     
     func openWebsite() {
         /*
-            Check if the button's siteUrlString property was set
+            Check if the button's siteURLString property was set
             and create a string from the URL and open it in the
             device's browser if it was
          */
-        if let urlString = siteUrlString,
+        if let urlString = siteURLString,
             let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }

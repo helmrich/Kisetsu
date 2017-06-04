@@ -212,10 +212,10 @@ class FeaturedSlider: UIView {
             return
         }
         
-        if let imageBannerUrlString = currentlySelectedSeries.imageBannerUrlString,
-            let imageBannerUrl = URL(string: imageBannerUrlString) {
+        if let imageBannerURLString = currentlySelectedSeries.imageBannerURLString,
+            let imageBannerURL = URL(string: imageBannerURLString) {
             DispatchQueue.main.async {
-                self.imageView.kf.setImage(with: imageBannerUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
+                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
             }
         }
     }

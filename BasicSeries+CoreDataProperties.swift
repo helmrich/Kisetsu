@@ -19,7 +19,7 @@ extension BasicSeries {
     @NSManaged public var averageScore: Double
     @NSManaged public var coverImageData: NSData?
     @NSManaged public var id: Int32
-    @NSManaged public var imageMediumUrlString: String?
+    @NSManaged public var imageMediumURLString: String?
     @NSManaged public var isAdult: Bool
     @NSManaged public var popularity: Int32
     @NSManaged public var seriesType: String?

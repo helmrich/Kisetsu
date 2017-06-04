@@ -10,5 +10,5 @@ import Foundation
 
 struct Staff {
     let name: String
-    let imageUrlString: String?
+    let imageURLString: String?
 }

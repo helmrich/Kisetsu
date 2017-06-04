@@ -20,14 +20,14 @@ class Series {
     let isAdult: Bool
     let averageScore: Double
     let popularity: Int
-    let imageMediumUrlString: String
-    let imageLargeUrlString: String
+    let imageMediumURLString: String
+    let imageLargeURLString: String
     
     // Not in small model
     let seasonId: Int?
     let description: String?
     let favorite: Bool?
-    let imageBannerUrlString: String?
+    let imageBannerURLString: String?
     let tags: [Tag]?
     
     // Additional informations
@@ -115,8 +115,8 @@ class Series {
                 let isAdult = dictionary[SeriesKey.adult] as? Bool,
                 let averageScore = dictionary[SeriesKey.averageScore] as? Double,
                 let popularity = dictionary[SeriesKey.popularity] as? Int,
-                let imageMediumUrlString = dictionary[SeriesKey.imageMediumUrl] as? String,
-                let imageLargeUrlString = dictionary[SeriesKey.imageLargeUrl] as? String else {
+                let imageMediumURLString = dictionary[SeriesKey.imageMediumURL] as? String,
+                let imageLargeURLString = dictionary[SeriesKey.imageLargeURL] as? String else {
                     return nil
         }
         
@@ -140,8 +140,8 @@ class Series {
         self.isAdult = isAdult
         self.averageScore = averageScore
         self.popularity = popularity
-        self.imageMediumUrlString = imageMediumUrlString
-        self.imageLargeUrlString = imageLargeUrlString
+        self.imageMediumURLString = imageMediumURLString
+        self.imageLargeURLString = imageLargeURLString
         
         /* 
             Extract and set all values (if there are ones) that are
@@ -166,10 +166,10 @@ class Series {
             self.favorite = nil
         }
         
-        if let imageBannerUrlString = dictionary[SeriesKey.imageBannerUrl] as? String {
-            self.imageBannerUrlString = imageBannerUrlString
+        if let imageBannerURLString = dictionary[SeriesKey.imageBannerURL] as? String {
+            self.imageBannerURLString = imageBannerURLString
         } else {
-            self.imageBannerUrlString = nil
+            self.imageBannerURLString = nil
         }
         
         if let tagDictionaries = dictionary[SeriesKey.tags] as? [[String:Any]],

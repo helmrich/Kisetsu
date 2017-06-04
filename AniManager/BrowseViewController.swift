@@ -260,7 +260,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 basicSeries.titleJapanese = series.titleJapanese
                 basicSeries.averageScore = series.averageScore
                 basicSeries.popularity = Int32(series.popularity)
-                basicSeries.imageMediumUrlString = series.imageMediumUrlString
+                basicSeries.imageMediumURLString = series.imageMediumURLString
                 basicSeries.seriesType = series.seriesType.rawValue
                 basicSeries.isAdult = series.isAdult
                 self.browseList!.addToBasicSeries(basicSeries)
@@ -370,7 +370,7 @@ class BrowseViewController: SeriesCollectionViewController {
                     basicSeries.titleJapanese = series.titleJapanese
                     basicSeries.averageScore = series.averageScore
                     basicSeries.popularity = Int32(series.popularity)
-                    basicSeries.imageMediumUrlString = series.imageMediumUrlString
+                    basicSeries.imageMediumURLString = series.imageMediumURLString
                     basicSeries.seriesType = series.seriesType.rawValue
                     basicSeries.isAdult = series.isAdult
                     self.browseList?.addToBasicSeries(basicSeries)

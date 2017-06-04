@@ -48,13 +48,13 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
                 return cell
             }
             
-            guard let imageMediumUrlString = characters[indexPath.row].imageMediumUrlString,
-                let imageMediumUrl = URL(string: imageMediumUrlString) else {
+            guard let imageMediumURLString = characters[indexPath.row].imageMediumURLString,
+                let imageMediumURL = URL(string: imageMediumURLString) else {
                     return cell
             }
             
             if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                cell.imageView.kf.setImage(with: imageMediumURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     // TODO: App is crashing here sometimes:
                     // attempt to delete item 1 from section 0 which only contains 0 items before the update
                     collectionView.reloadItems(at: [indexPath])
@@ -85,14 +85,14 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             }
             cell.seriesType = currentRelationSeriesType
             
-            let imageMediumUrlString = currentRelation.imageMediumUrlString
+            let imageMediumURLString = currentRelation.imageMediumURLString
             
-            guard let imageMediumUrl = URL(string: imageMediumUrlString) else {
+            guard let imageMediumURL = URL(string: imageMediumURLString) else {
                     return cell
             }
             
             if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     collectionView.reloadItems(at: [indexPath])
                 }
             }

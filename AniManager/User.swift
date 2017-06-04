@@ -11,13 +11,13 @@ import Foundation
 struct User {
     let id: Int
     let displayName: String
-    let imageMediumUrlString: String
-    let imageLargeUrlString: String
+    let imageMediumURLString: String
+    let imageLargeURLString: String
     let animeTime: Int?
     let readMangaChapters: Int?
     let about: String?
     let adultContent: Bool?
-    let imageBannerUrlString: String?
+    let imageBannerURLString: String?
     let advancedRating: Bool?
     let advancedRatingNames: [String:[String]]?
     let scoreType: Int?
@@ -28,15 +28,15 @@ struct User {
         
         guard let id = dictionary[UserResponseKey.id] as? Int,
         let displayName = dictionary[UserResponseKey.about] as? String,
-        let imageMediumUrlString = dictionary[UserResponseKey.imageMediumUrl] as? String,
-            let imageLargeUrlString = dictionary[UserResponseKey.imageLargeUrl] as? String else {
+        let imageMediumURLString = dictionary[UserResponseKey.imageMediumURL] as? String,
+            let imageLargeURLString = dictionary[UserResponseKey.imageLargeURL] as? String else {
                 return nil
         }
         
         self.id = id
         self.displayName = displayName
-        self.imageMediumUrlString = imageMediumUrlString
-        self.imageLargeUrlString = imageLargeUrlString
+        self.imageMediumURLString = imageMediumURLString
+        self.imageLargeURLString = imageLargeURLString
         
         if let animeTime = dictionary[UserResponseKey.animeTime] as? Int {
             self.animeTime = animeTime
@@ -62,10 +62,10 @@ struct User {
             self.adultContent = nil
         }
         
-        if let imageBannerUrlString = dictionary[UserResponseKey.imageBannerUrl] as? String {
-            self.imageBannerUrlString = imageBannerUrlString
+        if let imageBannerURLString = dictionary[UserResponseKey.imageBannerURL] as? String {
+            self.imageBannerURLString = imageBannerURLString
         } else {
-            self.imageBannerUrlString = nil
+            self.imageBannerURLString = nil
         }
         
         if let advancedRating = dictionary[UserResponseKey.advancedRating] as? Bool {

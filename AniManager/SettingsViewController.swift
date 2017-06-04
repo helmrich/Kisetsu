@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        errorMessageView.addToBottom(of: view, withOffsetToBottom: 49.0)
+        errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = true
@@ -153,7 +153,7 @@ extension SettingsViewController: UITableViewDelegate {
                 let preferredLanguageTableViewController = storyboard?.instantiateViewController(withIdentifier: "preferredLanguageTableViewController") as! PreferredLanguageTableViewController
                 navigationController?.pushViewController(preferredLanguageTableViewController, animated: true)
             } else if currentSettingName.uppercased() == "FORUM" {
-                if let forumURL = URL(string: Constant.URL.aniListForumRecentUrlString) {
+                if let forumURL = URL(string: Constant.URL.aniListForumRecentURLString) {
                     presentWebViewController(with: forumURL)
                 } else {
                     errorMessageView.showAndHide(withMessage: "Couldn't open forum")

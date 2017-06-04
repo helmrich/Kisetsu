@@ -135,10 +135,10 @@ class DataSource {
         retrieved genres
      */
     func getGenres() {
-        let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let fileUrl = documentsUrl.appendingPathComponent("genres.plist")
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsURL.appendingPathComponent("genres.plist")
         
-        if let genresFromFile = NSArray(contentsOf: fileUrl) as? [String],
+        if let genresFromFile = NSArray(contentsOf: fileURL) as? [String],
             genresFromFile.count > 0 {
             genres = genresFromFile
             
@@ -286,9 +286,9 @@ class DataSource {
         }
         
         for series in seriesListForPreviewImage {
-            if let imageBannerUrlString = series.imageBannerUrlString,
-                let imageBannerUrl = URL(string: imageBannerUrlString) {
-                return imageBannerUrl
+            if let imageBannerURLString = series.imageBannerURLString,
+                let imageBannerURL = URL(string: imageBannerURLString) {
+                return imageBannerURL
             }
         }
         

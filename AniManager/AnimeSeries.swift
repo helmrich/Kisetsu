@@ -100,6 +100,7 @@ class AnimeSeries: Series {
             let countdownUntilNextEpisodeInSeconds = airingInformations[AniListConstant.ResponseKey.AnimeSeries.airingCountdownUntilNextEpisodeInSeconds] as? Int,
             let nextEpisodeNumber = airingInformations[AniListConstant.ResponseKey.AnimeSeries.airingNextEpisodeNumber] as? Int {
             self.countdownUntilNextEpisodeInSeconds = countdownUntilNextEpisodeInSeconds
+            print("Next airing in \(countdownUntilNextEpisodeInSeconds / 3600 / 24) days")
             self.nextEpisodeNumber = nextEpisodeNumber
         } else {
             self.countdownUntilNextEpisodeInSeconds = nil

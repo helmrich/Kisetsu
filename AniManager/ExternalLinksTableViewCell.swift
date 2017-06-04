@@ -57,7 +57,7 @@ class ExternalLinksTableViewCell: UITableViewCell {
             // Create and configure a button and append it to the array of buttons
             let button = ExternalLinkButton()
             button.setTitle(externalLink.siteName, for: .normal)
-            button.siteUrlString = externalLink.siteUrlString
+            button.siteURLString = externalLink.siteURLString
             button.translatesAutoresizingMaskIntoConstraints = false
             buttons.append(button)
             

@@ -21,12 +21,12 @@ extension AniListClient {
             
             // URL creation and request configuration
             
-            guard let url = self.createAniListUrl(withPath: AniListConstant.Path.UserGet.authenticatedUserModel, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: AniListConstant.Path.UserGet.authenticatedUserModel, andParameters: [:]) else {
                 completionHandlerForUser(nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -100,7 +100,7 @@ extension AniListClient {
         
         // URL creation and request configuration
         
-        guard let url = createAniListUrl(withPath: AniListConstant.Path.Authentication.accessToken, andParameters: parameters) else {
+        guard let url = createAniListURL(withPath: AniListConstant.Path.Authentication.accessToken, andParameters: parameters) else {
             completionHandlerForTokens(nil, nil, "Couldn't create AniList URL")
             return
         }

@@ -40,7 +40,7 @@ extension AniListClient {
         that are needed to access the resource server on the resource
         owner's behalf to the belonging HTTP header fields
      */
-    func createDefaultRequest(withUrl url: URL) -> NSMutableURLRequest {
+    func createDefaultRequest(withURL url: URL) -> NSMutableURLRequest {
         // Create request from URL
         let request = NSMutableURLRequest(url: url)
         
@@ -58,7 +58,7 @@ extension AniListClient {
      URL of the AniList API, a query string will be created from the parameters
      and assigned to the URLComponents' object's queryItems property (if there were parameters)
      */
-    func createAniListUrl(withPath path: String, andParameters parameters: [String:Any]) -> URL? {
+    func createAniListURL(withPath path: String, andParameters parameters: [String:Any]) -> URL? {
         var urlComponents = URLComponents()
         urlComponents.scheme = AniListConstant.URL.scheme
         urlComponents.host = AniListConstant.URL.host

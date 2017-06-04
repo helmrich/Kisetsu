@@ -144,12 +144,12 @@ extension AniListClient {
             }
             
             // Create a URL with the path and create a request with it
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForLists(nil, "Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
                 
@@ -326,7 +326,7 @@ extension AniListClient {
                 return
             }
             
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForSubmission("Couldn't create AniList URL")
                 return
             }
@@ -394,12 +394,12 @@ extension AniListClient {
                 return
             }
             
-            guard let url = self.createAniListUrl(withPath: path, andParameters: [:]) else {
+            guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
                 completionHandlerForDeletion("Couldn't create AniList URL")
                 return
             }
             
-            let request = self.createDefaultRequest(withUrl: url)
+            let request = self.createDefaultRequest(withURL: url)
             request.httpMethod = "DELETE"
             
             let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in

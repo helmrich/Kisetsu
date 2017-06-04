@@ -10,17 +10,17 @@ import Foundation
 
 struct ExternalLink {
     let siteName: String
-    let siteUrlString: String
+    let siteURLString: String
     
     typealias ExternalLinkKey = AniListConstant.ResponseKey.ExternalLink
     
     init?(fromDictionary dictionary: [String:Any]) {
         guard let siteName = dictionary[ExternalLinkKey.site] as? String,
-            let siteUrlString = dictionary[ExternalLinkKey.url] as? String else {
+            let siteURLString = dictionary[ExternalLinkKey.url] as? String else {
                 return nil
         }
         
         self.siteName = siteName
-        self.siteUrlString = siteUrlString
+        self.siteURLString = siteURLString
     }
 }

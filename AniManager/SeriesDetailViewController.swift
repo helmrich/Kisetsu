@@ -228,7 +228,7 @@ class SeriesDetailViewController: UIViewController {
             }
             
             // Check if the series has an URL string for a banner image
-            guard let bannerImageURLString = series.imageBannerUrlString,
+            guard let bannerImageURLString = series.imageBannerURLString,
                 let bannerImageURL = URL(string: bannerImageURLString) else {
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 return

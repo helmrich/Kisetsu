@@ -15,8 +15,8 @@ struct Character {
     let japaneseName: String?
     let info: String?
     let role: String?
-    let imageMediumUrlString: String?
-    let imageLargeUrlString: String?
+    let imageMediumURLString: String?
+    let imageLargeURLString: String?
     let actor: Actor?
     let isFavorite: Bool?
     
@@ -58,16 +58,16 @@ struct Character {
             self.role = nil
         }
         
-        if let imageMediumUrlString = dictionary[characterKey.imageMediumUrl] as? String {
-            self.imageMediumUrlString = imageMediumUrlString
+        if let imageMediumURLString = dictionary[characterKey.imageMediumURL] as? String {
+            self.imageMediumURLString = imageMediumURLString
         } else {
-            self.imageMediumUrlString = nil
+            self.imageMediumURLString = nil
         }
         
-        if let imageLargeUrlString = dictionary[characterKey.imageLargeUrl] as? String {
-            self.imageLargeUrlString = imageLargeUrlString
+        if let imageLargeURLString = dictionary[characterKey.imageLargeURL] as? String {
+            self.imageLargeURLString = imageLargeURLString
         } else {
-            self.imageLargeUrlString = nil
+            self.imageLargeURLString = nil
         }
         
         if let favourite = dictionary[characterKey.favourite] as? Bool {

@@ -40,8 +40,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
             
-            if let imageLargeUrl = URL(string: series.imageLargeUrlString) {
-                cell.seriesCoverImageView.kf.setImage(with: imageLargeUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: CGSize(width: 125.0, height: 177.0)), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+            if let imageLargeURL = URL(string: series.imageLargeURLString) {
+                cell.seriesCoverImageView.kf.setImage(with: imageLargeURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: CGSize(width: 125.0, height: 177.0)), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 }
             } else {

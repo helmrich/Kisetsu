@@ -30,7 +30,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-T7-RiS">
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac5-1H-nYH">
+                        <rect key="frame" x="5" y="0.0" width="90" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="WPM-yw-c8v"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="uW2-hG-hTa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-T7-RiS">
                         <rect key="frame" x="5" y="52" width="90" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="73X-qW-q59"/>
@@ -44,10 +54,13 @@
             </view>
             <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="ac5-1H-nYH" secondAttribute="trailing" constant="5" id="Bcf-wI-p8u"/>
                 <constraint firstItem="lUy-VX-JoE" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" id="H5y-aO-juJ"/>
                 <constraint firstAttribute="trailing" secondItem="kAj-Ms-Mq9" secondAttribute="trailing" id="Hae-Hs-nBK"/>
                 <constraint firstItem="lUy-VX-JoE" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="I9E-hQ-OgG"/>
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="Lhk-mg-cSB"/>
+                <constraint firstItem="ac5-1H-nYH" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" constant="5" id="P16-lb-ZVu"/>
+                <constraint firstItem="ac5-1H-nYH" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="UT5-i2-RVQ"/>
                 <constraint firstAttribute="trailing" secondItem="lUy-VX-JoE" secondAttribute="trailing" id="WM0-7X-4KK"/>
                 <constraint firstAttribute="bottom" secondItem="lUy-VX-JoE" secondAttribute="bottom" id="bgd-x4-BWi"/>
                 <constraint firstAttribute="bottom" secondItem="Vxf-T7-RiS" secondAttribute="bottom" constant="3" id="fYF-nT-CL4"/>
@@ -63,6 +76,7 @@
             <connections>
                 <outlet property="imageOverlayView" destination="lUy-VX-JoE" id="JCE-Pl-HHk"/>
                 <outlet property="imageView" destination="kAj-Ms-Mq9" id="Ph4-fH-dR0"/>
+                <outlet property="nextEpisodeLabel" destination="ac5-1H-nYH" id="gMP-NJ-zFG"/>
                 <outlet property="titleLabel" destination="Vxf-T7-RiS" id="TdZ-7T-kpx"/>
             </connections>
             <point key="canvasLocation" x="-168" y="15"/>

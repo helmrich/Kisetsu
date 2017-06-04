@@ -24,6 +24,7 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageOverlayView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var nextEpisodeLabel: UILabel!
     
     
     // MARK: - Functions

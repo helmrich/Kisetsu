@@ -38,17 +38,25 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let currentSeries = seriesList[indexPath.row]
         
-        guard let imageMediumUrl = URL(string: currentSeries.imageMediumUrlString) else {
+        guard let imageMediumURL = URL(string: currentSeries.imageMediumURLString) else {
             return cell
         }
         
         cell.titleLabel.text = currentSeries.titleForSelectedTitleLanguageSetting
+        if let currentAnimeSeries = currentSeries as? AnimeSeries,
+            let timeInSecondsUntilNextEpisode = currentAnimeSeries.countdownUntilNextEpisodeInSeconds,
+         let nextEpisodeNumber = currentAnimeSeries.nextEpisodeNumber {
+            cell.nextEpisodeLabel.text = "New episode \(nextEpisodeNumber) in \(timeInSecondsUntilNextEpisode / 3600 / 24) days"
+            UIView.animate(withDuration: 0.25) {
+                cell.nextEpisodeLabel.alpha = 1.0
+            }
+        }
         UIView.animate(withDuration: 0.25) {
             cell.titleLabel.alpha = 1.0
         }
         
         if cell.imageView.image == nil {
-            cell.imageView.kf.setImage(with: imageMediumUrl, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+            cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 collectionView.reloadItems(at: [indexPath])
             }
         }

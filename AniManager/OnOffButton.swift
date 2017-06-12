@@ -18,14 +18,14 @@ class OnOffButton: UIButton {
     var isOn: Bool = false {
         didSet {
             if isOn {
-                backgroundColor = .aniManagerBlue
+                backgroundColor = Style.Color.Background.onOffButtonActive
                 layer.borderWidth = 0
-                setTitleColor(.white, for: .normal)
+                setTitleColor(Style.Color.Text.onOffButtonTitleActive, for: .normal)
             } else {
-                backgroundColor = .white
-                layer.borderColor = UIColor.aniManagerBlue.cgColor
+                backgroundColor = Style.Color.Background.onOffButtonInactive
+                layer.borderColor = Style.Color.Background.onOffButtonActive.cgColor
                 layer.borderWidth = 1
-                setTitleColor(.aniManagerBlue, for: .normal)
+                setTitleColor(Style.Color.Text.onOffButtonTitleInactive, for: .normal)
             }
         }
     }

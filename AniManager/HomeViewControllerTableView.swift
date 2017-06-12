@@ -43,9 +43,13 @@ extension HomeViewController: UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(cellType.rawValue)Cell") as! ImagesTableViewCell
+        
+        cell.titleLabel.textColor = Style.Color.Background.imagesTableViewCellTitleLabel
+        cell.activityIndicatorView.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+        
         cell.type = cellType
         cell.titleLabel.text = cellTitle
-        cell.activityIndicator.startAnimatingAndFadeIn()
+        cell.activityIndicatorView.startAnimatingAndFadeIn()
         
         cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
         cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
@@ -54,9 +58,12 @@ extension HomeViewController: UITableViewDataSource {
         cell.imagesCollectionView.dataSource = self
         cell.imagesCollectionView.delegate = self
         
+        cell.imagesCollectionView.backgroundColor = Style.Color.Background.imagesCollectionViewCell
+        
+        
         cell.imagesCollectionView.reloadData()
         if cell.imagesCollectionView.numberOfItems(inSection: 0) > 0 {
-            cell.activityIndicator.stopAnimatingAndFadeOut()
+            cell.activityIndicatorView.stopAnimatingAndFadeOut()
         }
         
         return cell

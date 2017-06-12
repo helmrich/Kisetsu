@@ -24,6 +24,35 @@ class FavoriteGenresTableViewController: UIViewController {
 
         title = "Favorite Genres"
         navigationController?.navigationBar.tintColor = .white
+        
+        DataSource.shared.getGenres()
+        
+        setupInterfaceForCurrentTheme()
+        
+        AniListClient.shared.getGenreList { (genreList, errorMessage) in
+            guard errorMessage == nil else {
+                return
+            }
+            
+            guard genreList != nil else {
+                return
+            }
+            
+            DataSource.shared.getGenres()
+            
+            DispatchQueue.main.async {
+                self.setupInterfaceForCurrentTheme()
+            }
+        }
+    }
+    
+    
+    // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        view.backgroundColor = Style.Color.Background.mainView
+        genresTableView.backgroundColor = Style.Color.Background.tableView
+        genresTableView.reloadData()
     }
 }
 
@@ -37,8 +66,9 @@ extension FavoriteGenresTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell", for: indexPath) as! SettingSelectionTableViewCell
+        cell.backgroundColor = Style.Color.Background.tableViewCell
         cell.textLabel?.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
-        cell.textLabel?.textColor = .aniManagerBlack
+        cell.textLabel?.textColor = Style.Color.Text.tableViewCell
         cell.textLabel?.text = DataSource.shared.genres[indexPath.row]
         return cell
     }

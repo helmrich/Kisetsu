@@ -31,6 +31,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Basic Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInformationsCell") as! BasicInformationsTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Try to get the large image from the series' URL string and
@@ -105,6 +106,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Actions Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 - Add a target-action to the rate button that will show
@@ -252,6 +254,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Genre Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell") as! GenreTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             // Check if there are genres available
             guard series.genres.count > 0 else {
@@ -293,6 +296,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Character Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
+            cell.backgroundColor = Style.Color.Background.imagesTableViewCell
             
             // Check if there are available characters for the series
             guard let characters = series.characters,
@@ -322,6 +326,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Relations Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "relationImagesCell") as! ImagesTableViewCell
+            cell.backgroundColor = Style.Color.Background.imagesTableViewCell
             
             // Check if there are available relations for the series
             guard let allRelations = series.allRelations,
@@ -353,6 +358,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Additional Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 If the series type is anime and a studio is available,
@@ -393,6 +399,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Tags Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell") as! GenreTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             // Check if the series has tags
             guard let tags = series.tags,
@@ -428,6 +435,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - External Links Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Make sure the series can be casted to the AnimeSeries type
@@ -457,6 +465,7 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Video Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Make sure the series type is anime and that the series can be casted

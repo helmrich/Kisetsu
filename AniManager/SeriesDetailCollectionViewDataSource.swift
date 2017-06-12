@@ -15,6 +15,7 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
+        cell.backgroundColor = Style.Color.Background.imagesCollectionViewCell
         
         /*
             Make sure the shared data source's selectedSeries property

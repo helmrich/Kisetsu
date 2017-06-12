@@ -27,13 +27,24 @@ class ListSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         NetworkActivityManager.shared.numberOfActiveConnections = 0
+    }
+    
+    
+    // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        view.backgroundColor = Style.Color.Background.mainView
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
     }
 }
 

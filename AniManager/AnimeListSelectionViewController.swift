@@ -73,5 +73,4 @@ class AnimeListSelectionViewController: ListSelectionViewController {
         
         seriesType = .anime
     }
-
 }

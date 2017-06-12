@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     // MARK: - Properties
     
     let featuredSlider = FeaturedSlider()
+    let featuredSliderActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
     let errorMessageView = ErrorMessageView()
     
     var statusBarShouldBeHidden = false
@@ -35,18 +36,19 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     
-    
-    
     // MARK: - Lifecycle Methods
     
     override func viewDidLoad() {
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
+        
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
         
         errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         
         // Add observer for the "settingValueChanged" notification
-        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: .settingValueChanged, object: nil)
         
         // Register nibs
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "currentlyAiringCell")
@@ -81,13 +83,19 @@ class HomeViewController: UIViewController {
             ])
         
         view.addSubview(featuredSlider)
+        view.addSubview(featuredSliderActivityIndicator)
         featuredSlider.translatesAutoresizingMaskIntoConstraints = false
+        featuredSliderActivityIndicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: featuredSlider, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: featuredSlider, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: featuredSlider, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: featuredSlider, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.4, constant: 0.0),
+            NSLayoutConstraint(item: featuredSliderActivityIndicator, attribute: .centerX, relatedBy: .equal, toItem: featuredSlider, attribute: .centerX, multiplier: 1.0, constant: 0.0),
+            NSLayoutConstraint(item: featuredSliderActivityIndicator, attribute: .centerY, relatedBy: .equal, toItem: featuredSlider, attribute: .centerY, multiplier: 1.0, constant: 0.0)
         ])
+        
+        featuredSliderActivityIndicator.startAnimatingAndFadeIn()
         
         tableView.tableHeaderView = featuredSlider
         featuredSlider.imageView.alpha = 0.0
@@ -110,6 +118,7 @@ class HomeViewController: UIViewController {
                 self.featuredSlider.seriesList = featuredSeriesList
                 self.featuredSlider.layoutSubviews()
                 self.featuredSlider.isAutomaticSlidingEnabled = true
+                self.featuredSliderActivityIndicator.stopAnimatingAndFadeOut()
                 UIView.animate(withDuration: 0.25) {
                     self.featuredSlider.imageView.alpha = 1.0
                 }
@@ -236,6 +245,13 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
+        view.backgroundColor = Style.Color.Background.mainView
+        tableView.backgroundColor = Style.Color.Background.tableView
+        tableView.reloadData()
+    }
     
     func settingValueChanged() {
         tableView.reloadData()

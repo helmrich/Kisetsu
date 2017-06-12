@@ -14,9 +14,12 @@ class SettingSelectionTableViewCell: UITableViewCell {
         
         if selected {
             textLabel?.alpha = 1.0
-            contentView.backgroundColor = .aniManagerGray
+            textLabel?.textColor = Style.Color.Text.tableViewCellSelected
+            contentView.backgroundColor = Style.Color.Background.tableViewCellSelected
         } else {
             textLabel?.alpha = 0.3
+            textLabel?.textColor = Style.Color.Text.tableViewCell
+            contentView.backgroundColor = Style.Color.Background.tableViewCell
         }
     }
 }

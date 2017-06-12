@@ -24,6 +24,17 @@ class PreferredLanguageTableViewController: UIViewController {
         
         title = "Title Language"
         navigationController?.navigationBar.tintColor = .white
+        
+        setupInterfaceForCurrentTheme()
+    }
+    
+    
+    // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        view.backgroundColor = Style.Color.Background.mainView
+        titleLanguagesTableView.backgroundColor = Style.Color.Background.tableView
+        titleLanguagesTableView.reloadData()
     }
 }
 
@@ -37,8 +48,9 @@ extension PreferredLanguageTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "languageCell", for: indexPath) as! SettingSelectionTableViewCell
+        cell.backgroundColor = Style.Color.Background.tableViewCell
         cell.textLabel?.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
-        cell.textLabel?.textColor = .aniManagerBlack
+        cell.textLabel?.textColor = Style.Color.Text.tableViewCell
         cell.textLabel?.text = TitleLanguage.all[indexPath.row]
         return cell
     }
@@ -65,7 +77,7 @@ extension PreferredLanguageTableViewController: UITableViewDelegate {
         }
      
         UserDefaults.standard.set(text, forKey: "titleLanguage")
-        NotificationCenter.default.post(name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: self)
+        NotificationCenter.default.post(name: .settingValueChanged, object: self)
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         /*

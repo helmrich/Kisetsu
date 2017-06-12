@@ -31,6 +31,8 @@ class BrowseFilterViewController: UIViewController {
     @IBOutlet weak var seriesTypeButtonAnime: OnOffButton!
     @IBOutlet weak var seriesTypeButtonManga: OnOffButton!
     @IBOutlet weak var filterTableView: UITableView!
+    @IBOutlet weak var toolbar: UIToolbar!
+    
     
     // MARK: - Actions
     
@@ -54,6 +56,10 @@ class BrowseFilterViewController: UIViewController {
     override func viewDidLoad() {
         // Turn on the anime series type button by default
         seriesTypeButtonAnime.toggle()
+        
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
         
         // Set the table view's separator color
         filterTableView.separatorColor = .aniManagerGray
@@ -81,6 +87,15 @@ class BrowseFilterViewController: UIViewController {
                 filterTableView.selectRow(at: filterIndexPath, animated: true, scrollPosition: .top)
             }
         }
+    }
+    
+    // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        toolbar.barTintColor = Style.Color.BarTint.browseFilterToolbar
+        view.backgroundColor = Style.Color.Background.mainView
+        filterTableView.backgroundColor = Style.Color.Background.tableView
+        filterTableView.reloadData()
     }
     
 
@@ -113,6 +128,8 @@ extension BrowseFilterViewController: UITableViewDataSource {
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
+        cell.backgroundColor = Style.Color.Background.tableViewCell
+        cell.filterNameLabel.textColor = Style.Color.Text.tableViewCell
         var filterValueString = ""
         for (filterName, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
             if filterName == "Type" {
@@ -141,9 +158,8 @@ extension BrowseFilterViewController: UITableViewDelegate {
         
         // Configure the header title's appearance
         sectionHeaderLabel.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
-        sectionHeaderLabel.textColor = .aniManagerBlack
         sectionHeaderLabel.textColor = .white
-        sectionHeaderLabel.backgroundColor = .aniManagerBlue
+        sectionHeaderLabel.backgroundColor = Style.Color.Background.browseFilterTableViewSectionHeader
         sectionHeaderLabel.textAlignment = .left
         return sectionHeaderLabel
     }
@@ -209,7 +225,7 @@ extension BrowseFilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         for (filterName, _) in DataSource.shared.browseFilters[indexPath.section] {
             if filterName == "Genres" {
-                let _ = DataSource.shared.selectedBrowseFilters[filterName]??.removeValue(forKey: indexPath)
+                DataSource.shared.selectedBrowseFilters[filterName]??.removeValue(forKey: indexPath)
             } else {
                 DataSource.shared.selectedBrowseFilters[filterName] = [IndexPath:String]()
             }

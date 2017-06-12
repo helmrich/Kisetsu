@@ -32,13 +32,21 @@ class ListPageViewController: UIPageViewController {
         animeListSelectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "animeListSelectionViewController") as! AnimeListSelectionViewController
         mangaListSelectionViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mangaListSelectionViewController") as! MangaListSelectionViewController
         
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
+        
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
+        
         setViewController(forSelectedIndex: 0)
     }
     
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
+    }
     
     func setViewController(forSelectedIndex selectedIndex: Int) {
         setViewControllers([selectedIndex == 0 ? animeListSelectionViewController : mangaListSelectionViewController], direction: .forward, animated: false, completion: nil)

@@ -16,12 +16,15 @@ class DescriptionTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         // Set the title label and description text views' properties
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         descriptionTextView.font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
-        descriptionTextView.textColor = .aniManagerBlack
+        descriptionTextView.textColor = Style.Color.Text.textView
+        descriptionTextView.backgroundColor = Style.Color.Background.textView
         descriptionTextView.isEditable = false
         descriptionTextView.isSelectable = false
         descriptionTextView.isScrollEnabled = false

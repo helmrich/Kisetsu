@@ -23,8 +23,4 @@ struct Constant {
         
         static let logo = "CarterOne"
     }
-    
-    struct NotificationKey {
-        static let settingValueChanged = "settingValueChanged"
-    }
 }

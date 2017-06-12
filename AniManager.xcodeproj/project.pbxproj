@@ -11,6 +11,8 @@
 		D20E26311EDFF96400FC8A95 /* HomeViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */; };
 		D20E26351EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */; };
 		D20E26381EE018E400FC8A95 /* PresentWebViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */; };
+		D20E263E1EE4368B00FC8A95 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E263D1EE4368B00FC8A95 /* Style.swift */; };
+		D20E26401EE5259D00FC8A95 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E263F1EE5259D00FC8A95 /* UserDefaultsKey.swift */; };
 		D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */; };
 		D2180E151E11E6360072B1EF /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2180E141E11E6360072B1EF /* CoreDataStack.swift */; };
 		D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D2180E161E11E6EE0072B1EF /* AniManager.xcdatamodeld */; };
@@ -41,6 +43,7 @@
 		D2341CD81DF74C87004773B3 /* ImagesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */; };
 		D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */; };
 		D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */; };
+		D234F8751EEA48E9002BF935 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F8741EEA48E9002BF935 /* NotificationNameExtension.swift */; };
 		D258E3DA1E351463003074BD /* SeriesDetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258E3D91E351463003074BD /* SeriesDetailCellType.swift */; };
 		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
 		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
@@ -137,6 +140,8 @@
 		D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableView.swift; sourceTree = "<group>"; };
 		D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerCollectionView.swift; sourceTree = "<group>"; };
 		D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentWebViewControllerExtension.swift; sourceTree = "<group>"; };
+		D20E263D1EE4368B00FC8A95 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		D20E263F1EE5259D00FC8A95 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
 		D2180E141E11E6360072B1EF /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		D2180E171E11E6EE0072B1EF /* AniManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AniManager.xcdatamodel; sourceTree = "<group>"; };
@@ -167,6 +172,7 @@
 		D2341CD71DF74C87004773B3 /* ImagesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImagesCollectionViewCell.xib; sourceTree = "<group>"; };
 		D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCellType.swift; sourceTree = "<group>"; };
 		D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		D234F8741EEA48E9002BF935 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
 		D258E3D91E351463003074BD /* SeriesDetailCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCellType.swift; sourceTree = "<group>"; };
 		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -578,6 +584,9 @@
 				D27A77B41DDF861700228EF2 /* AppDelegate.swift */,
 				D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */,
 				D25EDEB51DE0909300267243 /* Constant.swift */,
+				D20E263F1EE5259D00FC8A95 /* UserDefaultsKey.swift */,
+				D234F8741EEA48E9002BF935 /* NotificationNameExtension.swift */,
+				D20E263D1EE4368B00FC8A95 /* Style.swift */,
 				D2A78DAB1E1490E500F45CF9 /* NetworkActivityManager.swift */,
 				D2AB60061EC9F30600243C3A /* DateManager.swift */,
 				D25EDE9B1DDF8FE500267243 /* Models */,
@@ -878,6 +887,7 @@
 				D2F32C631DFCD5AF0044D195 /* ListSelectionViewController.swift in Sources */,
 				D25EDF131DECD21F00267243 /* OnOffButton.swift in Sources */,
 				D2AB602B1ECECC4300243C3A /* FeaturedSlider.swift in Sources */,
+				D20E263E1EE4368B00FC8A95 /* Style.swift in Sources */,
 				D25EDEC21DE2777A00267243 /* AniListClient.swift in Sources */,
 				D2AB60071EC9F30600243C3A /* DateManager.swift in Sources */,
 				D2C9BFA21E19B4D400AD1060 /* SettingSwitchTableViewCell.swift in Sources */,
@@ -897,6 +907,7 @@
 				D21EC7551E032475008027E4 /* AniListClientHelper.swift in Sources */,
 				D2F32C5A1DFCCFFB0044D195 /* AnimeListSelectionViewController.swift in Sources */,
 				D25EDF051DE8ECA600267243 /* SeriesCollectionViewCell.swift in Sources */,
+				D20E26401EE5259D00FC8A95 /* UserDefaultsKey.swift in Sources */,
 				D2180DEC1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift in Sources */,
 				D2786F871DF3997400F4368F /* Character.swift in Sources */,
 				D281AF6E1EDAB41D00F07994 /* TitleLanguage.swift in Sources */,
@@ -907,6 +918,7 @@
 				D25EDEE31DE5019800267243 /* AuthenticationViewController.swift in Sources */,
 				D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */,
 				D21EC7511E0321B0008027E4 /* AniListClientAuthentication.swift in Sources */,
+				D234F8751EEA48E9002BF935 /* NotificationNameExtension.swift in Sources */,
 				D2F32C6D1DFCE4570044D195 /* ListNameTableViewCell.swift in Sources */,
 				D28A5E981DEF5F8400D62BDC /* BasicInformationsTableViewCell.swift in Sources */,
 				D2786F9A1DF5CA2300F4368F /* TableViewCellTitleLabel.swift in Sources */,

@@ -162,6 +162,9 @@ class SeriesDetailViewController: UIViewController {
                 NSLayoutConstraint(item: seriesDataTableViewActivityIndicator, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1.0, constant: 0.0),
                 NSLayoutConstraint(item: seriesDataTableViewActivityIndicator, attribute: .centerY, relatedBy: .equal, toItem: seriesDataTableViewActivityIndicatorHelperView, attribute: .centerY, multiplier: 1.0, constant: 0.0)
             ])
+        
+        setupInterfaceForCurrentTheme()
+        
         seriesDataTableViewActivityIndicator.startAnimatingAndFadeIn()
         
         /*
@@ -271,6 +274,13 @@ class SeriesDetailViewController: UIViewController {
     
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        seriesDataTableViewActivityIndicator.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+        view.backgroundColor = Style.Color.Background.mainView
+        seriesDataTableView.backgroundColor = Style.Color.Background.tableView
+        seriesDataTableViewActivityIndicator.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+    }
     
     func goBack() {
         dismiss(animated: true, completion: nil)
@@ -461,7 +471,7 @@ extension SeriesDetailViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let ratingLabel = UILabel()
         ratingLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 36.0)
-        ratingLabel.textColor = .aniManagerBlack
+        ratingLabel.textColor = Style.Color.Text.pickerView
         ratingLabel.text = "\(row + 1)"
         ratingLabel.textAlignment = .center
         return ratingLabel

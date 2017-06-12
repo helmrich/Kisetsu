@@ -12,5 +12,10 @@ class SettingSwitchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var settingTextLabel: UILabel!
     @IBOutlet weak var settingSwitch: UISwitch!
+    
+    override func layoutSubviews() {
+        backgroundColor = Style.Color.Background.tableViewCell
+        settingTextLabel.textColor = Style.Color.Text.tableViewCell
+    }
 
 }

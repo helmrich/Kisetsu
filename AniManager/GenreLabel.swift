@@ -17,8 +17,8 @@ class GenreLabel: UILabel {
         
         clipsToBounds = true
         font = UIFont(name: Constant.FontName.mainRegular, size: 16.0)
-        backgroundColor = .aniManagerBlack
-        textColor = .white
+        backgroundColor = Style.Color.Background.genreLabel
+        textColor = Style.Color.Text.genreLabel
         textAlignment = .center
         layer.cornerRadius = 2.0
     }

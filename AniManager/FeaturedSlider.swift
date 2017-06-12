@@ -231,7 +231,7 @@ class FeaturedSlider: UIView {
     }
     
     func setBackgroundColor() {
-        backgroundColor = .aniManagerBlack
+        backgroundColor = .aniManagerBlackAlternative
     }
 }
 

@@ -72,6 +72,8 @@ class CharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         
+        setupInterfaceForCurrentTheme()
+        
         nameStackView.alpha = 0.0
         infoTextView.alpha = 0.0
         
@@ -194,5 +196,14 @@ class CharacterDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         NetworkActivityManager.shared.numberOfActiveConnections = 0
+    }
+    
+    
+    // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        view.backgroundColor = Style.Color.Background.mainView
+        infoTextView.backgroundColor = Style.Color.Background.textView
+        infoTextView.textColor = Style.Color.Text.textView
     }
 }

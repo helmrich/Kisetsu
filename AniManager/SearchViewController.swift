@@ -55,10 +55,14 @@ class SearchViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
+        
         seriesCollectionViewBottomConstraint = NSLayoutConstraint(item: seriesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: tabBarController != nil ? tabBarController!.tabBar : view, attribute: .top, multiplier: 1.0, constant: 0.0)
         
         // Add observer for the "settingValueChanged" notification
-        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: .settingValueChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -81,6 +85,14 @@ class SearchViewController: SeriesCollectionViewController {
     
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        view.backgroundColor = Style.Color.Background.mainView
+        activityIndicatorView.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
+        searchBar.backgroundColor = Style.Color.Background.searchBar
+        seriesCollectionView.backgroundColor = Style.Color.Background.collectionView
+    }
     
     func keyboardWillShow(notification: NSNotification) {
         if let originalSeriesCollectionViewBottomConstraint = originalSeriesCollectionViewBottomConstraint {

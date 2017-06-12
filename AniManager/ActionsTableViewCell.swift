@@ -28,6 +28,8 @@ class ActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var animeProgressStackView: UIStackView!
     @IBOutlet weak var maximumNumberOfEpisodesLabel: UILabel!
     @IBOutlet weak var watchedEpisodesTextField: UITextField!
+    @IBOutlet weak var watchedEpisodesDescriptionLabel: UILabel!
+    
     
     // Manga Progress Stack View
     @IBOutlet weak var mangaProgressStackView: UIStackView!
@@ -37,7 +39,15 @@ class ActionsTableViewCell: UITableViewCell {
     @IBOutlet weak var chaptersReadTextField: UITextField!
     @IBOutlet weak var maximumNumberOfVolumesLabel: UILabel!
     @IBOutlet weak var volumesReadTextField: UITextField!
+    @IBOutlet weak var chaptersReadDescriptionLabel: UILabel!
+    @IBOutlet weak var volumesReadDescriptionLabel: UILabel!
     
+    
+    @IBOutlet var slashes: [UILabel]!
+    @IBOutlet var subtractButtons: [UIButton]!
+    @IBOutlet var addButtons: [UIButton]!
+    @IBOutlet var subtractButtonsSmall: [UIButton]!
+    @IBOutlet var addButtonsSmall: [UIButton]!
     
     // MARK: - Actions
 
@@ -192,5 +202,23 @@ class ActionsTableViewCell: UITableViewCell {
         
         return userScore
         
+    }
+    
+    override func layoutSubviews() {
+        maximumNumberOfVolumesLabel.textColor = Style.Color.Text.progressLabel
+        maximumNumberOfChaptersLabel.textColor = Style.Color.Text.progressLabel
+        maximumNumberOfEpisodesLabel.textColor = Style.Color.Text.progressLabel
+        volumesReadTextField.textColor = Style.Color.Text.textField
+        chaptersReadTextField.textColor = Style.Color.Text.textField
+        watchedEpisodesTextField.textColor = Style.Color.Text.textField
+        volumesReadDescriptionLabel.textColor = Style.Color.Text.progressLabel
+        chaptersReadDescriptionLabel.textColor = Style.Color.Text.progressLabel
+        watchedEpisodesDescriptionLabel.textColor = Style.Color.Text.progressLabel
+        
+        slashes.forEach { $0.textColor = Style.Color.Text.progressLabel }
+        addButtons.forEach { $0.setImage(Style.Image.progressPlusIcon, for: .normal) }
+        subtractButtons.forEach { $0.setImage(Style.Image.progressMinusIcon, for: .normal) }
+        addButtonsSmall.forEach { $0.setImage(Style.Image.progressPlusIconSmall, for: .normal) }
+        subtractButtonsSmall.forEach { $0.setImage(Style.Image.progressMinusIconSmall, for: .normal) }
     }
 }

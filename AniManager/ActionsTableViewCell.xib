@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -123,7 +123,7 @@
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="f6n-Dh-igt">
-                        <rect key="frame" x="54" y="140" width="268" height="50"/>
+                        <rect key="frame" x="53.5" y="140" width="268" height="50"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cap-DW-Xib">
                                 <rect key="frame" x="0.0" y="0.0" width="123.5" height="50"/>
@@ -262,6 +262,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="animeProgressStackView" destination="ziN-r0-JP3" id="kXo-2b-TtV"/>
+                <outlet property="chaptersReadDescriptionLabel" destination="euI-yP-q3Z" id="XQy-ok-8i1"/>
                 <outlet property="chaptersReadStackView" destination="Cap-DW-Xib" id="s45-fn-yVI"/>
                 <outlet property="chaptersReadTextField" destination="kj3-cK-Y8f" id="az4-54-SxC"/>
                 <outlet property="mangaProgressStackView" destination="f6n-Dh-igt" id="RUX-fz-uZc"/>
@@ -271,9 +272,20 @@
                 <outlet property="rateButton" destination="kxz-00-zyb" id="csD-YO-Tx6"/>
                 <outlet property="topButtonsStackView" destination="IqI-4e-MHt" id="Tez-2l-wQN"/>
                 <outlet property="userListStatusButton" destination="V69-RX-gK6" id="zNY-fH-gRB"/>
+                <outlet property="volumesReadDescriptionLabel" destination="1vf-8W-IyN" id="1fn-Oc-ILa"/>
                 <outlet property="volumesReadStackView" destination="ks2-lW-IWa" id="Fyq-Ly-DDv"/>
                 <outlet property="volumesReadTextField" destination="zfZ-yS-GiS" id="XfH-XR-RWO"/>
+                <outlet property="watchedEpisodesDescriptionLabel" destination="TwY-JT-QHx" id="8Je-WB-ZLv"/>
                 <outlet property="watchedEpisodesTextField" destination="nAv-fX-N2Y" id="Ugg-bi-X3a"/>
+                <outletCollection property="slashes" destination="NQL-aE-Z2o" collectionClass="NSMutableArray" id="LYT-th-MLX"/>
+                <outletCollection property="slashes" destination="TxE-m3-LLp" collectionClass="NSMutableArray" id="6TZ-iY-OVZ"/>
+                <outletCollection property="slashes" destination="d3c-31-d5E" collectionClass="NSMutableArray" id="bir-tW-PuC"/>
+                <outletCollection property="subtractButtonsSmall" destination="R8e-Ne-IIF" collectionClass="NSMutableArray" id="Ddy-cr-NI9"/>
+                <outletCollection property="addButtonsSmall" destination="uv0-5g-kOe" collectionClass="NSMutableArray" id="QtZ-nQ-J1W"/>
+                <outletCollection property="subtractButtonsSmall" destination="Hu6-dO-vrm" collectionClass="NSMutableArray" id="yta-GD-CgJ"/>
+                <outletCollection property="addButtonsSmall" destination="dd5-fx-gBa" collectionClass="NSMutableArray" id="wiu-AL-jKv"/>
+                <outletCollection property="subtractButtons" destination="nFk-Vi-zNs" collectionClass="NSMutableArray" id="heb-9h-Upt"/>
+                <outletCollection property="addButtons" destination="kE5-ol-tOL" collectionClass="NSMutableArray" id="yNu-J6-7Wg"/>
             </connections>
             <point key="canvasLocation" x="-46.5" y="121"/>
         </tableViewCell>

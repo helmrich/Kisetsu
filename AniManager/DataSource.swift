@@ -113,6 +113,7 @@ class DataSource {
                     "Favorite Genres",
                     "Preferred Title Language"
         ]],
+        ["Appearance": ["Dark Theme"]],
         ["Advanced": ["Clear Disk Image Cache"]],
         ["Feedback": ["Send Feedback"]],
         ["AniList": ["Forum"]],

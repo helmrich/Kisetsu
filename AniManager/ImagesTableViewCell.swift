@@ -19,8 +19,14 @@ class ImagesTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: TableViewCellTitleLabel!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var imagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    override func layoutSubviews() {
+        backgroundColor = Style.Color.Background.imagesTableViewCell
+        titleLabel.textColor = Style.Color.Text.tableViewCellTitle
+        imagesCollectionView.backgroundColor = Style.Color.Background.collectionView
+    }
 }

@@ -31,8 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Check if a title language is set in the user defaults and set
             the value to "english" if there is no value
          */
-        if UserDefaults.standard.string(forKey: "titleLanguage") == nil {
-            UserDefaults.standard.set(TitleLanguage.english.rawValue, forKey: "titleLanguage")
+        if UserDefaults.standard.string(forKey: UserDefaultsKey.titleLanguage.rawValue) == nil {
+            UserDefaults.standard.set(TitleLanguage.english.rawValue, forKey: UserDefaultsKey.titleLanguage.rawValue)
+        }
+        
+        if UserDefaults.standard.string(forKey: UserDefaultsKey.theme.rawValue) == nil {
+            UserDefaults.standard.set(Style.Theme.light.rawValue, forKey: UserDefaultsKey.theme.rawValue)
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -43,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             view controller as the user didn't authenticate the app
             before
         */
-        guard let _ = UserDefaults.standard.string(forKey: "accessToken") else {
+        guard let _ = UserDefaults.standard.string(forKey: UserDefaultsKey.accessToken.rawValue) else {
             let authenticationViewController = storyboard.instantiateViewController(withIdentifier: "authenticationViewController") as! AuthenticationViewController
             window?.rootViewController = authenticationViewController
             window?.makeKeyAndVisible()
@@ -59,10 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             between either skip the login once again to authenticate with client credentials
             or logging in
          */
-        let expirationTimestamp = UserDefaults.standard.integer(forKey: "expirationTimestamp")
+        let expirationTimestamp = UserDefaults.standard.integer(forKey: UserDefaultsKey.expirationTimestamp.rawValue)
         
         guard expirationTimestamp > Int(Date().timeIntervalSince1970) else {
-            if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
+            if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
                 let grantType = GrantType(rawValue: grantTypeString),
                 grantType == .authorizationCode || grantType == .refreshToken {
                 let loadingViewController = storyboard.instantiateViewController(withIdentifier: "loadingViewController") as! LoadingViewController

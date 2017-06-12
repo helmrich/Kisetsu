@@ -25,8 +25,12 @@ class ListDetailViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
+        
         // Add observer for the "settingValueChanged" notification
-        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: .settingValueChanged, object: nil)
         
         // Configure the series collection view's flow layout
         configure(seriesCollectionViewFlowLayout)
@@ -161,6 +165,12 @@ class ListDetailViewController: SeriesCollectionViewController {
     }
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        activityIndicatorView.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+        view.backgroundColor = Style.Color.Background.mainView
+        seriesCollectionView.backgroundColor = Style.Color.Background.collectionView
+    }
     
     func settingValueChanged() {
         seriesCollectionView.reloadData()

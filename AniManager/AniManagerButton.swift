@@ -21,39 +21,28 @@ class AniManagerButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        /*
-            Set the button layer's corner radius and background color
-            and add a constraint for its height
-         */
-        layer.cornerRadius = 2.0
-        backgroundColor = .aniManagerBlue
-        addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-        
-        /*
-            Add the activity indicator to the button as a subview
-            and set its constraints
-         */
-        addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
-            ])
-        activityIndicator.alpha = 0
-        
-        // Add actions that handle the button's appearance when it's tapped
-        addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
-        addTarget(self, action: #selector(setTouchUpAppearance), for: [.touchUpInside, .touchUpOutside])
+        setupViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        // Configure button's properties and set its constraints
+        setupViews()
+    }
+    
+    
+    // MARK: - Methods
+    
+    func setupViews() {
+        /*
+            Set the button layer's corner radius and background color
+            and add a constraint for its height
+         */
         layer.cornerRadius = 2.0
-        backgroundColor = .aniManagerBlue
+        backgroundColor = Style.Color.Background.aniManagerButton
+        setTitleColor(Style.Color.Text.aniManagerButton, for: .normal)
         addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
-
+        
         /*
             Add the activity indicator to the button as a subview
             and set its constraints
@@ -70,9 +59,6 @@ class AniManagerButton: UIButton {
         addTarget(self, action: #selector(setTouchDownAppearance), for: .touchDown)
         addTarget(self, action: #selector(setTouchUpAppearance), for: [.touchUpInside, .touchUpOutside])
     }
-    
-    
-    // MARK: - Methods
     
     /*
         This method configures the button's activity indicator's appearance

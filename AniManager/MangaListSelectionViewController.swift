@@ -73,5 +73,4 @@ class MangaListSelectionViewController: ListSelectionViewController {
         
         seriesType = .manga
     }
-
 }

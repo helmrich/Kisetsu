@@ -64,8 +64,10 @@ class BrowseViewController: SeriesCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
+        
         // Add observer for the "settingValueChanged" notification
-        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: Notification.Name(rawValue: Constant.NotificationKey.settingValueChanged), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(settingValueChanged), name: .settingValueChanged, object: nil)
         
         /*
             Get the data with the selected browse filters from the user defaults and
@@ -92,8 +94,7 @@ class BrowseViewController: SeriesCollectionViewController {
         
         tabBarController?.delegate = self
         
-        navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
+        setupInterfaceForCurrentTheme()
         
         /*
             Create the refresh control, add a target-action to it and assign it
@@ -159,6 +160,12 @@ class BrowseViewController: SeriesCollectionViewController {
     
     
     // MARK: - Functions
+    
+    func setupInterfaceForCurrentTheme() {
+        activityIndicatorView.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
+        seriesCollectionView.backgroundColor = Style.Color.Background.collectionView
+    }
     
     func refreshList() {
         showsAllAvailableSeriesItems = false

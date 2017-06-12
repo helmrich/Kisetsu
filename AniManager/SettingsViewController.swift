@@ -31,7 +31,9 @@ class SettingsViewController: UIViewController {
         errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
+        setupInterfaceForCurrentTheme()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,12 +45,32 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Functions
     
+    func setupInterfaceForCurrentTheme() {
+        navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
+        view.backgroundColor = Style.Color.Background.mainView
+        settingsTableView.backgroundColor = Style.Color.Background.settingsTableView
+        settingsTableView.separatorStyle = Style.activeTheme == .light ? .singleLine : .none
+        settingsTableView.reloadData()
+    }
+    
     func explicitContentSwitchChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: "showExplicitContent")
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultsKey.showExplicitContent.rawValue)
     }
     
     func tagsWithSpoilersSwitchChanged(_ sender: UISwitch) {
-        UserDefaults.standard.set(sender.isOn, forKey: "showTagsWithSpoilers")
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultsKey.showTagsWithSpoilers.rawValue)
+    }
+    
+    func darkThemeSwitchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set(Style.Theme.dark.rawValue, forKey: UserDefaultsKey.theme.rawValue)
+            NotificationCenter.default.post(name: .themeSettingChanged, object: self)
+            setupInterfaceForCurrentTheme()
+        } else {
+            UserDefaults.standard.set(Style.Theme.light.rawValue, forKey: UserDefaultsKey.theme.rawValue)
+            NotificationCenter.default.post(name: .themeSettingChanged, object: self)
+            setupInterfaceForCurrentTheme()
+        }
     }
     
     func logout() {
@@ -57,11 +79,11 @@ class SettingsViewController: UIViewController {
             access token and the AniList client's authorization code
             property to nil and present the authentication view controller
          */
-        UserDefaults.standard.set(nil, forKey: "accessToken")
-        UserDefaults.standard.set(nil, forKey: "expirationTimestamp")
-        UserDefaults.standard.set(nil, forKey: "tokenType")
-        UserDefaults.standard.set(nil, forKey: "refreshToken")
-        UserDefaults.standard.set(nil, forKey: "grantType")
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.accessToken.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.expirationTimestamp.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.tokenType.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.refreshToken.rawValue)
+        UserDefaults.standard.set(nil, forKey: UserDefaultsKey.grantType.rawValue)
         AniListClient.shared.authorizationCode = nil
         
         let authenticationViewController = storyboard!.instantiateViewController(withIdentifier: "authenticationViewController")
@@ -94,8 +116,9 @@ extension SettingsViewController: UITableViewDataSource {
         var cell = tableView.dequeueReusableCell(withIdentifier: "settingCell")
         cell?.textLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 18.0)
         cell?.detailTextLabel?.font = UIFont(name: Constant.FontName.mainLight, size: 18.0)
-        cell?.textLabel?.textColor = .aniManagerBlack
-        cell?.detailTextLabel?.textColor = .aniManagerBlack
+        cell?.textLabel?.textColor = Style.Color.Text.tableViewCell
+        cell?.detailTextLabel?.textColor = Style.Color.Text.tableViewCell
+        cell?.backgroundColor = Style.Color.Background.tableViewCell
         cell?.detailTextLabel?.isHidden = true
         for (_, settingValues) in DataSource.shared.settings[indexPath.section] {
             
@@ -112,6 +135,12 @@ extension SettingsViewController: UITableViewDataSource {
                 (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
                 (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: "showTagsWithSpoilers")
                 (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(tagsWithSpoilersSwitchChanged), for: .valueChanged)
+                return (cell as! SettingSwitchTableViewCell)
+            } else if currentSettingName.uppercased() == "DARK THEME" {
+                cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
+                (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
+                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = Style.activeTheme == .dark
+                (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(darkThemeSwitchChanged), for: .valueChanged)
                 return (cell as! SettingSwitchTableViewCell)
             } else if currentSettingName.uppercased() == "CLEAR DISK IMAGE CACHE" {
                 ImageCache.default.calculateDiskCacheSize { sizeInBytes in
@@ -179,5 +208,9 @@ extension SettingsViewController: UITableViewDelegate {
                 }
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as? UITableViewHeaderFooterView)?.textLabel?.textColor = Style.Color.Text.tableViewSectionHeaderTitle
     }
 }

@@ -22,10 +22,10 @@ class RatingPicker: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = Style.Color.Background.ratingPicker
         
         let toolbar = UIToolbar()
-        toolbar.barTintColor = .aniManagerBlue
+        toolbar.barTintColor = Style.Color.BarTint.toolbar
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         
         // Set the toolbar's bar button items' color

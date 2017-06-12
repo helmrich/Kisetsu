@@ -29,7 +29,7 @@ class AniManagerLabel: UILabel {
         super.init(frame: frame)
         
         font = UIFont(name: Constant.FontName.mainLight, size: 16.0)
-        textColor = .aniManagerBlack
+        textColor = Style.Color.Text.aniManagerLabel
     }
     
     required init?(coder aDecoder: NSCoder) {

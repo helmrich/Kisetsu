@@ -29,6 +29,10 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     
+    override func layoutSubviews() {
+        backgroundColor = Style.Color.Background.imagesCollectionViewCell
+    }
+    
     override func prepareForReuse() {
         imageView.image = nil
         titleLabel.alpha = 0.0

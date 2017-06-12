@@ -45,7 +45,8 @@ class SeriesCollectionViewController: UIViewController {
         
         errorMessageView.addToBottom(of: view, withOffsetToBottom: tabBarController != nil ? tabBarController!.tabBar.frame.height : 49.0)
         navigationController?.navigationBar.barStyle = .black
-        navigationController?.navigationBar.isTranslucent = true
+        
+        view.backgroundColor = Style.Color.Background.mainView
     }
 
     override func viewWillAppear(_ animated: Bool) {

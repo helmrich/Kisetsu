@@ -14,6 +14,7 @@ import UIKit
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
+        cell.backgroundColor = Style.Color.Background.imagesCollectionViewCell
         
         cell.imageOverlayView.alpha = 0.6
         

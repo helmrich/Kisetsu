@@ -100,6 +100,7 @@ class AuthenticationViewController: UIViewController {
          */
         errorMessageView.addToBottom(of: view)
         loginButton.backgroundColor = .white
+        loginButton.setTitleColor(.aniManagerBlue, for: .normal)
         
         view.addSubview(loadingStatusView)
         loadingStatusView.translatesAutoresizingMaskIntoConstraints = false

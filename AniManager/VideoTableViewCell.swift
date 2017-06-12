@@ -22,8 +22,8 @@ class VideoTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
         
         // Configure the video web view
-        videoWebView.backgroundColor = .aniManagerBlack
-        videoWebView.scrollView.backgroundColor = .aniManagerBlack
+        videoWebView.backgroundColor = Style.Color.Background.videoWebView
+        videoWebView.scrollView.backgroundColor = Style.Color.Background.videoWebView
         videoWebView.scrollView.isScrollEnabled = false
         
         // Configure the title label and set its constraints

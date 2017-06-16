@@ -48,7 +48,16 @@ extension HomeViewController: UICollectionViewDataSource {
         if let currentAnimeSeries = currentSeries as? AnimeSeries,
             let timeInSecondsUntilNextEpisode = currentAnimeSeries.countdownUntilNextEpisodeInSeconds,
          let nextEpisodeNumber = currentAnimeSeries.nextEpisodeNumber {
-            cell.nextEpisodeLabel.text = "New episode \(nextEpisodeNumber) in \(timeInSecondsUntilNextEpisode / 3600 / 24) days"
+            let hoursUntilNextEpisode = Double(timeInSecondsUntilNextEpisode) / 3600.0
+            let nextEpisodeString: String
+            if hoursUntilNextEpisode > 24.0 {
+                let amountOfDays = Int(round(hoursUntilNextEpisode / 24.0))
+                nextEpisodeString = "New episode \(nextEpisodeNumber) in \(amountOfDays) \(amountOfDays > 1 ? "days" : "day")"
+            } else {
+                let amountOfHours = Int(round(hoursUntilNextEpisode))
+                nextEpisodeString = "New episode \(nextEpisodeNumber) in \(amountOfHours) \(amountOfHours > 1 ? "hours" : "hour")"
+            }
+            cell.nextEpisodeLabel.text = nextEpisodeString
             UIView.animate(withDuration: 0.25) {
                 cell.nextEpisodeLabel.alpha = 1.0
             }

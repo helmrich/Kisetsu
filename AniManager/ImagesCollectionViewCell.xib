@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -31,20 +31,18 @@
                         <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac5-1H-nYH">
-                        <rect key="frame" x="5" y="0.0" width="90" height="45"/>
+                        <rect key="frame" x="5" y="3" width="90" height="0.0"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="WPM-yw-c8v"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="uW2-hG-hTa"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="uW2-hG-hTa"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-T7-RiS">
-                        <rect key="frame" x="5" y="52" width="90" height="45"/>
+                        <rect key="frame" x="5" y="82.5" width="90" height="14.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="73X-qW-q59"/>
-                            <constraint firstAttribute="height" constant="45" id="Ut0-7X-gEx"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="hOp-ch-9W1"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,7 +58,7 @@
                 <constraint firstItem="lUy-VX-JoE" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="I9E-hQ-OgG"/>
                 <constraint firstItem="kAj-Ms-Mq9" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="Lhk-mg-cSB"/>
                 <constraint firstItem="ac5-1H-nYH" firstAttribute="leading" secondItem="XOJ-ba-x2U" secondAttribute="leading" constant="5" id="P16-lb-ZVu"/>
-                <constraint firstItem="ac5-1H-nYH" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" id="UT5-i2-RVQ"/>
+                <constraint firstItem="ac5-1H-nYH" firstAttribute="top" secondItem="XOJ-ba-x2U" secondAttribute="top" constant="3" id="UT5-i2-RVQ"/>
                 <constraint firstAttribute="trailing" secondItem="lUy-VX-JoE" secondAttribute="trailing" id="WM0-7X-4KK"/>
                 <constraint firstAttribute="bottom" secondItem="lUy-VX-JoE" secondAttribute="bottom" id="bgd-x4-BWi"/>
                 <constraint firstAttribute="bottom" secondItem="Vxf-T7-RiS" secondAttribute="bottom" constant="3" id="fYF-nT-CL4"/>

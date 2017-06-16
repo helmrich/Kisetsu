@@ -25,7 +25,6 @@ extension BrowseViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "seriesCell", for: indexPath) as! SeriesCollectionViewCell
         
         guard let browseList = browseList,
@@ -61,8 +60,12 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         if cell.imageView.image == nil,
             let imageMediumURLString = currentSeries.imageMediumURLString,
-            let imageMediumURL = URL(string: imageMediumURLString) {
-            cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
+            let imageMediumURL = URL(string: imageMediumURLString),
+            let imageLargeURLString = currentSeries.imageLargeURLString,
+            let imageLargeURL = URL(string: imageLargeURLString) {
+            cell.imageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+                placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
         }
         
         return cell

@@ -12,6 +12,10 @@ import UIKit
 class RequiredLoginViewController: UIViewController {
     
     var reason: String = ""
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +27,7 @@ class RequiredLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         let informationView = UIView(frame: view.frame)
-        informationView.backgroundColor = .aniManagerBlack
+        informationView.backgroundColor = Style.Color.Background.requiredLogin
         
         let informationMessageLabel = AniManagerLabel(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width * 0.9, height: 200.0))
         informationMessageLabel.font = UIFont(name: informationMessageLabel.font.fontName, size: 24.0)
@@ -34,7 +38,7 @@ class RequiredLoginViewController: UIViewController {
         
         let loginButton = AniManagerButton(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.width / 1.25, height: 60.0))
         loginButton.backgroundColor = .white
-        loginButton.setTitleColor(.aniManagerBlack, for: .normal)
+        loginButton.setTitleColor(Style.Color.Text.requiredLoginButton, for: .normal)
         loginButton.setTitle("Login", for: .normal)
         loginButton.addTarget(self, action: #selector(displayAuthenticationViewController), for: .touchUpInside)
         

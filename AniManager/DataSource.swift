@@ -31,11 +31,7 @@ class DataSource {
     var mostPopularAnimeSeriesList = [Series]()
     var topRatedAnimeSeriesList = [Series]()
     
-    var mostPopularMangaSeriesList = [Series]() {
-        didSet {
-            mostPopularMangaSeriesList.forEach { print($0.seriesType) }
-        }
-    }
+    var mostPopularMangaSeriesList = [Series]()
     var topRatedMangaSeriesList = [Series]()
     
     var allSeriesLists: [[Series]] {
@@ -109,11 +105,14 @@ class DataSource {
         ["Content": [
                     "Show Explicit Content",
                     "Show Tags with Spoilers",
-                    "Rating System",
+//                    "Rating System",
                     "Favorite Genres",
                     "Preferred Title Language"
         ]],
-        ["Appearance": ["Dark Theme"]],
+        ["Appearance": [
+                "Dark Theme",
+                "Download High Quality Images"
+        ]],
         ["Advanced": ["Clear Disk Image Cache"]],
         ["Feedback": ["Send Feedback"]],
         ["AniList": ["Forum"]],

@@ -21,6 +21,10 @@ class SeriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageOverlay: UIView!
     @IBOutlet weak var imageView: UIImageView!
     
+    override func layoutSubviews() {
+        imageView.backgroundColor = Style.Color.Background.seriesCollectionImageView
+    }
+    
     override func prepareForReuse() {
         seriesId = nil
         imageView.image = nil

@@ -27,6 +27,9 @@ struct Style {
             static var collectionView: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
+            static var collectionViewCell: UIColor {
+                if activeTheme == .light { return .aniManagerBlack } else { return .aniManagerBlackAlternative }
+            }
             static var tableView: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
@@ -46,7 +49,7 @@ struct Style {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
             static var imagesCollectionViewCell: UIColor {
-                if activeTheme == .light { return .white } else { return .aniManagerBlackAlternative }
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlackAlternative }
             }
             static var imagesTableViewCellTitleLabel: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }
@@ -69,6 +72,9 @@ struct Style {
             static var ratingPicker: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
+            static var featuredSlider: UIColor {
+                if activeTheme == .light { return .aniManagerBlack } else { return .aniManagerBlackAlternative }
+            }
             static var textView: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
@@ -76,7 +82,16 @@ struct Style {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
             static var videoWebView: UIColor {
-                if activeTheme == .light { return .aniManagerBlack } else { return .white }
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlackAlternative }
+            }
+            static var requiredLogin: UIColor {
+                if activeTheme == .light { return .aniManagerBlue } else { return .aniManagerBlack }
+            }
+            static var imagePlaceholder: UIColor {
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlackAlternative }
+            }
+            static var seriesCollectionImageView: UIColor {
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerGray }
             }
         }
         
@@ -101,6 +116,9 @@ struct Style {
             }
             static var aniManagerButton: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
+            }
+            static var requiredLoginButton: UIColor {
+                if activeTheme == .light { return .aniManagerBlue } else { return .aniManagerBlack }
             }
             static var tableViewSectionHeaderTitle: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }

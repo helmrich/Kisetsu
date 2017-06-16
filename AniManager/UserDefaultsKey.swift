@@ -9,8 +9,10 @@
 import Foundation
 
 enum UserDefaultsKey: String {
+    // Start
+    case isNotFirstStart
     // Authentication
     case accessToken, refreshToken, expirationTimestamp, grantType, tokenType
     // Content and Style
-    case titleLanguage, theme, showExplicitContent, showTagsWithSpoilers
+    case titleLanguage, theme, showExplicitContent, showTagsWithSpoilers, downloadHighQualityImages
 }

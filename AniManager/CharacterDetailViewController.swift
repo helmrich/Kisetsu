@@ -149,11 +149,15 @@ class CharacterDetailViewController: UIViewController {
                         let attributedString = NSMutableAttributedString(string: "Biography\n\n\(info)")
                         attributedString.addAttributes([
                             NSFontAttributeName: UIFont(name: Constant.FontName.mainBlack, size: 24.0)!,
-                            NSForegroundColorAttributeName: UIColor.aniManagerBlack
+                            NSForegroundColorAttributeName: Style.Color.Text.textView
                             ], range: NSRange(location: 0, length: 9))
+                        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: Constant.FontName.mainRegular, size: 16.0)!, range: NSRange(location: 9, length: attributedString.string.characters.count - 9))
                         self.infoTextView.attributedText = attributedString
+                        self.infoTextView.textColor = Style.Color.Text.textView
+                        self.infoTextView.textAlignment = .justified
                     } else {
                         self.infoTextView.text = "There is no biography available for this character at the moment. >_<"
+//                        self.infoTextView.textColor = Style.Color.Text.textView
                     }
                     UIView.animate(withDuration: 0.25) {
                         self.infoTextView.alpha = 1.0

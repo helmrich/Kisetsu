@@ -127,9 +127,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
         - Assign the filterValueString to the cell's filterNameLabel's text property
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "filterNameCell") as! FilterNameTableViewCell
-        cell.backgroundColor = Style.Color.Background.tableViewCell
-        cell.filterNameLabel.textColor = Style.Color.Text.tableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "filterValueCell") as! FilterValueTableViewCell
         var filterValueString = ""
         for (filterName, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
             if filterName == "Type" {
@@ -138,7 +136,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
                 filterValueString = "\(filterValues[indexPath.row])".capitalized
             }
         }
-        cell.filterNameLabel.text = filterValueString
+        cell.filterValueLabel.text = filterValueString
         return cell
     }
 }

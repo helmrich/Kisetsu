@@ -63,14 +63,6 @@ class AnimeListSelectionViewController: ListSelectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let grantTypeString = UserDefaults.standard.string(forKey: "grantType"),
-            let grantType = GrantType(rawValue: grantTypeString),
-            grantType == .clientCredentials {
-            let requiredLoginViewController = RequiredLoginViewController()
-            requiredLoginViewController.reason = "watch and manage your manga"
-            present(requiredLoginViewController, animated: true, completion: nil)
-        }
-        
         seriesType = .anime
     }
 }

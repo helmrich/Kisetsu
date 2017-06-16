@@ -73,6 +73,10 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    func downloadHighQualityImagesSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultsKey.downloadHighQualityImages.rawValue)
+    }
+    
     func logout() {
         /*
             Reset all values in the user defaults that are related to the
@@ -149,6 +153,12 @@ extension SettingsViewController: UITableViewDataSource {
                     cell?.detailTextLabel?.textColor = .aniManagerRed
                     cell?.detailTextLabel?.isHidden = false
                 }
+            } else if currentSettingName.uppercased() == "DOWNLOAD HIGH QUALITY IMAGES" {
+                cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
+                (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
+                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue)
+                (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(downloadHighQualityImagesSwitchChanged), for: .valueChanged)
+                return (cell as! SettingSwitchTableViewCell)
             }
             
             cell?.textLabel?.text = currentSettingName

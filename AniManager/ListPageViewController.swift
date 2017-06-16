@@ -41,6 +41,18 @@ class ListPageViewController: UIPageViewController {
         setViewController(forSelectedIndex: 0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+            let grantType = GrantType(rawValue: grantTypeString),
+            grantType == .clientCredentials {
+            let requiredLoginViewController = RequiredLoginViewController()
+            requiredLoginViewController.reason = "watch and manage your anime and manga"
+            present(requiredLoginViewController, animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: - Functions
     

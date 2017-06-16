@@ -39,6 +39,9 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
         
         switch imagesTableViewCellType {
         case .characters:
+            
+            cell.imageOverlayView.alpha = 0.0
+            
             /*
              Make sure the series' characters property is not nil and that
              the current character has an URL string for a medium image,
@@ -50,18 +53,25 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             }
             
             guard let imageMediumURLString = characters[indexPath.row].imageMediumURLString,
-                let imageMediumURL = URL(string: imageMediumURLString) else {
+                let imageMediumURL = URL(string: imageMediumURLString),
+            let imageLargeURLString = characters[indexPath.row].imageLargeURLString,
+                let imageLargeURL = URL(string: imageLargeURLString) else {
                     return cell
             }
             
             if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(with: imageMediumURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                cell.imageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+                placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     // TODO: App is crashing here sometimes:
                     // attempt to delete item 1 from section 0 which only contains 0 items before the update
                     collectionView.reloadItems(at: [indexPath])
                 }
             }
         case .relations:
+            
+            cell.imageOverlayView.alpha = 0.0
+            
             /*
                 Check if the series' allRelations property is not nil,
                 get the current relation by using the current index path's row
@@ -87,13 +97,17 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             cell.seriesType = currentRelationSeriesType
             
             let imageMediumURLString = currentRelation.imageMediumURLString
+            let imageLargeURLString = currentRelation.imageLargeURLString
             
-            guard let imageMediumURL = URL(string: imageMediumURLString) else {
+            guard let imageMediumURL = URL(string: imageMediumURLString),
+                let imageLargeURL = URL(string: imageLargeURLString) else {
                     return cell
             }
             
             if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                cell.imageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+                placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     collectionView.reloadItems(at: [indexPath])
                 }
             }

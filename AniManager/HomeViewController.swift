@@ -162,43 +162,47 @@ class HomeViewController: UIViewController {
             }
         }
         
-        AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
-            guard errorMessage == nil else {
-                self.errorMessageView.showAndHide(withMessage: errorMessage!)
-                return
-            }
-            
-            guard let user = user else {
-                self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
-                return
-            }
-            
-            for seriesType in SeriesType.allValues {
-                let statusKey: String
-                switch seriesType {
-                case .anime:
-                    statusKey = AnimeListName.watching.asKey()
-                case .manga:
-                    statusKey = MangaListName.reading.asKey()
+        if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+            let grantType = GrantType(rawValue: grantTypeString),
+            grantType != .clientCredentials {
+            AniListClient.shared.getAuthenticatedUser { (user, errorMessage) in
+                guard errorMessage == nil else {
+                    self.errorMessageView.showAndHide(withMessage: errorMessage!)
+                    return
                 }
-                AniListClient.shared.getList(ofType: seriesType, withStatus: statusKey, userId: user.id, andDisplayName: user.displayName) { (seriesList, errorMessage) in
-                    guard errorMessage == nil else {
-                        return
-                    }
-                    
-                    guard let seriesList = seriesList else {
-                        return
-                    }
-                    
+                
+                guard let user = user else {
+                    self.errorMessageView.showAndHide(withMessage: "Couldn't get authenticated user")
+                    return
+                }
+                
+                for seriesType in SeriesType.allValues {
+                    let statusKey: String
                     switch seriesType {
                     case .anime:
-                        DataSource.shared.continueWatchingSeriesList = seriesList
+                        statusKey = AnimeListName.watching.asKey()
                     case .manga:
-                        DataSource.shared.continueReadingSeriesList = seriesList
+                        statusKey = MangaListName.reading.asKey()
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                    AniListClient.shared.getList(ofType: seriesType, withStatus: statusKey, userId: user.id, andDisplayName: user.displayName) { (seriesList, errorMessage) in
+                        guard errorMessage == nil else {
+                            return
+                        }
+                        
+                        guard let seriesList = seriesList else {
+                            return
+                        }
+                        
+                        switch seriesType {
+                        case .anime:
+                            DataSource.shared.continueWatchingSeriesList = seriesList
+                        case .manga:
+                            DataSource.shared.continueReadingSeriesList = seriesList
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
                     }
                 }
             }

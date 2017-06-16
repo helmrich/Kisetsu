@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).textColor = .aniManagerBlack
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
         
+        if UserDefaults.standard.bool(forKey: UserDefaultsKey.isNotFirstStart.rawValue) == false {
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.isNotFirstStart.rawValue)
+            UserDefaults.standard.set(true, forKey: UserDefaultsKey.downloadHighQualityImages.rawValue)
+        }
+        
         /*
             Check if a title language is set in the user defaults and set
             the value to "english" if there is no value

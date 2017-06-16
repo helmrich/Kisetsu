@@ -243,8 +243,11 @@ extension ListDetailViewController: UICollectionViewDataSource {
         cell.imageOverlay.alpha = 0.7
         
         if cell.imageView.image == nil,
-            let imageMediumURL = URL(string: currentSeries.imageMediumURLString) {
-            cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
+            let imageMediumURL = URL(string: currentSeries.imageMediumURLString),
+            let imageLargeURL = URL(string: currentSeries.imageLargeURLString) {
+            cell.imageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+                placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
         }
         
         return cell

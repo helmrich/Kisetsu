@@ -128,7 +128,7 @@ extension AniListClient {
         to the timestamp of the current time
      */
     func isAccessTokenValid() -> Bool {
-        let expirationTimestamp = UserDefaults.standard.integer(forKey: "expirationTimestamp")
+        let expirationTimestamp = UserDefaults.standard.integer(forKey: UserDefaultsKey.expirationTimestamp.rawValue)
         let timestampNow = Int(Date().timeIntervalSince1970)
         let isAccessTokenValid = expirationTimestamp > timestampNow
         return isAccessTokenValid

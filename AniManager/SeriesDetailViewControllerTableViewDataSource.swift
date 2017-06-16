@@ -296,7 +296,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Character Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
-            cell.backgroundColor = Style.Color.Background.imagesTableViewCell
             
             // Check if there are available characters for the series
             guard let characters = series.characters,
@@ -326,7 +325,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Relations Images Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "relationImagesCell") as! ImagesTableViewCell
-            cell.backgroundColor = Style.Color.Background.imagesTableViewCell
             
             // Check if there are available relations for the series
             guard let allRelations = series.allRelations,

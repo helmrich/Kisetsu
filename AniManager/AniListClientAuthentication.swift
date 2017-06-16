@@ -181,20 +181,37 @@ extension AniListClient {
             return
         }
         
-        getAccessToken(withGrantType: .refreshToken) { (accessToken, _, errorMessage) in
-            // Error Handling
-            guard errorMessage == nil else {
-                completionHandlerForValidation(errorMessage!)
-                return
+        if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+            let grantType = GrantType(rawValue: grantTypeString),
+        grantType == .clientCredentials {
+            getAccessToken(withGrantType: .clientCredentials) { (accessToken, _, errorMessage) in
+                guard errorMessage == nil else {
+                    completionHandlerForValidation(errorMessage!)
+                    return
+                }
+                
+                guard accessToken != nil else {
+                    completionHandlerForValidation("Couldn't get new acess token with client credentials")
+                    return
+                }
+                
+                completionHandlerForValidation(nil)
             }
-            
-            guard let _ = accessToken else {
-                completionHandlerForValidation("Couldn't get access token")
-                return
+        } else {
+            getAccessToken(withGrantType: .refreshToken) { (accessToken, _, errorMessage) in
+                // Error Handling
+                guard errorMessage == nil else {
+                    completionHandlerForValidation(errorMessage!)
+                    return
+                }
+                
+                guard accessToken != nil else {
+                    completionHandlerForValidation("Couldn't get new access token with refresh token")
+                    return
+                }
+                
+                completionHandlerForValidation(nil)
             }
-            
-            completionHandlerForValidation(nil)
-            
         }
     }
 }

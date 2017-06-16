@@ -258,7 +258,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 or not), create a BasicSeries object for each series, set its
                 properties and add it to the browse list
              */
-            let seriesListToShow = UserDefaults.standard.bool(forKey: "showExplicitContent") ? seriesList : nonAdultSeriesList
+            let seriesListToShow = UserDefaults.standard.bool(forKey: UserDefaultsKey.showExplicitContent.rawValue) ? seriesList : nonAdultSeriesList
             for series in seriesListToShow {
                 let basicSeries = BasicSeries(context: self.managedContext)
                 basicSeries.id = Int32(series.id)
@@ -268,6 +268,7 @@ class BrowseViewController: SeriesCollectionViewController {
                 basicSeries.averageScore = series.averageScore
                 basicSeries.popularity = Int32(series.popularity)
                 basicSeries.imageMediumURLString = series.imageMediumURLString
+                basicSeries.imageLargeURLString = series.imageLargeURLString
                 basicSeries.seriesType = series.seriesType.rawValue
                 basicSeries.isAdult = series.isAdult
                 self.browseList!.addToBasicSeries(basicSeries)
@@ -378,6 +379,7 @@ class BrowseViewController: SeriesCollectionViewController {
                     basicSeries.averageScore = series.averageScore
                     basicSeries.popularity = Int32(series.popularity)
                     basicSeries.imageMediumURLString = series.imageMediumURLString
+                    basicSeries.imageLargeURLString = series.imageLargeURLString
                     basicSeries.seriesType = series.seriesType.rawValue
                     basicSeries.isAdult = series.isAdult
                     self.browseList?.addToBasicSeries(basicSeries)

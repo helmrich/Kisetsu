@@ -31,6 +31,7 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         backgroundColor = Style.Color.Background.imagesCollectionViewCell
+        imageView.backgroundColor = Style.Color.Background.imagesCollectionViewCell
     }
     
     override func prepareForReuse() {

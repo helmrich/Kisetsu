@@ -15,5 +15,9 @@ class FilterValueTableViewCell: UITableViewCell {
     // MARK: - Outlets
     
     @IBOutlet weak var filterValueLabel: UILabel!
-
+    
+    override func layoutSubviews() {
+        backgroundColor = Style.Color.Background.tableViewCell
+        filterValueLabel.textColor = Style.Color.Text.tableViewCell
+    }
 }

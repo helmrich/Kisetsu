@@ -14,7 +14,6 @@ import UIKit
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        cell.backgroundColor = Style.Color.Background.imagesCollectionViewCell
         
         cell.imageOverlayView.alpha = 0.6
         
@@ -39,11 +38,13 @@ extension HomeViewController: UICollectionViewDataSource {
         
         let currentSeries = seriesList[indexPath.row]
         
-        guard let imageMediumURL = URL(string: currentSeries.imageMediumURLString) else {
+        guard let imageMediumURL = URL(string: currentSeries.imageMediumURLString),
+            let imageLargeURL = URL(string: currentSeries.imageLargeURLString) else {
             return cell
         }
         
         cell.titleLabel.text = currentSeries.titleForSelectedTitleLanguageSetting
+        
         if let currentAnimeSeries = currentSeries as? AnimeSeries,
             let timeInSecondsUntilNextEpisode = currentAnimeSeries.countdownUntilNextEpisodeInSeconds,
          let nextEpisodeNumber = currentAnimeSeries.nextEpisodeNumber {
@@ -57,7 +58,9 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         if cell.imageView.image == nil {
-            cell.imageView.kf.setImage(with: imageMediumURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: cell.imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+            cell.imageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+            placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 collectionView.reloadItems(at: [indexPath])
             }
         }

@@ -56,6 +56,7 @@ extension BrowseViewController: UICollectionViewDataSource {
         
         cell.titleLabel.text = currentSeries.titleForSelectedTitleLanguageSetting
         cell.titleLabel.alpha = 1.0
+        cell.imageView.backgroundColor = Style.Color.Background.seriesCollectionImageView
         cell.imageOverlay.alpha = 0.7
         
         if cell.imageView.image == nil,

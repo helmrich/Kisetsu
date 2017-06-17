@@ -112,16 +112,15 @@ class AuthenticationViewController: UIViewController {
             ])
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         /*
-            When the main view will appear, check if the AniListClient's
-            authorizationCode property is not nil. If that's the case,
-            request an access token with the AniListClient's authorization
-            code and if an access token is successfully received, set values
-            in the user defaults and instantiate and show the "main" tab bar
-            controller
+         When the main view will appear, check if the AniListClient's
+         authorizationCode property is not nil. If that's the case,
+         request an access token with the AniListClient's authorization
+         code and if an access token is successfully received, set values
+         in the user defaults and instantiate and show the "main" tab bar
+         controller
          */
         if AniListClient.shared.authorizationCode != nil {
             NetworkActivityManager.shared.increaseNumberOfActiveConnections()
@@ -151,7 +150,6 @@ class AuthenticationViewController: UIViewController {
                     let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
                     self.present(tabBarController, animated: true, completion: nil)
                 }
-                
             }
         }
     }

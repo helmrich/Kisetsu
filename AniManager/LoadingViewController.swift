@@ -50,6 +50,10 @@ class LoadingViewController: UIViewController {
         super.viewDidLoad()
         
         errorMessageView.addToBottom(of: view)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         getAccessToken()
     }

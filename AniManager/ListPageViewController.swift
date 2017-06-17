@@ -41,8 +41,8 @@ class ListPageViewController: UIPageViewController {
         setViewController(forSelectedIndex: 0)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
             let grantType = GrantType(rawValue: grantTypeString),

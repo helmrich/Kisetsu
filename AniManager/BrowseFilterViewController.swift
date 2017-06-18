@@ -61,9 +61,6 @@ class BrowseFilterViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(setupInterfaceForCurrentTheme), name: .themeSettingChanged, object: nil)
         
-        // Set the table view's separator color
-        filterTableView.separatorColor = .aniManagerGray
-        
         /*
             Set the series type buttons depending on the
             view controller's series type
@@ -75,16 +72,20 @@ class BrowseFilterViewController: UIViewController {
             seriesTypeButtonAnime.isOn = true
             seriesTypeButtonManga.isOn = false
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         /*
-            Iterate over all filter name-value dictionaries in the shared data
-            source's selectedBrowseFilters dictionary and then iterate
-            over all filter value dictionaries and select the rows at indices
-            that are a key in a filter value dictionary
+             Iterate over all filter name-value dictionaries in the shared data
+             source's selectedBrowseFilters dictionary and then iterate
+             over all filter value dictionaries and select the rows at indices
+             that are a key in a filter value dictionary
          */
         for (_, filterValues) in DataSource.shared.selectedBrowseFilters {
             for (filterIndexPath, _) in filterValues! {
-                filterTableView.selectRow(at: filterIndexPath, animated: true, scrollPosition: .top)
+                filterTableView.selectRow(at: filterIndexPath, animated: true, scrollPosition: .none)
             }
         }
     }

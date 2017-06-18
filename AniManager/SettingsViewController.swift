@@ -95,6 +95,9 @@ class SettingsViewController: UIViewController {
     }
 }
 
+
+// MARK: - Table View Data Source
+
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return DataSource.shared.settings.count
@@ -153,6 +156,16 @@ extension SettingsViewController: UITableViewDataSource {
                     cell?.detailTextLabel?.textColor = .aniManagerRed
                     cell?.detailTextLabel?.isHidden = false
                 }
+            } else if currentSettingName.uppercased() == "USER PROFILE" {
+                if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+                    let grantType = GrantType(rawValue: grantTypeString),
+                    grantType == .clientCredentials {
+                    cell?.textLabel?.textColor = cell?.textLabel?.textColor.withAlphaComponent(0.3)
+                        cell?.selectionStyle = .none
+                } else {
+                    cell?.textLabel?.textColor = cell?.textLabel?.textColor.withAlphaComponent(1.0)
+                    cell?.selectionStyle = .gray
+                }
             } else if currentSettingName.uppercased() == "DOWNLOAD HIGH QUALITY IMAGES" {
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
                 (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
@@ -164,12 +177,22 @@ extension SettingsViewController: UITableViewDataSource {
             cell?.textLabel?.text = currentSettingName
             
             if currentSettingName.uppercased() == "LOGOUT" {
+                guard let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+                    let grantType = GrantType(rawValue: grantTypeString),
+                grantType != .clientCredentials else {
+                    cell?.textLabel?.text = "Login"
+                    cell?.textLabel?.textColor = .aniManagerGreen
+                    return cell!
+                }
                 cell?.textLabel?.textColor = .aniManagerRed
             }
         }
         return cell!
     }
 }
+
+
+// MARK: - Table View Delegate
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -183,7 +206,8 @@ extension SettingsViewController: UITableViewDelegate {
                 }
             } else if currentSettingName.uppercased() == "SEND FEEDBACK" {
                 UIApplication.shared.open(URL(string: "mailto:me@tobias-helmrich.de")!, options: [:], completionHandler: nil)
-            } else if currentSettingName.uppercased() == "LOGOUT" {
+            } else if currentSettingName.uppercased() == "LOGOUT" ||
+                currentSettingName.uppercased() == "LOGIN" {
                 logout()
             } else if currentSettingName.uppercased() == "FAVORITE GENRES" {
                 let favoriteGenresTableViewController = storyboard?.instantiateViewController(withIdentifier: "favoriteGenresTableViewController") as! FavoriteGenresTableViewController
@@ -210,13 +234,25 @@ extension SettingsViewController: UITableViewDelegate {
                     }
                     
                     if let userProfileURL = URL(string: "https://anilist.co/user/\(user.id)") {
-                        print(userProfileURL)
                         self.presentWebViewController(with: userProfileURL)
                     } else {
                         self.errorMessageView.showAndHide(withMessage: "Can't open user profile")
                     }
                 }
             }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let tableViewCell = tableView.cellForRow(at: indexPath),
+            let textLabelString = tableViewCell.textLabel?.text,
+            let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+            let grantType = GrantType(rawValue: grantTypeString),
+            textLabelString.uppercased() == "USER PROFILE",
+        grantType == .clientCredentials {
+            return nil
+        } else {
+            return indexPath
         }
     }
     

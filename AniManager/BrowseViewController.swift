@@ -140,6 +140,7 @@ class BrowseViewController: SeriesCollectionViewController {
             print("Error when fetching browse list: \(error), \(error.userInfo)")
         }
         
+        DataSource.shared.getGenres()
         AniListClient.shared.getGenreList { (genreList, errorMessage) in
             guard errorMessage == nil else {
                 return
@@ -153,7 +154,6 @@ class BrowseViewController: SeriesCollectionViewController {
             
         }
         seriesCollectionViewOverlay.frame = seriesCollectionView.frame
-        seriesCollectionViewOverlay.backgroundColor = seriesCollectionView.backgroundColor
         seriesCollectionViewOverlay.alpha = 0.0
         view.insertSubview(seriesCollectionViewOverlay, aboveSubview: seriesCollectionView)
     }
@@ -165,6 +165,7 @@ class BrowseViewController: SeriesCollectionViewController {
         activityIndicatorView.activityIndicatorViewStyle = Style.ActivityIndicatorView.lightDark
         navigationController?.navigationBar.barTintColor = Style.Color.BarTint.navigationBar
         seriesCollectionView.backgroundColor = Style.Color.Background.collectionView
+        seriesCollectionViewOverlay.backgroundColor = seriesCollectionView.backgroundColor
     }
     
     func refreshList() {

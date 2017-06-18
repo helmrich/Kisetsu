@@ -67,6 +67,7 @@ class FeaturedSlider: UIView {
         
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.alpha = 0.0
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
@@ -78,6 +79,7 @@ class FeaturedSlider: UIView {
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 30.0, weight: 700.0)
         titleLabel.numberOfLines = 0
+        titleLabel.alpha = 0.0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
@@ -97,7 +99,7 @@ class FeaturedSlider: UIView {
             // Title Label
             NSLayoutConstraint(item: titleLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 20.0),
             NSLayoutConstraint(item: titleLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: -20.0),
-            NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 30.0),
+            NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: 20.0),
             // Overlay View
             NSLayoutConstraint(item: overlayView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: 0.0),
             NSLayoutConstraint(item: overlayView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1.0, constant: 0.0),
@@ -109,7 +111,7 @@ class FeaturedSlider: UIView {
         ])
         
         setupImageView()
-        setupTitle()
+        setupTitleLabel()
         
         /*
             Create two swipe gesture recognizers for left and right swipes
@@ -147,6 +149,8 @@ class FeaturedSlider: UIView {
     }
     
     func featuredSliderSwipeOccurred(sender: UISwipeGestureRecognizer) {
+        isAutomaticSlidingEnabled = false
+        isAutomaticSlidingEnabled = true
         if sender.direction == .left {
             showFeaturedTitle(inOrder: .next)
         } else if sender.direction == .right {
@@ -200,14 +204,18 @@ class FeaturedSlider: UIView {
                 return
         }
         
-        UIView.transition(with: imageView, duration: 0.5, options: [.transitionCrossDissolve], animations: {
-            self.setupImageView()
-            self.setupTitle()
+        self.setupImageView()
+        self.setupTitleLabel()
+        UIView.animate(withDuration: 0.5) {
             self.pageControl.currentPage = currentSeriesIndex
-        }, completion: nil)
+        }
     }
     
     func setupImageView() {
+        UIView.animate(withDuration: 0.5) {
+            self.imageView.alpha = 0.0
+        }
+        
         guard let currentlySelectedSeries = currentlySelectedSeries else {
             return
         }
@@ -215,18 +223,29 @@ class FeaturedSlider: UIView {
         if let imageBannerURLString = currentlySelectedSeries.imageBannerURLString,
             let imageBannerURL = URL(string: imageBannerURLString) {
             DispatchQueue.main.async {
-                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: nil)
+                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: nil, progressBlock: nil) { (_, _, _, _) in
+                    UIView.animate(withDuration: 0.5) {
+                        self.imageView.alpha = 1.0
+                    }
+                }
             }
         }
     }
     
-    func setupTitle() {
+    func setupTitleLabel() {
+        UIView.animate(withDuration: 0.5) {
+            self.titleLabel.alpha = 0.0
+        }
+        
         guard let currentlySelectedSeries = currentlySelectedSeries else {
             return
         }
         
         DispatchQueue.main.async {
             self.titleLabel.text = currentlySelectedSeries.titleForSelectedTitleLanguageSetting
+            UIView.animate(withDuration: 0.5) {
+                self.titleLabel.alpha = 1.0
+            }
         }
     }
     

@@ -100,8 +100,8 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             If the object for the "favoriteGenres" key in the user defaults
             is nil, set an empty string array as the value for this key
          */
-        if UserDefaults.standard.object(forKey: "favoriteGenres") == nil {
-            UserDefaults.standard.set([String](), forKey: "favoriteGenres")
+        if UserDefaults.standard.object(forKey: UserDefaultsKey.favoriteGenres.rawValue) == nil {
+            UserDefaults.standard.set([String](), forKey: UserDefaultsKey.favoriteGenres.rawValue)
         }
         
         /*
@@ -110,14 +110,14 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             to the array and overwrite the user defaults' object with the
             "favoriteGenres" key with this array
          */
-        selectedGenres = UserDefaults.standard.object(forKey: "favoriteGenres") as! [String]
+        selectedGenres = UserDefaults.standard.object(forKey: UserDefaultsKey.favoriteGenres.rawValue) as! [String]
         selectedGenres.append(text)
         
-        UserDefaults.standard.set(selectedGenres, forKey: "favoriteGenres")
+        UserDefaults.standard.set(selectedGenres, forKey: UserDefaultsKey.favoriteGenres.rawValue)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let favoriteGenres = UserDefaults.standard.object(forKey: "favoriteGenres") as? [String] else {
+        guard let favoriteGenres = UserDefaults.standard.object(forKey: UserDefaultsKey.favoriteGenres.rawValue) as? [String] else {
             return
         }
         
@@ -129,7 +129,7 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
         
         let updatedFavoriteGenres = favoriteGenres.filter { $0 != text }
         
-        UserDefaults.standard.set(updatedFavoriteGenres, forKey: "favoriteGenres")
+        UserDefaults.standard.set(updatedFavoriteGenres, forKey: UserDefaultsKey.favoriteGenres.rawValue)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -141,7 +141,7 @@ extension FavoriteGenresTableViewController: UITableViewDelegate {
             displayed cell's text value and if it does, select the
             table view's row at the cell's index path
          */
-        if let favoriteGenres = UserDefaults.standard.object(forKey: "favoriteGenres") as? [String],
+        if let favoriteGenres = UserDefaults.standard.object(forKey: UserDefaultsKey.favoriteGenres.rawValue) as? [String],
             let textLabel = cell.textLabel,
             let text = textLabel.text {
             if favoriteGenres.contains(text) {

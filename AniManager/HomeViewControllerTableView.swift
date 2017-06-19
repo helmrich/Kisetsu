@@ -52,8 +52,8 @@ extension HomeViewController: UITableViewDataSource {
         cell.activityIndicatorView.startAnimatingAndFadeIn()
         
         cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
-        cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
-        cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
+        cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100.0 ? 100.0 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100.0 ? 100.0 : (view.bounds.width / 3.5))
+        cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1.0
         
         cell.imagesCollectionView.dataSource = self
         cell.imagesCollectionView.delegate = self

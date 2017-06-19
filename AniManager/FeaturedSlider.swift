@@ -77,8 +77,8 @@ class FeaturedSlider: UIView {
         addSubview(overlayView)
         
         titleLabel.textColor = .white
-        titleLabel.font = UIFont.systemFont(ofSize: 30.0, weight: 700.0)
-        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 30.0)
+        titleLabel.numberOfLines = 3
         titleLabel.alpha = 0.0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)

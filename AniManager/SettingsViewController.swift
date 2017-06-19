@@ -166,7 +166,7 @@ extension SettingsViewController: UITableViewDataSource {
                     cell?.textLabel?.textColor = cell?.textLabel?.textColor.withAlphaComponent(1.0)
                     cell?.selectionStyle = .gray
                 }
-            } else if currentSettingName.uppercased() == "DOWNLOAD HIGH QUALITY IMAGES" {
+            } else if currentSettingName.uppercased() == "HIGH-QUALITY IMAGES" {
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
                 (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
                 (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue)

@@ -111,7 +111,7 @@ class DataSource {
         ]],
         ["Appearance": [
                 "Dark Theme",
-                "Download High Quality Images"
+                "High-Quality Images"
         ]],
         ["Advanced": ["Clear Disk Image Cache"]],
         ["Feedback": ["Send Feedback"]],

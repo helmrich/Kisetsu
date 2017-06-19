@@ -15,6 +15,17 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
         
+        /*
+            These properties have to be set in order for Auto Layout
+            to work properly for UICollectionViewCell subclasses on
+            all devices. The problem was especially visible for the
+            labels in images collection view cells when using an iPhone SE
+         
+            Also see stackoverflow: https://stackoverflow.com/a/27500590
+         */
+        cell.contentView.frame = cell.bounds
+        cell.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         cell.imageOverlayView.alpha = 0.6
         
         /*

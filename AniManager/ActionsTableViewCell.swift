@@ -161,7 +161,7 @@ class ActionsTableViewCell: UITableViewCell {
     func addToolbarInputAccessoryViewToProgressTextFields(doneButtonTarget target: Any, doneButtonAction action: Selector) {
         // Create and configure the toolbar
         let progressTextFieldToolbar = UIToolbar()
-        progressTextFieldToolbar.barTintColor = .aniManagerBlue
+        progressTextFieldToolbar.barTintColor = Style.Color.BarTint.toolbar
         progressTextFieldToolbar.sizeToFit()
         
         /*

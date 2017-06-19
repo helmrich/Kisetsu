@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D4C6103DD831A32C21686A0 /* Pods_AniManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C702D453F50800361936C81 /* Pods_AniManager.framework */; };
+		AE390AD1AE43AB5D619284A0 /* Pods_Kisetsu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E94FFE4D18868F31FD61259F /* Pods_Kisetsu.framework */; };
 		D20E26311EDFF96400FC8A95 /* HomeViewControllerTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */; };
 		D20E26351EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */; };
 		D20E26381EE018E400FC8A95 /* PresentWebViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */; };
@@ -133,9 +133,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		359EE2FA48B512F1E12F68A0 /* Pods-AniManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AniManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-AniManager/Pods-AniManager.release.xcconfig"; sourceTree = "<group>"; };
-		4C702D453F50800361936C81 /* Pods_AniManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AniManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE03A6AF6B276A5B82BEAD5 /* Pods-AniManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AniManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AniManager/Pods-AniManager.debug.xcconfig"; sourceTree = "<group>"; };
+		36A05BC99F31C123E14C7C42 /* Pods-Kisetsu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kisetsu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kisetsu/Pods-Kisetsu.release.xcconfig"; sourceTree = "<group>"; };
+		3F7F47347ADBD1607748EBD8 /* Pods-Kisetsu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kisetsu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kisetsu/Pods-Kisetsu.debug.xcconfig"; sourceTree = "<group>"; };
 		D20E26301EDFF96400FC8A95 /* HomeViewControllerTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTableView.swift; sourceTree = "<group>"; };
 		D20E26341EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewControllerCollectionView.swift; sourceTree = "<group>"; };
 		D20E26371EE018E400FC8A95 /* PresentWebViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentWebViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -222,7 +221,7 @@
 		D2786FA41DF5FD1D00F4368F /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		D2786FAC1DF63C2500F4368F /* SeriesDetailCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCollectionViewDataSource.swift; sourceTree = "<group>"; };
-		D27A77B11DDF861700228EF2 /* AniManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D27A77B11DDF861700228EF2 /* Kisetsu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kisetsu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27A77B41DDF861700228EF2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D27A77B91DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D27A77BE1DDF861700228EF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -260,6 +259,7 @@
 		D2F32C6C1DFCE4570044D195 /* ListNameTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNameTableViewCell.swift; sourceTree = "<group>"; };
 		D2F32C6E1DFDE2B70044D195 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D2F32C701DFEDDBA0044D195 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		E94FFE4D18868F31FD61259F /* Pods_Kisetsu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kisetsu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,7 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D4C6103DD831A32C21686A0 /* Pods_AniManager.framework in Frameworks */,
+				AE390AD1AE43AB5D619284A0 /* Pods_Kisetsu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,9 +277,18 @@
 		00740FB5237F825B82B01E6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4C702D453F50800361936C81 /* Pods_AniManager.framework */,
+				E94FFE4D18868F31FD61259F /* Pods_Kisetsu.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC3F403991C255FFFE5918CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F7F47347ADBD1607748EBD8 /* Pods-Kisetsu.debug.xcconfig */,
+				36A05BC99F31C123E14C7C42 /* Pods-Kisetsu.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D20E262D1EDFF90A00FC8A95 /* Browse */ = {
@@ -561,22 +570,22 @@
 		D27A77A81DDF861700228EF2 = {
 			isa = PBXGroup;
 			children = (
-				D27A77B31DDF861700228EF2 /* AniManager */,
+				D27A77B31DDF861700228EF2 /* Kisetsu */,
 				D27A77B21DDF861700228EF2 /* Products */,
-				D361BDFDFDBA646F9AF25105 /* Pods */,
 				00740FB5237F825B82B01E6E /* Frameworks */,
+				AC3F403991C255FFFE5918CD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		D27A77B21DDF861700228EF2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D27A77B11DDF861700228EF2 /* AniManager.app */,
+				D27A77B11DDF861700228EF2 /* Kisetsu.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D27A77B31DDF861700228EF2 /* AniManager */ = {
+		D27A77B31DDF861700228EF2 /* Kisetsu */ = {
 			isa = PBXGroup;
 			children = (
 				D27A77B41DDF861700228EF2 /* AppDelegate.swift */,
@@ -594,6 +603,7 @@
 				D25EDEA11DDF956000267243 /* Resources */,
 				D25EDE9E1DDF901C00267243 /* Supporting Files */,
 			);
+			name = Kisetsu;
 			path = AniManager;
 			sourceTree = "<group>";
 		};
@@ -734,21 +744,12 @@
 			name = "List Names Table View";
 			sourceTree = "<group>";
 		};
-		D361BDFDFDBA646F9AF25105 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BBE03A6AF6B276A5B82BEAD5 /* Pods-AniManager.debug.xcconfig */,
-				359EE2FA48B512F1E12F68A0 /* Pods-AniManager.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D27A77B01DDF861700228EF2 /* AniManager */ = {
+		D27A77B01DDF861700228EF2 /* Kisetsu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D27A77C31DDF861700228EF2 /* Build configuration list for PBXNativeTarget "AniManager" */;
+			buildConfigurationList = D27A77C31DDF861700228EF2 /* Build configuration list for PBXNativeTarget "Kisetsu" */;
 			buildPhases = (
 				CA33E7DA396F3968CFE98B9F /* [CP] Check Pods Manifest.lock */,
 				D27A77AD1DDF861700228EF2 /* Sources */,
@@ -761,9 +762,9 @@
 			);
 			dependencies = (
 			);
-			name = AniManager;
+			name = Kisetsu;
 			productName = AniManager;
-			productReference = D27A77B11DDF861700228EF2 /* AniManager.app */;
+			productReference = D27A77B11DDF861700228EF2 /* Kisetsu.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -778,12 +779,12 @@
 				TargetAttributes = {
 					D27A77B01DDF861700228EF2 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = QT2SGLRBWW;
+						DevelopmentTeam = 4TZM8GS72Y;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = D27A77AC1DDF861700228EF2 /* Build configuration list for PBXProject "AniManager" */;
+			buildConfigurationList = D27A77AC1DDF861700228EF2 /* Build configuration list for PBXProject "Kisetsu" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -796,7 +797,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D27A77B01DDF861700228EF2 /* AniManager */,
+				D27A77B01DDF861700228EF2 /* Kisetsu */,
 			);
 		};
 /* End PBXProject section */
@@ -837,7 +838,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AniManager/Pods-AniManager-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kisetsu/Pods-Kisetsu-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		500201E82D5B94B30475FFF9 /* [CP] Copy Pods Resources */ = {
@@ -852,7 +853,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AniManager/Pods-AniManager-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kisetsu/Pods-Kisetsu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CA33E7DA396F3968CFE98B9F /* [CP] Check Pods Manifest.lock */ = {
@@ -1111,11 +1112,11 @@
 		};
 		D27A77C41DDF861700228EF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BBE03A6AF6B276A5B82BEAD5 /* Pods-AniManager.debug.xcconfig */;
+			baseConfigurationReference = 3F7F47347ADBD1607748EBD8 /* Pods-Kisetsu.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QT2SGLRBWW;
+				DEVELOPMENT_TEAM = 4TZM8GS72Y;
 				INFOPLIST_FILE = AniManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1128,11 +1129,11 @@
 		};
 		D27A77C51DDF861700228EF2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 359EE2FA48B512F1E12F68A0 /* Pods-AniManager.release.xcconfig */;
+			baseConfigurationReference = 36A05BC99F31C123E14C7C42 /* Pods-Kisetsu.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QT2SGLRBWW;
+				DEVELOPMENT_TEAM = 4TZM8GS72Y;
 				INFOPLIST_FILE = AniManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1146,7 +1147,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D27A77AC1DDF861700228EF2 /* Build configuration list for PBXProject "AniManager" */ = {
+		D27A77AC1DDF861700228EF2 /* Build configuration list for PBXProject "Kisetsu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D27A77C11DDF861700228EF2 /* Debug */,
@@ -1155,7 +1156,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D27A77C31DDF861700228EF2 /* Build configuration list for PBXNativeTarget "AniManager" */ = {
+		D27A77C31DDF861700228EF2 /* Build configuration list for PBXNativeTarget "Kisetsu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D27A77C41DDF861700228EF2 /* Debug */,

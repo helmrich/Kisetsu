@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -32,7 +32,7 @@
         <!--Loading View Controller-->
         <scene sceneID="XjM-Hy-YWY">
             <objects>
-                <viewController storyboardIdentifier="loadingViewController" id="maD-s2-dON" customClass="LoadingViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loadingViewController" id="maD-s2-dON" customClass="LoadingViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UQx-Ih-rQ1"/>
                         <viewControllerLayoutGuide type="bottom" id="gxO-wE-gmL"/>
@@ -42,7 +42,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ndV-tQ-JtG">
-                                <rect key="frame" x="16" y="290.5" width="343" height="86"/>
+                                <rect key="frame" x="16" y="260" width="343" height="147"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-0S-ovY">
                                         <rect key="frame" x="153" y="0.0" width="37" height="37"/>
@@ -54,7 +54,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2py-oN-oeq">
-                                        <rect key="frame" x="124" y="86" width="95" height="0.0"/>
+                                        <rect key="frame" x="124" y="106" width="95" height="41"/>
                                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="24"/>
                                         <state key="normal" title="Try again">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -88,7 +88,7 @@
         <!--Authentication View Controller-->
         <scene sceneID="qw2-Yg-tVw">
             <objects>
-                <viewController storyboardIdentifier="authenticationViewController" id="KLd-lg-sp5" customClass="AuthenticationViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="authenticationViewController" id="KLd-lg-sp5" customClass="AuthenticationViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uUS-rq-xd7"/>
                         <viewControllerLayoutGuide type="bottom" id="Kt5-Sa-nfQ"/>
@@ -98,9 +98,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FYe-CF-u71">
-                                <rect key="frame" x="0.0" y="309.5" width="375" height="108"/>
+                                <rect key="frame" x="0.0" y="309" width="375" height="108"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRj-XV-Tl4" customClass="AniManagerButton" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="24"/>
@@ -167,8 +167,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jMd-Na-OAI">
                                 <rect key="frame" x="0.0" y="100" width="375" height="103"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AniManager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
-                                        <rect key="frame" x="45" y="0.0" width="285" height="74"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kisetsu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-46-32S">
+                                        <rect key="frame" x="104.5" y="0.0" width="166.5" height="74"/>
                                         <fontDescription key="fontDescription" name="CarterOne" family="Carter One" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -220,11 +220,11 @@
             </objects>
             <point key="canvasLocation" x="473" y="83"/>
         </scene>
-        <!--AniManager-->
+        <!--Kisetsu-->
         <scene sceneID="6H7-WG-Q6N">
             <objects>
-                <tabBarController storyboardIdentifier="tabBarController" title="AniManager" id="gKc-6b-GHk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="AniManager" id="mm2-3R-zeO">
+                <tabBarController storyboardIdentifier="tabBarController" title="Kisetsu" id="gKc-6b-GHk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Kisetsu" id="mm2-3R-zeO">
                         <barButtonItem key="rightBarButtonItem" image="SearchIconNavBar" id="sT3-fV-MI1"/>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Dr0-YQ-PMm">
@@ -250,7 +250,7 @@
         <!--Browse-->
         <scene sceneID="Ytf-x0-QEc">
             <objects>
-                <viewController id="645-XW-Nu9" customClass="BrowseViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="645-XW-Nu9" customClass="BrowseViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SzN-rn-rkK"/>
                         <viewControllerLayoutGuide type="bottom" id="H0f-3Z-8cC"/>
@@ -269,7 +269,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="mMS-8C-ENW" customClass="SeriesCollectionViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="mMS-8C-ENW" customClass="SeriesCollectionViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -338,7 +338,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-f6-oBt">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -375,7 +375,7 @@
         <!--Browse Filter View Controller-->
         <scene sceneID="ek0-ho-2rW">
             <objects>
-                <viewController storyboardIdentifier="browseFilterViewController" id="2oT-Sw-1d8" customClass="BrowseFilterViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="browseFilterViewController" id="2oT-Sw-1d8" customClass="BrowseFilterViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VS8-fI-SgJ"/>
                         <viewControllerLayoutGuide type="bottom" id="uAD-mN-ZgV"/>
@@ -385,7 +385,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jt3-sd-6bj">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="cancel" id="F97-7P-28y">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -404,7 +404,7 @@
                                 <color key="barTintColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyn-1c-8lw">
-                                <rect key="frame" x="160" y="20" width="55" height="44"/>
+                                <rect key="frame" x="160.5" y="0.0" width="55" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hmY-q6-Jzc"/>
                                 </constraints>
@@ -413,9 +413,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2gD-Kf-SHn">
-                                <rect key="frame" x="68" y="94" width="239" height="50"/>
+                                <rect key="frame" x="68" y="74" width="239" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIw-7E-qxQ" customClass="OnOffButton" customModule="AniManager" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIw-7E-qxQ" customClass="OnOffButton" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
                                         <color key="backgroundColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -430,7 +430,7 @@
                                             <action selector="toggleSelectedSeriesType:" destination="2oT-Sw-1d8" eventType="touchUpInside" id="Ovd-sN-iqO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfG-7o-tD6" customClass="OnOffButton" customModule="AniManager" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfG-7o-tD6" customClass="OnOffButton" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="119" y="0.0" width="120" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -448,11 +448,11 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8w7-Yw-UWn">
-                                <rect key="frame" x="0.0" y="174" width="375" height="493"/>
+                                <rect key="frame" x="0.0" y="154" width="375" height="513"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="filterValueCell" id="maf-nh-l61" customClass="FilterValueTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="filterValueCell" id="maf-nh-l61" customClass="FilterValueTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="maf-nh-l61" id="X7g-cF-cCd">
@@ -510,7 +510,7 @@
         <!--Series Detail View Controller-->
         <scene sceneID="JoQ-Qr-EC0">
             <objects>
-                <viewController storyboardIdentifier="seriesDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="BeO-6O-eOl" customClass="SeriesDetailViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="seriesDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="BeO-6O-eOl" customClass="SeriesDetailViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tzK-CO-pv3"/>
                         <viewControllerLayoutGuide type="bottom" id="Oyd-2m-mYf"/>
@@ -520,10 +520,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KmS-nA-87O">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="basicInformationsCell" id="pe8-Xr-HjZ" customClass="BasicInformationsTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="basicInformationsCell" id="pe8-Xr-HjZ" customClass="BasicInformationsTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pe8-Xr-HjZ" id="fGB-AT-kdg">
@@ -531,7 +531,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionsCell" id="ZUu-da-Slu" customClass="ActionsTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionsCell" id="ZUu-da-Slu" customClass="ActionsTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUu-da-Slu" id="LQJ-Nt-CY3">
@@ -539,7 +539,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="genreCell" id="t9i-hL-dc5" customClass="GenreTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="genreCell" id="t9i-hL-dc5" customClass="GenreTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t9i-hL-dc5" id="If6-Vb-Aib">
@@ -547,7 +547,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="descriptionCell" id="mb3-g1-nY9" customClass="DescriptionTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="descriptionCell" id="mb3-g1-nY9" customClass="DescriptionTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mb3-g1-nY9" id="bg4-f1-fQJ">
@@ -555,7 +555,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterImagesCell" id="bnR-uK-8pZ" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterImagesCell" id="bnR-uK-8pZ" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bnR-uK-8pZ" id="avx-mj-a3z">
@@ -563,7 +563,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="relationImagesCell" id="I4w-O2-qnC" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="relationImagesCell" id="I4w-O2-qnC" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I4w-O2-qnC" id="IeM-LE-VVo">
@@ -571,7 +571,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="additionalInformationsCell" id="eLc-lF-ZPP" customClass="AdditionalInformationsTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="additionalInformationsCell" id="eLc-lF-ZPP" customClass="AdditionalInformationsTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLc-lF-ZPP" id="FoL-1r-Rs0">
@@ -579,7 +579,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tagsCell" id="TtG-e5-aVF" customClass="GenreTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tagsCell" id="TtG-e5-aVF" customClass="GenreTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="336" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TtG-e5-aVF" id="Ae1-bd-Ptz">
@@ -587,7 +587,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="externalLinksCell" id="xSq-qt-qTM" customClass="ExternalLinksTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="externalLinksCell" id="xSq-qt-qTM" customClass="ExternalLinksTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xSq-qt-qTM" id="gd6-7a-mF0">
@@ -595,7 +595,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="videoCell" id="Bnb-Vq-Zbh" customClass="VideoTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="videoCell" id="Bnb-Vq-Zbh" customClass="VideoTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="424" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bnb-Vq-Zbh" id="B4O-3D-Ll5">
@@ -630,7 +630,7 @@
         <!--Character Detail View Controller-->
         <scene sceneID="ipB-7L-hcg">
             <objects>
-                <viewController storyboardIdentifier="characterDetailViewController" id="IJQ-Ue-ACz" customClass="CharacterDetailViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="characterDetailViewController" id="IJQ-Ue-ACz" customClass="CharacterDetailViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Fb-d0-pEh"/>
                         <viewControllerLayoutGuide type="bottom" id="Mx9-qU-bjr"/>
@@ -640,10 +640,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kgH-n3-c1f">
-                                <rect key="frame" x="0.0" y="20" width="375" height="333.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
                             </imageView>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HfW-iV-ICi">
-                                <rect key="frame" x="0.0" y="20" width="375" height="333.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLi-EF-Do4">
                                         <rect key="frame" x="20" y="15" width="25" height="25"/>
@@ -677,23 +677,23 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-hw-rum">
-                                <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
+                                <rect key="frame" x="0.0" y="333" width="375" height="334"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.12156862745098039" green="0.14901960784313725" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="7zG-Pd-DQc">
-                                <rect key="frame" x="140" y="104" width="95" height="215.5"/>
+                                <rect key="frame" x="140" y="84" width="95" height="216"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YPm-g5-c5n">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="132.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="95" height="133"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="YPm-g5-c5n" secondAttribute="height" multiplier="15:21" id="VIM-ad-ODR"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D2d-g6-wh8">
-                                        <rect key="frame" x="30" y="157.5" width="35" height="58"/>
+                                        <rect key="frame" x="30" y="158" width="35" height="58"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="KF9-TD-kva">
                                                 <rect key="frame" x="15" y="0.0" width="5" height="29"/>
@@ -751,7 +751,7 @@
         <!--Search View Controller-->
         <scene sceneID="Hrz-Fu-2gF">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mXY-UU-HB9" customClass="SearchViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mXY-UU-HB9" customClass="SearchViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZGL-sN-IRE"/>
                         <viewControllerLayoutGuide type="bottom" id="73c-a8-crc"/>
@@ -761,7 +761,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hZa-sX-XPG">
-                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="cxO-Dr-77U">
                                     <size key="itemSize" width="124" height="124"/>
@@ -770,7 +770,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="Js7-iY-1cf" customClass="SeriesCollectionViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="Js7-iY-1cf" customClass="SeriesCollectionViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -833,16 +833,16 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNk-og-rz6">
-                                <rect key="frame" x="124" y="357" width="127" height="24"/>
+                                <rect key="frame" x="124" y="351" width="127" height="24"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <color key="textColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CiZ-QH-BRS">
-                                <rect key="frame" x="177" y="359" width="20" height="20"/>
+                                <rect key="frame" x="177" y="353" width="20" height="20"/>
                             </activityIndicatorView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Jc3-Db-79z">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.14509803921568626" green="0.75686274509803919" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.14419206976890564" green="0.75712293386459351" blue="0.99466150999069214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -902,7 +902,7 @@
         <!--Anime Lists-->
         <scene sceneID="54M-V3-vQZ">
             <objects>
-                <viewController storyboardIdentifier="animeListSelectionViewController" automaticallyAdjustsScrollViewInsets="NO" id="6g2-7A-bjD" customClass="AnimeListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="animeListSelectionViewController" automaticallyAdjustsScrollViewInsets="NO" id="6g2-7A-bjD" customClass="AnimeListSelectionViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0lV-9V-i5v"/>
                         <viewControllerLayoutGuide type="bottom" id="gAT-P7-XTB"/>
@@ -915,7 +915,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="ouV-bM-2pS" customClass="ListNameTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="ouV-bM-2pS" customClass="ListNameTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ouV-bM-2pS" id="uxR-6o-js6">
@@ -936,7 +936,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoDetail" translatesAutoresizingMaskIntoConstraints="NO" id="KfA-T6-3sC">
-                                                    <rect key="frame" x="332" y="40.5" width="13" height="20"/>
+                                                    <rect key="frame" x="332" y="40" width="13" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="13" id="rIX-t4-Vb5"/>
                                                         <constraint firstAttribute="height" constant="20" id="yFo-GG-HYY"/>
@@ -994,7 +994,7 @@
         <!--List Detail View Controller-->
         <scene sceneID="d4p-N2-VPK">
             <objects>
-                <viewController storyboardIdentifier="listDetailViewController" id="2F8-yd-OEC" customClass="ListDetailViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="listDetailViewController" id="2F8-yd-OEC" customClass="ListDetailViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jN2-Xw-WVm"/>
                         <viewControllerLayoutGuide type="bottom" id="b0A-1c-1OS"/>
@@ -1013,7 +1013,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="M1x-UK-0Pe" customClass="SeriesCollectionViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="seriesCell" id="M1x-UK-0Pe" customClass="SeriesCollectionViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1076,10 +1076,10 @@
                                 </connections>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="idc-rb-S1Z">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAI-GY-nla">
-                                <rect key="frame" x="124" y="321.5" width="127" height="24"/>
+                                <rect key="frame" x="124" y="321" width="127" height="24"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="20"/>
                                 <color key="textColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1113,7 +1113,7 @@
         <!--Manga Lists-->
         <scene sceneID="DPD-1J-x1k">
             <objects>
-                <viewController storyboardIdentifier="mangaListSelectionViewController" automaticallyAdjustsScrollViewInsets="NO" id="Dia-Jv-QgS" customClass="MangaListSelectionViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mangaListSelectionViewController" automaticallyAdjustsScrollViewInsets="NO" id="Dia-Jv-QgS" customClass="MangaListSelectionViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CA4-lU-YAm"/>
                         <viewControllerLayoutGuide type="bottom" id="zAs-1i-B3g"/>
@@ -1126,7 +1126,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="5ia-8z-oCn" customClass="ListNameTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="listNameTableViewCell" rowHeight="100" id="5ia-8z-oCn" customClass="ListNameTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ia-8z-oCn" id="URP-o1-cIQ">
@@ -1141,13 +1141,13 @@
                                                     <color key="backgroundColor" red="0.1215686275" green="0.14901960780000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1UU-SK-BR6">
-                                                    <rect key="frame" x="30" y="32" width="111.5" height="36"/>
+                                                    <rect key="frame" x="30" y="32" width="112" height="36"/>
                                                     <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GoDetail" translatesAutoresizingMaskIntoConstraints="NO" id="T8q-GS-r4r">
-                                                    <rect key="frame" x="332" y="40.5" width="13" height="20"/>
+                                                    <rect key="frame" x="332" y="40" width="13" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="13" id="5km-6k-ah2"/>
                                                         <constraint firstAttribute="height" constant="20" id="Ucz-a3-tcP"/>
@@ -1203,7 +1203,7 @@
         <!--Settings-->
         <scene sceneID="o80-2O-BTn">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Zsz-G1-mQF" customClass="SettingsViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Zsz-G1-mQF" customClass="SettingsViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GM3-s8-HXo"/>
                         <viewControllerLayoutGuide type="bottom" id="i8K-vH-8Hj"/>
@@ -1240,7 +1240,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settingSwitchCell" id="ANZ-gO-pfr" customClass="SettingSwitchTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settingSwitchCell" id="ANZ-gO-pfr" customClass="SettingSwitchTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ANZ-gO-pfr" id="PBb-3p-RfU">
@@ -1298,7 +1298,7 @@
         <!--Favorite Genres Table View Controller-->
         <scene sceneID="hG1-3X-NDG">
             <objects>
-                <viewController storyboardIdentifier="favoriteGenresTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="XaD-k8-7sG" customClass="FavoriteGenresTableViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="favoriteGenresTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="XaD-k8-7sG" customClass="FavoriteGenresTableViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LDG-uD-cnS"/>
                         <viewControllerLayoutGuide type="bottom" id="O53-bR-Giy"/>
@@ -1308,12 +1308,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="98S-PM-uTg">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="genreCell" textLabel="yW4-rG-3MW" style="IBUITableViewCellStyleDefault" id="hML-wd-Rgz" customClass="SettingSelectionTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="genreCell" textLabel="yW4-rG-3MW" style="IBUITableViewCellStyleDefault" id="hML-wd-Rgz" customClass="SettingSelectionTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hML-wd-Rgz" id="O0M-YU-VSc">
@@ -1358,7 +1358,7 @@
         <!--Preferred Language Table View Controller-->
         <scene sceneID="AdR-aR-IQW">
             <objects>
-                <viewController storyboardIdentifier="preferredLanguageTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="Cld-f7-JcQ" customClass="PreferredLanguageTableViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="preferredLanguageTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="Cld-f7-JcQ" customClass="PreferredLanguageTableViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dJi-S0-pzb"/>
                         <viewControllerLayoutGuide type="bottom" id="35U-YB-jLk"/>
@@ -1368,12 +1368,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hK9-hH-T4e">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageCell" textLabel="UOH-pa-P0p" style="IBUITableViewCellStyleDefault" id="Tw9-xV-yUX" customClass="SettingSelectionTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="languageCell" textLabel="UOH-pa-P0p" style="IBUITableViewCellStyleDefault" id="Tw9-xV-yUX" customClass="SettingSelectionTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tw9-xV-yUX" id="PDh-N2-pSR">
@@ -1418,7 +1418,7 @@
         <!--Web View Controller-->
         <scene sceneID="B5Z-Qp-w0d">
             <objects>
-                <viewController storyboardIdentifier="WebViewController" id="dcw-WQ-teh" customClass="WebViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="dcw-WQ-teh" customClass="WebViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GMy-hA-n3t"/>
                         <viewControllerLayoutGuide type="bottom" id="4BX-zX-gkR"/>
@@ -1449,10 +1449,10 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
                             <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FSC-Ke-kOf">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
                             </activityIndicatorView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vU2-4E-cLs">
-                                <rect key="frame" x="155.5" y="317.5" width="64" height="32"/>
+                                <rect key="frame" x="156" y="318" width="64" height="32"/>
                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                 <state key="normal" title="Try again">
                                     <color key="titleColor" red="0.0" green="0.6588235294117647" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1496,7 +1496,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" tag="1" contentMode="scaleToFill" id="TWs-dX-8Bt">
+                    <navigationBar key="navigationBar" tag="1" contentMode="scaleToFill" misplaced="YES" id="TWs-dX-8Bt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1518,7 +1518,7 @@
         <!--List Page View Controller-->
         <scene sceneID="SGX-Yj-Nlh">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="phg-IF-Udk" customClass="ListPageViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="phg-IF-Udk" customClass="ListPageViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="6gW-P7-8Ds">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oOI-WC-8q4">
@@ -1542,7 +1542,7 @@
         <!--Home-->
         <scene sceneID="rBW-ap-u8e">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Wbo-b2-Vaw" customClass="HomeViewController" customModule="AniManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Wbo-b2-Vaw" customClass="HomeViewController" customModule="Kisetsu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iwo-ws-zH4"/>
                         <viewControllerLayoutGuide type="bottom" id="7A2-5P-xe4"/>
@@ -1555,7 +1555,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currentlyAiringCell" id="D4C-9z-Tf2" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currentlyAiringCell" id="D4C-9z-Tf2" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D4C-9z-Tf2" id="KFf-EW-ZS6">
@@ -1563,7 +1563,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currentSeasonCell" id="g8T-ei-YRY" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="currentSeasonCell" id="g8T-ei-YRY" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g8T-ei-YRY" id="gVa-wb-JW6">
@@ -1571,7 +1571,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="continueWatchingCell" id="MZx-F4-nWg" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="continueWatchingCell" id="MZx-F4-nWg" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MZx-F4-nWg" id="3Zl-Pa-NVM">
@@ -1579,7 +1579,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="continueReadingCell" id="9ao-od-NoG" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="continueReadingCell" id="9ao-od-NoG" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ao-od-NoG" id="NKs-kK-cJ7">
@@ -1587,7 +1587,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recommendationsCell" id="RNO-FL-MeW" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recommendationsCell" id="RNO-FL-MeW" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="204" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RNO-FL-MeW" id="0U1-k1-fsG">
@@ -1595,7 +1595,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topRatedAnimeCell" id="xhm-Qj-3xS" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topRatedAnimeCell" id="xhm-Qj-3xS" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xhm-Qj-3xS" id="PuD-zK-Sei">
@@ -1603,7 +1603,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostPopularAnimeCell" id="cQd-Qg-uWz" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostPopularAnimeCell" id="cQd-Qg-uWz" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="292" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cQd-Qg-uWz" id="bcg-IP-w0D">
@@ -1611,7 +1611,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostPopularMangaCell" id="3hP-Tg-IIk" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostPopularMangaCell" id="3hP-Tg-IIk" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="336" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3hP-Tg-IIk" id="tps-KX-0op">
@@ -1619,7 +1619,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topRatedMangaCell" id="EVw-dp-DB9" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="topRatedMangaCell" id="EVw-dp-DB9" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EVw-dp-DB9" id="LIT-9T-nX2">
@@ -1660,7 +1660,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F4P-iU-j1v">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="F4P-iU-j1v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.72196477651596069" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1686,7 +1686,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yzB-lc-YfT">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yzB-lc-YfT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1713,7 +1713,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sZg-Od-61L">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="sZg-Od-61L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1739,7 +1739,7 @@
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7AW-XY-vKX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7AW-XY-vKX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.72196477651596069" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

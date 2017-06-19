@@ -1,9 +1,9 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 
-target 'AniManager' do
+target 'Kisetsu' do
   use_frameworks!
 
-  # Pods for AniManager
+  # Pods for Kisetsu
   pod 'Kingfisher', '~> 3.0'
 
 end

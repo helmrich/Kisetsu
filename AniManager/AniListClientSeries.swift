@@ -148,11 +148,19 @@ extension AniListClient {
         }
     }
     
-    func getCurrentSeasonAnime(amount: Int = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+    func getCurrentSeasonAnime(amount: Int? = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+        let fullPageValue: String
+        if let amount = amount,
+            amount < 41 {
+            fullPageValue = "false"
+        } else {
+            fullPageValue = "true"
+        }
         let browseParameters: [String:Any] = [
             AniListConstant.ParameterKey.Browse.season: Season.current.rawValue,
             AniListConstant.ParameterKey.Browse.year: String(DateManager.currentYear),
-            AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
+            AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending,
+            AniListConstant.ParameterKey.Browse.fullPage: fullPageValue
         ]
         getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
             guard errorMessage == nil else {
@@ -182,16 +190,28 @@ extension AniListClient {
                 return
             }
             
-            let animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            let animeSeriesListWithSelectedAmount: [AnimeSeries]
+            if let amount = amount {
+                animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            } else {
+                animeSeriesListWithSelectedAmount = animeSeriesList
+            }
             completionHandlerForSeriesList(animeSeriesListWithSelectedAmount, nil)
         }
     }
     
-    func getCurrentlyAiringAnime(amount: Int = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+    func getCurrentlyAiringAnime(amount: Int? = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+        let fullPageValue: String
+        if let amount = amount,
+            amount < 41 {
+            fullPageValue = "false"
+        } else {
+            fullPageValue = "true"
+        }
         let browseParameters: [String:Any] = [
             AniListConstant.ParameterKey.Browse.airingData: "true",
             AniListConstant.ParameterKey.Browse.status: AnimeAiringStatus.currentlyAiring.rawValue,
-            AniListConstant.ParameterKey.Browse.fullPage: amount > 40 ? "true" : "false",
+            AniListConstant.ParameterKey.Browse.fullPage: fullPageValue,
             AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending
         ]
         getSeriesList(ofType: .anime, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
@@ -211,7 +231,7 @@ extension AniListClient {
             }
             
             let seriesListToUse: [Series]
-            if UserDefaults.standard.bool(forKey: "showExplicitContent") {
+            if UserDefaults.standard.bool(forKey: UserDefaultsKey.showExplicitContent.rawValue) {
                 seriesListToUse = seriesList
             } else {
                 seriesListToUse = nonAdultSeriesList
@@ -222,7 +242,12 @@ extension AniListClient {
                 return
             }
             
-            let animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            let animeSeriesListWithSelectedAmount: [AnimeSeries]
+            if let amount = amount {
+                animeSeriesListWithSelectedAmount = Array(animeSeriesList.prefix(amount))
+            } else {
+                animeSeriesListWithSelectedAmount = animeSeriesList
+            }
             completionHandlerForSeriesList(animeSeriesListWithSelectedAmount, nil)
         }
     }

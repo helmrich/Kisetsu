@@ -125,7 +125,7 @@ class HomeViewController: UIViewController {
             }
         }
         
-        AniListClient.shared.getCurrentlyAiringAnime(amount: 20) { (seriesList, errorMessage) in
+        AniListClient.shared.getCurrentlyAiringAnime(amount: nil) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 return
@@ -144,7 +144,7 @@ class HomeViewController: UIViewController {
             
         }
         
-        AniListClient.shared.getCurrentSeasonAnime(amount: 20) { (seriesList, errorMessage) in
+        AniListClient.shared.getCurrentSeasonAnime(amount: nil) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 return

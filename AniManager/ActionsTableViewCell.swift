@@ -115,6 +115,7 @@ class ActionsTableViewCell: UITableViewCell {
         } else {
             DispatchQueue.main.async {
                 self.animeProgressStackView.alpha = 0.0
+                self.mangaProgressStackView.alpha = 0.4
             }
         }
         

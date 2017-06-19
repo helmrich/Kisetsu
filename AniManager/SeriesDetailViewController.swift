@@ -417,7 +417,6 @@ class SeriesDetailViewController: UIViewController {
         depending on whether it's currently visible or not
      */
     func toggleRatingPickerVisibility() {
-        
         guard ratingPicker != nil else {
             return
         }
@@ -475,5 +474,27 @@ extension SeriesDetailViewController: UIPickerViewDelegate {
         ratingLabel.text = "\(row + 1)"
         ratingLabel.textAlignment = .center
         return ratingLabel
+    }
+}
+
+extension SeriesDetailViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let textFieldText = textField.text else {
+            return
+        }
+        textField.text = textFieldText
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard !string.isEmpty else {
+            return true
+        }
+        
+        guard let text = textField.text,
+            text.characters.count < 4,
+        string != "" else {
+            return false
+        }
+        return true
     }
 }

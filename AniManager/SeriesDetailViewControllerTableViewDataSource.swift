@@ -108,6 +108,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
             cell.backgroundColor = Style.Color.Background.tableViewCell
             
+            cell.watchedEpisodesTextField.delegate = self
+            cell.volumesReadTextField.delegate = self
+            cell.chaptersReadTextField.delegate = self
+            
             /*
                 - Add a target-action to the rate button that will show
                 the rating picker when tapped

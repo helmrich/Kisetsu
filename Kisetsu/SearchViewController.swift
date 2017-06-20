@@ -138,12 +138,14 @@ class SearchViewController: SeriesCollectionViewController {
      */
     func getSeriesList(withSearchText searchText: String) {
         
+        seriesCollectionView.alpha = 0.0
         activityIndicatorView.startAnimatingAndFadeIn()
+        UIView.animate(withDuration: 0.25) {
+            self.nothingFoundLabel.alpha = 0.0
+        }
         
         NetworkActivityManager.shared.increaseNumberOfActiveConnections()
-        
         AniListClient.shared.getSeriesList(fromPage: 1, ofType: seriesType, andParameters: [:], matchingQuery: searchText) { (seriesList, nonAdultSeriesList, errorMessage) in
-            
             // Error Handling
             guard errorMessage == nil else {
                 self.activityIndicatorView.stopAnimatingAndFadeOut()
@@ -179,8 +181,12 @@ class SearchViewController: SeriesCollectionViewController {
                 data source's searchResultsSeriesList property, reload the
                 series collection view and make it visible
              */
-            let seriesListToShow = UserDefaults.standard.bool(forKey: "showExplicitContent") ? seriesList : nonAdultSeriesList
-            DataSource.shared.searchResultsSeriesList = seriesListToShow
+            let seriesListToShow = UserDefaults.standard.bool(forKey: UserDefaultsKey.showExplicitContent.rawValue) ? seriesList : nonAdultSeriesList
+            let seriesListSortedByPopularity = seriesListToShow.sorted { (lhsSeries, rhsSeries) -> Bool in
+                return lhsSeries.popularity > rhsSeries.popularity
+            }
+            
+            DataSource.shared.searchResultsSeriesList = seriesListSortedByPopularity
             
             NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             DispatchQueue.main.async {
@@ -217,7 +223,6 @@ extension SearchViewController: UISearchBarDelegate {
             should be requested with the current search text, if the
             search text contains at least one character
          */
-        seriesCollectionView.alpha = 0.0
         if searchText.characters.count > 0 {
             getSeriesList(withSearchText: searchText)
         }

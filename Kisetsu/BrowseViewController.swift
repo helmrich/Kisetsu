@@ -194,6 +194,7 @@ class BrowseViewController: SeriesCollectionViewController {
     func getSeriesList() {
         self.seriesCollectionViewOverlay.frame = seriesCollectionView.frame
         UIView.animate(withDuration: 0.25) {
+            self.nothingFoundLabel.alpha = 0.0
             self.seriesCollectionViewOverlay.alpha = 1.0
         }
         

@@ -39,7 +39,7 @@ extension ParameterConstant {
             static let grantTypeAuthorizationCode = "authorization_code"
             static let grantTypeClientCredentials = "client_credentials"
             static let grantTypeRefreshToken = "refresh_token"
-            static let redirectUri = "AniManager://"
+            static let redirectUri = "Kisetsu://"
             static let responseTypeCode = "code"
         }
         

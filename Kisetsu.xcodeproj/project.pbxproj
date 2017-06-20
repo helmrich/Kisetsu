@@ -603,8 +603,7 @@
 				D25EDEA11DDF956000267243 /* Resources */,
 				D25EDE9E1DDF901C00267243 /* Supporting Files */,
 			);
-			name = Kisetsu;
-			path = AniManager;
+			path = Kisetsu;
 			sourceTree = "<group>";
 		};
 		D28A5E901DEF573E00D62BDC /* Series Detail Views */ = {
@@ -1117,10 +1116,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4TZM8GS72Y;
-				INFOPLIST_FILE = AniManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Kisetsu/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.AniManager";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.Kisetsu";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1134,10 +1133,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4TZM8GS72Y;
-				INFOPLIST_FILE = AniManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Kisetsu/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.AniManager";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tobias-helmrich.Kisetsu";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

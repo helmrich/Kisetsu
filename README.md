@@ -57,7 +57,7 @@ I'm not 100% sure if or when I'll submit the application to the App Store but th
 
 - Additional rating systems (currently only ratings from 1 to 10 are available)
 - Settings tab (with options to change the rating systems, title language (English, Romaji, Japanese), favourite genres and an option for WiFi-only image downloads) ✅
-- Home tab (with sections like "recommended", "new", "current season", etc.)
+- Home tab (with sections like "Currently Airing", "Current Season", etc.) ✅
 - Relations to connected series in the series detail ✅
 - Actors/Actresses info
 - Staff info

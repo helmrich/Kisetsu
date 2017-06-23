@@ -1,4 +1,4 @@
-![Kisetsu preview on iPhone](https://github.com/helmrich/AniManager/blob/master/images/animanager-iphone-preview-v2.png?raw=true)
+![Kisetsu preview on iPhone](https://github.com/helmrich/AniManager/blob/master/images/kisetsu-iphone-preview.jpg?raw=true)
 
 Kisetsu is an application for iOS that lets the user track and explore anime and manga. This app was created as my last project for the [iOS Developer Nanodegree by Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003) which is supposed to be an own iOS application. 
 

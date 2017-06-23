@@ -12,7 +12,7 @@ Note: This is *not* an official AniList application
 3. After registering and verifying your account, go to [your account's developer settings](https://anilist.co/settings/developer) and click on the **Create New Client** button
 4. Fill in the fields *like so*...
 
-	![](https://github.com/helmrich/AniManager/blob/master/screenshots/anilist-client-creation.png?raw=true)
+	![](https://github.com/helmrich/AniManager/blob/master/images/anilist-client-creation.png?raw=true)
   
 5. The value for ```Client Redirect Uri``` should be ```AniManager://```, the value for ```Name``` should be ```AniManager```
 6. Click on **Save**

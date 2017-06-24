@@ -11,12 +11,6 @@ import UIKit
 class HomeViewController: UIViewController {
     // MARK: - Properties
     
-    let featuredSlider = FeaturedSlider()
-    let featuredSliderActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    let errorMessageView = ErrorMessageView()
-    
-    var statusBarShouldBeHidden = false
-    
     override var prefersStatusBarHidden: Bool {
         return statusBarShouldBeHidden
     }
@@ -24,6 +18,15 @@ class HomeViewController: UIViewController {
     override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
         return .slide
     }
+    
+    let featuredSlider = FeaturedSlider()
+    let featuredSliderActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let errorMessageView = ErrorMessageView()
+    
+    var statusBarShouldBeHidden = false
+    
+    var availableCellTypes: [ImagesTableViewCellType]!
+    
     
     // MARK: - Outlets and Actions
     
@@ -40,6 +43,30 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         navigationController?.navigationBar.barStyle = .black
+        
+        let isUserLoggedIn: Bool
+        if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
+            let grantType = GrantType(rawValue: grantTypeString) {
+            isUserLoggedIn = grantType != .clientCredentials
+        } else {
+            isUserLoggedIn = false
+        }
+        
+        availableCellTypes = [
+            .currentlyAiring,
+            .currentSeason,
+            .mostPopularAnime,
+            .topRatedAnime,
+            .mostPopularManga,
+            .topRatedManga
+        ]
+        
+        if isUserLoggedIn {
+            availableCellTypes.append(contentsOf: [
+                .continueWatching,
+                .continueReading
+                ])
+        }
         
         setupInterfaceForCurrentTheme()
         
@@ -103,6 +130,7 @@ class HomeViewController: UIViewController {
         
         view.layoutIfNeeded()
         
+        // Get top series of the current year for featured slider
         AniListClient.shared.getTopSeries(ofType: .anime, fromYear: DateManager.currentYear) { (featuredSeriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
@@ -125,6 +153,7 @@ class HomeViewController: UIViewController {
             }
         }
         
+        // Get currently airing anime sorted by popularity
         AniListClient.shared.getCurrentlyAiringAnime(amount: nil) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
@@ -144,6 +173,7 @@ class HomeViewController: UIViewController {
             
         }
         
+        // Get anime of the current season sorted by popularity
         AniListClient.shared.getCurrentSeasonAnime(amount: nil) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
@@ -208,6 +238,7 @@ class HomeViewController: UIViewController {
             }
         }
         
+        // Get most popular and top rated anime and manga
         for seriesType in SeriesType.allValues {
             for sortParameter in AniListClient.SortParameter.allValues {
                 AniListClient.shared.getTopSeries(ofType: seriesType, basedOn: sortParameter, fromYear: nil, amount: 20) { (seriesList, errorMessage) in
@@ -236,6 +267,28 @@ class HomeViewController: UIViewController {
                 }
             }
         }
+        
+//        // Get most popular anime for each of the user's favorite genres
+//        if let favoriteGenres = UserDefaults.standard.object(forKey: UserDefaultsKey.favoriteGenres.rawValue) as? [String],
+//            favoriteGenres.count > 0 {
+//            favoriteGenres.forEach { favoriteGenre in
+//                AniListClient.shared.getTopSeries(ofType: .anime, withGenres: [favoriteGenre], basedOn: .popularity, fromYear: nil, amount: 10) { (seriesList, errorMessage) in
+//                    guard errorMessage == nil else {
+//                        return
+//                    }
+//                    
+//                    guard let seriesList = seriesList else {
+//                        return
+//                    }
+//                    
+//                    DataSource.shared.mostPopularGenreSeriesLists[favoriteGenre] = seriesList
+//                    
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//            }
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

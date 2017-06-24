@@ -104,7 +104,7 @@ class BrowseFilterViewController: UIViewController {
 
 extension BrowseFilterViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return DataSource.shared.browseFilters.count
+        return DataSource.shared.filterSections.count
     }
     
     /*
@@ -112,11 +112,7 @@ extension BrowseFilterViewController: UITableViewDataSource {
         values in the dictionary at the index that is equal to the current section
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var numberOfFilterValues = 0
-        for (_, filterValues) in DataSource.shared.browseFilters[section] {
-            numberOfFilterValues = filterValues.count
-        }
-        return numberOfFilterValues
+        return DataSource.shared.filterSections[section].items.count
     }
     
     /*
@@ -129,86 +125,90 @@ extension BrowseFilterViewController: UITableViewDataSource {
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterValueCell") as! FilterValueTableViewCell
-        var filterValueString = ""
-        for (filterName, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
-            if filterName == "Type" {
-                filterValueString = "\(filterValues[indexPath.row])"
-            } else {
-                filterValueString = "\(filterValues[indexPath.row])".capitalized
-            }
+        if DataSource.shared.filterSections[indexPath.section].name == "Type" {
+            cell.filterValueLabel.text = "\(DataSource.shared.filterSections[indexPath.section].items[indexPath.row])"
+        } else {
+            cell.filterValueLabel.text = "\(DataSource.shared.filterSections[indexPath.section].items[indexPath.row])".capitalized
         }
-        cell.filterValueLabel.text = filterValueString
+        let selectedIndexPathsForSection = DataSource.shared.selectedBrowseFilters[DataSource.shared.filterSections[indexPath.section].name]
+        if (selectedIndexPathsForSection!?.keys.contains { $0 == indexPath })! {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        }
         return cell
     }
 }
 
 extension BrowseFilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as? CollapsibleTableViewHeader ?? CollapsibleTableViewHeader(reuseIdentifier: "header")
+        
         /*
             The title for each section should be the key in the filter dictionary
             at the index of the current section
          */
-        let sectionHeaderLabel = BrowseFilterHeaderLabel()
-        var headerTitle = ""
-        for (filterKey, _) in DataSource.shared.browseFilters[section] {
-            headerTitle = filterKey
-        }
-        sectionHeaderLabel.text = headerTitle
+        header.titleLabel.text = DataSource.shared.filterSections[section].name
+        header.arrowLabel.text = ">"
+        header.arrowLabel.textColor = .white
+        header.set(collapsed: DataSource.shared.filterSections[section].collapsed)
+        header.section = section
+        header.delegate = self
         
         // Configure the header title's appearance
-        sectionHeaderLabel.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
-        sectionHeaderLabel.textColor = .white
-        sectionHeaderLabel.backgroundColor = Style.Color.Background.browseFilterTableViewSectionHeader
-        sectionHeaderLabel.textAlignment = .left
-        return sectionHeaderLabel
+        header.titleLabel.font = UIFont(name: Constant.FontName.mainBold, size: 20.0)
+        header.titleLabel.textColor = .white
+        header.titleLabel.backgroundColor = Style.Color.Background.browseFilterTableViewSectionHeader
+        header.titleLabel.textAlignment = .left
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40.0
+        return 44.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if DataSource.shared.filterSections[indexPath.section].collapsed {
+            return 0.0
+        } else {
+            return 44.0
+        }
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        print(DataSource.shared.filterSections[indexPath.section].items[indexPath.row])
         /*
-            When a row will be selected, get the associated
-            filter key and value from the filters array's
-            dictionary at the position of the indexPath's
-            section property.
+            Check if the current section's name is "Genres" which is
+            the only filter that can have multiple selected values and
+            if it is, add a dictionary item with the current index path
+            as a key and the selected item as a value to the selectedFilters
+            dictionary with the current section name as a key
          */
-        for (filterName, filterValues) in DataSource.shared.browseFilters[indexPath.section] {
+        let filterSection = DataSource.shared.filterSections[indexPath.section]
+        
+        if filterSection.name == "Genres" {
+            DataSource.shared.selectedBrowseFilters[filterSection.name]??[indexPath] = "\(filterSection.items[indexPath.row])"
+        } else {
             /*
-                Check if the current section's associated filter name
-                is "Genres" which is the only filter that can have
-                multiple selected values and if it is, add a dictionary
-                item with the current index path as a key and the selected
-                filter value as a value to the selectedFilters dictionary
-                with the current filter name as a key
+                If the current section's associated filter name is NOT
+                "Genres" it should only be possible to select one value.
+                Thus before selecting a new row the row that was eventually
+                selected before should be deselected. To achieve this the
+                index path should be extracted from the dictionary - that's
+                the value of the selectedFilter dictionary - to deselect 
+                the row at this index path.
              */
-            if filterName == "Genres" {
-                DataSource.shared.selectedBrowseFilters[filterName]??[indexPath] = "\(filterValues[indexPath.row])"
-            } else {
-                /*
-                    If the current section's associated filter name is NOT
-                    "Genres" it should only be possible to select one value.
-                    Thus before selecting a new row the row that was eventually
-                    selected before should be deselected. To achieve this the
-                    index path should be extracted from the dictionary - that's
-                    the value of the selectedFilter dictionary - to deselect 
-                    the row at this index path.
-                 */
-                if let selectedFilter = DataSource.shared.selectedBrowseFilters[filterName] {
-                    for (indexPath, _) in selectedFilter! {
-                        tableView.deselectRow(at: indexPath, animated: false)
-                    }
+            if let selectedFilter = DataSource.shared.selectedBrowseFilters[filterSection.name] {
+                for (indexPath, _) in selectedFilter! {
+                    tableView.deselectRow(at: indexPath, animated: false)
                 }
-                
-                /*
-                    Afterwards the value at the selectedFilters' dictionary
-                    with the current filter name should be set to a new dictionary
-                    with the current index path as a key and the filter value
-                    at the index of the index path's row property
-                 */
-                DataSource.shared.selectedBrowseFilters[filterName] = [indexPath: "\(filterValues[indexPath.row])"]
             }
+            
+            /*
+                Afterwards the value at the selectedFilters' dictionary
+                with the current filter name should be set to a new dictionary
+                with the current index path as a key and the filter value
+                at the index of the index path's row property
+             */
+            DataSource.shared.selectedBrowseFilters[filterSection.name] = [indexPath: "\(filterSection.items[indexPath.row])"]
         }
         return indexPath
     }
@@ -222,13 +222,25 @@ extension BrowseFilterViewController: UITableViewDelegate {
         dictionary
      */
     func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        for (filterName, _) in DataSource.shared.browseFilters[indexPath.section] {
-            if filterName == "Genres" {
-                DataSource.shared.selectedBrowseFilters[filterName]??.removeValue(forKey: indexPath)
-            } else {
-                DataSource.shared.selectedBrowseFilters[filterName] = [IndexPath:String]()
-            }
+        let filterSection = DataSource.shared.filterSections[indexPath.section]
+        if filterSection.name == "Genres" {
+            DataSource.shared.selectedBrowseFilters[filterSection.name]??.removeValue(forKey: indexPath)
+        } else {
+            DataSource.shared.selectedBrowseFilters[filterSection.name] = [IndexPath:String]()
         }
         return indexPath
+    }
+}
+
+extension BrowseFilterViewController: CollapsibleTableViewHeaderDelegate {
+    func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {
+        let newCollapsed = !DataSource.shared.filterSections[section].collapsed
+        DataSource.shared.filterSections[section].collapsed = newCollapsed
+        header.set(collapsed: newCollapsed)
+        filterTableView.beginUpdates()
+        for i in 0..<DataSource.shared.filterSections[section].items.count {
+            filterTableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
+        }
+        filterTableView.endUpdates()
     }
 }

@@ -13,6 +13,7 @@ class ImagesTableViewCell: UITableViewCell {
     // MARK: - Properties
     
     var type: ImagesTableViewCellType?
+    var genre: String?
     
     
     // MARK: - Outlets and Actions

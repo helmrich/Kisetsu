@@ -31,43 +31,13 @@ class DataSource {
     var mostPopularAnimeSeriesList = [Series]()
     var topRatedAnimeSeriesList = [Series]()
     
+//    var mostPopularGenreSeriesLists = [String:[Series]]()
+    
     var mostPopularMangaSeriesList = [Series]()
     var topRatedMangaSeriesList = [Series]()
     
-    var allSeriesLists: [[Series]] {
-        return [
-            currentlyAiringSeriesList,
-            currentSeasonSeriesList,
-            mostPopularAnimeSeriesList,
-            topRatedAnimeSeriesList,
-            mostPopularMangaSeriesList,
-            topRatedMangaSeriesList,
-            continueWatchingSeriesList,
-            continueReadingSeriesList,
-//            recommendationsSeriesList
-        ]
-    }
-    
-    var notLoggedInSeriesLists: [[Series]] {
-        return [
-            currentlyAiringSeriesList,
-            currentSeasonSeriesList,
-            mostPopularAnimeSeriesList,
-            topRatedAnimeSeriesList,
-            mostPopularMangaSeriesList,
-            topRatedMangaSeriesList
-        ]
-    }
     
     // MARK: - Browse
-    var browseFilters: [[String:[Any]]] = [
-        ["Sort By": ["Score", "Popularity"]],
-        ["Season": Season.allSeasonStrings],
-        ["Status": AnimeAiringStatus.allStatusStrings],
-        ["Type": MediaType.allMediaTypeStrings],
-        ["Genres": [String]()],
-        ["Year": [Int](1951...DateManager.currentYear + 1).reversed()]
-    ]
     var selectedBrowseFilters: [String:[IndexPath:String]?] = [
         "Sort By": [IndexPath:String](),
         "Season": [IndexPath:String](),
@@ -80,6 +50,16 @@ class DataSource {
         AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Score.descending
     ]
     var browseSeriesList: [Series]? = nil
+    
+    var filterSections: [FilterSection] = [
+        FilterSection(name: "Sort By", items: ["Score", "Popularity"]),
+        FilterSection(name: "Season", items: Season.allSeasonStrings),
+        FilterSection(name: "Status", items: AnimeAiringStatus.allStatusStrings),
+        FilterSection(name: "Type", items: MediaType.allMediaTypeStrings),
+        FilterSection(name: "Genres", items: [String]()),
+        FilterSection(name: "Year", items: [Int](1951...DateManager.currentYear + 1).reversed())
+    ]
+    
     
     // MARK: - Search
     var searchResultsSeriesList: [Series]? = nil
@@ -142,11 +122,9 @@ class DataSource {
             genresFromFile.count > 0 {
             genres = genresFromFile
             
-            for (index, browseFilter) in browseFilters.enumerated() {
-                for (filterName, _) in browseFilter {
-                    if filterName == "Genres" {
-                        browseFilters[index]["Genres"] = genres
-                    }
+            for (index, filterSection) in filterSections.enumerated() {
+                if filterSection.name == "Genres" {
+                    filterSections[index].items = genres
                 }
             }
         }

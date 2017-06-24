@@ -44,6 +44,9 @@
 		D2341CDA1DF75CC9004773B3 /* ImagesTableViewCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */; };
 		D2341CDD1DF78230004773B3 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */; };
 		D234F8751EEA48E9002BF935 /* NotificationNameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D234F8741EEA48E9002BF935 /* NotificationNameExtension.swift */; };
+		D239AE201EFBBA7900EA181A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE1F1EFBBA7900EA181A /* FilterSection.swift */; };
+		D239AE221EFBC86100EA181A /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE211EFBC86100EA181A /* CollapsibleTableViewHeader.swift */; };
+		D239AE241EFBD90100EA181A /* UIViewRotateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE231EFBD90100EA181A /* UIViewRotateExtension.swift */; };
 		D258E3DA1E351463003074BD /* SeriesDetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258E3D91E351463003074BD /* SeriesDetailCellType.swift */; };
 		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
 		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
@@ -171,6 +174,9 @@
 		D2341CD91DF75CC9004773B3 /* ImagesTableViewCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewCellType.swift; sourceTree = "<group>"; };
 		D2341CDC1DF78230004773B3 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
 		D234F8741EEA48E9002BF935 /* NotificationNameExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNameExtension.swift; sourceTree = "<group>"; };
+		D239AE1F1EFBBA7900EA181A /* FilterSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
+		D239AE211EFBC86100EA181A /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		D239AE231EFBD90100EA181A /* UIViewRotateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewRotateExtension.swift; sourceTree = "<group>"; };
 		D258E3D91E351463003074BD /* SeriesDetailCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCellType.swift; sourceTree = "<group>"; };
 		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -371,6 +377,7 @@
 				D2180E131E11E6280072B1EF /* Core Data */,
 				D25EDF011DE8CBEB00267243 /* DataSource.swift */,
 				D2F32C6E1DFDE2B70044D195 /* User.swift */,
+				D239AE1F1EFBBA7900EA181A /* FilterSection.swift */,
 				D25EDF001DE8CBC300267243 /* Series */,
 				D25EDEC01DE2552700267243 /* Clients */,
 			);
@@ -394,6 +401,7 @@
 				D2AB60041EC7274D00243C3A /* LoadingStatusView.swift */,
 				D21EC7761E0368FC008027E4 /* RatingPicker.swift */,
 				D2AB602A1ECECC4300243C3A /* FeaturedSlider.swift */,
+				D239AE211EFBC86100EA181A /* CollapsibleTableViewHeader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -643,6 +651,7 @@
 				D2786F951DF5C09100F4368F /* StackViewExtension.swift */,
 				D2180DEB1E108E9A0072B1EF /* ActivityIndicatorViewExtension.swift */,
 				D2C9BF941E181BF500AD1060 /* ImageExtension.swift */,
+				D239AE231EFBD90100EA181A /* UIViewRotateExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -921,6 +930,7 @@
 				D2786F9A1DF5CA2300F4368F /* TableViewCellTitleLabel.swift in Sources */,
 				D28A5E8F1DEDE05B00D62BDC /* SeriesDetailViewController.swift in Sources */,
 				D21EC7771E0368FC008027E4 /* RatingPicker.swift in Sources */,
+				D239AE201EFBBA7900EA181A /* FilterSection.swift in Sources */,
 				D25EDF0D1DEBAFF800267243 /* BrowseFilterViewController.swift in Sources */,
 				D2786FAF1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift in Sources */,
 				D2786F941DF5B9F800F4368F /* AdditionalInformationsTableViewCell.swift in Sources */,
@@ -928,6 +938,7 @@
 				D2A78DAC1E1490E500F45CF9 /* NetworkActivityManager.swift in Sources */,
 				D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */,
 				D2AB60091ECAFB3C00243C3A /* GrantType.swift in Sources */,
+				D239AE221EFBC86100EA181A /* CollapsibleTableViewHeader.swift in Sources */,
 				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
 				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
@@ -982,6 +993,7 @@
 				D2AB60291ECD5E3500243C3A /* ListPageViewController.swift in Sources */,
 				D20E26351EDFF9CB00FC8A95 /* HomeViewControllerCollectionView.swift in Sources */,
 				D22198041E0ADCE500B6F20A /* HeaderFieldConstant.swift in Sources */,
+				D239AE241EFBD90100EA181A /* UIViewRotateExtension.swift in Sources */,
 				D25EDED41DE4DE3300267243 /* BrowseViewController.swift in Sources */,
 				D2786FA51DF5FD1D00F4368F /* VideoTableViewCell.swift in Sources */,
 				D22740961DFC99EF00C3E776 /* SeriesCollectionViewController.swift in Sources */,

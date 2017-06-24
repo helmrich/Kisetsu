@@ -87,6 +87,9 @@ class CharacterDetailViewController: UIViewController {
             bannerImageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: bannerView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                 NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
             }
+        } else {
+            bannerView.backgroundColor = .aniManagerBlackAlternative
+            bannerView.alpha = 1.0
         }
         
         /*
@@ -146,14 +149,18 @@ class CharacterDetailViewController: UIViewController {
                         this
                      */
                     if info.characters.count > 0 {
-                        let attributedString = NSMutableAttributedString(string: "Biography\n\n\(info)")
-                        attributedString.addAttributes([
-                            NSFontAttributeName: UIFont(name: Constant.FontName.mainBlack, size: 24.0)!,
-                            NSForegroundColorAttributeName: Style.Color.Text.textView
-                            ], range: NSRange(location: 0, length: 9))
-                        attributedString.addAttribute(NSFontAttributeName, value: UIFont(name: Constant.FontName.mainRegular, size: 16.0)!, range: NSRange(location: 9, length: attributedString.string.characters.count - 9))
-                        self.infoTextView.attributedText = attributedString
-                        self.infoTextView.textColor = Style.Color.Text.textView
+                        let headingAttributedString = NSMutableAttributedString(string: "Biography\n\n",
+                                                                                attributes: [        NSFontAttributeName: UIFont(name: Constant.FontName.mainBlack, size: 24.0)!,                                                       NSForegroundColorAttributeName: Style.Color.Text.textView
+                            ])
+                        
+                        let infoAttributedString = NSMutableAttributedString(string: info,
+                                                                             attributes: [
+                                                                                NSFontAttributeName: UIFont(name: Constant.FontName.mainRegular, size: 16.0)!,NSForegroundColorAttributeName: Style.Color.Text.textView
+                            ])
+                        let combinedAttributedString = NSMutableAttributedString()
+                        combinedAttributedString.append(headingAttributedString)
+                        combinedAttributedString.append(infoAttributedString)
+                        self.infoTextView.attributedText = combinedAttributedString
                         self.infoTextView.textAlignment = .justified
                     } else {
                         self.infoTextView.text = "There is no biography available for this character at the moment. >_<"

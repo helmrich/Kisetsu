@@ -1,4 +1,4 @@
-![AniManager preview on iPhone](https://github.com/helmrich/AniManager/blob/master/images/animanager-iphone-preview.png?raw=true)
+![Kisetsu preview on iPhone](https://github.com/helmrich/AniManager/blob/master/images/kisetsu-iphone-preview.jpg?raw=true)
 
 Kisetsu is an application for iOS that lets the user track and explore anime and manga. This app was created as my last project for the [iOS Developer Nanodegree by Udacity](https://www.udacity.com/course/ios-developer-nanodegree--nd003) which is supposed to be an own iOS application. 
 
@@ -12,9 +12,9 @@ Note: This is *not* an official AniList application
 3. After registering and verifying your account, go to [your account's developer settings](https://anilist.co/settings/developer) and click on the **Create New Client** button
 4. Fill in the fields *like so*...
 
-	![](https://github.com/helmrich/AniManager/blob/master/screenshots/anilist-client-creation.png?raw=true)
+	![](https://github.com/helmrich/AniManager/blob/master/images/anilist-client-creation.png?raw=true)
   
-5. The value for ```Client Redirect Uri``` should be ```AniManager://```, the value for ```Name``` should be ```AniManager```
+5. The value for ```Client Redirect Uri``` should be ```Kisetsu://```, the value for ```Name``` should be ```Kisetsu```
 6. Click on **Save**
 7. The Client ID and Client Secret text fields should now be filled out automatically
 8. Open the project
@@ -57,7 +57,7 @@ I'm not 100% sure if or when I'll submit the application to the App Store but th
 
 - Additional rating systems (currently only ratings from 1 to 10 are available)
 - Settings tab (with options to change the rating systems, title language (English, Romaji, Japanese), favourite genres and an option for WiFi-only image downloads) ✅
-- Home tab (with sections like "recommended", "new", "current season", etc.)
+- Home tab (with sections like "Currently Airing", "Current Season", etc.) ✅
 - Relations to connected series in the series detail ✅
 - Actors/Actresses info
 - Staff info

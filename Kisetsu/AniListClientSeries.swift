@@ -107,7 +107,7 @@ extension AniListClient {
         }
     }
     
-    func getTopSeries(ofType type: SeriesType, basedOn sortParameter: SortParameter = .popularity, fromYear year: Int?, amount: Int = 5, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
+    func getTopSeries(ofType type: SeriesType, withGenres genres: [String]? = nil, basedOn sortParameter: SortParameter = .popularity, fromYear year: Int?, amount: Int = 5, completionHandlerForSeriesList: @escaping (_ seriesList: [Series]?, _ errorMessage: String?) -> Void) {
         var browseParameters: [String:Any] = [String:Any]()
         switch sortParameter {
         case .score:
@@ -117,6 +117,10 @@ extension AniListClient {
         }
         if let year = year {
             browseParameters[AniListConstant.ParameterKey.Browse.year] = year
+        }
+        if let genres = genres {
+            let genreParameterString = DataSource.shared.createGenreParameterString(fromGenres: genres)
+            browseParameters[AniListConstant.ParameterKey.Browse.genres] = genreParameterString
         }
         
         AniListClient.shared.getSeriesList(ofType: type, andParameters: browseParameters) { (seriesList, nonAdultSeriesList, errorMessage) in
@@ -136,7 +140,7 @@ extension AniListClient {
             }
             
             let filteredSeriesList: [Series]
-            if UserDefaults.standard.bool(forKey: "showExplicitContent") {
+            if UserDefaults.standard.bool(forKey: UserDefaultsKey.showExplicitContent.rawValue) {
                 filteredSeriesList = seriesList.filter { $0.imageBannerURLString != nil }
             } else {
                 filteredSeriesList = nonAdultSeriesList.filter { $0.imageBannerURLString != nil }

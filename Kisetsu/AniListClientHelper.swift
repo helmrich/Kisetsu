@@ -20,9 +20,12 @@ extension AniListClient {
         }
         
         // - The status code indicates a successful response
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
-            statusCode >= 200 && statusCode <= 299 else {
-                return "Unsuccessful response status code"
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+            return "No status code received"
+        }
+            
+        guard statusCode >= 200 && statusCode <= 299 else {
+            return "Unsuccessful response status code \(statusCode)"
         }
         
         // - There is data
@@ -46,7 +49,7 @@ extension AniListClient {
         
         // Add HTTP header field values
         request.addValue(AniListConstant.HeaderFieldValue.contentType, forHTTPHeaderField: AniListConstant.HeaderFieldName.contentType)
-        request.addValue("Bearer \(UserDefaults.standard.string(forKey: "accessToken")!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
+        request.addValue("Bearer \(UserDefaults.standard.string(forKey: UserDefaultsKey.accessToken.rawValue)!)", forHTTPHeaderField: AniListConstant.HeaderFieldName.authorization)
         
         return request
     }

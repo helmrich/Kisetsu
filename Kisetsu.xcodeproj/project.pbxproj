@@ -47,6 +47,8 @@
 		D239AE201EFBBA7900EA181A /* FilterSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE1F1EFBBA7900EA181A /* FilterSection.swift */; };
 		D239AE221EFBC86100EA181A /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE211EFBC86100EA181A /* CollapsibleTableViewHeader.swift */; };
 		D239AE241EFBD90100EA181A /* UIViewRotateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D239AE231EFBD90100EA181A /* UIViewRotateExtension.swift */; };
+		D243C88C1EFE6D7100C51387 /* CrunchyrollClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D243C88B1EFE6D7100C51387 /* CrunchyrollClient.swift */; };
+		D243C88E1EFE6F4000C51387 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D243C88D1EFE6F4000C51387 /* Episode.swift */; };
 		D258E3DA1E351463003074BD /* SeriesDetailCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D258E3D91E351463003074BD /* SeriesDetailCellType.swift */; };
 		D25EDEA71DDF979600267243 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA31DDF979600267243 /* Lato-Black.ttf */; };
 		D25EDEA81DDF979600267243 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D25EDEA41DDF979600267243 /* Lato-Bold.ttf */; };
@@ -113,6 +115,7 @@
 		D2AB60291ECD5E3500243C3A /* ListPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB60281ECD5E3500243C3A /* ListPageViewController.swift */; };
 		D2AB602B1ECECC4300243C3A /* FeaturedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB602A1ECECC4300243C3A /* FeaturedSlider.swift */; };
 		D2ACA1F01EB5AD8700190958 /* RequiredLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */; };
+		D2B071491EFEAEB000D697C2 /* EpisodesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B071481EFEAEB000D697C2 /* EpisodesTableViewCell.swift */; };
 		D2B7AA661EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */; };
 		D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */; };
 		D2C9BF951E181BF500AD1060 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C9BF941E181BF500AD1060 /* ImageExtension.swift */; };
@@ -177,6 +180,8 @@
 		D239AE1F1EFBBA7900EA181A /* FilterSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSection.swift; sourceTree = "<group>"; };
 		D239AE211EFBC86100EA181A /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
 		D239AE231EFBD90100EA181A /* UIViewRotateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewRotateExtension.swift; sourceTree = "<group>"; };
+		D243C88B1EFE6D7100C51387 /* CrunchyrollClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrunchyrollClient.swift; sourceTree = "<group>"; };
+		D243C88D1EFE6F4000C51387 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		D258E3D91E351463003074BD /* SeriesDetailCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesDetailCellType.swift; sourceTree = "<group>"; };
 		D25EDEA31DDF979600267243 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		D25EDEA41DDF979600267243 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -245,6 +250,7 @@
 		D2AB60281ECD5E3500243C3A /* ListPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPageViewController.swift; sourceTree = "<group>"; };
 		D2AB602A1ECECC4300243C3A /* FeaturedSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedSlider.swift; sourceTree = "<group>"; };
 		D2ACA1EF1EB5AD8700190958 /* RequiredLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequiredLoginViewController.swift; sourceTree = "<group>"; };
+		D2B071481EFEAEB000D697C2 /* EpisodesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodesTableViewCell.swift; sourceTree = "<group>"; };
 		D2B7AA651EAC860E00D4B2F3 /* NBUIKitMainThreadGuard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NBUIKitMainThreadGuard.swift; sourceTree = "<group>"; };
 		D2C635911DED050500959D75 /* FilterValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterValueTableViewCell.swift; sourceTree = "<group>"; };
 		D2C9BF941E181BF500AD1060 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
@@ -371,6 +377,14 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		D243C88A1EFE6D5A00C51387 /* CrunchyrollClient */ = {
+			isa = PBXGroup;
+			children = (
+				D243C88B1EFE6D7100C51387 /* CrunchyrollClient.swift */,
+			);
+			name = CrunchyrollClient;
+			sourceTree = "<group>";
+		};
 		D25EDE9B1DDF8FE500267243 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +493,7 @@
 		D25EDEC01DE2552700267243 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				D243C88A1EFE6D5A00C51387 /* CrunchyrollClient */,
 				D25EDEBD1DE2513400267243 /* AniList */,
 			);
 			name = Clients;
@@ -534,6 +549,7 @@
 		D2786F8D1DF39C9500F4368F /* Additional Information Types */ = {
 			isa = PBXGroup;
 			children = (
+				D243C88D1EFE6F4000C51387 /* Episode.swift */,
 				D2786F841DF3993C00F4368F /* Staff.swift */,
 				D2786F861DF3997400F4368F /* Character.swift */,
 				D2786F891DF39A4000F4368F /* Actor.swift */,
@@ -551,6 +567,7 @@
 				D224A2671DF061F00085C532 /* BannerView.swift */,
 				D2E5A03C1E0B606600994DBF /* Basic Informations */,
 				D2E5A03B1E0B605500994DBF /* Actions */,
+				D2B071471EFEAE5000D697C2 /* Episodes */,
 				D2E5A0411E0B610700994DBF /* Genre */,
 				D2E5A0401E0B60FE00994DBF /* Description */,
 				D2341CD01DF74727004773B3 /* Images */,
@@ -634,6 +651,14 @@
 				D2786FAE1DF63C3700F4368F /* SeriesDetailCollectionViewDataSource.swift */,
 			);
 			name = "Series Detail View Controller";
+			sourceTree = "<group>";
+		};
+		D2B071471EFEAE5000D697C2 /* Episodes */ = {
+			isa = PBXGroup;
+			children = (
+				D2B071481EFEAEB000D697C2 /* EpisodesTableViewCell.swift */,
+			);
+			name = Episodes;
 			sourceTree = "<group>";
 		};
 		D2C6358E1DECFE7C00959D75 /* Browse Filter Table View */ = {
@@ -887,6 +912,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2F32C561DFCAA360044D195 /* Tag.swift in Sources */,
+				D243C88E1EFE6F4000C51387 /* Episode.swift in Sources */,
 				D2CE68331E265205005C4931 /* PreferredLanguageTableViewController.swift in Sources */,
 				D2ACA1F01EB5AD8700190958 /* RequiredLoginViewController.swift in Sources */,
 				D2C9BFA51E1AFED700AD1060 /* FavoriteGenresTableViewController.swift in Sources */,
@@ -939,6 +965,7 @@
 				D2C635921DED050500959D75 /* FilterValueTableViewCell.swift in Sources */,
 				D2AB60091ECAFB3C00243C3A /* GrantType.swift in Sources */,
 				D239AE221EFBC86100EA181A /* CollapsibleTableViewHeader.swift in Sources */,
+				D243C88C1EFE6D7100C51387 /* CrunchyrollClient.swift in Sources */,
 				D25EDEEF1DE6502600267243 /* MediaType.swift in Sources */,
 				D2786F981DF5C95300F4368F /* AniManagerLabel.swift in Sources */,
 				D2F32C711DFEDDBA0044D195 /* ListDetailViewController.swift in Sources */,
@@ -961,6 +988,7 @@
 				D2180E181E11E6EE0072B1EF /* AniManager.xcdatamodeld in Sources */,
 				D2786FA11DF5F79C00F4368F /* BasicInformationsLabel.swift in Sources */,
 				D2C9BF9B1E1895CA00AD1060 /* SeriesList+CoreDataProperties.swift in Sources */,
+				D2B071491EFEAEB000D697C2 /* EpisodesTableViewCell.swift in Sources */,
 				D22198061E0ADD0500B6F20A /* ResponseConstant.swift in Sources */,
 				D22198021E0ADCB500B6F20A /* ParameterConstant.swift in Sources */,
 				D2AB60051EC7274D00243C3A /* LoadingStatusView.swift in Sources */,

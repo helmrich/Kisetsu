@@ -9,5 +9,5 @@
 import Foundation
 
 enum SeriesDetailCellType {
-    case basicInformations, actions, genres, description, characters, relations, additionalInformations, tags, externalLinks, video
+    case basicInformations, actions, genres, description, characters, relations, additionalInformations, tags, externalLinks, video, episodes
 }

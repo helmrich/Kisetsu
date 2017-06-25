@@ -254,6 +254,17 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
+        case .episodes:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "episodesCell") as! EpisodesTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
+            
+            if let animeSeries = series as? AnimeSeries,
+            let episodes = animeSeries.episodes,
+                episodes.count > 0 {
+                cell.seeAllEpisodesButton.set(enabled: true)
+            }
+            
+            return cell
         case .genres:
             // MARK: - Genre Cell
             

@@ -15,6 +15,7 @@ class AnimeSeries: Series {
     let source: AnimeSource?
     let studios: [Studio]?
     let externalLinks: [ExternalLink]?
+    var episodes: [Episode]?
     
     // List-specific properties
     var watchedEpisodes: Int?
@@ -105,6 +106,8 @@ class AnimeSeries: Series {
             self.countdownUntilNextEpisodeInSeconds = nil
             self.nextEpisodeNumber = nil
         }
+        
+        self.episodes = nil
         
         super.init(fromDictionary: dictionary)
         

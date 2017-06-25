@@ -245,6 +245,33 @@ class SeriesDetailViewController: UIViewController {
                     NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                 }
             }
+            
+            // If the selected series is an anime try getting an episode list
+            if let animeSeries = series as? AnimeSeries,
+                let externalLinks = animeSeries.externalLinks,
+                let crunchyrollExternalLink = externalLinks.first(where: { $0.siteName.uppercased() == "CRUNCHYROLL" }) {
+                self.availableCellTypes?.insert(.episodes, at: 2)
+                DispatchQueue.main.async {
+                    self.seriesDataTableView.reloadData()
+                }
+                
+                CrunchyrollClient.shared.getEpisodeList(forSeriesCrunchyrollURLString: crunchyrollExternalLink.siteURLString) { (episodeList, errorMessage) in
+                    guard errorMessage == nil else {
+                        return
+                    }
+                    
+                    guard episodeList != nil else {
+                        return
+                    }
+                    
+                    if let availableCellTypes = self.availableCellTypes,
+                        availableCellTypes.count > 2 {
+                        DispatchQueue.main.async {
+                            self.seriesDataTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+                        }
+                    }
+                }
+            }
         }
     }
     

@@ -23,7 +23,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="actionsCell" rowHeight="206" id="WYy-Rj-HQh" customClass="ActionsTableViewCell" customModule="AniManager" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="actionsCell" rowHeight="206" id="WYy-Rj-HQh" customClass="ActionsTableViewCell" customModule="Kisetsu" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WYy-Rj-HQh" id="dcS-MR-x5z">
@@ -33,7 +33,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IqI-4e-MHt">
                         <rect key="frame" x="15" y="15" width="345" height="110"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V69-RX-gK6" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V69-RX-gK6" customClass="AniManagerButton" customModule="Kisetsu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -44,7 +44,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxz-00-zyb" customClass="AniManagerButton" customModule="AniManager" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxz-00-zyb" customClass="AniManagerButton" customModule="Kisetsu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="60" width="345" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

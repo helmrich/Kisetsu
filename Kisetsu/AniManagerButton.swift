@@ -41,6 +41,7 @@ class AniManagerButton: UIButton {
         layer.cornerRadius = 2.0
         backgroundColor = Style.Color.Background.aniManagerButton
         setTitleColor(Style.Color.Text.aniManagerButton, for: .normal)
+        titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 20.0)
         addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 50.0))
         
         /*

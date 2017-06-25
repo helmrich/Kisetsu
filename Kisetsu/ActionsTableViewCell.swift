@@ -206,6 +206,9 @@ class ActionsTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        userListStatusButton.titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 24.0)
+        rateButton.titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 24.0)
+        
         maximumNumberOfVolumesLabel.textColor = Style.Color.Text.progressLabel
         maximumNumberOfChaptersLabel.textColor = Style.Color.Text.progressLabel
         maximumNumberOfEpisodesLabel.textColor = Style.Color.Text.progressLabel

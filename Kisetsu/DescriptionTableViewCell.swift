@@ -10,7 +10,7 @@ import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
     
-    fileprivate let titleLabel = TableViewCellTitleLabel(withTitle: "Description")
+    fileprivate let titleLabel = CellTitleLabel(withTitle: "Description")
     let descriptionTextView = UITextView()
     
     required init?(coder aDecoder: NSCoder) {

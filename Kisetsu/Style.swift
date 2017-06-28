@@ -27,6 +27,9 @@ struct Style {
             static var collectionView: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
+            static var episodesCollectionView: UIColor {
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlack }
+            }
             static var collectionViewCell: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .aniManagerBlackAlternative }
             }
@@ -53,6 +56,12 @@ struct Style {
             }
             static var imagesTableViewCellTitleLabel: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }
+            }
+            static var episodeCollectionViewCell: UIColor {
+                if activeTheme == .light { return .white } else { return .aniManagerBlackAlternative }
+            }
+            static var episodeCollectionViewCellPreviewImage: UIColor {
+                if activeTheme == .light { return .aniManagerBlack } else { return .aniManagerBlackAlternative }
             }
             static var browseFilterTableViewSectionHeader: UIColor {
                 if activeTheme == .light { return .aniManagerBlue } else { return .aniManagerBlackAlternative }
@@ -123,7 +132,7 @@ struct Style {
             static var tableViewSectionHeaderTitle: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }
             }
-            static var tableViewCellTitle: UIColor {
+            static var cellTitle: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }
             }
             static var tableViewCell: UIColor {
@@ -131,6 +140,9 @@ struct Style {
             }
             static var tableViewCellSelected: UIColor {
                 if activeTheme == .light { return .white } else { return .white }
+            }
+            static var episodeCollectionViewCell: UIColor {
+                if activeTheme == .light { return .aniManagerBlack } else { return .white }
             }
             static var pickerView: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }
@@ -155,6 +167,12 @@ struct Style {
             }
             static var onOffButtonTitleInactive: UIColor {
                 if activeTheme == .light { return .aniManagerBlue } else { return .white }
+            }
+        }
+        
+        struct Shadow {
+            static var episodeCell: UIColor {
+                if activeTheme == .light { return .aniManagerBlack } else { return .white }
             }
         }
     }

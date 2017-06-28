@@ -12,7 +12,7 @@ class EpisodesTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    let titleLabel = TableViewCellTitleLabel(withTitle: "Episodes")
+    let titleLabel = CellTitleLabel(withTitle: "Episodes")
     let seeAllEpisodesButton = AniManagerButton()
     
     

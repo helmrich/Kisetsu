@@ -27,7 +27,7 @@ class VideoTableViewCell: UITableViewCell {
         videoWebView.scrollView.isScrollEnabled = false
         
         // Configure the title label and set its constraints
-        let titleLabel = TableViewCellTitleLabel(withTitle: "Video")
+        let titleLabel = CellTitleLabel(withTitle: "Video")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         addConstraints([

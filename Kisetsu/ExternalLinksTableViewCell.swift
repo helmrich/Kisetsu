@@ -14,7 +14,7 @@ class ExternalLinksTableViewCell: UITableViewCell {
     
     var externalLinks = [ExternalLink]()
     var maximumNumberOfButtonsPerRow = 2
-    let titleLabel = TableViewCellTitleLabel(withTitle: "External Links")
+    let titleLabel = CellTitleLabel(withTitle: "External Links")
     
     
     // MARK: - Initializer

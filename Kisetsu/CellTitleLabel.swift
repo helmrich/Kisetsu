@@ -1,5 +1,5 @@
 //
-//  TableViewCellTitleLabel.swift
+//  CellTitleLabel.swift
 //  AniManager
 //
 //  Created by Tobias Helmrich on 05.12.16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewCellTitleLabel: AniManagerLabel {
+class CellTitleLabel: AniManagerLabel {
     
     // MARK: - Initializer
     

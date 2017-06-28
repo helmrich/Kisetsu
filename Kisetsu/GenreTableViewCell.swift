@@ -12,7 +12,7 @@ class GenreTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
-    let titleLabel = TableViewCellTitleLabel(withTitle: "Genres")
+    let titleLabel = CellTitleLabel(withTitle: "Genres")
     let genreLabelStackView = UIStackView()
     
     

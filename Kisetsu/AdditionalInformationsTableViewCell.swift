@@ -12,7 +12,7 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
 
     // MARK: - Properties
     
-    fileprivate let titleLabel = TableViewCellTitleLabel(withTitle: "Additional Informations")
+    fileprivate let titleLabel = CellTitleLabel(withTitle: "Additional Informations")
     
     let studioLabel = AniManagerLabel()
     let englishTitleLabel = AniManagerLabel()

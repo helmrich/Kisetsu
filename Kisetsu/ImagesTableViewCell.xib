@@ -16,14 +16,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="170" id="gPb-zz-uGI" customClass="ImagesTableViewCell" customModule="AniManager" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="170" id="gPb-zz-uGI" customClass="ImagesTableViewCell" customModule="Kisetsu" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gPb-zz-uGI" id="uBz-Tf-efj">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLv-G0-TC3" customClass="TableViewCellTitleLabel" customModule="AniManager" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Characters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLv-G0-TC3" customClass="CellTitleLabel" customModule="Kisetsu" customModuleProvider="target">
                         <rect key="frame" x="15" y="15" width="120.5" height="29"/>
                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
                         <nil key="textColor"/>

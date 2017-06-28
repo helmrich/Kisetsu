@@ -141,6 +141,7 @@ class CharacterDetailViewController: UIViewController {
             }
             
             if let info = pageModelCharacter.info {
+                let infoWithoutMarkupCharacters = info.replacingOccurrences(of: "__", with: "")
                 DispatchQueue.main.async {
                     /*
                         Check if the character info has content or not, if it has
@@ -148,12 +149,12 @@ class CharacterDetailViewController: UIViewController {
                         the character info. If not, display a message that indicates
                         this
                      */
-                    if info.characters.count > 0 {
-                        let headingAttributedString = NSMutableAttributedString(string: "Biography\n\n",
+                    if infoWithoutMarkupCharacters.characters.count > 0 {
+                        let headingAttributedString = NSMutableAttributedString(string: "Biography\n",
                                                                                 attributes: [        NSFontAttributeName: UIFont(name: Constant.FontName.mainBlack, size: 24.0)!,                                                       NSForegroundColorAttributeName: Style.Color.Text.textView
                             ])
                         
-                        let infoAttributedString = NSMutableAttributedString(string: info,
+                        let infoAttributedString = NSMutableAttributedString(string: infoWithoutMarkupCharacters,
                                                                              attributes: [
                                                                                 NSFontAttributeName: UIFont(name: Constant.FontName.mainRegular, size: 16.0)!,NSForegroundColorAttributeName: Style.Color.Text.textView
                             ])
@@ -164,7 +165,6 @@ class CharacterDetailViewController: UIViewController {
                         self.infoTextView.textAlignment = .justified
                     } else {
                         self.infoTextView.text = "There is no biography available for this character at the moment. >_<"
-//                        self.infoTextView.textColor = Style.Color.Text.textView
                     }
                     UIView.animate(withDuration: 0.25) {
                         self.infoTextView.alpha = 1.0

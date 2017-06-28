@@ -28,6 +28,8 @@ class SeriesDetailViewController: UIViewController {
     }
     var bannerImageURL: URL?
     
+    var availableCellTypes = [SeriesDetailCellType]()
+    
     var series: Series? {
         didSet {
             
@@ -48,49 +50,50 @@ class SeriesDetailViewController: UIViewController {
              */
             
             if series.genres.count > 0 {
-                availableCellTypes?.append(.genres)
+                availableCellTypes.append(.genres)
             }
             
             if series.description != nil {
-                availableCellTypes?.append(.description)
+                availableCellTypes.append(.description)
             }
             
             if let characters = series.characters,
                 characters.count > 0 {
-                availableCellTypes?.append(.characters)
+                availableCellTypes.append(.characters)
             }
             
             if let allRelations = series.allRelations,
                 allRelations.count > 0 {
-                availableCellTypes?.append(.relations)
+                availableCellTypes.append(.relations)
             }
             
             /*
                 Append the additionalInformations cell type as additional
                 informations should always be available
              */
-            availableCellTypes?.append(.additionalInformations)
+            availableCellTypes.append(.additionalInformations)
             
             if let tags = series.tags,
                 tags.count > 0 {
-                availableCellTypes?.append(.tags)
+                availableCellTypes.append(.tags)
             }
             
             if let animeSeries = series as? AnimeSeries,
                 let externalLinks = animeSeries.externalLinks,
                 externalLinks.count > 0 {
-                availableCellTypes?.append(.externalLinks)
+                if let _ = externalLinks.first(where: { $0.siteName.uppercased() == "CRUNCHYROLL" }) {
+                    availableCellTypes.append(.episodes)
+                }
+                availableCellTypes.append(.externalLinks)
             }
             
             if let animeSeries = series as? AnimeSeries,
                 let youtubeVideoId = animeSeries.youtubeVideoId,
                 let _ = URL(string: "https://www.youtube.com/embed/\(youtubeVideoId)") {
-                availableCellTypes?.append(.video)
+                availableCellTypes.append(.video)
             }
         }
     }
-    
-    var availableCellTypes: [SeriesDetailCellType]?
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -231,18 +234,14 @@ class SeriesDetailViewController: UIViewController {
             }
             
             // Check if the series has an URL string for a banner image
-            guard let bannerImageURLString = series.imageBannerURLString,
-                let bannerImageURL = URL(string: bannerImageURLString) else {
-                NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
-                return
-            }
-            
-            self.bannerImageURL = bannerImageURL
-            
-            // Get the banner image from the banner image URL string
-            DispatchQueue.main.async {
-                (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                    NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+            if let bannerImageURLString = series.imageBannerURLString,
+                let bannerImageURL = URL(string: bannerImageURLString) {
+                self.bannerImageURL = bannerImageURL
+                
+                // Get the banner image from the banner image URL string
+                DispatchQueue.main.async {
+                    (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.kf.setImage(with: bannerImageURL, placeholder: UIImage.with(color: .aniManagerGray, andSize: (self.seriesDataTableView.tableHeaderView as! BannerView).imageView.bounds.size), options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                    }
                 }
             }
             
@@ -250,24 +249,44 @@ class SeriesDetailViewController: UIViewController {
             if let animeSeries = series as? AnimeSeries,
                 let externalLinks = animeSeries.externalLinks,
                 let crunchyrollExternalLink = externalLinks.first(where: { $0.siteName.uppercased() == "CRUNCHYROLL" }) {
-                self.availableCellTypes?.insert(.episodes, at: 2)
-                DispatchQueue.main.async {
-                    self.seriesDataTableView.reloadData()
-                }
-                
                 CrunchyrollClient.shared.getEpisodeList(forSeriesCrunchyrollURLString: crunchyrollExternalLink.siteURLString) { (episodeList, errorMessage) in
+                    guard let episodeCellTypeIndex = self.availableCellTypes.index(of: .episodes),
+                    episodeCellTypeIndex < self.availableCellTypes.count else {
+                        return
+                    }
+                    
                     guard errorMessage == nil else {
-                        return
-                    }
-                    
-                    guard episodeList != nil else {
-                        return
-                    }
-                    
-                    if let availableCellTypes = self.availableCellTypes,
-                        availableCellTypes.count > 2 {
+                        self.availableCellTypes.remove(at: episodeCellTypeIndex)
                         DispatchQueue.main.async {
-                            self.seriesDataTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+                            self.seriesDataTableView.reloadData()
+                        }
+                        return
+                    }
+                    
+                    guard let episodeList = episodeList else {
+                        self.availableCellTypes.remove(at: episodeCellTypeIndex)
+                        DispatchQueue.main.async {
+                            self.seriesDataTableView.reloadData()
+                        }
+                        return
+                    }
+                    
+                    guard episodeList.count > 0 else {
+                        self.availableCellTypes.remove(at: episodeCellTypeIndex)
+                        DispatchQueue.main.async {
+                            self.seriesDataTableView.reloadData()
+                        }
+                        return
+                    }
+                    
+                    if self.availableCellTypes.contains(.episodes) {
+                        DispatchQueue.main.async {
+                            self.seriesDataTableView.reloadData()
+                            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            NetworkActivityManager.shared.decreaseNumberOfActiveConnections()
                         }
                     }
                 }
@@ -469,6 +488,11 @@ class SeriesDetailViewController: UIViewController {
         actionsCell.rateButton.setTitle("Your Rating: \(selectedPickerRow + 1)", for: .normal)
         listValueChanged()
         toggleRatingPickerVisibility()
+    }
+    
+    func presentEpisodesNavigationController() {
+        let episodesNavigationController = storyboard!.instantiateViewController(withIdentifier: "episodesNavigationController") as! UINavigationController
+        present(episodesNavigationController, animated: true, completion: nil)
     }
 }
 

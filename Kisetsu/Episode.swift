@@ -11,6 +11,14 @@ import Foundation
 struct Episode {
     let title: String
     let description: String
+    let guid: String?
+    var number: Double?
+    
+    // URLs
     let crunchyrollURL: URL?
-    let previewImageURL: URL?
+    let imageSmallURL: URL?
+    let imageMediumURL: URL?
+    let imageThumbnailURL: URL?
+    let imageLargeURL: URL?
+    let imageFullURL: URL?
 }

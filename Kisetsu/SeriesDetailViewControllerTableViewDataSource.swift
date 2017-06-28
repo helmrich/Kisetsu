@@ -10,17 +10,13 @@ import UIKit
 
 extension SeriesDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let availableCellTypes = availableCellTypes else {
-            return 0
-        }
-        
         return availableCellTypes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let series = series,
-        let availableCellTypes = availableCellTypes else {
+        availableCellTypes.count > indexPath.row else {
             return UITableViewCell(frame: CGRect.zero)
         }
         
@@ -254,17 +250,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
-        case .episodes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "episodesCell") as! EpisodesTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
-            
-            if let animeSeries = series as? AnimeSeries,
-            let episodes = animeSeries.episodes,
-                episodes.count > 0 {
-                cell.seeAllEpisodesButton.set(enabled: true)
-            }
-            
-            return cell
         case .genres:
             // MARK: - Genre Cell
             
@@ -299,10 +284,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             /*
-                Remove all <br> HTML tags from the description and set
+                Replace all <br> HTML tags with "\n" and set
                 the description text view's text
              */
-            let cleanDescription = description.replacingOccurrences(of: "<br>", with: "")
+            let cleanDescription = description.replacingOccurrences(of: "<br>", with: "\n")
             
             cell.descriptionTextView.text = cleanDescription
             
@@ -444,6 +429,18 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             return cell
+        case .episodes:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "episodesCell") as! EpisodesTableViewCell
+            cell.backgroundColor = Style.Color.Background.tableViewCell
+            
+            if let animeSeries = series as? AnimeSeries,
+                let episodes = animeSeries.episodes,
+                episodes.count > 0 {
+                cell.seeAllEpisodesButton.addTarget(self, action: #selector(presentEpisodesNavigationController), for: [.touchUpInside])
+                cell.seeAllEpisodesButton.set(enabled: true)
+            }
+            
+            return cell
         case .externalLinks:
             // MARK: - External Links Cell
             
@@ -473,7 +470,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             cell.setupCell()
             
             return cell
-
         case .video:
             // MARK: - Video Cell
             

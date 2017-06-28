@@ -83,6 +83,7 @@ class FeaturedSlider: UIView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
+        pageControl.isUserInteractionEnabled = false
         pageControl.numberOfPages = seriesList.count
         pageControl.currentPage = currentSeriesIndex
         pageControl.translatesAutoresizingMaskIntoConstraints = false
@@ -223,7 +224,7 @@ class FeaturedSlider: UIView {
         if let imageBannerURLString = currentlySelectedSeries.imageBannerURLString,
             let imageBannerURL = URL(string: imageBannerURLString) {
             DispatchQueue.main.async {
-                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: nil, progressBlock: nil) { (_, _, _, _) in
+                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     UIView.animate(withDuration: 0.5) {
                         self.imageView.alpha = 1.0
                     }

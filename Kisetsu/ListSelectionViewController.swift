@@ -90,7 +90,7 @@ extension ListSelectionViewController: UITableViewDataSource {
             let currentMangaListNameString = MangaListName.allNameStrings[indexPath.row]
             cell.listNameLabel.text = currentMangaListNameString
             if let bannerImageURL = DataSource.shared.getUserListPreviewImageURL(forSeriesType: seriesType, andListNameString: currentMangaListNameString) {
-                cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
+                cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: { (_, _, _, _) in
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 0.25) {
                             cell.previewImageView.alpha = 1.0
@@ -104,7 +104,7 @@ extension ListSelectionViewController: UITableViewDataSource {
         let currentAnimeListNameString = AnimeListName.allNameStrings[indexPath.row]
         cell.listNameLabel.text = currentAnimeListNameString
         if let bannerImageURL = DataSource.shared.getUserListPreviewImageURL(forSeriesType: seriesType, andListNameString: currentAnimeListNameString) {
-            cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: nil, progressBlock: nil, completionHandler: { (_, _, _, _) in
+            cell.previewImageView.kf.setImage(with: bannerImageURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil, completionHandler: { (_, _, _, _) in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.25) {
                         cell.previewImageView.alpha = 1.0

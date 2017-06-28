@@ -6,5 +6,6 @@ target 'Kisetsu' do
   # Pods for Kisetsu
   pod 'Kingfisher', '~> 3.0'
   pod 'FeedKit', '~> 6.1.0'
+  pod 'AEXML', '~> 4.1.0'
 
 end

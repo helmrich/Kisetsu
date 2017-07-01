@@ -85,6 +85,7 @@ class DataSource {
         ["Content": [
                     "Show Explicit Content",
                     "Show Tags with Spoilers",
+                    "Show Spoilers in Bio",
 //                    "Rating System",
                     "Favorite Genres",
                     "Preferred Title Language"

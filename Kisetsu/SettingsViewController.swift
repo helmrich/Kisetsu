@@ -61,6 +61,10 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(sender.isOn, forKey: UserDefaultsKey.showTagsWithSpoilers.rawValue)
     }
     
+    func spoilersInBioSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultsKey.showBioWithSpoilers.rawValue)
+    }
+    
     func darkThemeSwitchChanged(_ sender: UISwitch) {
         if sender.isOn {
             UserDefaults.standard.set(Style.Theme.dark.rawValue, forKey: UserDefaultsKey.theme.rawValue)
@@ -140,8 +144,14 @@ extension SettingsViewController: UITableViewDataSource {
             } else if currentSettingName.uppercased() == "SHOW TAGS WITH SPOILERS" {
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
                 (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
-                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: "showTagsWithSpoilers")
+                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsKey.showTagsWithSpoilers.rawValue)
                 (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(tagsWithSpoilersSwitchChanged), for: .valueChanged)
+                return (cell as! SettingSwitchTableViewCell)
+            } else if currentSettingName.uppercased() == "SHOW SPOILERS IN BIO" {
+                cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")
+                (cell as! SettingSwitchTableViewCell).settingTextLabel.text = currentSettingName
+                (cell as! SettingSwitchTableViewCell).settingSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsKey.showBioWithSpoilers.rawValue)
+                (cell as! SettingSwitchTableViewCell).settingSwitch.addTarget(self, action: #selector(spoilersInBioSwitchChanged), for: .valueChanged)
                 return (cell as! SettingSwitchTableViewCell)
             } else if currentSettingName.uppercased() == "DARK THEME" {
                 cell = tableView.dequeueReusableCell(withIdentifier: "settingSwitchCell")

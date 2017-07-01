@@ -14,5 +14,5 @@ enum UserDefaultsKey: String {
     // Authentication
     case accessToken, refreshToken, expirationTimestamp, grantType, tokenType
     // Content and Style
-    case titleLanguage, theme, showExplicitContent, showTagsWithSpoilers, downloadHighQualityImages, favoriteGenres, selectedBrowseFiltersData, browseSeriesType
+    case titleLanguage, theme, showExplicitContent, showTagsWithSpoilers, showBioWithSpoilers, downloadHighQualityImages, favoriteGenres, selectedBrowseFiltersData, browseSeriesType
 }

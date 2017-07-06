@@ -24,10 +24,11 @@ class ImagesTableViewCell: UITableViewCell {
     @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var imagesCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var imagesCollectionViewHeightConstraint: NSLayoutConstraint!
     
     override func layoutSubviews() {
         backgroundColor = Style.Color.Background.imagesTableViewCell
         titleLabel.textColor = Style.Color.Text.cellTitle
-        imagesCollectionView.backgroundColor = Style.Color.Background.collectionView
+        imagesCollectionView.backgroundColor = Style.Color.Background.imagesCollectionView
     }
 }

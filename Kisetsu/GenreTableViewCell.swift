@@ -21,6 +21,8 @@ class GenreTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         // Set the title label's constraints
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)

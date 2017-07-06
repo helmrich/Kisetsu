@@ -48,6 +48,8 @@ class BasicInformationsTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         // Configure the series cover image view
         seriesCoverImageView.translatesAutoresizingMaskIntoConstraints = false
         seriesCoverImageView.contentMode = .scaleAspectFill

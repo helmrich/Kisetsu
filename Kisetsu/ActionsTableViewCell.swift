@@ -206,6 +206,8 @@ class ActionsTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         userListStatusButton.titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 24.0)
         rateButton.titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 24.0)
         

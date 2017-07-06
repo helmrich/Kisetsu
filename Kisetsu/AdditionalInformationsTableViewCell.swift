@@ -32,6 +32,8 @@ class AdditionalInformationsTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         // Configure the title label and set its constraints
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)

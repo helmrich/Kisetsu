@@ -27,7 +27,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Basic Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInformationsCell") as! BasicInformationsTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Try to get the large image from the series' URL string and
@@ -102,7 +101,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Actions Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "actionsCell") as! ActionsTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             cell.watchedEpisodesTextField.delegate = self
             cell.volumesReadTextField.delegate = self
@@ -254,7 +252,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Genre Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "genreCell") as! GenreTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             // Check if there are genres available
             guard series.genres.count > 0 else {
@@ -283,11 +280,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
                 return UITableViewCell(frame: CGRect.zero)
             }
             
-            /*
-                Replace all <br> HTML tags with "\n" and set
-                the description text view's text
-             */
-            let cleanDescription = description.replacingOccurrences(of: "<br>", with: "\n")
+            // Remove all <br> tags from the description
+            let cleanDescription = description.replacingOccurrences(of: "<br>", with: "")
             
             cell.descriptionTextView.text = cleanDescription
             
@@ -297,6 +291,8 @@ extension SeriesDetailViewController: UITableViewDataSource {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "characterImagesCell") as! ImagesTableViewCell
             
+            cell.imagesCollectionViewHeightConstraint.constant = 202.0
+            
             // Check if there are available characters for the series
             guard let characters = series.characters,
                 characters.count > 0 else {
@@ -304,10 +300,10 @@ extension SeriesDetailViewController: UITableViewDataSource {
             }
             
             // Register the images collection view cell's nib file
-            cell.imagesCollectionView.register(UINib(nibName: "ImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "imagesCollectionViewCell")
+            cell.imagesCollectionView.register(UINib(nibName: "CharacterImagesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "characterImagesCollectionViewCell")
             
             // Configure the images collection view's flow layout and set the cell's type
-            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100 ? 100 : (view.bounds.width / 3.5))
+            cell.imagesCollectionViewFlowLayout.itemSize = CGSize(width: (view.bounds.width / 3.5) > 100.0 ? 100.0 : (view.bounds.width / 3.5), height: (view.bounds.width / 3.5) > 100.0 ? 200.0 : (view.bounds.width / 3.5) * 2.0)
             cell.imagesCollectionViewFlowLayout.minimumLineSpacing = 1
             cell.type = ImagesTableViewCellType.characters
             
@@ -356,7 +352,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Additional Informations Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "additionalInformationsCell") as! AdditionalInformationsTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 If the series type is anime and a studio is available,
@@ -397,7 +392,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Tags Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "tagsCell") as! GenreTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             // Check if the series has tags
             guard let tags = series.tags,
@@ -431,7 +425,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             return cell
         case .episodes:
             let cell = tableView.dequeueReusableCell(withIdentifier: "episodesCell") as! EpisodesTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             if let animeSeries = series as? AnimeSeries,
                 let episodes = animeSeries.episodes,
@@ -445,7 +438,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - External Links Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "externalLinksCell") as! ExternalLinksTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Make sure the series can be casted to the AnimeSeries type
@@ -474,7 +466,6 @@ extension SeriesDetailViewController: UITableViewDataSource {
             // MARK: - Video Cell
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell") as! VideoTableViewCell
-            cell.backgroundColor = Style.Color.Background.tableViewCell
             
             /*
                 Make sure the series type is anime and that the series can be casted

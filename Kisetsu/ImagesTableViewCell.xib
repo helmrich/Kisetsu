@@ -61,6 +61,7 @@
                 <outlet property="activityIndicatorView" destination="stX-Ki-tiU" id="32V-ec-kuE"/>
                 <outlet property="imagesCollectionView" destination="o7b-9P-EYu" id="FHa-iK-y32"/>
                 <outlet property="imagesCollectionViewFlowLayout" destination="nkC-d0-aOs" id="pqr-UL-ACq"/>
+                <outlet property="imagesCollectionViewHeightConstraint" destination="DHg-eM-xMB" id="yxg-bu-xuN"/>
                 <outlet property="titleLabel" destination="ZLv-G0-TC3" id="rqy-48-7d4"/>
             </connections>
             <point key="canvasLocation" x="-115" y="-134"/>

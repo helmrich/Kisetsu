@@ -21,6 +21,8 @@ class VideoTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        backgroundColor = Style.Color.Background.tableViewCell
+        
         // Configure the video web view
         videoWebView.backgroundColor = Style.Color.Background.videoWebView
         videoWebView.scrollView.backgroundColor = Style.Color.Background.videoWebView

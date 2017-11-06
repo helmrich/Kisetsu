@@ -80,8 +80,7 @@ extension AniListClient {
                         if let animeSeries = AnimeSeries(fromDictionary: series) {
                             seriesList.append(animeSeries)
                         } else {
-                            completionHandlerForSeriesList(nil, nil, "Couldn't get anime series")
-                            return
+                            continue
                         }
                     }
                 } else {
@@ -152,7 +151,7 @@ extension AniListClient {
         }
     }
     
-    func getCurrentSeasonAnime(amount: Int? = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
+    func getSeasonAnime(forSeason season: Season, amount: Int? = 10, completionHandlerForSeriesList: @escaping (_ seriesList: [AnimeSeries]?, _ errorMessage: String?) -> Void) {
         let fullPageValue: String
         if let amount = amount,
             amount < 41 {
@@ -160,9 +159,20 @@ extension AniListClient {
         } else {
             fullPageValue = "true"
         }
+        // Check if the season is winter AND the next season should be requested,
+        // in this case the next year should be used (because the winter season
+        // is the first season of the year, thus the season that comes after
+        // Fall 2016 is Winter 2017). If it's not the case, the current year should
+        // be used
+        let yearBrowseParameterValue: Int
+        if season == Season.next && season == .winter {
+            yearBrowseParameterValue = DateManager.nextYear
+        } else {
+            yearBrowseParameterValue = DateManager.currentYear
+        }
         let browseParameters: [String:Any] = [
-            AniListConstant.ParameterKey.Browse.season: Season.current.rawValue,
-            AniListConstant.ParameterKey.Browse.year: String(DateManager.currentYear),
+            AniListConstant.ParameterKey.Browse.season: season.rawValue,
+            AniListConstant.ParameterKey.Browse.year: String(yearBrowseParameterValue),
             AniListConstant.ParameterKey.Browse.sort: AniListConstant.ParameterValue.Browse.Sort.Popularity.descending,
             AniListConstant.ParameterKey.Browse.fullPage: fullPageValue
         ]
@@ -340,12 +350,10 @@ extension AniListClient {
     }
     
     // This method gets the page model for a character with a specified character ID
-    func getPageModelCharacter(forCharacterId id: Int, completionHandlerForCharacterPageModel: @escaping (_ character: Character?, _ errorMessage: String?) -> Void) {
-        
-        
+    fileprivate func getPageModelDictionary(forPersonType personType: PersonType, withID id: Int, completionHandlerForPageModelDictionary: @escaping (_ pageModelDictionary: [String:Any]?, _ errorMessage: String?) -> Void) {
         validateAccessToken { (errorMessage) in
             guard errorMessage == nil else {
-                completionHandlerForCharacterPageModel(nil, errorMessage!)
+                completionHandlerForPageModelDictionary(nil, errorMessage!)
                 return
             }
             
@@ -353,9 +361,14 @@ extension AniListClient {
             let replacingPairs = [
                 AniListConstant.Path.Placeholder.id: "\(id)"
             ]
-            let path = self.replacePlaceholders(inPath: AniListConstant.Path.CharacterGet.pageCharacterModel, withReplacingPairs: replacingPairs)
+            let pathWithPlaceholders: String
+            switch personType {
+            case .character: pathWithPlaceholders = AniListConstant.Path.CharacterGet.pageCharacterModel
+            case .staff: pathWithPlaceholders = AniListConstant.Path.StaffGet.pageStaffModel
+            }
+            let path = self.replacePlaceholders(inPath: pathWithPlaceholders, withReplacingPairs: replacingPairs)
             guard let url = self.createAniListURL(withPath: path, andParameters: [:]) else {
-                completionHandlerForCharacterPageModel(nil, "Couldn't create AniList URL")
+                completionHandlerForPageModelDictionary(nil, "Couldn't create AniList URL")
                 return
             }
             
@@ -365,7 +378,7 @@ extension AniListClient {
                 
                 // Error Handling
                 if let errorMessage = self.checkDataTaskResponseForError(data: data, response: response, error: error) {
-                    completionHandlerForCharacterPageModel(nil, errorMessage)
+                    completionHandlerForPageModelDictionary(nil, errorMessage)
                     return
                 }
                 
@@ -373,17 +386,16 @@ extension AniListClient {
                 
                 // JSON Deserialization
                 guard let jsonObject = self.deserializeJson(fromData: data) else {
-                    completionHandlerForCharacterPageModel(nil, "Couldn't deserialize data into a JSON object")
+                    completionHandlerForPageModelDictionary(nil, "Couldn't deserialize data into a JSON object")
                     return
                 }
                 
-                guard let characterDictionary = jsonObject as? [String:Any],
-                    let character = Character(fromDictionary: characterDictionary) else {
-                        completionHandlerForCharacterPageModel(nil, "Couldn't create character object from dictionary")
+                guard let pageModelDictionary = jsonObject as? [String:Any] else {
+                        completionHandlerForPageModelDictionary(nil, "Couldn't get page model dictionary from JSON object")
                         return
                 }
                 
-                completionHandlerForCharacterPageModel(character, nil)
+                completionHandlerForPageModelDictionary(pageModelDictionary, nil)
                 
             }
             
@@ -391,6 +403,43 @@ extension AniListClient {
             
         }
     }
+    
+    func getCharacterPageModel(forCharacterID id: Int, completionHandlerForCharacterPageModel: @escaping (_ character: Character?, _ errorMessage: String?) -> Void) {
+        AniListClient.shared.getPageModelDictionary(forPersonType: .character, withID: id) { (pageModelDictionary, errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForCharacterPageModel(nil, errorMessage!)
+                return
+            }
+            guard let pageModelDictionary = pageModelDictionary else {
+                completionHandlerForCharacterPageModel(nil, "Couldn't get page model dictionary")
+                return
+            }
+            guard let character = Character(fromDictionary: pageModelDictionary) else {
+                completionHandlerForCharacterPageModel(nil, "Couldn't create character from dictionary")
+                return
+            }
+            completionHandlerForCharacterPageModel(character, nil)
+        }
+    }
+    
+    func getStaffPageModel(forStaffWithID id: Int, completionHandlerForStaffPageModel: @escaping (_ staff: Staff?, _ errorMessage: String?) -> Void) {
+        AniListClient.shared.getPageModelDictionary(forPersonType: .staff, withID: id) { (pageModelDictionary, errorMessage) in
+            guard errorMessage == nil else {
+                completionHandlerForStaffPageModel(nil, errorMessage!)
+                return
+            }
+            guard let pageModelDictionary = pageModelDictionary else {
+                completionHandlerForStaffPageModel(nil, "Couldn't get page model dictionary")
+                return
+            }
+            guard let staff = Staff(fromDictionary: pageModelDictionary) else {
+                completionHandlerForStaffPageModel(nil, "Couldn't create character from dictionary")
+                return
+            }
+            completionHandlerForStaffPageModel(staff, nil)
+        }
+    }
+    
     
     func getGenreList(completionHandlerForGenreList: @escaping (_ genreList: [String]?, _ errorMessage: String?) -> Void) {
         validateAccessToken { (errorMessage) in
@@ -458,8 +507,12 @@ extension AniListClient {
     }
     
     // This method is used to favorite a character with a specified ID
-    func favorite(characterWithId id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
-        let path = AniListConstant.Path.CharacterPost.favourite
+    func favorite(personType: PersonType, withID id: Int, completionHandlerForFavoriting: @escaping (_ errorMessage: String?) -> Void) {
+        let path: String
+        switch personType {
+        case .character:    path = AniListConstant.Path.CharacterPost.favourite
+        case .staff:        path = AniListConstant.Path.StaffPost.favourite
+        }
         
         favorite(id: id, path: path, completionHandlerForFavoriting: completionHandlerForFavoriting)
     }

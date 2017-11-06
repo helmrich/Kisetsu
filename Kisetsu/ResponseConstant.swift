@@ -43,6 +43,7 @@ extension ResponseConstant {
             static let relations = "relations"
             static let relationsAnime = "relations_anime"
             static let relationsManga = "relations_manga"
+            static let relationType = "relation_type"
         }
         
         struct GenreList {
@@ -97,13 +98,17 @@ extension ResponseConstant {
             static let name = "studio_name"
         }
         
-        struct Actor {
+        struct Staff {
             static let id = "id"
             static let firstName  = "name_first"
             static let lastName = "name_last"
+            static let firstNameJapanese = "name_first_japanese"
+            static let lastNameJapanese = "name_last_japanese"
             static let language = "language"
             static let imageMediumURL = "image_url_med"
             static let imageLargeURL = "image_url_lge"
+            static let info = "info"
+            static let favourite = "favourite"
         }
         
         struct User {

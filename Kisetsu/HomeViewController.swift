@@ -55,6 +55,7 @@ class HomeViewController: UIViewController {
         availableCellTypes = [
             .currentlyAiring,
             .currentSeason,
+            .nextSeason,
             .mostPopularAnime,
             .topRatedAnime,
             .mostPopularManga,
@@ -80,6 +81,7 @@ class HomeViewController: UIViewController {
         // Register nibs
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "currentlyAiringCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "currentSeasonCell")
+        tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "nextSeasonCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "continueWatchingCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "continueReadingCell")
         tableView.register(UINib(nibName: "ImagesTableViewCell", bundle: nil), forCellReuseIdentifier: "recommendationsCell")
@@ -131,7 +133,7 @@ class HomeViewController: UIViewController {
         view.layoutIfNeeded()
         
         // Get top series of the current year for featured slider
-        AniListClient.shared.getTopSeries(ofType: .anime, fromYear: DateManager.currentYear) { (featuredSeriesList, errorMessage) in
+        AniListClient.shared.getTopSeries(ofType: .anime, fromYear: DateManager.currentYear, amount: 40) { (featuredSeriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 return
@@ -142,8 +144,29 @@ class HomeViewController: UIViewController {
                 return
             }
             
+            /*
+                 If there are more than 5 series in the featured series
+                 list, create 5 random indices and use the series at these
+                 indices for the featured slider's series list.
+             
+                 If not, use the featured series list that was received
+             */
+            var featuredListToUse = [Series]()
+            if featuredSeriesList.count > 5 {
+                // Create 5 random indices
+                var randomIndices = Set<Int>()
+                while true {
+                    let randomIndex = Int(arc4random_uniform(UInt32(featuredSeriesList.count)))
+                    randomIndices.insert(randomIndex)
+                    if randomIndices.count == 5 { break }
+                }
+                randomIndices.forEach { featuredListToUse.append(featuredSeriesList[$0]) }
+            } else {
+                featuredListToUse = featuredSeriesList
+            }
+            
             DispatchQueue.main.async {
-                self.featuredSlider.seriesList = featuredSeriesList
+                self.featuredSlider.seriesList = featuredListToUse
                 self.featuredSlider.layoutSubviews()
                 self.featuredSlider.isAutomaticSlidingEnabled = true
                 self.featuredSliderActivityIndicator.stopAnimatingAndFadeOut()
@@ -174,7 +197,7 @@ class HomeViewController: UIViewController {
         }
         
         // Get anime of the current season sorted by popularity
-        AniListClient.shared.getCurrentSeasonAnime(amount: nil) { (seriesList, errorMessage) in
+        AniListClient.shared.getSeasonAnime(forSeason: Season.current, amount: nil) { (seriesList, errorMessage) in
             guard errorMessage == nil else {
                 self.errorMessageView.showAndHide(withMessage: errorMessage!)
                 return
@@ -191,6 +214,26 @@ class HomeViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        // Get anime of the next season sorted by popularity
+        AniListClient.shared.getSeasonAnime(forSeason: Season.next, amount: nil) { (seriesList, errorMessage) in
+            guard errorMessage == nil else {
+                self.errorMessageView.showAndHide(withMessage: errorMessage!)
+                return
+            }
+            
+            guard let seriesList = seriesList else {
+                self.errorMessageView.showAndHide(withMessage: "Couldn't get anime for the next season")
+                return
+            }
+            
+            DataSource.shared.nextSeasonSeriesList = seriesList
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        
         
         if let grantTypeString = UserDefaults.standard.string(forKey: UserDefaultsKey.grantType.rawValue),
             let grantType = GrantType(rawValue: grantTypeString),
@@ -316,24 +359,16 @@ class HomeViewController: UIViewController {
     
     func getSeriesList(forCellOfType type: ImagesTableViewCellType) -> [Series] {
         switch type {
-        case .currentSeason:
-            return DataSource.shared.currentSeasonSeriesList
-        case .continueWatching:
-            return DataSource.shared.continueWatchingSeriesList
-        case .continueReading:
-            return DataSource.shared.continueReadingSeriesList
-        case .recommendations:
-            return DataSource.shared.recommendationsSeriesList
-        case .mostPopularAnime:
-            return DataSource.shared.mostPopularAnimeSeriesList
-        case .topRatedAnime:
-            return DataSource.shared.topRatedAnimeSeriesList
-        case .mostPopularManga:
-            return DataSource.shared.mostPopularMangaSeriesList
-        case .topRatedManga:
-            return DataSource.shared.topRatedMangaSeriesList
-        default:
-            return DataSource.shared.currentlyAiringSeriesList
+        case .currentSeason:    return DataSource.shared.currentSeasonSeriesList
+        case .nextSeason:       return DataSource.shared.nextSeasonSeriesList
+        case .continueWatching: return DataSource.shared.continueWatchingSeriesList
+        case .continueReading:  return DataSource.shared.continueReadingSeriesList
+        case .recommendations:  return DataSource.shared.recommendationsSeriesList
+        case .mostPopularAnime: return DataSource.shared.mostPopularAnimeSeriesList
+        case .topRatedAnime:    return DataSource.shared.topRatedAnimeSeriesList
+        case .mostPopularManga: return DataSource.shared.mostPopularMangaSeriesList
+        case .topRatedManga:    return DataSource.shared.topRatedMangaSeriesList
+        default:                return DataSource.shared.currentlyAiringSeriesList
         }
     }
     

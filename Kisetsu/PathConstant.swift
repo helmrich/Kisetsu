@@ -50,6 +50,15 @@ extension PathConstant {
             static let favourite = "character/favourite"
         }
         
+        struct StaffGet {
+            static let basicStaffModel = "staff/{id}"
+            static let pageStaffModel = "staff/{id}/page"
+        }
+        
+        struct StaffPost {
+            static let favourite = "staff/favourite"
+        }
+        
         struct UserList {
             struct AnimeListGet {
                 static let animeListModel = "user/{id}/animelist"

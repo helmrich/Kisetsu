@@ -16,8 +16,8 @@ typealias PayloadConstant = AniListConstant
 
 struct AniListConstant {
     struct Account {
-        static let clientId = "YOURCLIENTID"
-        static let clientSecret = "YOURCLIENTSECRET"
+        static let clientId = "tobe-pikrk"
+        static let clientSecret = "OUlu5I6VyOvs7jaTLJgS4h"
     }
     
     struct URL {

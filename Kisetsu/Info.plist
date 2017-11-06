@@ -22,15 +22,19 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>de.tobias-helmrich.AniManager</string>
+			<string>de.tobias-helmrich.Kisetsu</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>AniManager</string>
+				<string>Kisetsu</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>crunchyroll</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -45,6 +49,10 @@
 		<string>Lato-Light.ttf</string>
 		<string>Lato-Regular.ttf</string>
 		<string>CarterOne.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

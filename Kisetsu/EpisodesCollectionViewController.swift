@@ -71,6 +71,8 @@ extension EpisodesCollectionViewController: UICollectionViewDataSource {
         cell.episodeTitleLabel.text = episodeForCell.title
         cell.episodeDescriptionLabel.text = episodeForCell.description
         
+        cell.crunchyrollButton.addTarget(self, action: #selector(openEpisode), for: .touchUpInside)
+        
         let imageURLBasedOnHighQualitySetting = UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? episodeForCell.imageFullURL : episodeForCell.imageLargeURL
         if let previewImageURL = imageURLBasedOnHighQualitySetting,
             cell.previewImageView.image == nil {
@@ -81,10 +83,39 @@ extension EpisodesCollectionViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
+    func openEpisode(_ sender: UIButton) {
+        guard let buttonSuperview = sender.superview,
+        let episodeCell = buttonSuperview as? EpisodeCollectionViewCell,
+        let episodeCellIndexPath = episodesCollectionView.indexPath(for: episodeCell) else {
+            return
+        }
+        
+        guard let selectedAnimeSeries = DataSource.shared.selectedSeries as? AnimeSeries,
+        let episodes = selectedAnimeSeries.episodes,
+        episodes.count > episodeCellIndexPath.row else {
+            return
+        }
+        
+        let selectedEpisode = episodes[episodeCellIndexPath.row]
+        
+        guard let crunchyrollEpisodeURL = selectedEpisode.crunchyrollURL else { return }
+        
+        if UIApplication.shared.canOpenURL(URL(string: "crunchyroll://")!),
+        let mediaId = selectedEpisode.mediaId {
+            // If the Crunchyroll app is installed, the episode should be opened
+            // in the application by using the crunchyroll scheme and the episode's
+            // media ID
+            UIApplication.shared.open(URL(string: "crunchyroll://playmedia/\(mediaId)")!, options: [:], completionHandler: nil)
+        } else {
+            // If the Crunchyroll app is not installed, the episode should be opened
+            // in Safari
+            UIApplication.shared.open(crunchyrollEpisodeURL, options: [:], completionHandler: nil)
+        }
+    }
 }
 
 
 // MARK: - Collection View Delegate
 extension EpisodesCollectionViewController: UICollectionViewDelegate {
-    // TODO
 }

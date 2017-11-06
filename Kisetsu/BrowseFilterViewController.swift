@@ -174,7 +174,6 @@ extension BrowseFilterViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        print(DataSource.shared.filterSections[indexPath.section].items[indexPath.row])
         /*
             Check if the current section's name is "Genres" which is
             the only filter that can have multiple selected values and

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// MARK: - Data Source
+
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellTitle: String

@@ -17,8 +17,38 @@ struct Character {
     let role: String?
     let imageMediumURLString: String?
     let imageLargeURLString: String?
-    let actor: Actor?
+    let actors: [Staff]?
     let isFavorite: Bool?
+    
+    var fullName: String {
+        switch (firstName, lastName) {
+        case (.some, .none):
+            return firstName!
+        case (.none, .some):
+            return lastName!
+        case (.none, .none):
+            return ""
+        case (.some, .some):
+            return "\(firstName!) \(lastName!)"
+        }
+    }
+    
+    var spoilerFreeInfo: String? {
+        guard let info = info else { return nil }
+        let spoilerMarkdownRegularExpression = try! NSRegularExpression(pattern: "~!.*?!~", options: [])
+        let matches = spoilerMarkdownRegularExpression.matches(in: info, options: [], range: NSRange(location: 0, length: info.characters.count))
+        var infoWithoutSpoilers = info
+        matches.forEach {
+            let matchNSRange = $0.range
+            if let matchRange = matchNSRange.toRange() {
+                let lowerBound = info.index(info.startIndex, offsetBy: matchRange.lowerBound)
+                let upperBound = info.index(info.startIndex, offsetBy: matchRange.upperBound)
+                let matchingSubstring = info.substring(with: lowerBound..<upperBound)
+                infoWithoutSpoilers = infoWithoutSpoilers.replacingOccurrences(of: matchingSubstring, with: "(Spoiler)")
+            }
+        }
+        return infoWithoutSpoilers
+    }
     
     typealias characterKey = AniListConstant.ResponseKey.Character
     
@@ -76,11 +106,16 @@ struct Character {
             self.isFavorite = nil
         }
         
-        if let actorDictionary = dictionary[characterKey.actor] as? [String:Any],
-            let actor = Actor(fromDictionary: actorDictionary) {
-            self.actor = actor
+        if let actorDictionaries = dictionary[characterKey.actor] as? [[String:Any]] {
+            var actors = [Staff]()
+            for actorDictionary in actorDictionaries {
+                if let actor = Staff(fromDictionary: actorDictionary) {
+                    actors.append(actor)
+                }
+            }
+            self.actors = actors
         } else {
-            self.actor = nil
+            self.actors = nil
         }
     }
 }

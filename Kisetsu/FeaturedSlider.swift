@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FeaturedSlider: UIView {
     
@@ -17,6 +18,7 @@ class FeaturedSlider: UIView {
     var seriesList: [Series] = [Series]()
     
     let imageView = UIImageView()
+    let overlayView = UIView()
     let titleLabel = UILabel()
     let pageControl = UIPageControl()
     var currentlySelectedSeries: Series?
@@ -67,19 +69,19 @@ class FeaturedSlider: UIView {
         
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.alpha = 0.0
+//        imageView.alpha = 0.0
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         
-        let overlayView = UIView()
-        overlayView.backgroundColor = UIColor.aniManagerBlack.withAlphaComponent(0.6)
+        overlayView.backgroundColor = .aniManagerBlack
+        overlayView.alpha = 0.6
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(overlayView)
         
         titleLabel.textColor = .white
         titleLabel.font = UIFont(name: Constant.FontName.mainBlack, size: 30.0)
         titleLabel.numberOfLines = 3
-        titleLabel.alpha = 0.0
+//        titleLabel.alpha = 0.0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
@@ -205,18 +207,16 @@ class FeaturedSlider: UIView {
                 return
         }
         
-        self.setupImageView()
-        self.setupTitleLabel()
-        UIView.animate(withDuration: 0.5) {
+        UIView.transition(with: imageView, duration: 0.5, options: .transitionCrossDissolve, animations: { 
+            self.setupImageView()
+            self.setupTitleLabel()
+        }, completion: nil)
+        UIView.animate(withDuration: 1.5) {
             self.pageControl.currentPage = currentSeriesIndex
         }
     }
     
     func setupImageView() {
-        UIView.animate(withDuration: 0.5) {
-            self.imageView.alpha = 0.0
-        }
-        
         guard let currentlySelectedSeries = currentlySelectedSeries else {
             return
         }
@@ -224,29 +224,18 @@ class FeaturedSlider: UIView {
         if let imageBannerURLString = currentlySelectedSeries.imageBannerURLString,
             let imageBannerURL = URL(string: imageBannerURLString) {
             DispatchQueue.main.async {
-                self.imageView.kf.setImage(with: imageBannerURL, placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
-                    UIView.animate(withDuration: 0.5) {
-                        self.imageView.alpha = 1.0
-                    }
-                }
+                self.imageView.kf.setImage(with: imageBannerURL, placeholder: UIImage.with(color: .aniManagerBlack, andSize: self.imageView.frame.size), options: [.transition(.fade(0.5))], progressBlock: nil, completionHandler: nil)
             }
         }
     }
     
     func setupTitleLabel() {
-        UIView.animate(withDuration: 0.5) {
-            self.titleLabel.alpha = 0.0
-        }
-        
         guard let currentlySelectedSeries = currentlySelectedSeries else {
             return
         }
         
         DispatchQueue.main.async {
             self.titleLabel.text = currentlySelectedSeries.titleForSelectedTitleLanguageSetting
-            UIView.animate(withDuration: 0.5) {
-                self.titleLabel.alpha = 1.0
-            }
         }
     }
     

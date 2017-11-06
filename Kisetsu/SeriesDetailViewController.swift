@@ -39,9 +39,7 @@ class SeriesDetailViewController: UIViewController {
              */
             availableCellTypes = [.basicInformations, .actions]
             
-            guard let series = series else {
-                return
-            }
+            guard let series = series else { return }
             
             /*
                 Check the data that's available for the selected series and
@@ -194,7 +192,9 @@ class SeriesDetailViewController: UIViewController {
                 return
             }
             
-            self.seriesDataTableViewActivityIndicator.stopAnimatingAndFadeOut()
+            DispatchQueue.main.async {
+                self.seriesDataTableViewActivityIndicator.stopAnimatingAndFadeOut()
+            }
             
             self.series = DataSource.shared.selectedSeries
             
@@ -408,7 +408,6 @@ class SeriesDetailViewController: UIViewController {
             list with the list names as titles depending on the type
          */
         if seriesType == .anime {
-            
             for animeListName in AnimeListName.allNameStrings {
                 let listAction = UIAlertAction(title: animeListName, style: .default) { (alertAction) in
                     sender.setTitle(alertAction.title, for: .normal)

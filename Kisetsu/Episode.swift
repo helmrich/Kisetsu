@@ -12,6 +12,7 @@ struct Episode {
     let title: String
     let description: String
     let guid: String?
+    var mediaId: String?
     var number: Double?
     
     // URLs

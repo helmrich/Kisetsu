@@ -27,6 +27,9 @@ struct Style {
             static var collectionView: UIColor {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
+            static var imagesCollectionView: UIColor {
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlackAlternative }
+            }
             static var episodesCollectionView: UIColor {
                 if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlack }
             }
@@ -52,7 +55,7 @@ struct Style {
                 if activeTheme == .light { return .white } else { return .aniManagerBlack }
             }
             static var imagesCollectionViewCell: UIColor {
-                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlackAlternative }
+                if activeTheme == .light { return .aniManagerGray } else { return .aniManagerBlack }
             }
             static var imagesTableViewCellTitleLabel: UIColor {
                 if activeTheme == .light { return .aniManagerBlack } else { return .white }

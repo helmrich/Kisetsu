@@ -14,15 +14,13 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
         cell's collection view
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        cell.backgroundColor = Style.Color.Background.imagesCollectionViewCell
         
         /*
             Make sure the shared data source's selectedSeries property
             is not nil
          */
         guard let series = series else {
-            return cell
+            return UICollectionViewCell(frame: .zero)
         }
         
         /*
@@ -32,15 +30,14 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             content view, the second one is the actual table view cell.
          */
         guard let imagesTableViewCellType = (collectionView.superview?.superview as? ImagesTableViewCell)?.type else {
-            return cell
+            return UICollectionViewCell(frame: .zero)
         }
-        
-        cell.imagesTableViewCellType = imagesTableViewCellType
         
         switch imagesTableViewCellType {
         case .characters:
             
-            cell.imageOverlayView.alpha = 0.0
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "characterImagesCollectionViewCell", for: indexPath) as! CharacterImagesCollectionViewCell
+            cell.imagesTableViewCellType = imagesTableViewCellType
             
             /*
              Make sure the series' characters property is not nil and that
@@ -52,25 +49,44 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
                 return cell
             }
             
-            guard let imageMediumURLString = characters[indexPath.row].imageMediumURLString,
-                let imageMediumURL = URL(string: imageMediumURLString),
-            let imageLargeURLString = characters[indexPath.row].imageLargeURLString,
-                let imageLargeURL = URL(string: imageLargeURLString) else {
+            guard let characterImageMediumURLString = characters[indexPath.row].imageMediumURLString,
+                let characterImageMediumURL = URL(string: characterImageMediumURLString),
+            let characterImageLargeURLString = characters[indexPath.row].imageLargeURLString,
+                let characterImageLargeURL = URL(string: characterImageLargeURLString) else {
                     return cell
             }
             
-            if cell.imageView.image == nil {
-                cell.imageView.kf.setImage(
-                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? imageLargeURL : imageMediumURL,
+            if cell.characterImageView.image == nil {
+                cell.characterImageView.kf.setImage(
+                with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? characterImageLargeURL : characterImageMediumURL,
                 placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
                     // TODO: App is crashing here sometimes:
                     // attempt to delete item 1 from section 0 which only contains 0 items before the update
                     collectionView.reloadItems(at: [indexPath])
                 }
             }
-        case .relations:
             
-            cell.imageOverlayView.alpha = 0.0
+            guard let actorImageMediumURLString = characters[indexPath.row].actors?.first?.imageMediumURLString,
+                let actorImageMediumURL = URL(string: actorImageMediumURLString),
+                let actorImageLargeURLString = characters[indexPath.row].actors?.first?.imageLargeURLString,
+                let actorImageLargeURL = URL(string: actorImageLargeURLString) else {
+                    return cell
+            }
+            
+            if cell.actorImageView.image == nil {
+                cell.actorImageView.kf.setImage(
+                    with: UserDefaults.standard.bool(forKey: UserDefaultsKey.downloadHighQualityImages.rawValue) ? actorImageLargeURL : actorImageMediumURL,
+                    placeholder: nil, options: [.transition(.fade(0.25))], progressBlock: nil) { (_, _, _, _) in
+                        // TODO: App is crashing here sometimes:
+                        // attempt to delete item 1 from section 0 which only contains 0 items before the update
+                        collectionView.reloadItems(at: [indexPath])
+                }
+            }
+            
+            return cell
+        case .relations:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
+            cell.imagesTableViewCellType = imagesTableViewCellType
             
             /*
                 Check if the series' allRelations property is not nil,
@@ -87,17 +103,24 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
             let currentRelation = allRelations[indexPath.row]
             
             let currentRelationSeriesType: SeriesType
-            if let _ = currentRelation as? AnimeSeries {
+            if let _ = currentRelation.series as? AnimeSeries {
                 currentRelationSeriesType = .anime
-            } else if let _ = currentRelation as? MangaSeries {
+            } else if let _ = currentRelation.series as? MangaSeries {
                 currentRelationSeriesType = .manga
             } else {
                 return cell
             }
             cell.seriesType = currentRelationSeriesType
             
-            let imageMediumURLString = currentRelation.imageMediumURLString
-            let imageLargeURLString = currentRelation.imageLargeURLString
+            if let currentRelationType = currentRelation.type {
+                cell.titleLabel.text = currentRelationType
+                UIView.animate(withDuration: 0.25) {
+                    cell.titleLabel.alpha = 1.0
+                }
+            }
+            
+            let imageMediumURLString = currentRelation.series.imageMediumURLString
+            let imageLargeURLString = currentRelation.series.imageLargeURLString
             
             guard let imageMediumURL = URL(string: imageMediumURLString),
                 let imageLargeURL = URL(string: imageLargeURLString) else {
@@ -111,12 +134,11 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
                     collectionView.reloadItems(at: [indexPath])
                 }
             }
-        default:
+            
             return cell
+        default:
+            return UICollectionViewCell(frame: .zero)
         }
-
-        return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -143,6 +165,5 @@ extension SeriesDetailViewController: UICollectionViewDataSource {
         default:
             return 0
         }
-        
     }
 }

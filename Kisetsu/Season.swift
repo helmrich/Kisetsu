@@ -35,15 +35,26 @@ enum Season: String {
     
     static var current: Season {
         switch DateManager.currentMonth {
-        case "January", "February", "March":
+        case .january, .february, .march:
             return .winter
-        case "April", "May", "June":
+        case .april, .may, .june:
             return .spring
-        case "July", "August", "September":
+        case .july, .august, .september:
             return .summer
-        case "October", "November", "December":
+        case .october, .november, .december:
             return .fall
-        default:
+        }
+    }
+    
+    static var next: Season {
+        switch DateManager.currentMonth {
+        case .january, .february, .march:
+            return .spring
+        case .april, .may, .june:
+            return .summer
+        case .july, .august, .september:
+            return .fall
+        case .october, .november, .december:
             return .winter
         }
     }

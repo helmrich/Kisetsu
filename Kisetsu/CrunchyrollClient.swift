@@ -101,6 +101,7 @@ extension CrunchyrollClient {
                     let episode = Episode(title: episodeTitle,
                                           description: episodeDescription,
                                           guid: episodeGUID,
+                                          mediaId: nil,
                                           number: nil,
                                           crunchyrollURL: crunchyrollURL,
                                           imageSmallURL: imageSmallURL,
@@ -138,6 +139,9 @@ extension CrunchyrollClient {
                         let guid = $0["guid"].value,
                         let indexOfEpisodeWithMatchingGUID = episodeList.index(where: { $0.guid == guid }) {
                         episodeList[indexOfEpisodeWithMatchingGUID].number = episodeNumber
+                        if let mediaId = $0["crunchyroll:mediaId"].value {
+                            episodeList[indexOfEpisodeWithMatchingGUID].mediaId = mediaId
+                        }
                     }
                 }
                 

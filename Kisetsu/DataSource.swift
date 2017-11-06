@@ -25,6 +25,7 @@ class DataSource {
     // MARK: - Home
     var currentlyAiringSeriesList = [Series]()
     var currentSeasonSeriesList = [Series]()
+    var nextSeasonSeriesList = [Series]()
     var continueWatchingSeriesList = [Series]()
     var continueReadingSeriesList = [Series]()
     var recommendationsSeriesList = [Series]()

@@ -13,36 +13,24 @@ enum ImagesTableViewCellType: String {
     case relations, characters, actors
     
     // Home
-    case currentlyAiring, currentSeason, continueReading, continueWatching, recommendations, topRatedAnime, mostPopularAnime, topRatedManga, mostPopularManga, mostPopularGenreAnime
+    case currentlyAiring, currentSeason, nextSeason, continueReading, continueWatching, recommendations, topRatedAnime, mostPopularAnime, topRatedManga, mostPopularManga, mostPopularGenreAnime
     
     var title: String {
         switch self {
-        case .relations:
-            return "Relations"
-        case .characters:
-            return "Characters"
-        case .actors:
-            return "Actors"
-        case .currentlyAiring:
-            return "Currently Airing"
-        case .currentSeason:
-            return "Current Season"
-        case .continueReading:
-            return "Continue Reading"
-        case .continueWatching:
-            return "Continue Watching"
-        case .recommendations:
-            return "Recommendations"
-        case .topRatedAnime:
-            return "Top Rated Anime"
-        case .mostPopularAnime:
-            return "Most Popular Anime"
-        case .topRatedManga:
-            return "Top Rated Manga"
-        case .mostPopularManga:
-            return "Most Popular Manga"
-        case .mostPopularGenreAnime:
-            return "Most Popular Genre Anime"
+        case .relations:                return "Relations"
+        case .characters:               return "Characters"
+        case .actors:                   return "Actors"
+        case .currentlyAiring:          return "Currently Airing"
+        case .currentSeason:            return "Current Season"
+        case .nextSeason:               return "Next Season"
+        case .continueReading:          return "Continue Reading"
+        case .continueWatching:         return "Continue Watching"
+        case .recommendations:          return "Recommendations"
+        case .topRatedAnime:            return "Top Rated Anime"
+        case .mostPopularAnime:         return "Most Popular Anime"
+        case .topRatedManga:            return "Top Rated Manga"
+        case .mostPopularManga:         return "Most Popular Manga"
+        case .mostPopularGenreAnime:    return "Most Popular Genre Anime"
         }
     }
 }

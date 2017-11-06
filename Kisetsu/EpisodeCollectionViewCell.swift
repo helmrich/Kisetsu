@@ -42,6 +42,8 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         episodeDescriptionLabel.textAlignment = .justified
         episodeDescriptionLabel.font = UIFont(name: Constant.FontName.mainLight, size: 10.0)
         
+        crunchyrollButton.titleLabel?.font = UIFont(name: Constant.FontName.mainRegular, size: 14.0)
+        
         episodeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         episodeDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         previewImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +74,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
                 // Crunchyroll Button
                 crunchyrollButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10.0),
                 crunchyrollButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10.0),
+                crunchyrollButton.heightAnchor.constraint(equalToConstant: 35.0),
                 crunchyrollButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10.0)
             ])
     }

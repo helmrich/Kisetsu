@@ -14,11 +14,15 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
         cell's collection view
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let imagesTableViewCellSuperview = collectionView.superview?.superview as? ImagesTableViewCell else {
+            return
+        }
         
-        let selectedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imagesCollectionViewCell", for: indexPath) as! ImagesCollectionViewCell
-        
-        // Check if the selected cell has a type
-        guard let imagesTableViewCellType = selectedCell.imagesTableViewCellType else {
+        /*
+            Check if the images table view cell the cell's collection view is
+            contained in has a cell type
+         */
+        guard let imagesTableViewCellType = imagesTableViewCellSuperview.type else {
             return
         }
         
@@ -30,22 +34,41 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
          */
         switch imagesTableViewCellType {
         case .characters:
-            /*
-                Get the selected character by using the index path's row property as
-                an index. Then instantiate a character detail view controller
-                and set its character property to the selected character
-                and present the character detail view controller
-             */
-            guard let selectedCharacter = series?.characters?[indexPath.row] else {
+            let selectedCell = collectionView.cellForItem(at: indexPath) as! CharacterImagesCollectionViewCell
+            
+            guard let selectedCellSelectionType = selectedCell.selectionType else {
                 return
             }
             
-            let characterDetailViewController = storyboard?.instantiateViewController(withIdentifier: "characterDetailViewController") as! CharacterDetailViewController
-            characterDetailViewController.character = selectedCharacter
-            if let bannerImageURL = bannerImageURL {
-                characterDetailViewController.bannerImageURL = bannerImageURL
+            guard let personDetailViewController = storyboard?.instantiateViewController(withIdentifier: "personDetailViewController") as? PersonDetailViewController else {
+                return
             }
-            present(characterDetailViewController, animated: true, completion: nil)
+            
+            if let bannerImageURL = bannerImageURL {
+                personDetailViewController.bannerImageURL = bannerImageURL
+            }
+            
+            switch selectedCellSelectionType {
+            case .character:
+                /*
+                 Get the selected character by using the index path's row property as
+                 an index. Then instantiate a character detail view controller
+                 and set its character property to the selected character
+                 and present the character detail view controller
+                 */
+                guard let selectedCharacter = series?.characters?[indexPath.row] else {
+                    return
+                }
+                
+                personDetailViewController.character = selectedCharacter
+            case .staff:
+                guard let selectedActor = series?.characters?[indexPath.row].actors?.first else {
+                    return
+                }
+                
+                personDetailViewController.staff = selectedActor
+            }
+            present(personDetailViewController, animated: true, completion: nil)
         case .relations:
             /*
                 Get the selected relation by using the index path's row property as
@@ -59,14 +82,13 @@ extension SeriesDetailViewController: UICollectionViewDelegate {
             
             let seriesDetailViewController = storyboard?.instantiateViewController(withIdentifier: "seriesDetailViewController") as! SeriesDetailViewController
             seriesDetailViewController.seriesType = (collectionView.cellForItem(at: indexPath) as! ImagesCollectionViewCell).seriesType
-                seriesDetailViewController.seriesTitle = selectedRelation.titleForSelectedTitleLanguageSetting
-            seriesDetailViewController.seriesId = selectedRelation.id
+                seriesDetailViewController.seriesTitle = selectedRelation.series.titleForSelectedTitleLanguageSetting
+            seriesDetailViewController.seriesId = selectedRelation.series.id
             present(seriesDetailViewController, animated: true, completion: nil)
         case .actors:
             break
         default:
             break
         }
-        
     }
 }

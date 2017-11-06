@@ -515,6 +515,17 @@ extension SeriesDetailViewController: UITableViewDataSource {
             let readVolumes: Int
             let userScore: Int
             
+            if listStatus == "completed",
+            let animeSeries = series as? AnimeSeries {
+                actionsCell.watchedEpisodesTextField.text = "\(animeSeries.numberOfTotalEpisodes)"
+            }
+            
+            if listStatus == "completed",
+                let mangaSeries = series as? MangaSeries {
+                actionsCell.chaptersReadTextField.text = "\(mangaSeries.numberOfTotalChapters)"
+                actionsCell.volumesReadTextField.text = "\(mangaSeries.numberOfTotalVolumes)"
+            }
+            
             // Try to get the list values from the corresponding UI element
             if let watchedEpisodesText = actionsCell.watchedEpisodesTextField.text,
                 let watchedEpisodesNumber = Int(watchedEpisodesText) {

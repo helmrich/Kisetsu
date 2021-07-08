@@ -69,5 +69,5 @@ I'd highly appreciate any kind of constructive feedback or bug reports. If you f
 
 ## Author
 
-I'm Tobias Helmrich, you can find me on Twitter [@tobias_helmrich](https://twitter.com/tobias_helmrich) or send me an email to [me@tobias-helmrich.de](mailto:me@tobias-helmrich.de).
+I'm Tobias Helmrich, you can find me on Twitter [@tobias_helmrich](https://twitter.com/tobias_helmrich).
 
